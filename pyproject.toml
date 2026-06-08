@@ -1,0 +1,42 @@
+[project]
+name = "rag-platform"
+version = "0.1.0"
+description = "Enterprise RAG platform based on FastAPI, LangChain, LangGraph, MySQL and Milvus"
+requires-python = ">=3.11"
+
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "pydantic-settings",
+    "pymysql",
+    "sqlalchemy",
+    "python-dotenv",
+    "langchain",
+    "langgraph",
+    "pymilvus",
+    "httpx",
+    "orjson",
+
+    # 模块 2 新增：解析 docx
+    "python-docx",
+
+    # 模块 2 新增：解析 pdf
+    "pypdf",
+
+    # 模块 2 新增：FastAPI 接收 multipart/form-data 文件上传
+    "python-multipart",
+
+    # 模块 6 新增：Elasticsearch Python 客户端
+    "elasticsearch>=8.17,<9",
+    "langchain",
+    "langchain-core",
+    "langgraph",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

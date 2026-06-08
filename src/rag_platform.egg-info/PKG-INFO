@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: rag-platform
+Version: 0.1.0
+Summary: Enterprise RAG platform based on FastAPI, LangChain, LangGraph, MySQL and Milvus
+Requires-Python: >=3.11
+Requires-Dist: fastapi
+Requires-Dist: uvicorn[standard]
+Requires-Dist: pydantic
+Requires-Dist: pydantic-settings
+Requires-Dist: pymysql
+Requires-Dist: sqlalchemy
+Requires-Dist: python-dotenv
+Requires-Dist: langchain
+Requires-Dist: langgraph
+Requires-Dist: pymilvus
+Requires-Dist: httpx
+Requires-Dist: orjson
