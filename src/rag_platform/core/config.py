@@ -122,6 +122,21 @@ class Settings(BaseSettings):
     context_include_metadata_header: bool = True
     context_citation_prefix: str = "C"
 
+    # --------------------
+    # Answer Generation 配置
+    # --------------------
+    answer_model: str = "deepseek-v4-pro"
+    answer_temperature: float = 0.2
+    answer_max_tokens: int = 2048
+    answer_timeout_seconds: int = 120
+    answer_require_citation: bool = True
+    answer_fail_when_context_empty: bool = True
+
+    # --------------------
+    # SSE 配置
+    # --------------------
+    chat_stream_heartbeat_seconds: int = 15
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
