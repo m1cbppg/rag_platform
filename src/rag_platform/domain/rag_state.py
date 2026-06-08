@@ -48,6 +48,13 @@ class RagState(TypedDict, total=False):
     rerank_info: dict[str, Any]
 
     # --------------------
+    # Context 构建结果
+    # --------------------
+    context: str
+    citations: list[dict[str, Any]]
+    context_build_info: dict[str, Any]
+
+    # --------------------
     # 后续模块预留
     # --------------------
     reranked_chunks: list[dict[str, Any]]

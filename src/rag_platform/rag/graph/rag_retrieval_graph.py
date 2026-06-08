@@ -9,6 +9,7 @@ from src.rag_platform.rag.retrievers.langchain_hybrid_retriever import LangChain
 from src.rag_platform.rag.retrievers.langchain_vector_retriever import LangChainVectorRetriever
 from src.rag_platform.schemas.query_analysis import QueryAnalysisRequest
 from src.rag_platform.application.rerank_service import RerankService
+from src.rag_platform.application.context_build_service import ContextBuildService
 
 
 class RagRetrievalGraphBuilder:
@@ -48,6 +49,7 @@ class RagRetrievalGraphBuilder:
         graph.add_node("merge_documents", self.merge_documents)
         graph.add_node("judge_retrieval_quality", self.judge_retrieval_quality)
         graph.add_node("rerank_documents", self.rerank_documents)
+        graph.add_node("build_context", self.build_context)
         graph.add_node("finish", self.finish)
 
         graph.add_edge(START, "analyze_query")
@@ -72,23 +74,68 @@ class RagRetrievalGraphBuilder:
             self.route_after_quality_judge,
             {
                 "rerank": "rerank_documents",
+                "context": "build_context",
                 "finish": "finish",
             },
         )
 
-        graph.add_edge("rerank_documents", "finish")
+        graph.add_edge("rerank_documents", "build_context")
+        graph.add_edge("build_context", "finish")
         graph.add_edge("finish", END)
 
         return graph.compile()
+
+    def build_context(self, state: RagState) -> dict:
+        """
+        节点：Context 构建。
+
+        优先使用 reranked_documents。
+        如果 reranked_documents 为空，则 fallback 到 merged_documents。
+        """
+
+        trace_id = state.get("trace_id") or ""
+        query = state.get("rewritten_question") or state.get("question") or ""
+
+        documents = state.get("reranked_documents") or state.get("merged_documents") or []
+
+        service = ContextBuildService()
+
+        result, context_build_info = service.build_context(
+            trace_id=trace_id,
+            query_text=query,
+            documents=documents,
+        )
+
+        citations = [
+            {
+                "citation_id": citation.citation_id,
+                "chunk_id": citation.chunk_id,
+                "doc_id": citation.doc_id,
+                "title": citation.title,
+                "title_path": citation.title_path,
+                "source_section": citation.source_section,
+                "chunk_type": citation.chunk_type,
+                "expansion_type": citation.expansion_type,
+                "sort_order": citation.sort_order,
+            }
+            for citation in result.citations
+        ]
+
+        return {
+            "context": result.context,
+            "citations": citations,
+            "context_build_info": context_build_info,
+            "current_node": "build_context",
+            "status": "CONTEXT_READY",
+        }
 
     def route_after_quality_judge(self, state: RagState) -> str:
         """
         质量判断后的条件路由。
 
-        如果召回质量太差，先不进入 rerank。
-        因为没有候选文档时 rerank 没意义。
-
-        后续模块可以在这里接二次检索。
+        POOR：没有候选，结束。
+        GOOD/WEAK：进入 rerank。
+        后续关闭 rerank 时，可以直接进入 context。
         """
 
         quality = state.get("retrieval_quality", {})
@@ -342,9 +389,10 @@ class RagRetrievalGraphBuilder:
         """
         结束工作流。
 
-        模块 10 后：
-        如果 rerank 成功，则状态为 RERANK_READY。
-        如果召回不足，则状态为 RETRIEVAL_INSUFFICIENT。
+        模块 11 后：
+        - 没有召回：RETRIEVAL_INSUFFICIENT
+        - 有 context：CONTEXT_READY
+        - 有 rerank 但 context 为空：RERANK_READY
         """
 
         quality = state.get("retrieval_quality", {})
@@ -353,6 +401,12 @@ class RagRetrievalGraphBuilder:
             return {
                 "current_node": "finish",
                 "status": "RETRIEVAL_INSUFFICIENT",
+            }
+
+        if state.get("context"):
+            return {
+                "current_node": "finish",
+                "status": "CONTEXT_READY",
             }
 
         if state.get("reranked_documents"):

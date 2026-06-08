@@ -65,6 +65,10 @@ class RagWorkflowService:
             documents=merged_documents,
             rerank_info=final_state.get("rerank_info", {}),
             reranked_documents=reranked_documents,
+            # 模块 11 新增
+            context=final_state.get("context"),
+            citations=final_state.get("citations", []),
+            context_build_info=final_state.get("context_build_info", {}),
         )
 
     def _to_document_response(

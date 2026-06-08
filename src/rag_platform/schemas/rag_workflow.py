@@ -52,3 +52,7 @@ class RagRetrievalWorkflowResponse(BaseModel):
     # 模块 10 新增：精排阶段文档
     rerank_info: dict[str, Any] = Field(default_factory=dict)
     reranked_documents: list[WorkflowDocumentResponse] = Field(default_factory=list)
+
+    context: str | None = None
+    citations: list[dict[str, Any]] = Field(default_factory=list)
+    context_build_info: dict[str, Any] = Field(default_factory=dict)

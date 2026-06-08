@@ -110,6 +110,18 @@ class Settings(BaseSettings):
         "that directly answer the question."
     )
 
+    # --------------------
+    # Context 构建配置
+    # --------------------
+    context_max_tokens: int = 6000
+    context_max_chunks: int = 8
+    context_expand_parent: bool = True
+    context_expand_previous_next: bool = True
+    context_expand_same_section: bool = True
+    context_max_expanded_chunks_per_hit: int = 2
+    context_include_metadata_header: bool = True
+    context_citation_prefix: str = "C"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
