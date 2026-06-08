@@ -29,9 +29,33 @@ class RagRetrievalGraphBuilder:
     - AnswerGenerator
     """
 
-    def __init__(self) -> None:
-        self.document_codec = GraphDocumentCodec()
-        self.quality_judge = RetrievalQualityJudge()
+    def __init__(
+        self,
+        query_understanding_service=None,
+        rerank_service=None,
+        context_build_service=None,
+        bm25_retriever_factory=None,
+        vector_retriever_factory=None,
+        hybrid_retriever_factory=None,
+        document_codec=None,
+        quality_judge=None,
+    ) -> None:
+        self.query_understanding_service = (
+            query_understanding_service or QueryUnderstandingService()
+        )
+        self.rerank_service = rerank_service or RerankService()
+        self.context_build_service = context_build_service or ContextBuildService()
+        self.bm25_retriever_factory = (
+            bm25_retriever_factory or LangChainBM25Retriever
+        )
+        self.vector_retriever_factory = (
+            vector_retriever_factory or LangChainVectorRetriever
+        )
+        self.hybrid_retriever_factory = (
+            hybrid_retriever_factory or LangChainHybridRetriever
+        )
+        self.document_codec = document_codec or GraphDocumentCodec()
+        self.quality_judge = quality_judge or RetrievalQualityJudge()
 
     def build(self):
         """
@@ -98,9 +122,7 @@ class RagRetrievalGraphBuilder:
 
         documents = state.get("reranked_documents") or state.get("merged_documents") or []
 
-        service = ContextBuildService()
-
-        result, context_build_info = service.build_context(
+        result, context_build_info = self.context_build_service.build_context(
             trace_id=trace_id,
             query_text=query,
             documents=documents,
@@ -162,9 +184,7 @@ class RagRetrievalGraphBuilder:
         query = state.get("rewritten_question") or state.get("question") or ""
         documents = state.get("merged_documents", [])
 
-        service = RerankService()
-
-        reranked_documents, rerank_info = await service.rerank_documents(
+        reranked_documents, rerank_info = await self.rerank_service.rerank_documents(
             trace_id=trace_id,
             query=query,
             documents=documents,
@@ -197,9 +217,7 @@ class RagRetrievalGraphBuilder:
         business_domain = state.get("business_domain")
         session_id = state.get("session_id")
 
-        service = QueryUnderstandingService()
-
-        response = await service.analyze(
+        response = await self.query_understanding_service.analyze(
             QueryAnalysisRequest(
                 query=question,
                 session_id=session_id,
@@ -254,7 +272,7 @@ class RagRetrievalGraphBuilder:
         只依赖 ES，不依赖 Milvus / DashScope。
         """
 
-        retriever = LangChainBM25Retriever(
+        retriever = self.bm25_retriever_factory(
             top_k=state.get("top_k", 10),
             doc_type=self._single_doc_type_or_none(state),
             business_domain=state.get("business_domain"),
@@ -279,7 +297,7 @@ class RagRetrievalGraphBuilder:
         依赖 DashScope + Milvus。
         """
 
-        retriever = LangChainVectorRetriever(
+        retriever = self.vector_retriever_factory(
             top_k=state.get("top_k", 10),
             doc_type=self._single_doc_type_or_none(state),
             business_domain=state.get("business_domain"),
@@ -304,7 +322,7 @@ class RagRetrievalGraphBuilder:
         同时依赖 ES + Milvus + DashScope。
         """
 
-        retriever = LangChainHybridRetriever(
+        retriever = self.hybrid_retriever_factory(
             top_k=state.get("top_k", 10),
             vector_top_k=state.get("top_k", 10),
             bm25_top_k=state.get("top_k", 10),

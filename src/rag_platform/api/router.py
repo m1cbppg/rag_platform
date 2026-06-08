@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from src.rag_platform.api.chunks import router as chunks_router
 from src.rag_platform.api.documents import router as documents_router
@@ -31,9 +31,13 @@ api_router.include_router(context_admin_router)
 api_router.include_router(chat_v2_router)
 
 
-rag_service = RagService()
+def get_rag_service() -> RagService:
+    return RagService()
 
 
 @api_router.post("/chat/mock", response_model=ChatResponse)
-async def chat(request: ChatRequest) -> ChatResponse:
-    return await rag_service.chat(request)
+async def chat(
+    request: ChatRequest,
+    service: RagService = Depends(get_rag_service),
+) -> ChatResponse:
+    return await service.chat(request)

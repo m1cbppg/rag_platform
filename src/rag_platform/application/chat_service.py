@@ -25,12 +25,19 @@ class ChatService:
     6. 支持 SSE 流式输出。
     """
 
-    def __init__(self) -> None:
-        self.settings = get_settings()
-        self.workflow_service = RagWorkflowService()
-        self.answer_generator = DeepSeekAnswerGenerator()
-        self.answer_repository = AnswerRepository()
-        self.citation_validator = CitationValidator()
+    def __init__(
+        self,
+        settings=None,
+        workflow_service=None,
+        answer_generator=None,
+        answer_repository=None,
+        citation_validator=None,
+    ) -> None:
+        self.settings = settings or get_settings()
+        self.workflow_service = workflow_service or RagWorkflowService()
+        self.answer_generator = answer_generator or DeepSeekAnswerGenerator()
+        self.answer_repository = answer_repository or AnswerRepository()
+        self.citation_validator = citation_validator or CitationValidator()
 
     async def chat(
         self,

@@ -20,10 +20,17 @@ class RerankService:
     6. 输出统一 reranked_documents。
     """
 
-    def __init__(self) -> None:
-        self.settings = get_settings()
-        self.repository = RerankRepository()
-        self.fallback_reranker = FallbackReranker()
+    def __init__(
+        self,
+        settings=None,
+        repository=None,
+        fallback_reranker=None,
+        reranker_factory=None,
+    ) -> None:
+        self.settings = settings or get_settings()
+        self.repository = repository or RerankRepository()
+        self.fallback_reranker = fallback_reranker or FallbackReranker()
+        self.reranker_factory = reranker_factory or Qwen3Reranker
 
     async def rerank_documents(
         self,
@@ -68,7 +75,7 @@ class RerankService:
         start_time = time.perf_counter()
 
         try:
-            reranker = Qwen3Reranker()
+            reranker = self.reranker_factory()
 
             items = await reranker.rerank(
                 query=query,

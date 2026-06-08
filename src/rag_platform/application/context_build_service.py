@@ -15,10 +15,15 @@ class ContextBuildService:
     4. 返回构建结果。
     """
 
-    def __init__(self) -> None:
-        self.settings = get_settings()
-        self.builder = ContextBuilder()
-        self.repository = ContextRepository()
+    def __init__(
+        self,
+        settings=None,
+        builder=None,
+        repository=None,
+    ) -> None:
+        self.settings = settings or get_settings()
+        self.builder = builder or ContextBuilder()
+        self.repository = repository or ContextRepository()
 
     def build_context(
         self,

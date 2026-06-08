@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import APIRouter, File, Form, UploadFile
+from fastapi import APIRouter, Depends, File, Form, UploadFile
 
 from src.rag_platform.application.document_ingest_service import DocumentIngestService
 from src.rag_platform.domain.document import DocumentType
@@ -10,7 +10,9 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
-document_ingest_service = DocumentIngestService()
+
+def get_document_ingest_service() -> DocumentIngestService:
+    return DocumentIngestService()
 
 
 @router.post("/upload", response_model=DocumentUploadResponse)
@@ -21,6 +23,7 @@ def upload_document(
     business_domain: str | None = Form(default=None, description="业务域"),
     version: str | None = Form(default=None, description="版本"),
     created_by: str | None = Form(default="system", description="上传人"),
+    service: DocumentIngestService = Depends(get_document_ingest_service),
 ) -> DocumentUploadResponse:
     """
     上传并解析文档。
@@ -44,7 +47,7 @@ def upload_document(
     )
 
     try:
-        response = document_ingest_service.ingest_upload_file(
+        response = service.ingest_upload_file(
             file=file,
             title=title,
             doc_type=doc_type,

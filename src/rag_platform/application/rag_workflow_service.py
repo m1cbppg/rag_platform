@@ -20,9 +20,11 @@ class RagWorkflowService:
     3. 把最终 state 转成 API 响应。
     """
 
-    def __init__(self) -> None:
-        builder = RagRetrievalGraphBuilder()
-        self.graph = builder.build()
+    def __init__(self, graph=None) -> None:
+        self.graph = graph
+
+        if self.graph is None:
+            self.graph = RagRetrievalGraphBuilder().build()
 
     async def run_retrieval_workflow(
         self,

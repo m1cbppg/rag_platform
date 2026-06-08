@@ -22,10 +22,17 @@ class QueryUnderstandingService:
     4. 保存分析日志。
     """
 
-    def __init__(self) -> None:
-        self.settings = get_settings()
-        self.rule_analyzer = RuleBasedQueryAnalyzer()
-        self.repository = QueryAnalysisRepository()
+    def __init__(
+        self,
+        settings=None,
+        rule_analyzer=None,
+        repository=None,
+        llm_analyzer_factory=None,
+    ) -> None:
+        self.settings = settings or get_settings()
+        self.rule_analyzer = rule_analyzer or RuleBasedQueryAnalyzer()
+        self.repository = repository or QueryAnalysisRepository()
+        self.llm_analyzer_factory = llm_analyzer_factory or LLMQueryAnalyzer
 
     async def analyze(
         self,
@@ -42,7 +49,7 @@ class QueryUnderstandingService:
 
         if self.settings.query_analysis_use_llm:
             try:
-                llm_analyzer = LLMQueryAnalyzer()
+                llm_analyzer = self.llm_analyzer_factory()
 
                 llm_result = await llm_analyzer.analyze(
                     query=request.query,
