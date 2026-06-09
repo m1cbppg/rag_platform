@@ -1,0 +1,75 @@
+{
+  "doc_type": "MANUAL",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "订单菜单",
+        "操作入口"
+      ],
+      "content": "登录电商后台管理系统，进入【订单管理】模块，默认显示订单列表页。路径：订单管理 > 订单列表（标识：E-OM-8001）",
+      "facts": [
+        {
+          "fact_key": "order_admin_search",
+          "fact_text": "管理员可通过订单号和用户信息在订单列表页查询订单，支持精确和模糊搜索。"
+        }
+      ],
+      "heading": "菜单路径",
+      "section_code": "MANUAL_ORDER_ADMIN_001_SECTION_01"
+    },
+    {
+      "aliases": [
+        "列表字段",
+        "信息字段"
+      ],
+      "content": "订单列表字段包括：订单号、用户账号、订单状态、商品信息、实付金额、下单时间、收货地址（标识：M-ORDER-001）。",
+      "facts": [],
+      "heading": "字段说明",
+      "section_code": "MANUAL_ORDER_ADMIN_001_SECTION_02"
+    },
+    {
+      "aliases": [
+        "订单处理流程",
+        "操作指南"
+      ],
+      "content": "1. 在订单列表页输入订单号或用户信息，点击【搜索】按钮，系统展示匹配订单。\n2. 点击目标订单后的【查看详情】按钮，进入订单详情页。\n3. 在详情页如需取消订单，点击【取消订单】按钮，填写取消原因并提交申请。\n4. 提交后，在【取消审核】状态栏查看审核状态，审核通过则订单取消。\n5. 如需修改收货地址，在订单未发货状态下，点击【修改地址】按钮，输入新地址并保存。\n6. 确认修改后，系统返回订单详情页，地址更新成功。",
+      "facts": [
+        {
+          "fact_key": "order_admin_cancel",
+          "fact_text": "提交取消申请后，可在订单详情页的取消审核状态栏查看审核状态，审核结果会实时更新。"
+        },
+        {
+          "fact_key": "order_admin_address",
+          "fact_text": "修改收货地址功能仅在订单未发货且符合系统规则时可用，修改后需保存生效。"
+        }
+      ],
+      "heading": "操作步骤",
+      "section_code": "MANUAL_ORDER_ADMIN_001_SECTION_03"
+    },
+    {
+      "aliases": [
+        "按钮功能",
+        "操作按钮"
+      ],
+      "content": "【搜索】：根据输入条件查询订单。【查看详情】：进入订单详情页。【取消订单】：发起取消申请。【修改地址】：修改收货地址。【保存】：保存修改信息。",
+      "facts": [],
+      "heading": "按钮说明",
+      "section_code": "MANUAL_ORDER_ADMIN_001_SECTION_04"
+    },
+    {
+      "aliases": [
+        "异常处理",
+        "报错信息"
+      ],
+      "content": "常见错误提示及处理：\n- “订单不存在”：请检查订单号或用户信息是否正确。\n- “当前订单状态不允许取消”：仅待发货订单可取消。\n- “地址修改失败”：请确认订单未发货且地址格式正确。",
+      "facts": [],
+      "heading": "错误提示",
+      "section_code": "MANUAL_ORDER_ADMIN_001_SECTION_05"
+    }
+  ],
+  "source_doc_code": "MANUAL_ORDER_ADMIN_001",
+  "title": "订单管理后台操作手册",
+  "topic": "order",
+  "version": "1.0"
+}

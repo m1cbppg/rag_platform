@@ -1,0 +1,103 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2025-06-01",
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "适用范围"
+        ],
+        "content": "本规则适用于所有使用原路退款方式的订单。相关标识符：R-REFUND-002, E-RF-1002",
+        "facts": [],
+        "heading": "适用范围",
+        "section_code": "S-COVERAGE"
+      },
+      {
+        "aliases": [
+          "规则条款"
+        ],
+        "content": "原路退款最多自动重试两次。当原渠道不可用时，按审核结果改为人工打款。",
+        "facts": [
+          {
+            "fact_key": "refund_retry_limit",
+            "fact_text": "原路退款最多自动重试两次"
+          },
+          {
+            "fact_key": "refund_alternate_route",
+            "fact_text": "原渠道不可用时按审核结果改为人工打款"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "S-RULE"
+      },
+      {
+        "aliases": [
+          "例外条件"
+        ],
+        "content": "若退款触发风控，则按风控冻结处理，不执行退款改道。",
+        "facts": [],
+        "heading": "例外条件",
+        "section_code": "S-EXCEPTION"
+      },
+      {
+        "aliases": [
+          "优先级"
+        ],
+        "content": "风控冻结优先于退款改道。",
+        "facts": [
+          {
+            "fact_key": "refund_risk_priority",
+            "fact_text": "风控冻结优先于退款改道"
+          }
+        ],
+        "heading": "优先级",
+        "section_code": "S-PRIORITY"
+      },
+      {
+        "aliases": [
+          "生效日期"
+        ],
+        "content": "本规则自2025年6月1日起生效。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "S-EFFECTIVE"
+      }
+    ],
+    "source_doc_code": "RULE_REFUND_002",
+    "title": "退款失败与改道规则",
+    "topic": "refund",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.0,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 1.0,
+        "issues": [],
+        "overall_score": 1.0,
+        "passed": true,
+        "source_doc_code": "RULE_REFUND_002",
+        "structure_score": 1.0,
+        "summary": "文档完全符合蓝图要求：所有required_facts（refund_retry_limit、refund_alternate_route、refund_risk_priority）均在对应section中以精确fact_text显式声明，且语义无偏差；required_identifiers R-REFUND-002和E-RF-1002完整出现在适用范围节，未串用或遗漏；required_sections全部存在且section_code规范；结构层级清晰，无交叉引用或隐含依赖；生效日期与蓝图严格一致，无supersedes/conflicts_with关系需校验；'风控冻结优先于退款改道'在例外条件与优先级两节中逻辑自洽（例外描述行为禁令，优先级阐明规则序位），不构成冲突或歧义；全文无模糊量词（如'一般''视情况'）、未定义术语或条件嵌套，RAG与客服均可唯一解析。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.0,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 1.0,
+    "issues": [],
+    "overall_score": 1.0,
+    "passed": true,
+    "source_doc_code": "RULE_REFUND_002",
+    "structure_score": 1.0,
+    "summary": "文档完全符合蓝图要求：所有required_facts（refund_retry_limit、refund_alternate_route、refund_risk_priority）均在对应section中以精确fact_text显式声明，且语义无偏差；required_identifiers R-REFUND-002和E-RF-1002完整出现在适用范围节，未串用或遗漏；required_sections全部存在且section_code规范；结构层级清晰，无交叉引用或隐含依赖；生效日期与蓝图严格一致，无supersedes/conflicts_with关系需校验；'风控冻结优先于退款改道'在例外条件与优先级两节中逻辑自洽（例外描述行为禁令，优先级阐明规则序位），不构成冲突或歧义；全文无模糊量词（如'一般''视情况'）、未定义术语或条件嵌套，RAG与客服均可唯一解析。",
+    "version_consistency": 1.0
+  }
+}

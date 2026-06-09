@@ -39,6 +39,12 @@ class Settings(BaseSettings):
     # 模块 4 新增：阿里 DashScope Embedding 配置
     dashscope_api_key: str = ""
     dashscope_base_url: str = "https://dashscope.aliyuncs.com"
+    dashscope_chat_base_url: str = (
+        "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    )
+    qwen_judge_model: str = "qwen-plus"
+    qwen_judge_timeout_seconds: int = 120
+    eval_pdf_font_path: str = ""
     embedding_model: str = "text-embedding-v4"
     embedding_dimension: int = 1024
     embedding_output_type: str = "dense"

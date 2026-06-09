@@ -1,0 +1,60 @@
+{
+  "doc_type": "SOP",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [],
+      "content": "本SOP适用于原路退款失败或账户异常导致的退款失败场景。",
+      "facts": [],
+      "heading": "适用场景",
+      "section_code": "SEC01"
+    },
+    {
+      "aliases": [],
+      "content": "核对原支付渠道可退款状态（参考标识S-REFUND-002），确认渠道返回码及退款限制。同时确认退款失败原因是否为账户异常（参考标识E-RF-1002）。",
+      "facts": [
+        {
+          "fact_key": "refund_failure_channel",
+          "fact_text": "核对原支付渠道可退款状态，确认返回码是否为'NOT_SUPPORTED'或'ACCOUNT_CLOSED'等，以区分原路退回限制与账户异常。"
+        }
+      ],
+      "heading": "前置检查",
+      "section_code": "SEC02"
+    },
+    {
+      "aliases": [],
+      "content": "1. 检查退款失败原因，根据渠道返回码判断是原路退回限制（S-REFUND-002）还是账户异常（E-RF-1002）。\n2. 若为原路退回限制，则重试退款任务（参考标识S-REFUND-002）；若为账户异常，则直接转人工打款（参考标识E-RF-1002）。\n3. 重试失败后，转人工打款或财务处理（提交工单）。\n4. 记录处理结果并归档。",
+      "facts": [
+        {
+          "fact_key": "refund_failure_retry",
+          "fact_text": "满足条件时重试退款任务，重试逻辑应基于渠道返回码判断是否可重试。"
+        },
+        {
+          "fact_key": "refund_failure_manual",
+          "fact_text": "重试失败后转人工打款或财务处理，需通过工单系统提交，注明失败原因与重试记录。"
+        }
+      ],
+      "heading": "处理步骤",
+      "section_code": "SEC03"
+    },
+    {
+      "aliases": [],
+      "content": "若系统返回未知错误码或无法判断失败原因，升级至技术团队排查。",
+      "facts": [],
+      "heading": "异常分支",
+      "section_code": "SEC04"
+    },
+    {
+      "aliases": [],
+      "content": "当重试次数达到3次仍失败，或涉及金额超过500元（人民币）时，需升级至主管审批。",
+      "facts": [],
+      "heading": "升级条件",
+      "section_code": "SEC05"
+    }
+  ],
+  "source_doc_code": "SOP_REFUND_FAILURE_001",
+  "title": "退款失败排查SOP",
+  "topic": "refund",
+  "version": "1.0"
+}

@@ -1,0 +1,101 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [],
+        "content": "本SOP适用于客户签收时发现包裹破损或签收后72小时内反馈包裹破损的情况。涉及快递单号标识：S-LOGISTICS-002 和 E-LG-3002 覆盖的订单。",
+        "facts": [],
+        "heading": "适用场景",
+        "section_code": "SOP-001"
+      },
+      {
+        "aliases": [],
+        "content": "处理前需确认客户已提供以下凭证：外包装照片、商品破损照片、快递面单照片。检查凭证完整性（damage_evidence_check）。",
+        "facts": [
+          {
+            "fact_key": "damage_evidence_check",
+            "fact_text": "检查客户提供的凭证（外包装、商品、面单）是否清晰完整，确认破损事实。"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "SOP-002"
+      },
+      {
+        "aliases": [],
+        "content": "1. 判断破损责任方（damage_liability）：依据凭证判断是否属于运输破损、商家包装不当或客户原因。\n2. 若责任为运输破损，联系物流公司索赔，并为客户提供退款或补发方案。\n3. 若责任为商家包装问题，商家承担费用，为客户提供补发或退款。\n4. 若责任为客户原因，告知客户无法免费处理，提供自费维修或重新购买选项。\n5. 执行解决方案（damage_resolution）：根据责任判定结果，执行退款、补发或维修流程。",
+        "facts": [
+          {
+            "fact_key": "damage_liability",
+            "fact_text": "依据凭证判断运输破损、商家包装或客户原因，确定责任方。"
+          },
+          {
+            "fact_key": "damage_resolution",
+            "fact_text": "根据责任认定结果，提供退款、补发或维修等解决方案。"
+          }
+        ],
+        "heading": "处理步骤",
+        "section_code": "SOP-003"
+      },
+      {
+        "aliases": [],
+        "content": "签收时拒收：现场拍照留证，直接发起拒收流程，由物流退回，客服介入退款或补发。\n签收后发现：引导客户在签收后72小时内提供凭证，按上述步骤处理。\n涉及S-LOGISTICS-002的订单，需优先联系指定物流客服。涉及E-LG-3002的订单，需参考物流合同条款。",
+        "facts": [],
+        "heading": "异常分支",
+        "section_code": "SOP-004"
+      },
+      {
+        "aliases": [],
+        "content": "若客户索赔金额超过500元，或客户投诉升级至工商/平台，或责任判定存在争议无法协商一致，需升级至主管处理。",
+        "facts": [],
+        "heading": "升级条件",
+        "section_code": "SOP-005"
+      }
+    ],
+    "source_doc_code": "SOP_PACKAGE_DAMAGE_001",
+    "title": "包裹破损处理SOP",
+    "topic": "logistics",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.2,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "‘签收后72小时内反馈’在‘适用场景’和‘异常分支’中重复出现，但未明确定义起算时点（如签收时间以物流系统签收时间为准？还是客户手动点击签收？），存在轻微执行歧义；",
+          "‘异常分支’中‘涉及S-LOGISTICS-002的订单，需优先联系指定物流客服’未说明‘指定物流客服’具体是谁/如何获取联系方式，属可操作性缺口，虽不构成编号错误或事实缺失，但增加RAG召回后人工二次确认成本；",
+          "‘升级条件’中‘责任判定存在争议无法协商一致’缺乏判断标准（如是否需双人复核、是否需凭证复审），可能引发不同客服对‘是否升级’作出不同判断，属低风险歧义。"
+        ],
+        "overall_score": 0.93,
+        "passed": true,
+        "source_doc_code": "SOP_PACKAGE_DAMAGE_001",
+        "structure_score": 0.95,
+        "summary": "文档完全覆盖蓝图要求的3个必要事实（damage_evidence_check、damage_liability、damage_resolution），且每个fact_text精准对应其description语义；两个required_identifiers（S-LOGISTICS-002、E-LG-3002）在‘适用场景’和‘异常分支’中准确、无串用；结构完整匹配全部5个required_sections，章节逻辑递进清晰（场景→检查→步骤→分支→升级），无章节缺失或错位；版本字段与蓝图一致，无supersedes/effective_from冲突；内部流程无矛盾：签收时拒收与签收后处理双路径分离明确，时限（72小时）、责任判定与解决方案严格绑定；仅存在3处低风险歧义，均不破坏事实完整性或操作唯一性，不影响自动化执行与RAG精准召回。整体质量优秀，符合通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.2,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "‘签收后72小时内反馈’在‘适用场景’和‘异常分支’中重复出现，但未明确定义起算时点（如签收时间以物流系统签收时间为准？还是客户手动点击签收？），存在轻微执行歧义；",
+      "‘异常分支’中‘涉及S-LOGISTICS-002的订单，需优先联系指定物流客服’未说明‘指定物流客服’具体是谁/如何获取联系方式，属可操作性缺口，虽不构成编号错误或事实缺失，但增加RAG召回后人工二次确认成本；",
+      "‘升级条件’中‘责任判定存在争议无法协商一致’缺乏判断标准（如是否需双人复核、是否需凭证复审），可能引发不同客服对‘是否升级’作出不同判断，属低风险歧义。"
+    ],
+    "overall_score": 0.93,
+    "passed": true,
+    "source_doc_code": "SOP_PACKAGE_DAMAGE_001",
+    "structure_score": 0.95,
+    "summary": "文档完全覆盖蓝图要求的3个必要事实（damage_evidence_check、damage_liability、damage_resolution），且每个fact_text精准对应其description语义；两个required_identifiers（S-LOGISTICS-002、E-LG-3002）在‘适用场景’和‘异常分支’中准确、无串用；结构完整匹配全部5个required_sections，章节逻辑递进清晰（场景→检查→步骤→分支→升级），无章节缺失或错位；版本字段与蓝图一致，无supersedes/effective_from冲突；内部流程无矛盾：签收时拒收与签收后处理双路径分离明确，时限（72小时）、责任判定与解决方案严格绑定；仅存在3处低风险歧义，均不破坏事实完整性或操作唯一性，不影响自动化执行与RAG精准召回。整体质量优秀，符合通过阈值。",
+    "version_consistency": 1.0
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2025-06-01",
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "适用范围"
+      ],
+      "content": "本规则适用于所有使用原路退款方式的订单。相关标识符：R-REFUND-002, E-RF-1002",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "S-COVERAGE"
+    },
+    {
+      "aliases": [
+        "规则条款"
+      ],
+      "content": "原路退款最多自动重试两次。当原渠道不可用时，按审核结果改为人工打款。",
+      "facts": [
+        {
+          "fact_key": "refund_retry_limit",
+          "fact_text": "原路退款最多自动重试两次"
+        },
+        {
+          "fact_key": "refund_alternate_route",
+          "fact_text": "原渠道不可用时按审核结果改为人工打款"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "S-RULE"
+    },
+    {
+      "aliases": [
+        "例外条件"
+      ],
+      "content": "若退款触发风控，则按风控冻结处理，不执行退款改道。",
+      "facts": [],
+      "heading": "例外条件",
+      "section_code": "S-EXCEPTION"
+    },
+    {
+      "aliases": [
+        "优先级"
+      ],
+      "content": "风控冻结优先于退款改道。",
+      "facts": [
+        {
+          "fact_key": "refund_risk_priority",
+          "fact_text": "风控冻结优先于退款改道"
+        }
+      ],
+      "heading": "优先级",
+      "section_code": "S-PRIORITY"
+    },
+    {
+      "aliases": [
+        "生效日期"
+      ],
+      "content": "本规则自2025年6月1日起生效。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "S-EFFECTIVE"
+    }
+  ],
+  "source_doc_code": "RULE_REFUND_002",
+  "title": "退款失败与改道规则",
+  "topic": "refund",
+  "version": "1.0"
+}

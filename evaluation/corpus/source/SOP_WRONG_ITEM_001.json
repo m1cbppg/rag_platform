@@ -1,0 +1,75 @@
+{
+  "doc_type": "SOP",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "适用情况",
+        "场景说明"
+      ],
+      "content": "本SOP适用于客户收到的商品与订单商品完全不一致（即错发），不包括少发、漏发或部分商品错误的情况。若属于少发或漏发，请参考其他相关流程。",
+      "facts": [
+        {
+          "fact_key": "wrong_item_verify",
+          "fact_text": "核对订单商品和实收商品信息"
+        }
+      ],
+      "heading": "适用场景",
+      "section_code": "S001"
+    },
+    {
+      "aliases": [
+        "检查步骤",
+        "前提条件"
+      ],
+      "content": "1. 确认客户反馈为整单错发，且客户已提供实物照片或视频。\n2. 核实订单信息（订单号、商品SKU、数量）。\n3. 检查客户提供的关键标识符：S-AFTERSALE-001 和 E-AS-4001 是否在系统中记录。",
+      "facts": [],
+      "heading": "前置检查",
+      "section_code": "S002"
+    },
+    {
+      "aliases": [
+        "操作流程",
+        "步骤说明"
+      ],
+      "content": "1. 核实错发情况：通过订单与实物的SKU比对，确认错发事实，记录于工单。\n2. 联系客户说明情况，确认客户是否同意退换：错发商品由商家承担寄回费用（参考wrong_item_return）。\n3. 补发正确商品：确认库存充足（如缺货则进入异常分支），并与客户核实收货地址后发起补发（参考wrong_item_reship）。\n4. 关闭工单：客户确认收到补发商品后，更新售后记录并关闭工单。",
+      "facts": [
+        {
+          "fact_key": "wrong_item_return",
+          "fact_text": "错发商品由商家承担寄回费用"
+        },
+        {
+          "fact_key": "wrong_item_reship",
+          "fact_text": "补发前确认库存和用户地址"
+        }
+      ],
+      "heading": "处理步骤",
+      "section_code": "S003"
+    },
+    {
+      "aliases": [
+        "特殊情况",
+        "异常处理"
+      ],
+      "content": "- 库存不足：转为调货或退款处理，并告知客户预计到货时间。\n- 客户拒绝退回错发商品：可酌情考虑赠送或回收，按公司权限审批。\n- 重复错发：升级至主管处理，并进行商品库存核查。",
+      "facts": [],
+      "heading": "异常分支",
+      "section_code": "S004"
+    },
+    {
+      "aliases": [
+        "升级标准",
+        "上报条件"
+      ],
+      "content": "1. 单个订单错发金额超过2000元。\n2. 同一客户连续两次错发。\n3. 涉及发票或税务问题。\n升级至售后经理处理，并记录升级原因。",
+      "facts": [],
+      "heading": "升级条件",
+      "section_code": "S005"
+    }
+  ],
+  "source_doc_code": "SOP_WRONG_ITEM_001",
+  "title": "错发商品处理SOP",
+  "topic": "after_sales",
+  "version": "1.0"
+}

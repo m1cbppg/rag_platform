@@ -1,0 +1,79 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2025-07-01",
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "范围",
+        "适用对象",
+        "scope"
+      ],
+      "content": "本规则适用于所有订单取消操作，包括普通订单和跨境订单。本规则替代RULE_ORDER_001_V1，关键差异为取消窗口判断由支付后两小时改为按出库状态判断。标识ORDER-V2和R-ORDER-001。",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "R-ORDER-001-V2-SEC-001"
+    },
+    {
+      "aliases": [
+        "规则",
+        "条款",
+        "rules"
+      ],
+      "content": "订单取消规则V2：按出库状态判断取消窗口。已出库订单无法取消，未出库订单可取消。高风险订单需人工复核。标识ORDER-V2和R-ORDER-001。",
+      "facts": [
+        {
+          "fact_key": "order_v2_cancel_window",
+          "fact_text": "V2按出库状态判断，不再限制支付后两小时"
+        },
+        {
+          "fact_key": "order_v2_risk_review",
+          "fact_text": "高风险订单取消需要人工复核"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "R-ORDER-001-V2-SEC-002"
+    },
+    {
+      "aliases": [
+        "例外",
+        "exception",
+        "特殊情况"
+      ],
+      "content": "虚拟商品支付后不可取消。标识ORDER-V2。",
+      "facts": [
+        {
+          "fact_key": "order_v2_exception",
+          "fact_text": "虚拟商品支付后不可取消"
+        }
+      ],
+      "heading": "例外条件",
+      "section_code": "R-ORDER-001-V2-SEC-003"
+    },
+    {
+      "aliases": [
+        "优先级",
+        "priority"
+      ],
+      "content": "本规则优先级高于旧版RULE_ORDER_001_V1。标识R-ORDER-001。",
+      "facts": [],
+      "heading": "优先级",
+      "section_code": "R-ORDER-001-V2-SEC-004"
+    },
+    {
+      "aliases": [
+        "生效",
+        "日期",
+        "effective"
+      ],
+      "content": "自2025年7月1日起生效，取代V1版本。标识R-ORDER-001和ORDER-V2。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "R-ORDER-001-V2-SEC-005"
+    }
+  ],
+  "source_doc_code": "RULE_ORDER_001_V2",
+  "title": "订单取消规则 V2",
+  "topic": "order",
+  "version": "2.0"
+}

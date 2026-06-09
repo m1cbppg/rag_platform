@@ -1,0 +1,159 @@
+{
+  "document": {
+    "doc_type": "FAQ",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "未出库改地址",
+          "未发货修改收货地址",
+          "未出库地址变更"
+        ],
+        "content": "未出库订单可在满足校验条件时修改地址。例如，您可以通过订单编号F-ORDER-002使用ADDRESS_CHANGE功能提交修改申请。注意，部分商品或区域可能不支持改址。",
+        "facts": [
+          {
+            "fact_key": "address_change_unshipped",
+            "fact_text": "未出库订单满足校验条件时可修改地址。"
+          }
+        ],
+        "heading": "未出库订单地址修改",
+        "section_code": "S001"
+      },
+      {
+        "aliases": [
+          "已发货改地址",
+          "运输中修改地址",
+          "已发货地址变更"
+        ],
+        "content": "已发货订单需要联系承运商尝试改址。您可联系客服提供订单号，客服会与承运商协调，但无法保证成功。",
+        "facts": [
+          {
+            "fact_key": "address_change_shipped",
+            "fact_text": "已发货订单需要联系承运商尝试改址。"
+          }
+        ],
+        "heading": "已发货订单地址修改",
+        "section_code": "S002"
+      },
+      {
+        "aliases": [
+          "风险改址",
+          "人工审核改址",
+          "高风险地址修改"
+        ],
+        "content": "跨区域或高风险改址需要人工审核。例如，从不同省份或边境地区改址时，系统会触发审核流程，需提交相关证明。",
+        "facts": [
+          {
+            "fact_key": "address_change_risk",
+            "fact_text": "跨区域或高风险改址需要人工审核。"
+          }
+        ],
+        "heading": "风险校验与人工审核",
+        "section_code": "S003"
+      },
+      {
+        "aliases": [
+          "不支持改址商品",
+          "区域限制改址",
+          "特殊商品地址修改"
+        ],
+        "content": "部分特殊商品（如生鲜、定制商品）及偏远区域（如港澳台、海外）可能不支持地址修改。请在订单详情页查看是否支持改址。",
+        "facts": [],
+        "heading": "哪些商品或区域不支持改址",
+        "section_code": "S004"
+      },
+      {
+        "aliases": [
+          "改址所需信息",
+          "地址修改资料",
+          "修改收货地址要求"
+        ],
+        "content": "通常需要提供订单编号、原地址、新地址、收件人姓名及联系方式。若涉及人工审核，可能还需提供身份证明。",
+        "facts": [],
+        "heading": "修改地址需要提供哪些信息",
+        "section_code": "S005"
+      },
+      {
+        "aliases": [
+          "改址生效时间",
+          "地址修改生效",
+          "变更地址时效"
+        ],
+        "content": "未出库订单修改地址后立即生效；已发货订单需等待承运商确认，通常1-3个工作日。",
+        "facts": [],
+        "heading": "地址修改的生效时间",
+        "section_code": "S006"
+      },
+      {
+        "aliases": [
+          "改址被拒申诉",
+          "地址修改失败处理",
+          "改址申诉流程"
+        ],
+        "content": "若改址被拒，可联系客服申诉。提供订单号及原因，客服会重新评估。注意，高风险改址被拒后需补充材料。",
+        "facts": [],
+        "heading": "地址修改失败后如何申诉",
+        "section_code": "S007"
+      },
+      {
+        "aliases": [
+          "改址运费变化",
+          "地址修改费用",
+          "物流费用调整"
+        ],
+        "content": "改址可能导致运费变更。若新地址更远或产生额外费用，需补差价；若更近，可能退差额。具体以承运商结算为准。",
+        "facts": [],
+        "heading": "地址修改对物流费用的影响",
+        "section_code": "S008"
+      }
+    ],
+    "source_doc_code": "FAQ_ADDRESS_CHANGE_001",
+    "title": "收货地址修改常见问题",
+    "topic": "order",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "S004（哪些商品或区域不支持改址）虽为合理补充，但其内容'部分特殊商品（如生鲜、定制商品）及偏远区域（如港澳台、海外）可能不支持地址修改'与蓝图generation_notes中'说明部分商品和区域不支持改址'一致，但该节未绑定任何required_fact，且未显式引用F-ORDER-002或ADDRESS_CHANGE标识符，存在弱关联风险；不过因属补充性非必需信息，不扣fact_coverage或identifier_accuracy分。",
+          "S006（生效时间）中'已发货订单需等待承运商确认，通常1-3个工作日'引入了'通常'和'工作日'等模糊时限，而蓝图未定义时效要求，亦未禁止时效描述——但'1-3个工作日'与'无法保证成功'（S002）存在隐性张力：若承运商拒绝改址，则无生效时间可言；此处未加条件限定（如'若承运商同意'），构成轻度逻辑松动，故internal_consistency略降（0.95而非1.0）。",
+          "S007（申诉流程）提及'高风险改址被拒后需补充材料'，与required_fact address_change_risk中'需要人工审核'形成合理延伸，但'补充材料'属新增操作细节，蓝图generation_notes未覆盖，亦未列为required_fact；虽不违反一致性，但增加RAG在无上下文时对'材料类型'产生歧义解释的风险（如是否需身份证/订单凭证/地理证明），故ambiguity_risk设为0.15（中低）。",
+          "结构上，蓝图要求required_sections为['未出库', '已发货', '风险校验']，文档对应S001/S002/S003标题语义完全匹配（'未出库订单地址修改'/'已发货订单地址修改'/'风险校验与人工审核'），且三节均含准确fact_key和fact_text；其余5节（S004–S008）为合理扩展，未破坏核心结构，structure_score=0.92（扣0.03分因S003标题含'与人工审核'，略冗余但未偏离'风险校验'本质）。",
+          "所有required_identifiers（F-ORDER-002、ADDRESS_CHANGE）仅在S001中准确出现一次，且上下文正确（'通过订单编号F-ORDER-002使用ADDRESS_CHANGE功能'），无串用、错位或虚构编号，identifier_accuracy=1.0。"
+        ],
+        "overall_score": 0.91,
+        "passed": true,
+        "source_doc_code": "FAQ_ADDRESS_CHANGE_001",
+        "structure_score": 0.92,
+        "summary": "文档严格覆盖全部3个required_facts，fact_text与蓝图描述完全一致；两个required_identifiers精准嵌入唯一合规位置；结构完整满足required_sections且扩展合理；版本字段空值与蓝图一致；无生效日期/替代关系冲突。主要风险为两处轻度表述张力：S006时效描述未加前提条件，S007引入未定义的'补充材料'可能引发RAG歧义。整体质量优秀，符合所有硬性通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "S004（哪些商品或区域不支持改址）虽为合理补充，但其内容'部分特殊商品（如生鲜、定制商品）及偏远区域（如港澳台、海外）可能不支持地址修改'与蓝图generation_notes中'说明部分商品和区域不支持改址'一致，但该节未绑定任何required_fact，且未显式引用F-ORDER-002或ADDRESS_CHANGE标识符，存在弱关联风险；不过因属补充性非必需信息，不扣fact_coverage或identifier_accuracy分。",
+      "S006（生效时间）中'已发货订单需等待承运商确认，通常1-3个工作日'引入了'通常'和'工作日'等模糊时限，而蓝图未定义时效要求，亦未禁止时效描述——但'1-3个工作日'与'无法保证成功'（S002）存在隐性张力：若承运商拒绝改址，则无生效时间可言；此处未加条件限定（如'若承运商同意'），构成轻度逻辑松动，故internal_consistency略降（0.95而非1.0）。",
+      "S007（申诉流程）提及'高风险改址被拒后需补充材料'，与required_fact address_change_risk中'需要人工审核'形成合理延伸，但'补充材料'属新增操作细节，蓝图generation_notes未覆盖，亦未列为required_fact；虽不违反一致性，但增加RAG在无上下文时对'材料类型'产生歧义解释的风险（如是否需身份证/订单凭证/地理证明），故ambiguity_risk设为0.15（中低）。",
+      "结构上，蓝图要求required_sections为['未出库', '已发货', '风险校验']，文档对应S001/S002/S003标题语义完全匹配（'未出库订单地址修改'/'已发货订单地址修改'/'风险校验与人工审核'），且三节均含准确fact_key和fact_text；其余5节（S004–S008）为合理扩展，未破坏核心结构，structure_score=0.92（扣0.03分因S003标题含'与人工审核'，略冗余但未偏离'风险校验'本质）。",
+      "所有required_identifiers（F-ORDER-002、ADDRESS_CHANGE）仅在S001中准确出现一次，且上下文正确（'通过订单编号F-ORDER-002使用ADDRESS_CHANGE功能'），无串用、错位或虚构编号，identifier_accuracy=1.0。"
+    ],
+    "overall_score": 0.91,
+    "passed": true,
+    "source_doc_code": "FAQ_ADDRESS_CHANGE_001",
+    "structure_score": 0.92,
+    "summary": "文档严格覆盖全部3个required_facts，fact_text与蓝图描述完全一致；两个required_identifiers精准嵌入唯一合规位置；结构完整满足required_sections且扩展合理；版本字段空值与蓝图一致；无生效日期/替代关系冲突。主要风险为两处轻度表述张力：S006时效描述未加前提条件，S007引入未定义的'补充材料'可能引发RAG歧义。整体质量优秀，符合所有硬性通过阈值。",
+    "version_consistency": 1.0
+  }
+}

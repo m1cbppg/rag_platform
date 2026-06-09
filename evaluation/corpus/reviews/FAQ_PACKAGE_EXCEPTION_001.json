@@ -1,0 +1,168 @@
+{
+  "document": {
+    "doc_type": "FAQ",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "包裹没收到",
+          "物流显示签收未收到",
+          "丢失包裹"
+        ],
+        "content": "如果包裹显示签收但实际未收到，可能属于包裹丢失。请先确认物流状态，并提供收件人姓名、地址、手机号和订单号。",
+        "facts": [
+          {
+            "fact_key": "package_loss_evidence",
+            "fact_text": "检查物流信息、联系快递员、提供订单号和收件人信息"
+          }
+        ],
+        "heading": "包裹丢失",
+        "section_code": "FAQ_001"
+      },
+      {
+        "aliases": [
+          "商品破损",
+          "外包装破损",
+          "内件损坏"
+        ],
+        "content": "签收前发现包裹破损，请当场拒收并拍照/录像，联系客服。签收后24小时内发现破损，需提供外包装和内件损坏的清晰照片。",
+        "facts": [
+          {
+            "fact_key": "package_damage_evidence",
+            "fact_text": "外包装和内件损坏照片或视频，需清晰可见"
+          }
+        ],
+        "heading": "包裹破损",
+        "section_code": "FAQ_002"
+      },
+      {
+        "aliases": [
+          "补发方案",
+          "退款流程",
+          "丢失破损处理"
+        ],
+        "content": "包裹确认丢失或破损后，我们将提供补发或退款。具体方案根据库存和订单状态决定，通常2个工作日内处理。参考PACKAGE_EXCEPTION流程。",
+        "facts": [
+          {
+            "fact_key": "package_exception_resolution",
+            "fact_text": "确认后补发或退款，2个工作日内处理"
+          }
+        ],
+        "heading": "处理方案",
+        "section_code": "FAQ_003"
+      },
+      {
+        "aliases": [
+          "报告丢失",
+          "联系客服",
+          "异常申报"
+        ],
+        "content": "您可以通过在线客服、电话或邮件联系我们，提供订单号和异常描述。我们会分配工单并跟进，工单编号与F-LOGISTICS-002关联。",
+        "facts": [],
+        "heading": "如何联系客服报告包裹异常",
+        "section_code": "FAQ_004"
+      },
+      {
+        "aliases": [
+          "签收未收到",
+          "显示签收但没货",
+          "代签收纠纷"
+        ],
+        "content": "请先核对是否为他人代签，或联系快递员确认。若确实丢失，提供签收底单和监控（如有），我们将在核查后处理。",
+        "facts": [],
+        "heading": "包裹显示已签收但实际未收到怎么办",
+        "section_code": "FAQ_005"
+      },
+      {
+        "aliases": [
+          "破损反馈时效",
+          "签收后破损期限",
+          "24小时规则"
+        ],
+        "content": "建议在签收后24小时内反馈，并提供照片。超时反馈可能影响处理，但特殊情形可酌情处理。",
+        "facts": [],
+        "heading": "签收后多久内可以反馈破损",
+        "section_code": "FAQ_006"
+      },
+      {
+        "aliases": [
+          "补发运费",
+          "是否免费补发",
+          "重发费用"
+        ],
+        "content": "因物流原因导致的丢失或破损，补发不收取额外运费。若因客户地址错误等原因，可能需要客户承担。",
+        "facts": [],
+        "heading": "补发需要额外运费吗",
+        "section_code": "FAQ_007"
+      },
+      {
+        "aliases": [
+          "退款时效",
+          "退款周期",
+          "退款到账时间"
+        ],
+        "content": "退款通常在原支付方式退回，1-7个工作日到账，具体取决于支付平台。我们会在确认后48小时内发起退款。",
+        "facts": [],
+        "heading": "退款多久到账",
+        "section_code": "FAQ_008"
+      },
+      {
+        "aliases": [
+          "部分破损处理",
+          "少件破损",
+          "套装破损"
+        ],
+        "content": "如果订单中部分商品破损，请提供整体和单独照片。我们将根据破损情况补发或退还对应商品金额。",
+        "facts": [],
+        "heading": "部分商品破损怎么办",
+        "section_code": "FAQ_009"
+      }
+    ],
+    "source_doc_code": "FAQ_PACKAGE_EXCEPTION_001",
+    "title": "包裹丢失或破损常见问题",
+    "topic": "logistics",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.25,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.92,
+        "issues": [
+          "Section '如何联系客服报告包裹异常' (FAQ_004) introduces procedural guidance not required by blueprint and lacks a required_fact — while not prohibited, it dilutes focus on the three mandated sections; however, it does correctly reference F-LOGISTICS-002, satisfying identifier usage.",
+          "Section '包裹显示已签收但实际未收到怎么办' (FAQ_005) mentions '签收底单和监控（如有）' as evidence — but blueprint's required_fact 'package_loss_evidence' only mandates '收件人姓名、地址、手机号和订单号' (per FAQ_001) and does not list签收底单/监控 as required; this creates *partial misalignment*: the fact is *covered* in FAQ_001, but FAQ_005 implies broader evidence expectations without clarifying that those extras are optional or secondary — low-risk ambiguity, but contributes to ambiguity_risk.",
+          "Section '签收后多久内可以反馈破损' (FAQ_006) states '超时反馈可能影响处理，但特殊情形可酌情处理' — this introduces an unqualified exception ('special circumstances') with no definition, contradicting the blueprint's generation note demanding *clear differentiation between pre- and post-signature damage handling*. While FAQ_002 correctly distinguishes 'on-the-spot拒收' vs '24h post-signature photo', FAQ_006 weakens that clarity by implying timeline flexibility without criteria — minor internal tension.",
+          "Section '补发需要额外运费吗' (FAQ_007) introduces a new condition ('address error') affecting cost responsibility — this is *not prohibited*, but the required_fact 'package_exception_resolution' (in FAQ_003) states only '补发或退款，2个工作日内处理' without qualifying cost liability. The resolution fact is therefore *incomplete*: it omits a material decision variable (who bears re-shipment cost), violating the spirit of 'expressing blueprint requirements'. However, since the fact_key is present and its text is *technically* true (it *does* resolve), and the omission isn't a contradiction — just incompleteness — this is treated as a low-severity ambiguity, not a fact_coverage failure."
+        ],
+        "overall_score": 0.91,
+        "passed": true,
+        "source_doc_code": "FAQ_PACKAGE_EXCEPTION_001",
+        "structure_score": 0.95,
+        "summary": "Document fully satisfies all required_facts (all three fact_keys present with non-empty, relevant fact_text), and all required_identifiers (F-LOGISTICS-002 and PACKAGE_EXCEPTION) appear contextually and correctly — notably in FAQ_004 and FAQ_003. Structure exceeds minimum: all three required_sections exist and are primary; extra sections are well-scoped and do not disrupt hierarchy. No version conflicts (no supersedes/effective dates). Internal logic is highly consistent: pre-signature vs post-signature handling is correctly distinguished in FAQ_002, and timelines (24h, 2 business days, 1–7 day refund) are non-contradictory. Ambiguity risk stems from two soft issues: (1) FAQ_006’s undefined 'special circumstances' weakens the bright-line rule implied by the blueprint’s generation note; (2) FAQ_007’s cost-liability nuance is omitted from the official resolution fact, creating subtle interpretive variance for RAG or frontline staff. Neither rises to factual error or structural failure, but collectively lower ambiguity_risk score. Overall quality is high and passes all thresholds.",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.25,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.92,
+    "issues": [
+      "Section '如何联系客服报告包裹异常' (FAQ_004) introduces procedural guidance not required by blueprint and lacks a required_fact — while not prohibited, it dilutes focus on the three mandated sections; however, it does correctly reference F-LOGISTICS-002, satisfying identifier usage.",
+      "Section '包裹显示已签收但实际未收到怎么办' (FAQ_005) mentions '签收底单和监控（如有）' as evidence — but blueprint's required_fact 'package_loss_evidence' only mandates '收件人姓名、地址、手机号和订单号' (per FAQ_001) and does not list签收底单/监控 as required; this creates *partial misalignment*: the fact is *covered* in FAQ_001, but FAQ_005 implies broader evidence expectations without clarifying that those extras are optional or secondary — low-risk ambiguity, but contributes to ambiguity_risk.",
+      "Section '签收后多久内可以反馈破损' (FAQ_006) states '超时反馈可能影响处理，但特殊情形可酌情处理' — this introduces an unqualified exception ('special circumstances') with no definition, contradicting the blueprint's generation note demanding *clear differentiation between pre- and post-signature damage handling*. While FAQ_002 correctly distinguishes 'on-the-spot拒收' vs '24h post-signature photo', FAQ_006 weakens that clarity by implying timeline flexibility without criteria — minor internal tension.",
+      "Section '补发需要额外运费吗' (FAQ_007) introduces a new condition ('address error') affecting cost responsibility — this is *not prohibited*, but the required_fact 'package_exception_resolution' (in FAQ_003) states only '补发或退款，2个工作日内处理' without qualifying cost liability. The resolution fact is therefore *incomplete*: it omits a material decision variable (who bears re-shipment cost), violating the spirit of 'expressing blueprint requirements'. However, since the fact_key is present and its text is *technically* true (it *does* resolve), and the omission isn't a contradiction — just incompleteness — this is treated as a low-severity ambiguity, not a fact_coverage failure."
+    ],
+    "overall_score": 0.91,
+    "passed": true,
+    "source_doc_code": "FAQ_PACKAGE_EXCEPTION_001",
+    "structure_score": 0.95,
+    "summary": "Document fully satisfies all required_facts (all three fact_keys present with non-empty, relevant fact_text), and all required_identifiers (F-LOGISTICS-002 and PACKAGE_EXCEPTION) appear contextually and correctly — notably in FAQ_004 and FAQ_003. Structure exceeds minimum: all three required_sections exist and are primary; extra sections are well-scoped and do not disrupt hierarchy. No version conflicts (no supersedes/effective dates). Internal logic is highly consistent: pre-signature vs post-signature handling is correctly distinguished in FAQ_002, and timelines (24h, 2 business days, 1–7 day refund) are non-contradictory. Ambiguity risk stems from two soft issues: (1) FAQ_006’s undefined 'special circumstances' weakens the bright-line rule implied by the blueprint’s generation note; (2) FAQ_007’s cost-liability nuance is omitted from the official resolution fact, creating subtle interpretive variance for RAG or frontline staff. Neither rises to factual error or structural failure, but collectively lower ambiguity_risk score. Overall quality is high and passes all thresholds.",
+    "version_consistency": 1.0
+  }
+}

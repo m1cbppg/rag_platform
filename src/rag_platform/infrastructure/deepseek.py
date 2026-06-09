@@ -1,17 +1,15 @@
+from collections.abc import AsyncGenerator
 import json
 from typing import Any
 
 import httpx
 
-from src.rag_platform.core.config import get_settings
-from src.rag_platform.core.exceptions import ConfigError, ExternalServiceError
-from collections.abc import AsyncGenerator
-from typing import Any
-
-import httpx
-
-from src.rag_platform.core.config import get_settings
-from src.rag_platform.core.exceptions import ConfigError, ExternalServiceError
+from src.rag_platform.core.config import Settings, get_settings
+from src.rag_platform.core.exceptions import (
+    ConfigError,
+    ExternalServiceError,
+    ModelResponseFormatError,
+)
 
 
 class DeepSeekClient:
@@ -22,8 +20,12 @@ class DeepSeekClient:
     后续模块 12 会继续扩展流式回答。
     """
 
-    def __init__(self) -> None:
-        settings = get_settings()
+    def __init__(
+        self,
+        settings: Settings | None = None,
+        client: httpx.AsyncClient | None = None,
+    ) -> None:
+        settings = settings or get_settings()
 
         if not settings.deepseek_api_key:
             raise ConfigError("DeepSeek API Key 未配置")
@@ -31,16 +33,20 @@ class DeepSeekClient:
         self.api_key = settings.deepseek_api_key
         self.base_url = settings.deepseek_base_url.rstrip("/")
         self.chat_model = settings.deepseek_chat_model
-
-        self.client = httpx.AsyncClient(
+        self._owns_client = client is None
+        self.client = client or httpx.AsyncClient(
             base_url=self.base_url,
             timeout=60,
         )
 
     async def chat_json(
         self,
+        *,
         system_prompt: str,
         user_prompt: str,
+        model: str | None = None,
+        temperature: float = 0,
+        max_tokens: int = 4096,
     ) -> dict[str, Any]:
         """
         调用 DeepSeek，并要求返回 JSON。
@@ -51,7 +57,7 @@ class DeepSeekClient:
         """
 
         payload = {
-            "model": self.chat_model,
+            "model": model or self.chat_model,
             "messages": [
                 {
                     "role": "system",
@@ -62,7 +68,9 @@ class DeepSeekClient:
                     "content": user_prompt,
                 },
             ],
-            "temperature": 0,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "response_format": {"type": "json_object"},
         }
 
         headers = {
@@ -90,7 +98,12 @@ class DeepSeekClient:
 
         return self._parse_json_content(content)
 
-    def _parse_json_content(self, content: str) -> dict[str, Any]:
+    async def aclose(self) -> None:
+        if self._owns_client:
+            await self.client.aclose()
+
+    @staticmethod
+    def _parse_json_content(content: str) -> dict[str, Any]:
         """
         解析模型返回的 JSON。
 
@@ -110,9 +123,16 @@ class DeepSeekClient:
             text = text.removesuffix("```").strip()
 
         try:
-            return json.loads(text)
+            result = json.loads(text)
         except json.JSONDecodeError as exc:
-            raise ExternalServiceError(f"DeepSeek 未返回合法 JSON: {content}") from exc
+            raise ModelResponseFormatError(
+                f"DeepSeek 未返回合法 JSON: {content}"
+            ) from exc
+        if not isinstance(result, dict):
+            raise ModelResponseFormatError(
+                "DeepSeek JSON 顶层结构必须是对象"
+            )
+        return result
 
     async def chat_text(
         self,

@@ -1,0 +1,109 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2025-01-01",
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "适用对象",
+          "范围"
+        ],
+        "content": "本规则适用于指定会员（R-MEMBER-001）和指定商品，会员可享十五日无理由退货（MEMBER-15D）。",
+        "facts": [
+          {
+            "fact_key": "member_extended_return",
+            "fact_text": "指定会员和商品可享十五日无理由退货"
+          }
+        ],
+        "heading": "适用范围",
+        "section_code": "SCOPE"
+      },
+      {
+        "aliases": [
+          "规则详情",
+          "条款"
+        ],
+        "content": "退款后按退款金额扣回积分和成长值，相关操作参见R-MEMBER-001。",
+        "facts": [
+          {
+            "fact_key": "member_points_refund",
+            "fact_text": "退款后按退款金额扣回积分和成长值"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "RULE_TERMS"
+      },
+      {
+        "aliases": [
+          "不适用场景",
+          "排除项"
+        ],
+        "content": "虚拟、定制和生鲜商品不适用延长退货（MEMBER-15D），与退款V2中的会员例外保持一致。",
+        "facts": [
+          {
+            "fact_key": "member_exception",
+            "fact_text": "虚拟、定制和生鲜商品不适用延长退货"
+          }
+        ],
+        "heading": "例外条件",
+        "section_code": "EXCEPTIONS"
+      },
+      {
+        "aliases": [
+          "规则优先级",
+          "优先顺序"
+        ],
+        "content": "本规则优先级高于通用售后规则，标识符R-MEMBER-001。",
+        "facts": [],
+        "heading": "优先级",
+        "section_code": "PRIORITY"
+      },
+      {
+        "aliases": [
+          "实施时间",
+          "起始日"
+        ],
+        "content": "自2025年1月1日起生效。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "EFFECTIVE_DATE"
+      }
+    ],
+    "source_doc_code": "RULE_MEMBER_001",
+    "title": "会员售后权益规则",
+    "topic": "member",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.0,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 1.0,
+        "issues": [],
+        "overall_score": 1.0,
+        "passed": true,
+        "source_doc_code": "RULE_MEMBER_001",
+        "structure_score": 1.0,
+        "summary": "文档完全符合蓝图要求：所有required_facts（member_extended_return、member_points_refund、member_exception）均被准确覆盖，fact_text与蓝图描述严格一致；required_identifiers（R-MEMBER-001、MEMBER-15D）在适用范围、例外条件和优先级章节中均显式出现且无串用；五个required_sections全部存在，heading精确匹配，section_code规范，aliases合理不干扰语义；结构完整，无缺失字段或冗余内容；生效日期（2025-01-01）与蓝图一致，无supersedes/conflicts_with关系需校验；全文无模糊表述（如'相关操作参见R-MEMBER-001'为指向性说明，非歧义；'与退款V2中的会员例外保持一致'属合法跨文档引用，且蓝图generation_notes已明确授权该表述）；所有事实锚定清晰，无逻辑冲突或时序矛盾。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.0,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 1.0,
+    "issues": [],
+    "overall_score": 1.0,
+    "passed": true,
+    "source_doc_code": "RULE_MEMBER_001",
+    "structure_score": 1.0,
+    "summary": "文档完全符合蓝图要求：所有required_facts（member_extended_return、member_points_refund、member_exception）均被准确覆盖，fact_text与蓝图描述严格一致；required_identifiers（R-MEMBER-001、MEMBER-15D）在适用范围、例外条件和优先级章节中均显式出现且无串用；五个required_sections全部存在，heading精确匹配，section_code规范，aliases合理不干扰语义；结构完整，无缺失字段或冗余内容；生效日期（2025-01-01）与蓝图一致，无supersedes/conflicts_with关系需校验；全文无模糊表述（如'相关操作参见R-MEMBER-001'为指向性说明，非歧义；'与退款V2中的会员例外保持一致'属合法跨文档引用，且蓝图generation_notes已明确授权该表述）；所有事实锚定清晰，无逻辑冲突或时序矛盾。",
+    "version_consistency": 1.0
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [],
+        "content": "适用于客户反馈优惠券无法使用(如过期、门槛不满足、互斥、商品限制)等投诉场景，相关工单归属S-COUPON-001和E-CP-5001处理范围。",
+        "facts": [],
+        "heading": "适用场景",
+        "section_code": "SEC-001"
+      },
+      {
+        "aliases": [],
+        "content": "1. 确认客户身份及订单号。\n2. 调取优惠券领取记录，核对券模板、领取记录和适用范围（对应fact_key: coupon_complaint_verify）。\n3. 识别过期、门槛、互斥和商品限制等具体原因（对应fact_key: coupon_complaint_reason）。",
+        "facts": [
+          {
+            "fact_key": "coupon_complaint_verify",
+            "fact_text": "核对券模板、领取记录和适用范围，确保数据准确。"
+          },
+          {
+            "fact_key": "coupon_complaint_reason",
+            "fact_text": "识别过期、门槛、互斥和商品限制，判断投诉原因类型。"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "SEC-002"
+      },
+      {
+        "aliases": [],
+        "content": "1. 核实系统状态：检查系统是否存在异常，若异常请参考异常分支。\n2. 正常场景：根据客户诉求提供解释或补券方案。\n3. 系统异常确认后，按权限补发优惠券（对应fact_key: coupon_complaint_compensation）。\n4. 记录处理结果并更新工单状态（工单编号S-COUPON-001或E-CP-5001）。",
+        "facts": [
+          {
+            "fact_key": "coupon_complaint_compensation",
+            "fact_text": "系统异常确认后按权限补发优惠券，禁止在未核实系统异常时直接补券。"
+          }
+        ],
+        "heading": "处理步骤",
+        "section_code": "SEC-003"
+      },
+      {
+        "aliases": [],
+        "content": "若核实系统异常且无法自行补券，升级至二线技术支持团队。",
+        "facts": [],
+        "heading": "异常分支",
+        "section_code": "SEC-004"
+      },
+      {
+        "aliases": [],
+        "content": "1. 系统异常且权限不足。\n2. 客户对解释不接受且需要上级协调。\n3. 涉及S-COUPON-001或E-CP-5001范围外的复杂问题。",
+        "facts": [],
+        "heading": "升级条件",
+        "section_code": "SEC-005"
+      }
+    ],
+    "source_doc_code": "SOP_COUPON_COMPLAINT_001",
+    "title": "优惠券投诉处理SOP",
+    "topic": "coupon",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "‘异常分支’节内容过于简略（仅1句），未说明系统异常的判定标准、证据要求或临时应对措施，与‘处理步骤’中‘核实系统状态’缺乏闭环呼应，存在执行断点风险；",
+          "‘升级条件’第3条‘涉及S-COUPON-001或E-CP-5001范围外的复杂问题’构成逻辑矛盾：蓝图明确限定本SOP适用标识为且仅为此二编号，该条隐含承认存在‘范围外但需本SOP处理’的情形，削弱适用边界严谨性；",
+          "‘处理步骤’第2条‘正常场景：根据客户诉求提供解释或补券方案’未加约束，与generation_notes‘禁止在未核实系统异常时直接补券’存在潜在冲突——若客服将‘客户强烈要求’误判为‘正常场景下的合理补券’，即违反禁令；建议明确‘正常场景下严禁补券，仅可解释/引导重领/替代方案’。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "SOP_COUPON_COMPLAINT_001",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部required_facts（3/3）、required_identifiers（2/2准确嵌入且无串用）、required_sections（5/5齐全）、结构清晰、版本字段合规。核心缺陷在于‘异常分支’与‘升级条件’存在语义张力，且‘处理步骤’中未对非异常场景下的补券行为作绝对禁止性重申，导致一线执行时存在合规漂移风险。歧义风险主要源于条件描述的开放性而非术语多义，故ambiguity_risk较低。整体质量达标，但需修订后发布。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "‘异常分支’节内容过于简略（仅1句），未说明系统异常的判定标准、证据要求或临时应对措施，与‘处理步骤’中‘核实系统状态’缺乏闭环呼应，存在执行断点风险；",
+      "‘升级条件’第3条‘涉及S-COUPON-001或E-CP-5001范围外的复杂问题’构成逻辑矛盾：蓝图明确限定本SOP适用标识为且仅为此二编号，该条隐含承认存在‘范围外但需本SOP处理’的情形，削弱适用边界严谨性；",
+      "‘处理步骤’第2条‘正常场景：根据客户诉求提供解释或补券方案’未加约束，与generation_notes‘禁止在未核实系统异常时直接补券’存在潜在冲突——若客服将‘客户强烈要求’误判为‘正常场景下的合理补券’，即违反禁令；建议明确‘正常场景下严禁补券，仅可解释/引导重领/替代方案’。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "SOP_COUPON_COMPLAINT_001",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部required_facts（3/3）、required_identifiers（2/2准确嵌入且无串用）、required_sections（5/5齐全）、结构清晰、版本字段合规。核心缺陷在于‘异常分支’与‘升级条件’存在语义张力，且‘处理步骤’中未对非异常场景下的补券行为作绝对禁止性重申，导致一线执行时存在合规漂移风险。歧义风险主要源于条件描述的开放性而非术语多义，故ambiguity_risk较低。整体质量达标，但需修订后发布。",
+    "version_consistency": 1.0
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "适用范围",
+          "适用条件",
+          "场景说明"
+        ],
+        "content": "本SOP适用于物流配送环节中，包裹状态异常且超过预期时效未更新，触发丢失排查的场景。涉及承运商编码S-LOGISTICS-001及内部物流编码E-LG-3001的包裹。触发条件：揽收后节点停滞超过48小时，或转运中节点停滞超过24小时，或派送节点停滞超过12小时。",
+        "facts": [],
+        "heading": "适用场景",
+        "section_code": "SEC_001"
+      },
+      {
+        "aliases": [
+          "前置条件",
+          "检查清单",
+          "预检步骤"
+        ],
+        "content": "在启动丢失排查前，需完成以下检查：\n1. 确认包裹是否已超过物流承诺时效。\n2. 核查揽收、转运和派送轨迹（loss_tracking_check），各节点停滞时限：揽收后48小时、转运中24小时、派送12小时。若任一节点符合异常条件，则进入下一步。\n3. 排除异常天气、地址不详等非丢失因素。",
+        "facts": [
+          {
+            "fact_key": "loss_tracking_check",
+            "fact_text": "客服需登录物流系统，输入运单号，逐节点核查揽收、转运、派送轨迹。揽收后节点停滞超过48小时视为异常，转运中节点停滞超过24小时视为异常，派送节点停滞超过12小时视为异常。若任一节点符合异常条件，则进入下一步。"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "SEC_002"
+      },
+      {
+        "aliases": [
+          "操作流程",
+          "执行步骤",
+          "操作指引"
+        ],
+        "content": "步骤1：核查揽收、转运和派送轨迹（loss_tracking_check），确认异常节点。\n步骤2：向承运商S-LOGISTICS-001创建丢失核查工单（loss_carrier_ticket），引用内部物流编码E-LG-3001。\n步骤3：在工单中填写运单号、包裹内容、价值、客户信息及轨迹截图，并要求承运商在2个工作日内反馈核查结果。\n步骤4：根据承运商书面确认的丢失结果（以承运商出具书面丢失证明或系统标记为准），执行退款或补发处理（loss_resolution）。",
+        "facts": [
+          {
+            "fact_key": "loss_carrier_ticket",
+            "fact_text": "使用承运商提供的工单系统，选择“丢失核查”类型，关联S-LOGISTICS-001运单，并备注“请核查揽收/转运/派送节点”。提交后记录工单号。"
+          },
+          {
+            "fact_key": "loss_resolution",
+            "fact_text": "确认丢失以承运商出具书面丢失证明或系统标记“丢失”为准。客服需在系统中选择“丢失处理”方案：客户要求退款则发起退款流程；要求补发则创建补发订单，并通知仓库优先处理。"
+          }
+        ],
+        "heading": "处理步骤",
+        "section_code": "SEC_003"
+      },
+      {
+        "aliases": [
+          "异常处理",
+          "分支流程",
+          "特殊情况"
+        ],
+        "content": "异常分支A：承运商反馈包裹未丢失，但轨迹长期停滞（超过正常时限）。则要求承运商提供书面证明，说明停滞原因，并持续跟进直至轨迹更新。\n异常分支B：客户主张丢失但承运商轨迹显示已签收。则要求客户提供签收底单或监控，并存证处理。",
+        "facts": [],
+        "heading": "异常分支",
+        "section_code": "SEC_004"
+      },
+      {
+        "aliases": [
+          "升级标准",
+          "上报条件",
+          "触发升级"
+        ],
+        "content": "以下情况需升级至主管或物流部门：\n1. 包裹价值超过5000元。\n2. 承运商超时未反馈（超过3个工作日）。\n3. 同一客户多次丢失（月内≥2次）。\n升级后需按高级流程处理，并在E-LG-3001系统日志中记录。",
+        "facts": [],
+        "heading": "升级条件",
+        "section_code": "SEC_005"
+      }
+    ],
+    "source_doc_code": "SOP_PACKAGE_LOSS_001",
+    "title": "包裹丢失排查SOP",
+    "topic": "logistics",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.3,
+        "fact_coverage": 0.6666666666666666,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "required_facts中loss_tracking_check、loss_carrier_ticket、loss_resolution三项均被声明为必要事实，但loss_tracking_check仅在SEC_002中作为fact_key出现且其fact_text虽存在，而loss_carrier_ticket和loss_resolution的fact_text虽存在，但loss_tracking_check的fact_text未在蓝图generation_notes中要求的'明确不同物流节点的等待时间'——其内容中仅笼统提及'揽收后48小时'和'转运中24小时'，但未覆盖'派送'节点等待时限，违反generation_notes要求；",
+          "loss_resolution的fact_text描述为'若承运商确认包裹丢失，客服需在系统中选择“丢失处理”方案……'，但蓝图required_facts中该事实的description为'确认丢失后的退款或补发处理'，强调'确认丢失后'这一状态前提，而文档中未明确定义何为'确认丢失'（例如：是否以承运商书面确认为准？系统自动标记？），导致执行依据模糊；",
+          "SEC_004（异常分支）中未包含任何fact对象，但蓝图未声明该节可豁免fact覆盖；更重要的是，异常分支A中'要求承运商提供书面证明，并升级为二次核查'——该操作未关联任何required_fact，也未在required_sections中被列为必须承载事实的章节，但其引入了新动作（二次核查）却无对应fact_key约束，形成事实缺口；",
+          "SEC_005（升级条件）中'升级后需按高级流程处理，并记录在E-LG-3001系统日志'，但'高级流程'无定义、无引用、无对应fact_key，构成隐性歧义；同时'记录在E-LG-3001系统日志'未说明字段、格式、责任人，RAG或客服可能无法复现操作；",
+          "SEC_002中前置检查第3条'排除异常天气、地址不详等非丢失因素'属于合理业务判断，但未绑定任何fact_key，亦未在required_facts中声明，虽不扣fact_coverage分，但与'loss_tracking_check'并列呈现时，易使读者误认为该条具有同等强制效力，削弱SOP的确定性。"
+        ],
+        "overall_score": 0.7833333333333333,
+        "passed": false,
+        "source_doc_code": "SOP_PACKAGE_LOSS_001",
+        "structure_score": 1.0,
+        "summary": "文档结构完整，章节齐全，标识符准确无误，版本信息一致，无冲突文档干扰。但必要事实覆盖率不足（仅2/3 required_facts具备符合蓝图语义与generation_notes约束的fact_text），尤其loss_tracking_check缺失派送节点时限，loss_resolution缺乏'确认丢失'的操作定义，且异常分支与升级条件中引入关键动作却未锚定必要事实，导致执行歧义风险上升。整体质量未达通过阈值（fact_coverage < 1，overall_score < 0.88），需补充事实定义、明确状态判定标准、闭合异常路径的事实链。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.3,
+        "fact_coverage": 0.6666666666666666,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "required_facts缺失：'loss_tracking_check'、'loss_carrier_ticket'、'loss_resolution'三项在蓝图中列为必需，但文档中仅将它们作为fact_key嵌入facts数组，未在对应section.content中显式、完整复现其语义；尤其'loss_tracking_check'的fact_text虽存在，但其内容（如48h/24h/12h节点停滞阈值）属于generation_notes中'明确不同物流节点的等待时间'的实现，而该要求未在section.content主干文本中声明，导致事实表达依附于facts而非正文，违反SOP可读性与执行确定性原则；",
+          "required_facts未全部覆盖：'loss_tracking_check'、'loss_carrier_ticket'、'loss_resolution'虽在facts数组中出现，但蓝图要求的是‘必须被表达’，而非‘仅被引用’；SOP正文（content字段）须独立承载全部必要操作指令，当前content中对这些关键动作仅作简略提及（如‘核查揽收、转运和派送轨迹’），未包含fact_text中定义的具体判断标准（如时限）、操作路径（如登录系统、截图）、判定依据（如‘以承运商书面证明或系统标记为准’），构成事实表达不完整；",
+          "新增未声明fact_key：'loss_secondary_check'、'loss_high_level_process'、'loss_log_entry'在蓝图required_facts中未定义，却出现在文档facts中，属范围外扩展，可能引发知识库混淆或RAG误召回；",
+          "‘异常分支’节中异常分支A引入了未在蓝图中定义的‘二次核查’流程，且其触发条件（‘承运商反馈未丢失但轨迹长期停滞’）与前置检查中已定义的节点停滞阈值逻辑重叠，未说明如何与SEC_002中‘若任一节点符合异常条件则进入下一步’衔接，存在流程断点与条件冲突风险；",
+          "‘升级条件’节中‘升级后需按高级流程处理（loss_high_level_process）’将内部流程名直接括号嵌入正文，未作术语定义或链接，对一线客服构成理解障碍，属低歧义但中等执行风险；",
+          "‘适用场景’节content中‘触发丢失排查的场景’未明确定义触发阈值（如‘超承诺时效X小时’），依赖SEC_002前置检查反向定义，削弱首屏可操作性，违反SOP‘适用场景’应具备独立判别能力的设计惯例。"
+        ],
+        "overall_score": 0.7833333333333333,
+        "passed": false,
+        "source_doc_code": "SOP_PACKAGE_LOSS_001",
+        "structure_score": 1.0,
+        "summary": "文档结构完整、编号准确、版本信息合规，所有required_sections均存在且heading匹配，required_identifiers（S-LOGISTICS-001/E-LG-3001）在适用场景与处理步骤中正确出现。但核心缺陷在于required_facts未被正文中实质性覆盖：三项必需事实仅以facts数组形式存在，未融入section.content主干文本，导致一线人员无法脱离facts元数据独立执行；同时引入3个蓝图未授权的fact_key，破坏知识库边界。内部逻辑基本自洽，但异常分支与前置检查存在隐性耦合漏洞。整体质量未达通过阈值，主要因fact_coverage=0.67<1.0，overall_score=0.78<0.88。",
+        "version_consistency": 1.0
+      },
+      "round_no": 1
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "前置检查（SEC_002）中将'loss_tracking_check'事实嵌入在步骤描述中，但其fact_text重复定义了节点时限（48h/24h/12h），与适用场景（SEC_001）中已明确的触发条件完全一致，存在冗余；虽不构成错误，但削弱事实颗粒度——蓝图要求该fact_key对应‘核查揽收、转运和派送轨迹’这一动作本身，而非时限规则；当前fact_text过度绑定时限，弱化了‘核查动作’的独立性。",
+          "处理步骤（SEC_003）中loss_resolution的fact_text规定‘以承运商出具书面丢失证明或系统标记为准’，但未明确‘谁判定’及‘判定依据是否需内部复核’；结合异常分支B中客户主张丢失而承运商显示签收的情形，此处缺少对‘冲突证据下如何终局认定丢失’的裁量机制，可能引发客服自由裁量歧义。",
+          "升级条件（SEC_005）要求‘在E-LG-3001系统日志中记录’，但未说明记录字段、格式或必填项（如工单号、升级原因、处理人），属可执行性缺口；虽不影响结构合规，但增加RAG检索时语义模糊风险（例如：‘记录’是否等同于‘创建日志条目’？是否需关联原始工单？）。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "SOP_PACKAGE_LOSS_001",
+        "structure_score": 0.95,
+        "summary": "文档严格覆盖全部required_facts（loss_tracking_check/loss_carrier_ticket/loss_resolution）、required_identifiers（S-LOGISTICS-001与E-LG-3001均准确出现在前置检查、处理步骤、升级条件三处上下文）、required_sections完整且标题/别名符合蓝图。结构清晰，逻辑链闭环：从触发→检查→执行→异常→升级。内部无实质性冲突（如时限定义统一、编号引用一致、状态转移无死循环）。版本字段空值与蓝图一致，无supersedes/conflicts_with干扰。主要风险为两处轻度歧义：一是loss_resolution事实未定义跨证据冲突时的终局判定主体，二是升级日志要求缺乏操作粒度。整体质量优秀，满足所有硬性通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 2
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "前置检查（SEC_002）中将'loss_tracking_check'事实嵌入在步骤描述中，但其fact_text重复定义了节点时限（48h/24h/12h），与适用场景（SEC_001）中已明确的触发条件完全一致，存在冗余；虽不构成错误，但削弱事实颗粒度——蓝图要求该fact_key对应‘核查揽收、转运和派送轨迹’这一动作本身，而非时限规则；当前fact_text过度绑定时限，弱化了‘核查动作’的独立性。",
+      "处理步骤（SEC_003）中loss_resolution的fact_text规定‘以承运商出具书面丢失证明或系统标记为准’，但未明确‘谁判定’及‘判定依据是否需内部复核’；结合异常分支B中客户主张丢失而承运商显示签收的情形，此处缺少对‘冲突证据下如何终局认定丢失’的裁量机制，可能引发客服自由裁量歧义。",
+      "升级条件（SEC_005）要求‘在E-LG-3001系统日志中记录’，但未说明记录字段、格式或必填项（如工单号、升级原因、处理人），属可执行性缺口；虽不影响结构合规，但增加RAG检索时语义模糊风险（例如：‘记录’是否等同于‘创建日志条目’？是否需关联原始工单？）。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "SOP_PACKAGE_LOSS_001",
+    "structure_score": 0.95,
+    "summary": "文档严格覆盖全部required_facts（loss_tracking_check/loss_carrier_ticket/loss_resolution）、required_identifiers（S-LOGISTICS-001与E-LG-3001均准确出现在前置检查、处理步骤、升级条件三处上下文）、required_sections完整且标题/别名符合蓝图。结构清晰，逻辑链闭环：从触发→检查→执行→异常→升级。内部无实质性冲突（如时限定义统一、编号引用一致、状态转移无死循环）。版本字段空值与蓝图一致，无supersedes/conflicts_with干扰。主要风险为两处轻度歧义：一是loss_resolution事实未定义跨证据冲突时的终局判定主体，二是升级日志要求缺乏操作粒度。整体质量优秀，满足所有硬性通过阈值。",
+    "version_consistency": 1.0
+  }
+}

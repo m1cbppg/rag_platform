@@ -1,0 +1,117 @@
+{
+  "document": {
+    "doc_type": "MANUAL",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "路径",
+          "导航"
+        ],
+        "content": "登录风控系统后，进入【风险管理】模块，选择【风控后台】菜单项，即可进入风控管理后台界面。",
+        "facts": [],
+        "heading": "菜单路径",
+        "section_code": "MENU_PATH"
+      },
+      {
+        "aliases": [
+          "字段描述",
+          "字段解释"
+        ],
+        "content": "风险单号（格式：M-RISK-001）唯一标识每笔风险案件；命中规则（如E-RKM-8501）显示触发的具体风控规则；风险等级分为低、中、高三级；创建时间与最后操作时间记录案件生命周期。",
+        "facts": [
+          {
+            "fact_key": "risk_admin_case",
+            "fact_text": "风险单号（M-RISK-001）和命中规则（E-RKM-8501）可通过风险单列表查询，支持按单号、规则编号、风险等级等条件筛选。"
+          }
+        ],
+        "heading": "字段说明",
+        "section_code": "FIELD_DESC"
+      },
+      {
+        "aliases": [
+          "流程",
+          "操作流程"
+        ],
+        "content": "1. 进入【风控后台】菜单，在风险单列表中选择待处理案件。\n2. 点击案件进入详情页，查看风险单信息及命中规则详情。\n3. 上传核验材料：点击【上传证据】按钮，选择相关文件（如截图、聊天记录等）并填写复核意见。\n4. 若案件风险等级为高，需点击【升级至风控专员】按钮，将案件转交高级处理。\n5. 确认无误后点击【提交复核】按钮，系统将自动流转至复核队列。注意：客服仅能提交复核，无法直接解除风险。",
+        "facts": [
+          {
+            "fact_key": "risk_admin_evidence",
+            "fact_text": "上传核验材料时，需点击【上传证据】按钮，选择PDF、图片或文档格式，并在文本框内填写详细的复核意见，包括对风险判定的认可或质疑理由。"
+          }
+        ],
+        "heading": "操作步骤",
+        "section_code": "OPERATION_STEPS"
+      },
+      {
+        "aliases": [
+          "按钮功能",
+          "操作按钮"
+        ],
+        "content": "【上传证据】：上传核验材料文件。\n【升级至风控专员】：将高风险案件升级处理。\n【提交复核】：提交当前案件及材料供复核，客服仅可使用此按钮。\n【驳回】：将案件退回前序节点（仅风控专员可用）。\n【解除风险】：直接解除案件风险状态（仅风控专员可用）。\n【查看日志】：查看案件操作历史。",
+        "facts": [
+          {
+            "fact_key": "risk_admin_escalate",
+            "fact_text": "当案件风险等级为高或存在异常时，客服应点击【升级至风控专员】按钮，将案件升级至风控专员处理，升级后需在备注中说明升级原因。"
+          }
+        ],
+        "heading": "按钮说明",
+        "section_code": "BUTTON_DESC"
+      },
+      {
+        "aliases": [
+          "异常提示",
+          "错误信息"
+        ],
+        "content": "常见错误提示及处理方法：\n- “上传文件格式不支持”：仅支持PDF、JPG、PNG、DOCX格式，请重新选择。\n- “必填字段未填写”：复核意见为必填项，请填写后再提交。\n- “案件状态不允许操作”：当前案件已处于终态（如已解除风险），无法再次提交复核。\n- “系统繁忙，请稍后重试”：后台处理超时，请间隔一段时间后重试。",
+        "facts": [],
+        "heading": "错误提示",
+        "section_code": "ERROR_PROMPT"
+      }
+    ],
+    "source_doc_code": "MANUAL_RISK_ADMIN_001",
+    "title": "风控管理后台操作手册",
+    "topic": "risk",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.1,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "在'按钮说明'章节中，【驳回】和【解除风险】按钮被描述为'仅风控专员可用'，但未在任何required_facts中体现该权限约束；虽不违反required_facts覆盖要求（因蓝图未要求覆盖权限归属事实），但与generation_notes中'强调客服只能提交复核，不能直接解除风险'存在隐含强化缺口——当前文档仅通过按钮禁用说明间接传达，未在操作步骤或字段说明中主动申明权限边界，可能削弱一线客服对自身操作边界的认知确定性。",
+          "‘错误提示’节中‘案件状态不允许操作’的解释提到‘已处于终态（如已解除风险）’，但全文未定义何为‘终态’，亦未说明‘解除风险’是否可逆、由谁触发、是否留痕；虽该状态非required_facts所列，但作为高频错误场景，其模糊表述可能引发RAG在问答中错误推断客服具备解除权限（尤其当用户混淆‘提交复核’与‘解除风险’时）。",
+          "‘字段说明’中将‘风险等级分为低、中、高三级’列为通用描述，但未与required_facts中的‘risk_admin_escalate’（明确要求‘将高风险案件升级’）形成显式映射，缺少‘高风险 = 风险等级字段值为‘高’’的确认性陈述，存在术语落地弱关联风险。"
+        ],
+        "overall_score": 0.93,
+        "passed": true,
+        "source_doc_code": "MANUAL_RISK_ADMIN_001",
+        "structure_score": 0.95,
+        "summary": "文档严格覆盖全部3项required_facts（risk_admin_case、risk_admin_evidence、risk_admin_escalate），M-RISK-001与E-RKM-8501编号准确嵌入字段说明与操作上下文，结构完整匹配全部5个required_sections，无版本冲突，内部逻辑无硬性矛盾。主要质量风险集中于权限边界的显性化不足与状态术语的闭环定义缺失，属中低风险歧义，不影响核心操作执行，但可能降低RAG响应精准度及新客服自学效率。总体质量优秀，符合发布阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.1,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "在'按钮说明'章节中，【驳回】和【解除风险】按钮被描述为'仅风控专员可用'，但未在任何required_facts中体现该权限约束；虽不违反required_facts覆盖要求（因蓝图未要求覆盖权限归属事实），但与generation_notes中'强调客服只能提交复核，不能直接解除风险'存在隐含强化缺口——当前文档仅通过按钮禁用说明间接传达，未在操作步骤或字段说明中主动申明权限边界，可能削弱一线客服对自身操作边界的认知确定性。",
+      "‘错误提示’节中‘案件状态不允许操作’的解释提到‘已处于终态（如已解除风险）’，但全文未定义何为‘终态’，亦未说明‘解除风险’是否可逆、由谁触发、是否留痕；虽该状态非required_facts所列，但作为高频错误场景，其模糊表述可能引发RAG在问答中错误推断客服具备解除权限（尤其当用户混淆‘提交复核’与‘解除风险’时）。",
+      "‘字段说明’中将‘风险等级分为低、中、高三级’列为通用描述，但未与required_facts中的‘risk_admin_escalate’（明确要求‘将高风险案件升级’）形成显式映射，缺少‘高风险 = 风险等级字段值为‘高’’的确认性陈述，存在术语落地弱关联风险。"
+    ],
+    "overall_score": 0.93,
+    "passed": true,
+    "source_doc_code": "MANUAL_RISK_ADMIN_001",
+    "structure_score": 0.95,
+    "summary": "文档严格覆盖全部3项required_facts（risk_admin_case、risk_admin_evidence、risk_admin_escalate），M-RISK-001与E-RKM-8501编号准确嵌入字段说明与操作上下文，结构完整匹配全部5个required_sections，无版本冲突，内部逻辑无硬性矛盾。主要质量风险集中于权限边界的显性化不足与状态术语的闭环定义缺失，属中低风险歧义，不影响核心操作执行，但可能降低RAG响应精准度及新客服自学效率。总体质量优秀，符合发布阈值。",
+    "version_consistency": 1.0
+  }
+}

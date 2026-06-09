@@ -1,0 +1,192 @@
+{
+  "document": {
+    "doc_type": "FAQ",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "取消待支付订单",
+          "待支付取消",
+          "未付款取消"
+        ],
+        "content": "待支付订单可由用户直接在订单列表中点击取消按钮，无需审核，即时生效。",
+        "facts": [
+          {
+            "fact_key": "order_cancel_pending_payment",
+            "fact_text": "待支付订单可由用户直接取消"
+          }
+        ],
+        "heading": "如何取消待支付订单？",
+        "section_code": "Q001"
+      },
+      {
+        "aliases": [
+          "待支付取消失败",
+          "取消待支付报错",
+          "待支付取消异常"
+        ],
+        "content": "若取消待支付订单时提示失败，请先检查网络连接，刷新页面后重试。如仍失败，请联系客服处理。",
+        "facts": [],
+        "heading": "待支付订单取消失败怎么办？",
+        "section_code": "Q002"
+      },
+      {
+        "aliases": [
+          "取消已支付订单",
+          "已支付取消申请",
+          "退款取消"
+        ],
+        "content": "已支付未出库订单需要提交取消申请，路径：订单详情页点击申请取消，审核通过后退款。",
+        "facts": [
+          {
+            "fact_key": "order_cancel_paid",
+            "fact_text": "已支付未出库订单需要提交取消申请"
+          }
+        ],
+        "heading": "如何取消已支付订单？",
+        "section_code": "Q003"
+      },
+      {
+        "aliases": [
+          "已支付取消失败",
+          "取消申请未更新",
+          "已支付取消异常"
+        ],
+        "content": "若提交取消申请后订单状态长时间未更新，建议联系客服核实，可能因系统延迟或审核驳回。",
+        "facts": [],
+        "heading": "已支付订单取消失败如何处理？",
+        "section_code": "Q004"
+      },
+      {
+        "aliases": [
+          "取消已发货订单",
+          "已发货不能直接取消",
+          "发货后退货"
+        ],
+        "content": "已发货订单不能直接取消，应走售后流程，申请退货退款或换货。",
+        "facts": [
+          {
+            "fact_key": "order_cancel_shipped",
+            "fact_text": "已发货订单不能直接取消，应走售后流程"
+          }
+        ],
+        "heading": "已发货订单如何取消？",
+        "section_code": "Q005"
+      },
+      {
+        "aliases": [
+          "已发货退货流程",
+          "退货操作步骤",
+          "售后退货"
+        ],
+        "content": "进入订单详情点击【退换货】按钮，选择退货原因，提交后等待审核，审核通过后按地址寄回商品。",
+        "facts": [],
+        "heading": "已发货订单退货具体流程？",
+        "section_code": "Q006"
+      },
+      {
+        "aliases": [
+          "订单状态列表",
+          "状态说明",
+          "常见状态"
+        ],
+        "content": "常见订单状态包括：待支付、已支付（待出库）、已发货、已签收、已完成、已取消等。",
+        "facts": [],
+        "heading": "订单有哪些常见状态？",
+        "section_code": "Q007"
+      },
+      {
+        "aliases": [
+          "F-ORDER-001解释",
+          "错误码001",
+          "订单取消禁止"
+        ],
+        "content": "错误码F-ORDER-001表示当前订单状态不允许取消，请根据页面提示调整操作。",
+        "facts": [],
+        "heading": "提示F-ORDER-001是什么意思？",
+        "section_code": "Q008"
+      },
+      {
+        "aliases": [
+          "ORDER_CANCEL_PENDING含义",
+          "取消待支付提示",
+          "待支付取消代码"
+        ],
+        "content": "提示ORDER_CANCEL_PENDING表示订单处于待支付状态，可以执行取消操作。",
+        "facts": [],
+        "heading": "提示ORDER_CANCEL_PENDING是什么含义？",
+        "section_code": "Q009"
+      },
+      {
+        "aliases": [
+          "取消退款时间",
+          "退款周期",
+          "取消后退款时长"
+        ],
+        "content": "待支付订单取消不涉及退款；已支付订单取消审核通过后，退款通常在1-3个工作日内原路返回。",
+        "facts": [],
+        "heading": "订单取消后多久退款？",
+        "section_code": "Q010"
+      },
+      {
+        "aliases": [
+          "部分取消订单",
+          "多商品取消",
+          "拆分取消"
+        ],
+        "content": "如果部分商品未发货，可以申请部分取消；已发货的商品不可部分取消，需走售后流程。",
+        "facts": [],
+        "heading": "多商品订单可以部分取消吗？",
+        "section_code": "Q011"
+      }
+    ],
+    "source_doc_code": "FAQ_ORDER_STATUS_001",
+    "title": "订单状态与取消常见问题",
+    "topic": "order",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "Q002（待支付取消失败）未关联任何fact，虽属合理补充，但与蓝图generation_notes中'覆盖订单状态变化与取消失败提示'要求一致，不构成缺陷；但内容中'联系客服处理'未说明是否需提供订单号或错误码，存在轻微操作指引缺失，属低风险歧义。",
+          "Q004（已支付取消失败）提及'审核驳回'，但蓝图required_facts中仅明确'需要提交取消申请'，未定义驳回场景或条件，此处引入新隐含逻辑（如驳回可能性），虽不冲突，但未在required_facts中声明，属于边缘性扩展，增加RAG对'驳回原因'的不可控联想风险。",
+          "Q007（订单状态列表）为新增通用信息，非蓝图required_sections所列三类（待支付/已支付/已发货）之一，亦未在generation_notes中要求，属冗余内容；虽不破坏结构，但稀释核心主题聚焦度，轻微降低结构紧凑性得分依据（仍达0.95）。",
+          "Q010（退款时间）中'已支付订单取消审核通过后，退款通常在1-3个工作日内原路返回'——'通常'一词引入不确定性，与企业知识库要求的确定性表述存在张力；且蓝图未授权该时效承诺，可能引发SLA争议，构成中低风险歧义（已计入ambiguity_risk=0.15）。",
+          "Q011（部分取消）属合理延伸，但'部分商品未发货'未明确定义对应状态（如是否等同于'已支付未出库'），与required_facts['order_cancel_paid']中'已支付未出库'术语不完全对齐，存在术语映射模糊风险，属轻度歧义。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "FAQ_ORDER_STATUS_001",
+        "structure_score": 0.95,
+        "summary": "文档严格覆盖全部3项required_facts（Q001/Q003/Q005精准锚定），完整包含F-ORDER-001和ORDER_CANCEL_PENDING两个required_identifiers（Q008/Q009），结构符合FAQ类型规范，章节划分清晰，section_code连续无跳号，aliases设计合理。内部逻辑无硬冲突：待支付即时取消、已支付需申请、已发货禁取消三者边界清晰；状态流转约束自洽。版本字段完整且与蓝图一致。主要风险集中于少量补充性问答中的非确定性措辞（如'通常''建议''可能'）及未经声明的流程延伸（如驳回、部分取消条件），不破坏事实正确性，但略微抬升客服/RAG多解风险。总体质量优秀，满足所有硬性通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "Q002（待支付取消失败）未关联任何fact，虽属合理补充，但与蓝图generation_notes中'覆盖订单状态变化与取消失败提示'要求一致，不构成缺陷；但内容中'联系客服处理'未说明是否需提供订单号或错误码，存在轻微操作指引缺失，属低风险歧义。",
+      "Q004（已支付取消失败）提及'审核驳回'，但蓝图required_facts中仅明确'需要提交取消申请'，未定义驳回场景或条件，此处引入新隐含逻辑（如驳回可能性），虽不冲突，但未在required_facts中声明，属于边缘性扩展，增加RAG对'驳回原因'的不可控联想风险。",
+      "Q007（订单状态列表）为新增通用信息，非蓝图required_sections所列三类（待支付/已支付/已发货）之一，亦未在generation_notes中要求，属冗余内容；虽不破坏结构，但稀释核心主题聚焦度，轻微降低结构紧凑性得分依据（仍达0.95）。",
+      "Q010（退款时间）中'已支付订单取消审核通过后，退款通常在1-3个工作日内原路返回'——'通常'一词引入不确定性，与企业知识库要求的确定性表述存在张力；且蓝图未授权该时效承诺，可能引发SLA争议，构成中低风险歧义（已计入ambiguity_risk=0.15）。",
+      "Q011（部分取消）属合理延伸，但'部分商品未发货'未明确定义对应状态（如是否等同于'已支付未出库'），与required_facts['order_cancel_paid']中'已支付未出库'术语不完全对齐，存在术语映射模糊风险，属轻度歧义。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "FAQ_ORDER_STATUS_001",
+    "structure_score": 0.95,
+    "summary": "文档严格覆盖全部3项required_facts（Q001/Q003/Q005精准锚定），完整包含F-ORDER-001和ORDER_CANCEL_PENDING两个required_identifiers（Q008/Q009），结构符合FAQ类型规范，章节划分清晰，section_code连续无跳号，aliases设计合理。内部逻辑无硬冲突：待支付即时取消、已支付需申请、已发货禁取消三者边界清晰；状态流转约束自洽。版本字段完整且与蓝图一致。主要风险集中于少量补充性问答中的非确定性措辞（如'通常''建议''可能'）及未经声明的流程延伸（如驳回、部分取消条件），不破坏事实正确性，但略微抬升客服/RAG多解风险。总体质量优秀，满足所有硬性通过阈值。",
+    "version_consistency": 1.0
+  }
+}

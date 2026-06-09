@@ -1,0 +1,121 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [],
+        "content": "本SOP适用于原路退款失败或账户异常导致的退款失败场景。",
+        "facts": [],
+        "heading": "适用场景",
+        "section_code": "SEC01"
+      },
+      {
+        "aliases": [],
+        "content": "核对原支付渠道可退款状态（参考标识S-REFUND-002），确认渠道返回码及退款限制。同时确认退款失败原因是否为账户异常（参考标识E-RF-1002）。",
+        "facts": [
+          {
+            "fact_key": "refund_failure_channel",
+            "fact_text": "核对原支付渠道可退款状态，确认返回码是否为'NOT_SUPPORTED'或'ACCOUNT_CLOSED'等，以区分原路退回限制与账户异常。"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "SEC02"
+      },
+      {
+        "aliases": [],
+        "content": "1. 检查退款失败原因，根据渠道返回码判断是原路退回限制（S-REFUND-002）还是账户异常（E-RF-1002）。\n2. 若为原路退回限制，则重试退款任务（参考标识S-REFUND-002）；若为账户异常，则直接转人工打款（参考标识E-RF-1002）。\n3. 重试失败后，转人工打款或财务处理（提交工单）。\n4. 记录处理结果并归档。",
+        "facts": [
+          {
+            "fact_key": "refund_failure_retry",
+            "fact_text": "满足条件时重试退款任务，重试逻辑应基于渠道返回码判断是否可重试。"
+          },
+          {
+            "fact_key": "refund_failure_manual",
+            "fact_text": "重试失败后转人工打款或财务处理，需通过工单系统提交，注明失败原因与重试记录。"
+          }
+        ],
+        "heading": "处理步骤",
+        "section_code": "SEC03"
+      },
+      {
+        "aliases": [],
+        "content": "若系统返回未知错误码或无法判断失败原因，升级至技术团队排查。",
+        "facts": [],
+        "heading": "异常分支",
+        "section_code": "SEC04"
+      },
+      {
+        "aliases": [],
+        "content": "当重试次数达到3次仍失败，或涉及金额超过500元（人民币）时，需升级至主管审批。",
+        "facts": [],
+        "heading": "升级条件",
+        "section_code": "SEC05"
+      }
+    ],
+    "source_doc_code": "SOP_REFUND_FAILURE_001",
+    "title": "退款失败排查SOP",
+    "topic": "refund",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.7,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 0.5,
+        "internal_consistency": 0.85,
+        "issues": [
+          "标识E-RF-1002在文档中被错误复用：蓝图明确要求E-RF-1002标识'账户异常'，但文档在'前置检查'和'处理步骤'中均将其用于'原路退回限制'（SEC02：'确认退款失败原因是否为账户异常（参考标识E-RF-1002）'；SEC03：'若为原路退回限制，则重试退款任务（参考标识E-RF-1002）'）——同一编号指向两个互斥原因，严重违反编号唯一性与语义一致性要求。",
+          "S-REFUND-002仅在'前置检查'中作为括号注释出现，未在任何fact_text中显式绑定其语义；且该标识在蓝图中关联'核对原支付渠道可退款状态'，但文档未说明其具体判定标准（如：渠道返回码、时效阈值、冻结状态等），导致执行不可验证。",
+          "'处理步骤'第2步将'原路退回限制'直接等同于可重试条件，但蓝图generation_notes强调需'明确原路退款失败和账户异常的差异'，而文档未定义二者判别逻辑（例如：渠道返回'NOT_SUPPORTED' vs 'ACCOUNT_CLOSED'），存在操作混淆风险。",
+          "'升级条件'中'重试超过3次'无依据支撑（蓝图未规定次数阈值），且'金额超过500元'未说明币种、是否含税、是否累计，构成歧义；同时该条件与required_facts无映射，属冗余添加。",
+          "'异常分支'内容过于笼统（'系统异常或无法判断原因'），未覆盖蓝图required_facts中的任一事实，也未与'升级条件'形成分层响应关系（如：先升级技术团队？还是先转人工？），逻辑断层。"
+        ],
+        "overall_score": 0.79,
+        "passed": false,
+        "source_doc_code": "SOP_REFUND_FAILURE_001",
+        "structure_score": 1.0,
+        "summary": "文档结构完整、章节齐全，所有required_sections均已存在，fact_coverage达标（3个required_facts全部覆盖且fact_text语义基本匹配），版本字段合规。但存在严重编号误用（E-RF-1002一码双义）、关键标识缺乏可操作定义、判别逻辑缺失、以及引入未经蓝图授权的阈值规则，导致内部一致性受损、编号准确性腰斩、歧义风险显著升高。整体质量未达通过阈值（overall_score < 0.88，identifier_accuracy < 1，internal_consistency < 0.90），须修订后重审。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.2,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "SEC03中'若为账户异常，则直接转人工打款'与蓝图generation_notes强调的'明确原路退款失败和账户异常的差异'逻辑一致，但未在'异常分支'（SEC04）中显式区分两类异常的处理路径差异，存在轻度解释模糊风险；建议在SEC04补充'账户异常不触发重试，仅走人工打款'的确认性说明。",
+          "SEC05升级条件中'金额超过500元'未注明是否含税/是否为单笔/是否累计，虽不违反蓝图，但构成RAG检索时可能歧义的边界条件（如多笔小额合并退款），属低风险歧义。"
+        ],
+        "overall_score": 0.94,
+        "passed": true,
+        "source_doc_code": "SOP_REFUND_FAILURE_001",
+        "structure_score": 1.0,
+        "summary": "文档完全覆盖全部required_facts（refund_failure_channel、refund_failure_retry、refund_failure_manual），事实描述精准对应蓝图语义；S-REFUND-002与E-RF-1002在前置检查和处理步骤中准确引用且无串用；所有required_sections完整存在且内容实质匹配；结构、版本、生效关系均无缺失或冲突；内部逻辑自洽，仅存在两处低风险表述模糊点，不影响核心执行确定性。总体质量优秀，符合发布标准。",
+        "version_consistency": 1.0
+      },
+      "round_no": 1
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.2,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "SEC03中'若为账户异常，则直接转人工打款'与蓝图generation_notes强调的'明确原路退款失败和账户异常的差异'逻辑一致，但未在'异常分支'（SEC04）中显式区分两类异常的处理路径差异，存在轻度解释模糊风险；建议在SEC04补充'账户异常不触发重试，仅走人工打款'的确认性说明。",
+      "SEC05升级条件中'金额超过500元'未注明是否含税/是否为单笔/是否累计，虽不违反蓝图，但构成RAG检索时可能歧义的边界条件（如多笔小额合并退款），属低风险歧义。"
+    ],
+    "overall_score": 0.94,
+    "passed": true,
+    "source_doc_code": "SOP_REFUND_FAILURE_001",
+    "structure_score": 1.0,
+    "summary": "文档完全覆盖全部required_facts（refund_failure_channel、refund_failure_retry、refund_failure_manual），事实描述精准对应蓝图语义；S-REFUND-002与E-RF-1002在前置检查和处理步骤中准确引用且无串用；所有required_sections完整存在且内容实质匹配；结构、版本、生效关系均无缺失或冲突；内部逻辑自洽，仅存在两处低风险表述模糊点，不影响核心执行确定性。总体质量优秀，符合发布标准。",
+    "version_consistency": 1.0
+  }
+}

@@ -27,3 +27,11 @@ class ExternalServiceError(RagPlatformError):
     - Milvus 查询失败；
     - DeepSeek API 超时。
     """
+
+
+class ModelResponseFormatError(ExternalServiceError):
+    """
+    外部模型成功响应，但响应正文不符合约定格式。
+
+    这类错误与网络或鉴权错误不同，允许上层在有限次数内重新请求模型。
+    """

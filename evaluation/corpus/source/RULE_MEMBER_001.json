@@ -1,0 +1,76 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2025-01-01",
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "适用对象",
+        "范围"
+      ],
+      "content": "本规则适用于指定会员（R-MEMBER-001）和指定商品，会员可享十五日无理由退货（MEMBER-15D）。",
+      "facts": [
+        {
+          "fact_key": "member_extended_return",
+          "fact_text": "指定会员和商品可享十五日无理由退货"
+        }
+      ],
+      "heading": "适用范围",
+      "section_code": "SCOPE"
+    },
+    {
+      "aliases": [
+        "规则详情",
+        "条款"
+      ],
+      "content": "退款后按退款金额扣回积分和成长值，相关操作参见R-MEMBER-001。",
+      "facts": [
+        {
+          "fact_key": "member_points_refund",
+          "fact_text": "退款后按退款金额扣回积分和成长值"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "RULE_TERMS"
+    },
+    {
+      "aliases": [
+        "不适用场景",
+        "排除项"
+      ],
+      "content": "虚拟、定制和生鲜商品不适用延长退货（MEMBER-15D），与退款V2中的会员例外保持一致。",
+      "facts": [
+        {
+          "fact_key": "member_exception",
+          "fact_text": "虚拟、定制和生鲜商品不适用延长退货"
+        }
+      ],
+      "heading": "例外条件",
+      "section_code": "EXCEPTIONS"
+    },
+    {
+      "aliases": [
+        "规则优先级",
+        "优先顺序"
+      ],
+      "content": "本规则优先级高于通用售后规则，标识符R-MEMBER-001。",
+      "facts": [],
+      "heading": "优先级",
+      "section_code": "PRIORITY"
+    },
+    {
+      "aliases": [
+        "实施时间",
+        "起始日"
+      ],
+      "content": "自2025年1月1日起生效。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "EFFECTIVE_DATE"
+    }
+  ],
+  "source_doc_code": "RULE_MEMBER_001",
+  "title": "会员售后权益规则",
+  "topic": "member",
+  "version": "1.0"
+}

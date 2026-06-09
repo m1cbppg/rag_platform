@@ -1,0 +1,60 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2024-05-01",
+  "effective_to": "2025-10-31",
+  "sections": [
+    {
+      "aliases": [],
+      "content": "本规则适用于所有使用LOGISTICS-V1的订单物流轨迹判定。涉及标识符R-LOGISTICS-001。",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "SEC_001"
+    },
+    {
+      "aliases": [],
+      "content": "物流延迟判定标准：若物流轨迹48小时未更新，判定为延迟（fact_key: logistics_v1_delay）。若连续七日无轨迹，进入疑似丢失核查（fact_key: logistics_v1_loss）。",
+      "facts": [
+        {
+          "fact_key": "logistics_v1_delay",
+          "fact_text": "V1物流轨迹48小时未更新判定延迟"
+        },
+        {
+          "fact_key": "logistics_v1_loss",
+          "fact_text": "七日无轨迹可进入疑似丢失核查"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "SEC_002"
+    },
+    {
+      "aliases": [],
+      "content": "偏远地区和不可抗力不适用普通时限（fact_key: logistics_v1_exception）。",
+      "facts": [
+        {
+          "fact_key": "logistics_v1_exception",
+          "fact_text": "偏远地区和不可抗力不适用普通时限"
+        }
+      ],
+      "heading": "例外条件",
+      "section_code": "SEC_003"
+    },
+    {
+      "aliases": [],
+      "content": "本规则优先级高于一般物流规则，与R-LOGISTICS-001其他版本冲突时以当前版本为准。",
+      "facts": [],
+      "heading": "优先级",
+      "section_code": "SEC_004"
+    },
+    {
+      "aliases": [],
+      "content": "本规则自2024-05-01起生效，至2025-10-31失效。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "SEC_005"
+    }
+  ],
+  "source_doc_code": "RULE_LOGISTICS_001_V1",
+  "title": "物流延迟判定规则 V1",
+  "topic": "logistics",
+  "version": "1.0"
+}

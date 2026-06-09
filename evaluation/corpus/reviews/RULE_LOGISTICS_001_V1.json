@@ -1,0 +1,101 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2024-05-01",
+    "effective_to": "2025-10-31",
+    "sections": [
+      {
+        "aliases": [],
+        "content": "本规则适用于所有使用LOGISTICS-V1的订单物流轨迹判定。涉及标识符R-LOGISTICS-001。",
+        "facts": [],
+        "heading": "适用范围",
+        "section_code": "SEC_001"
+      },
+      {
+        "aliases": [],
+        "content": "物流延迟判定标准：若物流轨迹48小时未更新，判定为延迟（fact_key: logistics_v1_delay）。若连续七日无轨迹，进入疑似丢失核查（fact_key: logistics_v1_loss）。",
+        "facts": [
+          {
+            "fact_key": "logistics_v1_delay",
+            "fact_text": "V1物流轨迹48小时未更新判定延迟"
+          },
+          {
+            "fact_key": "logistics_v1_loss",
+            "fact_text": "七日无轨迹可进入疑似丢失核查"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "SEC_002"
+      },
+      {
+        "aliases": [],
+        "content": "偏远地区和不可抗力不适用普通时限（fact_key: logistics_v1_exception）。",
+        "facts": [
+          {
+            "fact_key": "logistics_v1_exception",
+            "fact_text": "偏远地区和不可抗力不适用普通时限"
+          }
+        ],
+        "heading": "例外条件",
+        "section_code": "SEC_003"
+      },
+      {
+        "aliases": [],
+        "content": "本规则优先级高于一般物流规则，与R-LOGISTICS-001其他版本冲突时以当前版本为准。",
+        "facts": [],
+        "heading": "优先级",
+        "section_code": "SEC_004"
+      },
+      {
+        "aliases": [],
+        "content": "本规则自2024-05-01起生效，至2025-10-31失效。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "SEC_005"
+      }
+    ],
+    "source_doc_code": "RULE_LOGISTICS_001_V1",
+    "title": "物流延迟判定规则 V1",
+    "topic": "logistics",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.2,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "version_consistency扣分：蓝图中'supersedes'为null，但冲突文档V2明确声明'替代RULE_LOGISTICS_001_V1'且生效起始日（2025-11-01）紧接V1的effective_to（2025-10-31），逻辑上V1应设置'supersedes'指向V2或至少在'generation_notes'中注明'将被V2替代'；当前V1文档未体现该继承关系，与企业版本演进治理规范不符。",
+          "ambiguity_risk虽低但仍存在：'优先级'章节中'与R-LOGISTICS-001其他版本冲突时以当前版本为准'表述不严谨——V2已明确定义自身优先级为一级且'高于V1'，而V1单方面宣称'以当前版本为准'构成规则效力自指冲突，易引发法务或系统策略引擎解析歧义；应改为'本版本在有效期内适用，但不否定后续更高优先级版本的覆盖效力'。",
+          "structure_score微扣：'优先级'节未显式声明数值优先级（如'P1'或'Level 1'），仅用定性描述，虽满足required_sections存在性，但相较V2中'一级'量化表述，弱化了可执行性；建议补充优先级编码。"
+        ],
+        "overall_score": 0.89,
+        "passed": true,
+        "source_doc_code": "RULE_LOGISTICS_001_V1",
+        "structure_score": 0.95,
+        "summary": "文档整体质量优良：全部required_facts精准覆盖且fact_text与蓝图完全一致；required_identifiers（R-LOGISTICS-001、LOGISTICS-V1）完整准确出现在适用范围节；结构完整包含全部required_sections，语义清晰；内部逻辑无矛盾（48h延迟、7日无轨迹、例外豁免三者正交）。主要缺陷在于版本演进关系未闭环——V1作为历史版本，应主动声明其被V2替代的事实，而非保持supersedes=null，这削弱了知识库的版本可追溯性。歧义风险可控但存在策略性表述瑕疵。综合符合所有硬性通过阈值。",
+        "version_consistency": 0.85
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.2,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "version_consistency扣分：蓝图中'supersedes'为null，但冲突文档V2明确声明'替代RULE_LOGISTICS_001_V1'且生效起始日（2025-11-01）紧接V1的effective_to（2025-10-31），逻辑上V1应设置'supersedes'指向V2或至少在'generation_notes'中注明'将被V2替代'；当前V1文档未体现该继承关系，与企业版本演进治理规范不符。",
+      "ambiguity_risk虽低但仍存在：'优先级'章节中'与R-LOGISTICS-001其他版本冲突时以当前版本为准'表述不严谨——V2已明确定义自身优先级为一级且'高于V1'，而V1单方面宣称'以当前版本为准'构成规则效力自指冲突，易引发法务或系统策略引擎解析歧义；应改为'本版本在有效期内适用，但不否定后续更高优先级版本的覆盖效力'。",
+      "structure_score微扣：'优先级'节未显式声明数值优先级（如'P1'或'Level 1'），仅用定性描述，虽满足required_sections存在性，但相较V2中'一级'量化表述，弱化了可执行性；建议补充优先级编码。"
+    ],
+    "overall_score": 0.89,
+    "passed": true,
+    "source_doc_code": "RULE_LOGISTICS_001_V1",
+    "structure_score": 0.95,
+    "summary": "文档整体质量优良：全部required_facts精准覆盖且fact_text与蓝图完全一致；required_identifiers（R-LOGISTICS-001、LOGISTICS-V1）完整准确出现在适用范围节；结构完整包含全部required_sections，语义清晰；内部逻辑无矛盾（48h延迟、7日无轨迹、例外豁免三者正交）。主要缺陷在于版本演进关系未闭环——V1作为历史版本，应主动声明其被V2替代的事实，而非保持supersedes=null，这削弱了知识库的版本可追溯性。歧义风险可控但存在策略性表述瑕疵。综合符合所有硬性通过阈值。",
+    "version_consistency": 0.85
+  }
+}

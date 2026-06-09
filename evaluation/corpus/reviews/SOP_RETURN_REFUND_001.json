@@ -1,0 +1,117 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "适用情况",
+          "适用范围"
+        ],
+        "content": "本SOP适用于用户在电商平台购买商品后，因各种原因发起的退货退款请求的处理流程。",
+        "facts": [],
+        "heading": "适用场景",
+        "section_code": "S01"
+      },
+      {
+        "aliases": [
+          "准备检查",
+          "预检"
+        ],
+        "content": "客服在收到退货申请后，需检查以下内容：退货资格（是否在退货期内、是否符合退货条件）、商品状态（是否影响二次销售）、物流单号是否有效。确认无误后，向用户提供退货地址。标识：S-RETURN-001",
+        "facts": [
+          {
+            "fact_key": "return_refund_precheck",
+            "fact_text": "检查退货资格、商品状态和物流单号"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "S02"
+      },
+      {
+        "aliases": [
+          "操作步骤",
+          "流程步骤"
+        ],
+        "content": "1. 用户发起退货申请，提交相关凭证。\n2. 客服审核退货资格，确认符合条件后向用户发送退货地址。\n3. 用户需在7天内寄回商品，并上传物流单号。\n4. 商家签收包裹，记录签收时间及物流单号，状态更新为RETURN_RECEIVED。\n5. 仓库进行验货，核对商品、配件、包装是否完好。\n6. 验货通过后，财务进行退款操作，退款原路返回。\n7. 退款完成，通知用户，结束退货流程。",
+        "facts": [
+          {
+            "fact_key": "return_refund_receive",
+            "fact_text": "商家签收后进入验货和退款流程"
+          }
+        ],
+        "heading": "处理步骤",
+        "section_code": "S03"
+      },
+      {
+        "aliases": [
+          "异常处理",
+          "非正常流程"
+        ],
+        "content": "若验货发现空包、少件或商品与描述不符，则进入异常处理分支：客服联系用户核实情况，要求补充照片或说明，根据实际情况决定部分退款或拒绝退款。若无法协商一致，升级处理。",
+        "facts": [
+          {
+            "fact_key": "return_refund_exception",
+            "fact_text": "空包、少件或商品不符时进入异常分支"
+          }
+        ],
+        "heading": "异常分支",
+        "section_code": "S04"
+      },
+      {
+        "aliases": [
+          "升级标准",
+          "升级场景"
+        ],
+        "content": "以下情况需升级至主管处理：\n- 同一用户多次退货异常；\n- 商品价值超过2000元；\n- 用户投诉或争议升级；\n- 异常分支中无法与用户达成一致。",
+        "facts": [],
+        "heading": "升级条件",
+        "section_code": "S05"
+      }
+    ],
+    "source_doc_code": "SOP_RETURN_REFUND_001",
+    "title": "退货退款处理SOP",
+    "topic": "return",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "步骤3中'用户需在7天内寄回商品'满足'明确用户寄回时限'要求，但未说明起算时点（如：自客服发送退货地址后7天？自申请提交后7天？），存在轻微歧义，可能影响RAG精准召回或客服执行一致性。",
+          "升级条件中'同一用户多次退货异常'未定义'多次'（≥2次？≥3次？）及'异常'是否特指本SOP中定义的return_refund_exception情形，属可操作性弱项，虽不构成事实缺失，但增加一线解释分歧风险。",
+          "前置检查部分将'S-RETURN-001'作为标识嵌入句子末尾，未明确其语义角色（是流程编号？检查项ID？文档版本锚点？），虽满足'出现'要求，但未体现其作为required_identifier的规范用法（如：标注于章节头、步骤前或作为独立元数据字段），属标识使用不严谨。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "SOP_RETURN_REFUND_001",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部3个required_facts，准确包含S-RETURN-001和RETURN_RECEIVED两个required_identifiers，结构严格匹配required_sections（5/5），无冲突文档上下文，版本字段与蓝图一致。7个编号步骤清晰，寄回时限（7天）明确。主要风险为两处操作定义模糊（时限起算点、'多次异常'量化标准）及一个标识使用不规范问题，均属低严重度歧义，不影响核心流程执行，整体质量优良，符合通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "步骤3中'用户需在7天内寄回商品'满足'明确用户寄回时限'要求，但未说明起算时点（如：自客服发送退货地址后7天？自申请提交后7天？），存在轻微歧义，可能影响RAG精准召回或客服执行一致性。",
+      "升级条件中'同一用户多次退货异常'未定义'多次'（≥2次？≥3次？）及'异常'是否特指本SOP中定义的return_refund_exception情形，属可操作性弱项，虽不构成事实缺失，但增加一线解释分歧风险。",
+      "前置检查部分将'S-RETURN-001'作为标识嵌入句子末尾，未明确其语义角色（是流程编号？检查项ID？文档版本锚点？），虽满足'出现'要求，但未体现其作为required_identifier的规范用法（如：标注于章节头、步骤前或作为独立元数据字段），属标识使用不严谨。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "SOP_RETURN_REFUND_001",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部3个required_facts，准确包含S-RETURN-001和RETURN_RECEIVED两个required_identifiers，结构严格匹配required_sections（5/5），无冲突文档上下文，版本字段与蓝图一致。7个编号步骤清晰，寄回时限（7天）明确。主要风险为两处操作定义模糊（时限起算点、'多次异常'量化标准）及一个标识使用不规范问题，均属低严重度歧义，不影响核心流程执行，整体质量优良，符合通过阈值。",
+    "version_consistency": 1.0
+  }
+}

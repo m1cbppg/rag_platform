@@ -1,0 +1,124 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [],
+        "content": "当用户高金额、频繁售后或账号异常触发风控（risk_trigger）时，启动本流程。",
+        "facts": [
+          {
+            "fact_key": "risk_trigger",
+            "fact_text": "高金额、频繁售后或账号异常触发风控"
+          }
+        ],
+        "heading": "适用场景",
+        "section_code": "SEC-001"
+      },
+      {
+        "aliases": [],
+        "content": "风险核查期间暂停自动退款或补偿（risk_freeze_action）。客服确认订单是否处于冻结状态，冻结状态由风控系统自动判定，若未冻结则继续常规流程，若冻结则执行本流程。",
+        "facts": [
+          {
+            "fact_key": "risk_freeze_action",
+            "fact_text": "风险核查期间暂停自动退款或补偿"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "SEC-002"
+      },
+      {
+        "aliases": [],
+        "content": "1. 识别触发风控的订单，标记为高风险。\n2. 根据风险等级编码标准 S-RISK-001（如L：低、M：中、H：高）对订单进行分级。\n3. 提交风控复核申请，使用记录模板编号 E-RK-7001 填写详细信息。\n4. 等待风控团队反馈，期间不得主动执行退款或补偿操作。",
+        "facts": [],
+        "heading": "处理步骤",
+        "section_code": "SEC-003"
+      },
+      {
+        "aliases": [],
+        "content": "若用户多次申诉或提供新证据，客服应保持原有结论，无权绕过风控结论。如需复议，需通过正式渠道提交风控团队，客服不得自行修改判定结果。",
+        "facts": [],
+        "heading": "异常分支",
+        "section_code": "SEC-004"
+      },
+      {
+        "aliases": [],
+        "content": "按照风险等级升级并记录处理时限（risk_escalation_sla）。例如：高风险（S-RISK-001=H）对应24小时内未处理则自动升级至主管；中风险（M）对应48小时；低风险（L）对应72小时。超时未响应时系统自动触发升级。",
+        "facts": [
+          {
+            "fact_key": "risk_escalation_sla",
+            "fact_text": "按照风险等级升级并记录处理时限"
+          }
+        ],
+        "heading": "升级条件",
+        "section_code": "SEC-005"
+      }
+    ],
+    "source_doc_code": "SOP_RISK_ESCALATION_001",
+    "title": "风控升级流程SOP",
+    "topic": "risk",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.7,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 0.5,
+        "internal_consistency": 0.85,
+        "issues": [
+          "required_identifier 'S-RISK-001' appears only as descriptive text in '处理步骤' (SEC-003)，未被明确定义为风险等级编码标准，也未说明其取值范围（如L/M/H）、映射规则或来源依据；同理'E-RK-7001'仅作为'参考记录'出现，未说明其是日志模板、系统字段还是审计编号，缺乏使用方式和格式约束，构成编号误用风险。",
+          "‘处理步骤’中第4步‘等待风控团队反馈，期间不得主动退款’与‘前置检查’中‘客服确认订单是否处于冻结状态’存在逻辑断层：未说明若确认未冻结是否可操作、冻结状态由谁判定、判定依据是什么，导致执行路径不闭环。",
+          "‘异常分支’仅声明‘客服无权绕过风控’，但未呼应generation_notes中明确要求的‘说明客服无权绕过风控结论’——当前表述未区分‘风控过程’与‘风控结论’，易引发误解（例如：是否允许对结论提出复议？是否允许补充材料？）。",
+          "‘升级条件’中‘如超24小时未处理，自动升级至主管’引入了蓝图未定义的SLA数值（24小时），且未关联risk_escalation_sla所要求的‘按风险等级’差异化时限，造成事实覆盖表面达标、实质偏离：fact_text仅复述蓝图短语，但内容未体现分级SLA机制，属‘伪覆盖’。",
+          "‘处理步骤’第2步‘根据风险等级S-RISK-001进行升级判断’将标识符当作判断逻辑使用，混淆编号与规则，违反标识符应为唯一、稳定、可引用的元数据原则；S-RISK-001应是等级分类编码（如S-RISK-001=高危），而非判断动作本身。"
+        ],
+        "overall_score": 0.79,
+        "passed": false,
+        "source_doc_code": "SOP_RISK_ESCALATION_001",
+        "structure_score": 1.0,
+        "summary": "文档结构完整、章节齐全，所有required_sections均已存在，fact_coverage形式上满足（三个required_facts均在对应section中以fact_key+fact_text方式声明），版本字段一致，无冲突文档干扰。但核心缺陷在于：两个required_identifiers（S-RISK-001、E-RK-7001）未被正确定义和使用，沦为装饰性字符串，严重损害可执行性与系统集成可靠性；同时‘升级条件’引入未授权的硬编码时限（24小时），破坏risk_escalation_sla的事实完整性；多处表述模糊（如‘不得主动退款’未界定例外情形、‘确认冻结状态’无判定主体与方法），显著抬高一线执行与RAG解析歧义风险。综合判定不通过：identifier_accuracy=0.5<1，internal_consistency=0.85<0.90，overall_score=0.79<0.88。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "处理步骤（SEC-003）未显式引用 required_facts['risk_escalation_sla']，虽内容隐含SLA逻辑（如'24小时内未处理则自动升级'），但未在 facts 字段中声明该 fact_key，导致该节 facts 数组为空——而蓝图要求所有 required_facts 必须在文档中以 facts 数组形式显式锚定。注意：fact_coverage=1.0 是因 risk_escalation_sla 在 '升级条件'（SEC-005）中已正确声明；但此处暴露结构严谨性风险：关键事实应优先置于其最直接对应的主流程节（即处理步骤中涉及时限动作时，应同步标注 fact_key），否则易引发RAG检索偏移或执行漏检。",
+          "异常分支（SEC-004）中'客服应保持原有结论，无权绕过风控结论'与 generation_notes['说明客服无权绕过风控结论']一致，但该句未关联任何 required_fact 或 identifier，属合规性强调而非事实陈述；虽不破坏 fact_coverage，但削弱了规范约束的可追溯性——理想做法是将此原则映射至 risk_freeze_action 或新增 fact_key（如 'no_override_policy'），但蓝图未要求，故不扣分。",
+          "升级条件（SEC-005）中 SLA 示例（H→24h/M→48h/L→72h）未注明是否为 S-RISK-001 编码标准的官方定义，仅称'例如'，存在轻微歧义风险：若 S-RISK-001 标准文档中定义不同（如H=12h），此处将引发冲突；但当前无冲突文档上下文，且'例如'属合理说明方式，故 ambiguity_risk 仅小幅上调至0.15。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "SOP_RISK_ESCALATION_001",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部3个 required_facts（risk_trigger、risk_freeze_action、risk_escalation_sla），均在对应章节 facts 数组中准确声明；S-RISK-001 和 E-RK-7001 两个 required_identifiers 均在正文明确出现且语境正确；5个 required_sections 全部存在，标题、内容与功能匹配度高；无生效日期/版本替代关系需校验；内部逻辑自洽（冻结→分级→提交→等待→超时升级→禁止绕过），无状态循环或时限矛盾。唯一可优化点在于：处理步骤节应主动声明 risk_escalation_sla 以强化流程-事实对齐，当前依赖跨节推理，略增RAG误判概率。总体质量优秀，符合通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 1
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "处理步骤（SEC-003）未显式引用 required_facts['risk_escalation_sla']，虽内容隐含SLA逻辑（如'24小时内未处理则自动升级'），但未在 facts 字段中声明该 fact_key，导致该节 facts 数组为空——而蓝图要求所有 required_facts 必须在文档中以 facts 数组形式显式锚定。注意：fact_coverage=1.0 是因 risk_escalation_sla 在 '升级条件'（SEC-005）中已正确声明；但此处暴露结构严谨性风险：关键事实应优先置于其最直接对应的主流程节（即处理步骤中涉及时限动作时，应同步标注 fact_key），否则易引发RAG检索偏移或执行漏检。",
+      "异常分支（SEC-004）中'客服应保持原有结论，无权绕过风控结论'与 generation_notes['说明客服无权绕过风控结论']一致，但该句未关联任何 required_fact 或 identifier，属合规性强调而非事实陈述；虽不破坏 fact_coverage，但削弱了规范约束的可追溯性——理想做法是将此原则映射至 risk_freeze_action 或新增 fact_key（如 'no_override_policy'），但蓝图未要求，故不扣分。",
+      "升级条件（SEC-005）中 SLA 示例（H→24h/M→48h/L→72h）未注明是否为 S-RISK-001 编码标准的官方定义，仅称'例如'，存在轻微歧义风险：若 S-RISK-001 标准文档中定义不同（如H=12h），此处将引发冲突；但当前无冲突文档上下文，且'例如'属合理说明方式，故 ambiguity_risk 仅小幅上调至0.15。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "SOP_RISK_ESCALATION_001",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部3个 required_facts（risk_trigger、risk_freeze_action、risk_escalation_sla），均在对应章节 facts 数组中准确声明；S-RISK-001 和 E-RK-7001 两个 required_identifiers 均在正文明确出现且语境正确；5个 required_sections 全部存在，标题、内容与功能匹配度高；无生效日期/版本替代关系需校验；内部逻辑自洽（冻结→分级→提交→等待→超时升级→禁止绕过），无状态循环或时限矛盾。唯一可优化点在于：处理步骤节应主动声明 risk_escalation_sla 以强化流程-事实对齐，当前依赖跨节推理，略增RAG误判概率。总体质量优秀，符合通过阈值。",
+    "version_consistency": 1.0
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "doc_type": "SOP",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [],
+      "content": "当用户高金额、频繁售后或账号异常触发风控（risk_trigger）时，启动本流程。",
+      "facts": [
+        {
+          "fact_key": "risk_trigger",
+          "fact_text": "高金额、频繁售后或账号异常触发风控"
+        }
+      ],
+      "heading": "适用场景",
+      "section_code": "SEC-001"
+    },
+    {
+      "aliases": [],
+      "content": "风险核查期间暂停自动退款或补偿（risk_freeze_action）。客服确认订单是否处于冻结状态，冻结状态由风控系统自动判定，若未冻结则继续常规流程，若冻结则执行本流程。",
+      "facts": [
+        {
+          "fact_key": "risk_freeze_action",
+          "fact_text": "风险核查期间暂停自动退款或补偿"
+        }
+      ],
+      "heading": "前置检查",
+      "section_code": "SEC-002"
+    },
+    {
+      "aliases": [],
+      "content": "1. 识别触发风控的订单，标记为高风险。\n2. 根据风险等级编码标准 S-RISK-001（如L：低、M：中、H：高）对订单进行分级。\n3. 提交风控复核申请，使用记录模板编号 E-RK-7001 填写详细信息。\n4. 等待风控团队反馈，期间不得主动执行退款或补偿操作。",
+      "facts": [],
+      "heading": "处理步骤",
+      "section_code": "SEC-003"
+    },
+    {
+      "aliases": [],
+      "content": "若用户多次申诉或提供新证据，客服应保持原有结论，无权绕过风控结论。如需复议，需通过正式渠道提交风控团队，客服不得自行修改判定结果。",
+      "facts": [],
+      "heading": "异常分支",
+      "section_code": "SEC-004"
+    },
+    {
+      "aliases": [],
+      "content": "按照风险等级升级并记录处理时限（risk_escalation_sla）。例如：高风险（S-RISK-001=H）对应24小时内未处理则自动升级至主管；中风险（M）对应48小时；低风险（L）对应72小时。超时未响应时系统自动触发升级。",
+      "facts": [
+        {
+          "fact_key": "risk_escalation_sla",
+          "fact_text": "按照风险等级升级并记录处理时限"
+        }
+      ],
+      "heading": "升级条件",
+      "section_code": "SEC-005"
+    }
+  ],
+  "source_doc_code": "SOP_RISK_ESCALATION_001",
+  "title": "风控升级流程SOP",
+  "topic": "risk",
+  "version": "1.0"
+}

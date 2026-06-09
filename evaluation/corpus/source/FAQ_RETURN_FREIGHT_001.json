@@ -1,0 +1,125 @@
+{
+  "doc_type": "FAQ",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "质量问题运费",
+        "瑕疵退货费用",
+        "商品故障退货运费"
+      ],
+      "content": "如果商品存在质量问题，退货运费由谁承担？\nA：由平台或商家承担。用户无需支付退货运费。",
+      "facts": [
+        {
+          "fact_key": "freight_quality_issue",
+          "fact_text": "质量问题退货运费由平台或商家承担"
+        }
+      ],
+      "heading": "质量问题",
+      "section_code": "Q01"
+    },
+    {
+      "aliases": [
+        "个人原因运费",
+        "不喜欢退货费用",
+        "无理由退货运费"
+      ],
+      "content": "因个人原因（如不喜欢、不想要）退货，运费由谁承担？\nA：由用户承担。用户需支付退货运费。",
+      "facts": [
+        {
+          "fact_key": "freight_personal_reason",
+          "fact_text": "个人原因退货运费由用户承担"
+        }
+      ],
+      "heading": "个人原因",
+      "section_code": "Q02"
+    },
+    {
+      "aliases": [
+        "运费险说明",
+        "运费险赔付",
+        "保险金额"
+      ],
+      "content": "运费险是什么？赔付多少？\nA：运费险是一种保险，用户退货时可获得一定金额的赔付，但赔付金额与实际运费可能存在差额。",
+      "facts": [
+        {
+          "fact_key": "freight_insurance",
+          "fact_text": "运费险赔付与实际运费可能存在差额"
+        }
+      ],
+      "heading": "运费险",
+      "section_code": "Q03"
+    },
+    {
+      "aliases": [
+        "拒收运费",
+        "拒绝签收",
+        "未签收退货"
+      ],
+      "content": "拒收和退货有什么区别？\nA：拒收发生在签收前，退货发生在签收后。拒收不涉及签收后的退货寄回流程。",
+      "facts": [
+        {
+          "fact_key": "freight_reject_difference",
+          "fact_text": "拒收发生在签收前，不属于签收后的退货寄回，不得虚构拦截费或其他收费规则"
+        }
+      ],
+      "heading": "拒收说明",
+      "section_code": "Q04"
+    },
+    {
+      "aliases": [
+        "上门取件费用",
+        "取件运费",
+        "上门退货运费"
+      ],
+      "content": "上门取件方式下，运费由谁承担？\nA：上门取件只是退货寄回的一种方式，运费承担方仍由退货原因（质量问题或个人原因）决定。",
+      "facts": [
+        {
+          "fact_key": "freight_pickup_difference",
+          "fact_text": "上门取件只是寄回方式，不改变按质量问题或个人原因确定的运费承担方"
+        }
+      ],
+      "heading": "上门取件",
+      "section_code": "Q05"
+    },
+    {
+      "aliases": [
+        "业务编码",
+        "文档标识",
+        "F-RETURN-001",
+        "RETURN_FREIGHT"
+      ],
+      "content": "业务编码：F-RETURN-001，主题标识：RETURN_FREIGHT。",
+      "facts": [],
+      "heading": "文档标识",
+      "section_code": "Q06"
+    },
+    {
+      "aliases": [
+        "运费规则",
+        "承担原则",
+        "退货运费总则"
+      ],
+      "content": "退货运费根据退货原因如何确定？\nA：退货运费根据退货原因确定：质量问题由平台或商家承担，个人原因由用户承担。运费险可能提供赔付。",
+      "facts": [],
+      "heading": "退货运费总则",
+      "section_code": "Q07"
+    },
+    {
+      "aliases": [
+        "运费承担查询",
+        "谁付运费",
+        "运费责任"
+      ],
+      "content": "如何知道退货运费由谁承担？\nA：查看退货原因：如果是质量问题，由平台或商家承担；如果是个人原因，由用户承担。",
+      "facts": [],
+      "heading": "运费承担查询",
+      "section_code": "Q08"
+    }
+  ],
+  "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+  "title": "退货运费常见问题",
+  "topic": "return",
+  "version": "1.0"
+}

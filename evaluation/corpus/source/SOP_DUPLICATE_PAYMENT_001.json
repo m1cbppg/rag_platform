@@ -1,0 +1,80 @@
+{
+  "doc_type": "SOP",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "重复支付",
+        "多次扣款",
+        "预授权重复"
+      ],
+      "content": "适用于客户反馈重复扣款或系统发现同一订单有多个成功支付流水的情况。本SOP仅处理因银行预授权延迟或网络原因导致的重复支付，不包括恶意套利。",
+      "facts": [],
+      "heading": "适用场景",
+      "section_code": "SEC-001"
+    },
+    {
+      "aliases": [
+        "前置条件",
+        "检查清单",
+        "预检"
+      ],
+      "content": "1. 确认订单状态为“已支付”或“待发货”。\n2. 登录支付管理后台，使用标识符S-PAY-001查询支付流水。\n3. 使用标识符E-PAY-2002核对银行返回的支付结果。\n4. 确认是否存在两笔或以上金额相同、时间相近的成功流水。",
+      "facts": [
+        {
+          "fact_key": "duplicate_payment_verify",
+          "fact_text": "核对订单号、支付流水和扣款次数，确认重复支付事实。"
+        }
+      ],
+      "heading": "前置检查",
+      "section_code": "SEC-002"
+    },
+    {
+      "aliases": [
+        "操作步骤",
+        "流程",
+        "处理方法"
+      ],
+      "content": "1. 核实订单对应的所有支付流水，标记多余流水。\n2. 确认多余流水未绑定其他订单，且退款账户与支付账户一致。\n3. 在支付系统中对多余流水发起原路退款，并记录退款单号。\n4. 通知客户退款已发起，预计到账时间为1-7个工作日。",
+      "facts": [
+        {
+          "fact_key": "duplicate_payment_match",
+          "fact_text": "确认多余流水未绑定其他订单，且退款账户与支付账户一致。"
+        },
+        {
+          "fact_key": "duplicate_payment_refund",
+          "fact_text": "对多余支付流水发起原路退款。"
+        }
+      ],
+      "heading": "处理步骤",
+      "section_code": "SEC-003"
+    },
+    {
+      "aliases": [
+        "异常情况",
+        "特殊情况",
+        "分支流程"
+      ],
+      "content": "1. 若多余流水已绑定其他订单，则标记异常，转高级处理。\n2. 若退款失败（如账户已注销），联系客户更换退款方式。\n3. 若银行退款超时（超过7个工作日），升级为工单处理。",
+      "facts": [],
+      "heading": "异常分支",
+      "section_code": "SEC-004"
+    },
+    {
+      "aliases": [
+        "升级标准",
+        "上报条件",
+        "升级规则"
+      ],
+      "content": "1. 退款金额超过万元需升级主管审批。\n2. 同一客户月内出现两次以上重复支付，升级风险控制。\n3. 涉及内外部系统故障导致的批量重复支付，升级技术团队。",
+      "facts": [],
+      "heading": "升级条件",
+      "section_code": "SEC-005"
+    }
+  ],
+  "source_doc_code": "SOP_DUPLICATE_PAYMENT_001",
+  "title": "重复支付处理SOP",
+  "topic": "payment",
+  "version": "1.0"
+}

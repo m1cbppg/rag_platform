@@ -1,0 +1,101 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2026-01-01",
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [],
+        "content": "本规则适用于所有通过本平台销售的商品（特殊商品除外），包括普通商品和会员商品。涉及退款申请的处理时限。规则编码：R-REFUND-001，关联异常流程编码：E-RF-1002。",
+        "facts": [],
+        "heading": "适用范围",
+        "section_code": "SCOPE"
+      },
+      {
+        "aliases": [],
+        "content": "1. 普通商品：签收后七日内可申请无理由退款（fact_key: refund_v2_window，内容：普通商品签收后七日内申请，部分会员延长至十五日）。\n2. 优惠券订单：按实付金额退款，优惠券处理遵循独立规则（fact_key: refund_v2_coupon_limit，内容：优惠券订单按实付金额退款且券处理遵循独立规则）。",
+        "facts": [
+          {
+            "fact_key": "refund_v2_window",
+            "fact_text": "普通商品签收后七日内申请，部分会员延长至十五日"
+          },
+          {
+            "fact_key": "refund_v2_coupon_limit",
+            "fact_text": "优惠券订单按实付金额退款且券处理遵循独立规则"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "RULE_TERMS"
+      },
+      {
+        "aliases": [],
+        "content": "质量问题不受无理由退货时限限制（fact_key: refund_v2_exception，内容：质量问题不受无理由退货时限限制）。此外，根据异常流程E-RF-1002，质量问题退款无需遵循上述七/十五日时限。",
+        "facts": [
+          {
+            "fact_key": "refund_v2_exception",
+            "fact_text": "质量问题不受无理由退货时限限制"
+          }
+        ],
+        "heading": "例外条件",
+        "section_code": "EXCEPTION"
+      },
+      {
+        "aliases": [],
+        "content": "本规则（V2.0）替代V1版本（RULE_REFUND_001_V1），并与之冲突（原V1规则作废）。当本规则与平台其他退款规则冲突时，以本规则为准，但质量问题相关条款优先适用例外条件。",
+        "facts": [],
+        "heading": "规则优先级",
+        "section_code": "PRIORITY"
+      },
+      {
+        "aliases": [],
+        "content": "本规则自2026年1月1日起生效，无截止日期。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "EFFECTIVE_DATE"
+      }
+    ],
+    "source_doc_code": "RULE_REFUND_001_V2",
+    "title": "售后退款时限规则 V2",
+    "topic": "refund",
+    "version": "2.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "在'规则优先级'章节中，'质量问题相关条款优先适用例外条件'表述模糊：'例外条件'是本节标题（EXCEPTION），但未明确其是否构成独立优先层级；应明确为'质量问题条款（refund_v2_exception）具有最高优先级，凌驾于所有其他时限条款之上'，否则RAG可能误判为仅在本规则内部优先，而非跨规则优先。",
+          "‘规则条款’节中将refund_v2_window和refund_v2_coupon_limit的fact_text直接嵌入编号条目（如'1. 普通商品：...'），虽内容正确，但未显式区分‘普通会员’与‘部分高阶会员’（如黑金/企业会员）——蓝图要求‘部分会员延长至十五日’，文档未说明判断标准（如等级、权益状态），存在客服执行歧义风险。",
+          "‘例外条件’节第二句‘根据异常流程E-RF-1002，质量问题退款无需遵循上述七/十五日时限’属合理补充，但E-RF-1002未在文档中定义或链接，若该编码指向外部SOP且未同步入库，将导致RAG无法解析其约束力，构成隐性知识断点。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "RULE_REFUND_001_V2",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部required_facts（3/3）、required_identifiers（R-REFUND-001 & E-RF-1002均显式出现）、required_sections（5/5），结构清晰，版本替代关系（supersedes V1、conflicts_with V1）与上下文一致，生效日期无重叠冲突。主要风险集中于语义精确性：优先级表述未达法律/规则文本所需的无歧义强度，且‘部分会员’缺乏可判定标准，可能引发一线执行偏差。整体质量达标，但建议修订优先级措辞并补充会员资格判定依据说明。",
+        "version_consistency": 0.98
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "在'规则优先级'章节中，'质量问题相关条款优先适用例外条件'表述模糊：'例外条件'是本节标题（EXCEPTION），但未明确其是否构成独立优先层级；应明确为'质量问题条款（refund_v2_exception）具有最高优先级，凌驾于所有其他时限条款之上'，否则RAG可能误判为仅在本规则内部优先，而非跨规则优先。",
+      "‘规则条款’节中将refund_v2_window和refund_v2_coupon_limit的fact_text直接嵌入编号条目（如'1. 普通商品：...'），虽内容正确，但未显式区分‘普通会员’与‘部分高阶会员’（如黑金/企业会员）——蓝图要求‘部分会员延长至十五日’，文档未说明判断标准（如等级、权益状态），存在客服执行歧义风险。",
+      "‘例外条件’节第二句‘根据异常流程E-RF-1002，质量问题退款无需遵循上述七/十五日时限’属合理补充，但E-RF-1002未在文档中定义或链接，若该编码指向外部SOP且未同步入库，将导致RAG无法解析其约束力，构成隐性知识断点。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "RULE_REFUND_001_V2",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部required_facts（3/3）、required_identifiers（R-REFUND-001 & E-RF-1002均显式出现）、required_sections（5/5），结构清晰，版本替代关系（supersedes V1、conflicts_with V1）与上下文一致，生效日期无重叠冲突。主要风险集中于语义精确性：优先级表述未达法律/规则文本所需的无歧义强度，且‘部分会员’缺乏可判定标准，可能引发一线执行偏差。整体质量达标，但建议修订优先级措辞并补充会员资格判定依据说明。",
+    "version_consistency": 0.98
+  }
+}

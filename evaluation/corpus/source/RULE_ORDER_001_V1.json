@@ -1,0 +1,61 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2024-01-01",
+  "effective_to": "2025-06-30",
+  "sections": [
+    {
+      "aliases": [],
+      "content": "本规则适用于所有通过电商平台生成且未完成发货的订单。已发货订单不得取消。",
+      "facts": [
+        {
+          "fact_key": "order_v1_shipped",
+          "fact_text": "已发货订单不得取消"
+        }
+      ],
+      "heading": "适用范围",
+      "section_code": "SCOPE"
+    },
+    {
+      "aliases": [],
+      "content": "V1允许未出库订单在支付后两小时内直接取消。订单标识R-ORDER-001及版本ORDER-V1适用。",
+      "facts": [
+        {
+          "fact_key": "order_v1_cancel_window",
+          "fact_text": "V1允许未出库订单在支付后两小时内直接取消"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "RULE_CLAUSE"
+    },
+    {
+      "aliases": [],
+      "content": "预售商品不适用两小时取消窗口。",
+      "facts": [
+        {
+          "fact_key": "order_v1_exception",
+          "fact_text": "预售商品不适用两小时取消窗口"
+        }
+      ],
+      "heading": "例外条件",
+      "section_code": "EXCEPTION"
+    },
+    {
+      "aliases": [],
+      "content": "本规则为V1版本，具有基础优先级。与后续版本冲突时，以更新版本为准。",
+      "facts": [],
+      "heading": "规则优先级",
+      "section_code": "PRIORITY"
+    },
+    {
+      "aliases": [],
+      "content": "生效日期：2024-01-01 至 2025-06-30。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "EFFECTIVE_DATE"
+    }
+  ],
+  "source_doc_code": "RULE_ORDER_001_V1",
+  "title": "订单取消规则 V1",
+  "topic": "order",
+  "version": "1.0"
+}

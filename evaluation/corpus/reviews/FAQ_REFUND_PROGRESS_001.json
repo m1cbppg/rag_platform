@@ -1,0 +1,187 @@
+{
+  "document": {
+    "doc_type": "FAQ",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "到账时间",
+          "退款多久到账",
+          "退款到账周期"
+        ],
+        "content": "退款到账时间取决于支付渠道。平台处理完成后，银行实际入账时间通常为1-7个工作日。信用卡支付可能需3-5个工作日，借记卡或余额支付一般为即时到账。请留意退款状态变更后，银行入账需额外时间。",
+        "facts": [
+          {
+            "fact_key": "refund_processing_time",
+            "fact_text": "不同支付渠道的退款到账时间：信用卡3-5工作日，借记卡即时到账，余额即时到账。"
+          }
+        ],
+        "heading": "退款到账时间",
+        "section_code": "SEC_001"
+      },
+      {
+        "aliases": [
+          "进度查询",
+          "查询退款进展",
+          "退款状态查看"
+        ],
+        "content": "您可以在订单详情页查看退款状态，状态代码REFUND_STATUS包含以下取值：REFUND_STATUS=处理中、REFUND_STATUS=成功、REFUND_STATUS=失败。若显示REFUND_STATUS=成功但超过预估到账时间仍未到账，请联系银行核实。",
+        "facts": [
+          {
+            "fact_key": "refund_status_query",
+            "fact_text": "用户可通过订单详情页的退款状态入口查询进度，状态码REFUND_STATUS显示当前阶段，取值包括处理中、成功、失败。"
+          },
+          {
+            "fact_key": "REFUND_STATUS",
+            "fact_text": "REFUND_STATUS是退款状态代码，用于标识退款流程阶段，包括处理中、成功、失败。"
+          }
+        ],
+        "heading": "退款进度查询",
+        "section_code": "SEC_002"
+      },
+      {
+        "aliases": [
+          "退款超时",
+          "退款超时怎么办",
+          "退款长时间未到账"
+        ],
+        "content": "若退款状态为REFUND_STATUS=成功但超过7个工作日未到账，或REFUND_STATUS=处理中超过7个工作日，请提交工单升级处理。平台将联系支付渠道核实。",
+        "facts": [
+          {
+            "fact_key": "refund_overdue_escalation",
+            "fact_text": "退款超时7个工作日以上可升级至人工处理，需提供订单号和支付凭证。"
+          }
+        ],
+        "heading": "退款超时处理",
+        "section_code": "SEC_003"
+      },
+      {
+        "aliases": [
+          "退款失败",
+          "退款不成功",
+          "退款拒绝"
+        ],
+        "content": "常见原因：银行卡号变更、账户异常、支付渠道限制。请检查账户信息或联系客服。",
+        "facts": [],
+        "heading": "退款失败原因",
+        "section_code": "SEC_004"
+      },
+      {
+        "aliases": [
+          "部分退款",
+          "退款部分金额",
+          "部分退款到账时间"
+        ],
+        "content": "部分退款是指仅退回部分金额。到账时间与全额退款一致，但金额会分开显示。",
+        "facts": [],
+        "heading": "部分退款到账",
+        "section_code": "SEC_005"
+      },
+      {
+        "aliases": [
+          "退款金额不对",
+          "退款金额差异",
+          "退款少钱"
+        ],
+        "content": "实际到账金额可能因使用优惠券、积分或运费而不同。请查看退款明细。",
+        "facts": [],
+        "heading": "退款金额不一致",
+        "section_code": "SEC_006"
+      },
+      {
+        "aliases": [
+          "订单状态",
+          "退款后订单",
+          "订单关闭"
+        ],
+        "content": "退款完成后订单状态显示为已关闭或已退款。若未更新，可尝试刷新页面。",
+        "facts": [],
+        "heading": "退款后订单状态",
+        "section_code": "SEC_007"
+      },
+      {
+        "aliases": [
+          "跨平台退款",
+          "第三方支付退款",
+          "支付宝退款进度"
+        ],
+        "content": "使用第三方支付如微信、支付宝时，退款需经对方平台处理，进度可能较慢。请使用标识符F-REFUND-001追踪此类退款。",
+        "facts": [
+          {
+            "fact_key": "F-REFUND-001",
+            "fact_text": "跨平台退款标识符F-REFUND-001用于跟踪第三方支付退款。"
+          }
+        ],
+        "heading": "跨平台退款进度",
+        "section_code": "SEC_008"
+      }
+    ],
+    "source_doc_code": "FAQ_REFUND_PROGRESS_001",
+    "title": "退款进度常见问题",
+    "topic": "refund",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.3,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 0.5,
+        "internal_consistency": 0.95,
+        "issues": [
+          "required_identifiers 包含 'F-REFUND-001' 和 'REFUND_STATUS'，但文档中仅在 SEC_008 的 facts 中显式声明了 'F-REFUND-001'；'REFUND_STATUS' 仅在 SEC_002 的 content 中作为描述性短语出现（'状态码REFUND_STATUS显示当前阶段'），未作为独立 fact_key 出现在任何 facts 数组中，不符合 required_identifiers 的强制显式建模要求。",
+          "SEC_002 的 fact_text for 'refund_status_query' states '状态码REFUND_STATUS显示当前阶段' —— 该表述模糊：'REFUND_STATUS' 是状态码（枚举值？字段名？API响应键？），但未说明其取值范围、来源系统或是否可被用户直接查看；作为 required_identifier，它必须被明确定义为可识别、可引用、可验证的实体，当前仅为上下文提及，不构成准确标识符使用。",
+          "SEC_008 将 'F-REFUND-001' 用作跨平台退款标识符，但蓝图中未说明其适用范围是否限于第三方支付；而 required_identifiers 列表将 'F-REFUND-001' 和 'REFUND_STATUS' 并列，暗示二者同为全局关键标识符，但文档未在核心流程（如到账时间/进度查询/超时）中统一使用 'F-REFUND-001' 关联各环节，存在标识符使用碎片化问题。",
+          "SEC_002 content 称'若显示退款成功但未到账，请联系银行'，与 SEC_001 中'平台处理完成后，银行实际入账时间通常为1-7个工作日'存在隐含冲突：'退款成功'状态是否等价于'平台处理完成'？若等价，则'退款成功'后仍需等待银行入账，不应立即引导用户联系银行（应先等待合理时限）；若不等价，则'退款成功'定义不清，易引发客服误判。"
+        ],
+        "overall_score": 0.82,
+        "passed": false,
+        "source_doc_code": "FAQ_REFUND_PROGRESS_001",
+        "structure_score": 0.93,
+        "summary": "文档覆盖全部 required_facts 且结构完整，三处 required_sections 均存在且内容合理，逻辑主干一致。但 required_identifiers 严重不达标：'REFUND_STATUS' 未作为 fact_key 出现，仅作口语化提及；'F-REFUND-001' 虽出现但使用场景狭窄且缺乏定义支撑。此外，'退款成功'状态与银行入账时限的衔接表述存在操作歧义，可能误导用户过早升级或客服错误判定超时。因 identifier_accuracy = 0.5 < 1.0，且 overall_score = 0.82 < 0.88，该文档未达通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "SEC_001中'平台处理完成后，银行实际入账时间通常为1-7个工作日'与后文'信用卡3-5工作日，借记卡/余额即时到账'存在隐含冲突：'1-7日'是宽泛上限，但未明确该范围是否包含'即时'（即0日），易被RAG解析为'至少1日'，违背借记卡/余额事实；建议将'1-7日'修正为'0–7个工作日'或分层表述。",
+          "SEC_003中升级条件为'REFUND_STATUS=成功但超过7个工作日未到账，或REFUND_STATUS=处理中超过7个工作日'，但蓝图要求的'退款超时后的升级条件'未限定状态码组合逻辑——'处理中超过7日'是否等同于超时？若平台处理本身需≤1日，则7日处理中属异常，但文档未说明该阈值是否含平台处理时长，存在解释歧义；应明确'超时'起算点（如'自平台发起退款指令起满7个工作日'）。",
+          "SEC_008引入F-REFUND-001标识符并声明其用途，符合required_identifiers要求，但该标识符未在其他任何section（尤其是required_sections）中复用或关联，孤立存在，削弱其可操作性；虽不违反编号准确性，但降低知识连贯性。",
+          "SEC_004至SEC_007均为额外扩展章节，虽无害，但'退款失败原因''部分退款''金额不一致''订单状态'均非蓝图required_sections，且未声明其与核心流程的关系（如是否属于'退款超时'的前置判断条件），可能干扰RAG对主干路径的聚焦。"
+        ],
+        "overall_score": 0.91,
+        "passed": true,
+        "source_doc_code": "FAQ_REFUND_PROGRESS_001",
+        "structure_score": 0.92,
+        "summary": "文档完整覆盖全部3项required_facts（refund_processing_time、refund_status_query、refund_overdue_escalation），fact_text准确表达蓝图语义；F-REFUND-001和REFUND_STATUS两个required_identifiers均正确定义并出现在对应facts中；结构上8个section中前3个严格匹配required_sections，标题、aliases、content逻辑自洽，整体结构合规；版本字段与蓝图一致，无冲突文档上下文，版本关系清晰。主要风险在于两处隐含逻辑张力：一是到账时间表述可能被误读为排除'即时'情形，二是'处理中超7日'的升级触发条件缺乏起算基准定义，构成中低度歧义风险。总体质量达标，建议微调措辞以消除解释分歧。",
+        "version_consistency": 1.0
+      },
+      "round_no": 1
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "SEC_001中'平台处理完成后，银行实际入账时间通常为1-7个工作日'与后文'信用卡3-5工作日，借记卡/余额即时到账'存在隐含冲突：'1-7日'是宽泛上限，但未明确该范围是否包含'即时'（即0日），易被RAG解析为'至少1日'，违背借记卡/余额事实；建议将'1-7日'修正为'0–7个工作日'或分层表述。",
+      "SEC_003中升级条件为'REFUND_STATUS=成功但超过7个工作日未到账，或REFUND_STATUS=处理中超过7个工作日'，但蓝图要求的'退款超时后的升级条件'未限定状态码组合逻辑——'处理中超过7日'是否等同于超时？若平台处理本身需≤1日，则7日处理中属异常，但文档未说明该阈值是否含平台处理时长，存在解释歧义；应明确'超时'起算点（如'自平台发起退款指令起满7个工作日'）。",
+      "SEC_008引入F-REFUND-001标识符并声明其用途，符合required_identifiers要求，但该标识符未在其他任何section（尤其是required_sections）中复用或关联，孤立存在，削弱其可操作性；虽不违反编号准确性，但降低知识连贯性。",
+      "SEC_004至SEC_007均为额外扩展章节，虽无害，但'退款失败原因''部分退款''金额不一致''订单状态'均非蓝图required_sections，且未声明其与核心流程的关系（如是否属于'退款超时'的前置判断条件），可能干扰RAG对主干路径的聚焦。"
+    ],
+    "overall_score": 0.91,
+    "passed": true,
+    "source_doc_code": "FAQ_REFUND_PROGRESS_001",
+    "structure_score": 0.92,
+    "summary": "文档完整覆盖全部3项required_facts（refund_processing_time、refund_status_query、refund_overdue_escalation），fact_text准确表达蓝图语义；F-REFUND-001和REFUND_STATUS两个required_identifiers均正确定义并出现在对应facts中；结构上8个section中前3个严格匹配required_sections，标题、aliases、content逻辑自洽，整体结构合规；版本字段与蓝图一致，无冲突文档上下文，版本关系清晰。主要风险在于两处隐含逻辑张力：一是到账时间表述可能被误读为排除'即时'情形，二是'处理中超7日'的升级触发条件缺乏起算基准定义，构成中低度歧义风险。总体质量达标，建议微调措辞以消除解释分歧。",
+    "version_consistency": 1.0
+  }
+}

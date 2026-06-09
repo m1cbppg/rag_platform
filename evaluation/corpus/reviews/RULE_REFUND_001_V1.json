@@ -1,0 +1,115 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2024-03-01",
+    "effective_to": "2025-12-31",
+    "sections": [
+      {
+        "aliases": [
+          "适用范围",
+          "适用对象"
+        ],
+        "content": "本规则适用于平台普通商品（非定制）的售后退款申请，且申请时间为签收后七日内。",
+        "facts": [],
+        "heading": "适用范围",
+        "section_code": "SEC001"
+      },
+      {
+        "aliases": [
+          "退款规则",
+          "条款"
+        ],
+        "content": "1. 普通商品签收后七日内可申请退款（标识：REFUND-V1）。\n2. 已发货未签收订单需先拒收或拦截方可申请退款。\n3. 定制商品不适用七日规则。",
+        "facts": [
+          {
+            "fact_key": "refund_v1_window",
+            "fact_text": "普通商品签收后七日内可申请退款"
+          },
+          {
+            "fact_key": "refund_v1_shipping",
+            "fact_text": "已发货未签收订单需先拒收或拦截"
+          },
+          {
+            "fact_key": "refund_v1_exception",
+            "fact_text": "定制商品不适用七日规则"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "SEC002"
+      },
+      {
+        "aliases": [
+          "例外",
+          "不适用情况"
+        ],
+        "content": "定制商品不适用本退款时限规则。其他例外以具体商品详情页说明为准。",
+        "facts": [],
+        "heading": "例外条件",
+        "section_code": "SEC003"
+      },
+      {
+        "aliases": [
+          "优先级",
+          "冲突处理"
+        ],
+        "content": "本规则版本号为1.0，属于规则组R-REFUND-001。当本规则与后续版本（如RULE_REFUND_001_V2）冲突时，以最新版本为准。",
+        "facts": [],
+        "heading": "规则优先级",
+        "section_code": "SEC004"
+      },
+      {
+        "aliases": [
+          "有效期",
+          "生效时间"
+        ],
+        "content": "本规则自2024年3月1日起生效，至2025年12月31日有效。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "SEC005"
+      }
+    ],
+    "source_doc_code": "RULE_REFUND_001_V1",
+    "title": "售后退款时限规则 V1",
+    "topic": "refund",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "SEC004（规则优先级）中'以最新版本为准'表述未显式引用冲突规则编码RULE_REFUND_001_V2，仅用'后续版本（如...）'举例，弱化了强制替代效力；蓝图要求明确声明conflicts_with，但文档未在正文中锚定该关系。",
+          "SEC003（例外条件）末句'其他例外以具体商品详情页说明为准'引入外部不可控变量，与蓝图中required_facts['refund_v1_exception']限定范围（仅定制商品）存在隐性扩展风险，可能被RAG误检为'存在未声明例外'。",
+          "SEC002中第2条'已发货未签收订单需先拒收或拦截方可申请退款'虽匹配fact_key refund_v1_shipping，但未说明'拒收/拦截失败后是否仍可退款'——蓝图未要求此细节，但该留白在客服实操中易引发歧义（如物流显示已发出但用户未收到，系统能否自动触发退款？），属低概率但高影响歧义点。"
+        ],
+        "overall_score": 0.89,
+        "passed": true,
+        "source_doc_code": "RULE_REFUND_001_V1",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部required_facts（3/3）、required_identifiers（R-REFUND-001 & REFUND-V1均在SEC002显式出现）、required_sections（5/5，且heading完全匹配，aliases为增强项不扣分）；结构严谨，各节逻辑自洽无内生矛盾；生效期（2024-03-01至2025-12-31）与V2的effective_from（2026-01-01）无缝衔接，符合supersedes=null + conflicts_with声明；唯一降分项在于优先级表述的法律确定性不足及例外条款的边界模糊，导致version_consistency和ambiguity_risk微损，但未突破阈值。总体质量达标。",
+        "version_consistency": 0.9
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "SEC004（规则优先级）中'以最新版本为准'表述未显式引用冲突规则编码RULE_REFUND_001_V2，仅用'后续版本（如...）'举例，弱化了强制替代效力；蓝图要求明确声明conflicts_with，但文档未在正文中锚定该关系。",
+      "SEC003（例外条件）末句'其他例外以具体商品详情页说明为准'引入外部不可控变量，与蓝图中required_facts['refund_v1_exception']限定范围（仅定制商品）存在隐性扩展风险，可能被RAG误检为'存在未声明例外'。",
+      "SEC002中第2条'已发货未签收订单需先拒收或拦截方可申请退款'虽匹配fact_key refund_v1_shipping，但未说明'拒收/拦截失败后是否仍可退款'——蓝图未要求此细节，但该留白在客服实操中易引发歧义（如物流显示已发出但用户未收到，系统能否自动触发退款？），属低概率但高影响歧义点。"
+    ],
+    "overall_score": 0.89,
+    "passed": true,
+    "source_doc_code": "RULE_REFUND_001_V1",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部required_facts（3/3）、required_identifiers（R-REFUND-001 & REFUND-V1均在SEC002显式出现）、required_sections（5/5，且heading完全匹配，aliases为增强项不扣分）；结构严谨，各节逻辑自洽无内生矛盾；生效期（2024-03-01至2025-12-31）与V2的effective_from（2026-01-01）无缝衔接，符合supersedes=null + conflicts_with声明；唯一降分项在于优先级表述的法律确定性不足及例外条款的边界模糊，导致version_consistency和ambiguity_risk微损，但未突破阈值。总体质量达标。",
+    "version_consistency": 0.9
+  }
+}

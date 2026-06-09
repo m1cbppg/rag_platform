@@ -1,0 +1,147 @@
+{
+  "doc_type": "FAQ",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "取消待支付订单",
+        "待支付取消",
+        "未付款取消"
+      ],
+      "content": "待支付订单可由用户直接在订单列表中点击取消按钮，无需审核，即时生效。",
+      "facts": [
+        {
+          "fact_key": "order_cancel_pending_payment",
+          "fact_text": "待支付订单可由用户直接取消"
+        }
+      ],
+      "heading": "如何取消待支付订单？",
+      "section_code": "Q001"
+    },
+    {
+      "aliases": [
+        "待支付取消失败",
+        "取消待支付报错",
+        "待支付取消异常"
+      ],
+      "content": "若取消待支付订单时提示失败，请先检查网络连接，刷新页面后重试。如仍失败，请联系客服处理。",
+      "facts": [],
+      "heading": "待支付订单取消失败怎么办？",
+      "section_code": "Q002"
+    },
+    {
+      "aliases": [
+        "取消已支付订单",
+        "已支付取消申请",
+        "退款取消"
+      ],
+      "content": "已支付未出库订单需要提交取消申请，路径：订单详情页点击申请取消，审核通过后退款。",
+      "facts": [
+        {
+          "fact_key": "order_cancel_paid",
+          "fact_text": "已支付未出库订单需要提交取消申请"
+        }
+      ],
+      "heading": "如何取消已支付订单？",
+      "section_code": "Q003"
+    },
+    {
+      "aliases": [
+        "已支付取消失败",
+        "取消申请未更新",
+        "已支付取消异常"
+      ],
+      "content": "若提交取消申请后订单状态长时间未更新，建议联系客服核实，可能因系统延迟或审核驳回。",
+      "facts": [],
+      "heading": "已支付订单取消失败如何处理？",
+      "section_code": "Q004"
+    },
+    {
+      "aliases": [
+        "取消已发货订单",
+        "已发货不能直接取消",
+        "发货后退货"
+      ],
+      "content": "已发货订单不能直接取消，应走售后流程，申请退货退款或换货。",
+      "facts": [
+        {
+          "fact_key": "order_cancel_shipped",
+          "fact_text": "已发货订单不能直接取消，应走售后流程"
+        }
+      ],
+      "heading": "已发货订单如何取消？",
+      "section_code": "Q005"
+    },
+    {
+      "aliases": [
+        "已发货退货流程",
+        "退货操作步骤",
+        "售后退货"
+      ],
+      "content": "进入订单详情点击【退换货】按钮，选择退货原因，提交后等待审核，审核通过后按地址寄回商品。",
+      "facts": [],
+      "heading": "已发货订单退货具体流程？",
+      "section_code": "Q006"
+    },
+    {
+      "aliases": [
+        "订单状态列表",
+        "状态说明",
+        "常见状态"
+      ],
+      "content": "常见订单状态包括：待支付、已支付（待出库）、已发货、已签收、已完成、已取消等。",
+      "facts": [],
+      "heading": "订单有哪些常见状态？",
+      "section_code": "Q007"
+    },
+    {
+      "aliases": [
+        "F-ORDER-001解释",
+        "错误码001",
+        "订单取消禁止"
+      ],
+      "content": "错误码F-ORDER-001表示当前订单状态不允许取消，请根据页面提示调整操作。",
+      "facts": [],
+      "heading": "提示F-ORDER-001是什么意思？",
+      "section_code": "Q008"
+    },
+    {
+      "aliases": [
+        "ORDER_CANCEL_PENDING含义",
+        "取消待支付提示",
+        "待支付取消代码"
+      ],
+      "content": "提示ORDER_CANCEL_PENDING表示订单处于待支付状态，可以执行取消操作。",
+      "facts": [],
+      "heading": "提示ORDER_CANCEL_PENDING是什么含义？",
+      "section_code": "Q009"
+    },
+    {
+      "aliases": [
+        "取消退款时间",
+        "退款周期",
+        "取消后退款时长"
+      ],
+      "content": "待支付订单取消不涉及退款；已支付订单取消审核通过后，退款通常在1-3个工作日内原路返回。",
+      "facts": [],
+      "heading": "订单取消后多久退款？",
+      "section_code": "Q010"
+    },
+    {
+      "aliases": [
+        "部分取消订单",
+        "多商品取消",
+        "拆分取消"
+      ],
+      "content": "如果部分商品未发货，可以申请部分取消；已发货的商品不可部分取消，需走售后流程。",
+      "facts": [],
+      "heading": "多商品订单可以部分取消吗？",
+      "section_code": "Q011"
+    }
+  ],
+  "source_doc_code": "FAQ_ORDER_STATUS_001",
+  "title": "订单状态与取消常见问题",
+  "topic": "order",
+  "version": "1.0"
+}

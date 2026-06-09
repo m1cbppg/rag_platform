@@ -1,0 +1,79 @@
+{
+  "doc_type": "MANUAL",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "入口路径",
+        "访问方式",
+        "后台入口"
+      ],
+      "content": "登录电子商务后台系统（E-CM-8201），进入营销中心 → 优惠券管理 → 优惠券管理后台（M-COUPON-001）。",
+      "facts": [],
+      "heading": "菜单路径",
+      "section_code": "S001"
+    },
+    {
+      "aliases": [
+        "字段列表",
+        "参数说明",
+        "字段含义"
+      ],
+      "content": "以下为优惠券管理后台主要字段：\n- 优惠券ID：唯一标识\n- 券模板ID：关联的券模板（coupon_admin_template）\n- 用户ID：领券用户\n- 使用状态：未使用/已使用/已过期\n- 领券时间\n- 使用时间",
+      "facts": [],
+      "heading": "字段说明",
+      "section_code": "S002"
+    },
+    {
+      "aliases": [
+        "补发流程",
+        "操作指南",
+        "步骤说明"
+      ],
+      "content": "1. 进入优惠券管理后台（E-CM-8201），点击【查询】按钮，输入券模板ID或用户ID，查询用户领券和使用记录（coupon_admin_record）。\n2. 在结果列表中选择需要补发的记录，点击【补发】按钮，系统弹出补发窗口。\n3. 在补发窗口中确认补发原因，并关联工单编号，然后点击【确认补发】。系统将根据券模板（coupon_admin_template）和适用范围，调用授权范围内的补发逻辑（coupon_admin_reissue），为用户补发相同面额的优惠券。\n4. 补发完成后，系统显示补发成功提示，并记录补发日志。",
+      "facts": [
+        {
+          "fact_key": "coupon_admin_template",
+          "fact_text": "查询券模板和适用范围，用于确定补发券的模板信息。"
+        },
+        {
+          "fact_key": "coupon_admin_record",
+          "fact_text": "查询用户领券和使用记录，用于定位需要补发的订单。"
+        },
+        {
+          "fact_key": "coupon_admin_reissue",
+          "fact_text": "在授权范围内补发优惠券，实际执行补发操作。"
+        }
+      ],
+      "heading": "操作步骤",
+      "section_code": "S003"
+    },
+    {
+      "aliases": [
+        "按钮列表",
+        "按钮功能",
+        "操作按钮"
+      ],
+      "content": "【查询】按钮：根据条件检索用户优惠券记录。\n【补发】按钮：对选中的记录进行补发操作。\n【确认补发】按钮：在补发窗口中确认执行补发。\n【重置】按钮：清空查询条件。",
+      "facts": [],
+      "heading": "按钮说明",
+      "section_code": "S004"
+    },
+    {
+      "aliases": [
+        "错误代码",
+        "常见问题",
+        "异常处理"
+      ],
+      "content": "常见错误及处理：\n- 错误提示“用户未领券”：检查输入的用户ID是否正确。\n- 错误提示“券模板不存在”：检查coupon_admin_template中模板状态。\n- 错误提示“补发超过授权次数”：需联系管理员增加补发额度。\n- 错误提示“补发失败，请重试”：可能为系统临时异常，稍后重试。",
+      "facts": [],
+      "heading": "错误提示",
+      "section_code": "S005"
+    }
+  ],
+  "source_doc_code": "MANUAL_COUPON_ADMIN_001",
+  "title": "优惠券管理后台操作手册",
+  "topic": "coupon",
+  "version": "1.0"
+}

@@ -1,0 +1,60 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2024-01-01",
+  "effective_to": "2025-08-31",
+  "sections": [
+    {
+      "aliases": [],
+      "content": "本规则（R-COUPON-001）适用于平台优惠券（COUPON-V1）在订单中的使用场景。",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "S01"
+    },
+    {
+      "aliases": [],
+      "content": "每个订单仅可使用一张平台券；门槛按商品原价合计判断。",
+      "facts": [
+        {
+          "fact_key": "coupon_v1_single",
+          "fact_text": "V1每个订单仅可使用一张平台券"
+        },
+        {
+          "fact_key": "coupon_v1_threshold",
+          "fact_text": "门槛按商品原价合计判断"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "S02"
+    },
+    {
+      "aliases": [],
+      "content": "特价商品不可使用平台券。",
+      "facts": [
+        {
+          "fact_key": "coupon_v1_exception",
+          "fact_text": "特价商品不可使用平台券"
+        }
+      ],
+      "heading": "例外条件",
+      "section_code": "S03"
+    },
+    {
+      "aliases": [],
+      "content": "本规则（R-COUPON-001）优先级高于一般促销规则，与满减规则互斥时以本规则为准。",
+      "facts": [],
+      "heading": "优先级",
+      "section_code": "S04"
+    },
+    {
+      "aliases": [],
+      "content": "2024年1月1日至2025年8月31日。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "S05"
+    }
+  ],
+  "source_doc_code": "RULE_COUPON_001_V1",
+  "title": "优惠券使用规则 V1",
+  "topic": "coupon",
+  "version": "1.0"
+}

@@ -1,0 +1,122 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2025-07-01",
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "范围",
+          "适用对象",
+          "scope"
+        ],
+        "content": "本规则适用于所有订单取消操作，包括普通订单和跨境订单。本规则替代RULE_ORDER_001_V1，关键差异为取消窗口判断由支付后两小时改为按出库状态判断。标识ORDER-V2和R-ORDER-001。",
+        "facts": [],
+        "heading": "适用范围",
+        "section_code": "R-ORDER-001-V2-SEC-001"
+      },
+      {
+        "aliases": [
+          "规则",
+          "条款",
+          "rules"
+        ],
+        "content": "订单取消规则V2：按出库状态判断取消窗口。已出库订单无法取消，未出库订单可取消。高风险订单需人工复核。标识ORDER-V2和R-ORDER-001。",
+        "facts": [
+          {
+            "fact_key": "order_v2_cancel_window",
+            "fact_text": "V2按出库状态判断，不再限制支付后两小时"
+          },
+          {
+            "fact_key": "order_v2_risk_review",
+            "fact_text": "高风险订单取消需要人工复核"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "R-ORDER-001-V2-SEC-002"
+      },
+      {
+        "aliases": [
+          "例外",
+          "exception",
+          "特殊情况"
+        ],
+        "content": "虚拟商品支付后不可取消。标识ORDER-V2。",
+        "facts": [
+          {
+            "fact_key": "order_v2_exception",
+            "fact_text": "虚拟商品支付后不可取消"
+          }
+        ],
+        "heading": "例外条件",
+        "section_code": "R-ORDER-001-V2-SEC-003"
+      },
+      {
+        "aliases": [
+          "优先级",
+          "priority"
+        ],
+        "content": "本规则优先级高于旧版RULE_ORDER_001_V1。标识R-ORDER-001。",
+        "facts": [],
+        "heading": "优先级",
+        "section_code": "R-ORDER-001-V2-SEC-004"
+      },
+      {
+        "aliases": [
+          "生效",
+          "日期",
+          "effective"
+        ],
+        "content": "自2025年7月1日起生效，取代V1版本。标识R-ORDER-001和ORDER-V2。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "R-ORDER-001-V2-SEC-005"
+      }
+    ],
+    "source_doc_code": "RULE_ORDER_001_V2",
+    "title": "订单取消规则 V2",
+    "topic": "order",
+    "version": "2.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "‘适用范围’节中‘本规则替代RULE_ORDER_001_V1，关键差异为……’属于生成性说明，但蓝图明确要求‘generation_notes’仅用于内部生成过程，不得出现在正文中；该内容应移至元数据或附录，当前混入正文降低专业性与可维护性。",
+          "‘规则条款’节称‘已出库订单无法取消，未出库订单可取消’，但未定义‘出库’——是否等同于‘已发货’？V1中使用‘已发货’，而V2改用‘出库’，二者在仓储系统中可能存在语义差（如出库=拣货完成但未物流揽收），未在文档中对齐定义，构成潜在执行歧义。",
+          "‘优先级’节仅声明‘高于旧版V1’，但蓝图要求体现与conflicts_with（即RULE_ORDER_001_V1）的显式冲突处理逻辑，例如‘当V1与V2条款冲突时，以V2为准’；当前表述未满足冲突消解的确定性要求，RAG可能无法可靠推导覆盖关系。",
+          "‘生效日期’节写‘取代V1版本’，但V1的effective_to为2025-06-30，V2 effective_from为2025-07-01，存在自然衔接，未说明是否存在过渡期或并行窗口，虽不违反时间逻辑，但未主动排除‘7月1日00:00:00前支付订单是否适用V1’等边界疑问，属轻度歧义风险。"
+        ],
+        "overall_score": 0.91,
+        "passed": true,
+        "source_doc_code": "RULE_ORDER_001_V2",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部required_facts（order_v2_cancel_window、order_v2_risk_review、order_v2_exception），事实表述准确；required_identifiers（R-ORDER-001、ORDER-V2）在各节中均正确出现且无串用；结构完全匹配required_sections，标题、层级、section_code规范；版本替代关系（supersedes）、生效时间窗与V1无重叠，逻辑自洽。主要问题集中于术语严谨性（‘出库’未定义）、冲突消解机制显式化不足、以及将generation_notes内容误植正文，影响知识库长期可维护性与RAG推理确定性。整体质量达标，建议修订后发布。",
+        "version_consistency": 0.95
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "‘适用范围’节中‘本规则替代RULE_ORDER_001_V1，关键差异为……’属于生成性说明，但蓝图明确要求‘generation_notes’仅用于内部生成过程，不得出现在正文中；该内容应移至元数据或附录，当前混入正文降低专业性与可维护性。",
+      "‘规则条款’节称‘已出库订单无法取消，未出库订单可取消’，但未定义‘出库’——是否等同于‘已发货’？V1中使用‘已发货’，而V2改用‘出库’，二者在仓储系统中可能存在语义差（如出库=拣货完成但未物流揽收），未在文档中对齐定义，构成潜在执行歧义。",
+      "‘优先级’节仅声明‘高于旧版V1’，但蓝图要求体现与conflicts_with（即RULE_ORDER_001_V1）的显式冲突处理逻辑，例如‘当V1与V2条款冲突时，以V2为准’；当前表述未满足冲突消解的确定性要求，RAG可能无法可靠推导覆盖关系。",
+      "‘生效日期’节写‘取代V1版本’，但V1的effective_to为2025-06-30，V2 effective_from为2025-07-01，存在自然衔接，未说明是否存在过渡期或并行窗口，虽不违反时间逻辑，但未主动排除‘7月1日00:00:00前支付订单是否适用V1’等边界疑问，属轻度歧义风险。"
+    ],
+    "overall_score": 0.91,
+    "passed": true,
+    "source_doc_code": "RULE_ORDER_001_V2",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部required_facts（order_v2_cancel_window、order_v2_risk_review、order_v2_exception），事实表述准确；required_identifiers（R-ORDER-001、ORDER-V2）在各节中均正确出现且无串用；结构完全匹配required_sections，标题、层级、section_code规范；版本替代关系（supersedes）、生效时间窗与V1无重叠，逻辑自洽。主要问题集中于术语严谨性（‘出库’未定义）、冲突消解机制显式化不足、以及将generation_notes内容误植正文，影响知识库长期可维护性与RAG推理确定性。整体质量达标，建议修订后发布。",
+    "version_consistency": 0.95
+  }
+}

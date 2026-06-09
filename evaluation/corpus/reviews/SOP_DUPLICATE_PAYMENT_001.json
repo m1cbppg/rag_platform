@@ -1,0 +1,121 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "重复支付",
+          "多次扣款",
+          "预授权重复"
+        ],
+        "content": "适用于客户反馈重复扣款或系统发现同一订单有多个成功支付流水的情况。本SOP仅处理因银行预授权延迟或网络原因导致的重复支付，不包括恶意套利。",
+        "facts": [],
+        "heading": "适用场景",
+        "section_code": "SEC-001"
+      },
+      {
+        "aliases": [
+          "前置条件",
+          "检查清单",
+          "预检"
+        ],
+        "content": "1. 确认订单状态为“已支付”或“待发货”。\n2. 登录支付管理后台，使用标识符S-PAY-001查询支付流水。\n3. 使用标识符E-PAY-2002核对银行返回的支付结果。\n4. 确认是否存在两笔或以上金额相同、时间相近的成功流水。",
+        "facts": [
+          {
+            "fact_key": "duplicate_payment_verify",
+            "fact_text": "核对订单号、支付流水和扣款次数，确认重复支付事实。"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "SEC-002"
+      },
+      {
+        "aliases": [
+          "操作步骤",
+          "流程",
+          "处理方法"
+        ],
+        "content": "1. 核实订单对应的所有支付流水，标记多余流水。\n2. 确认多余流水未绑定其他订单，且退款账户与支付账户一致。\n3. 在支付系统中对多余流水发起原路退款，并记录退款单号。\n4. 通知客户退款已发起，预计到账时间为1-7个工作日。",
+        "facts": [
+          {
+            "fact_key": "duplicate_payment_match",
+            "fact_text": "确认多余流水未绑定其他订单，且退款账户与支付账户一致。"
+          },
+          {
+            "fact_key": "duplicate_payment_refund",
+            "fact_text": "对多余支付流水发起原路退款。"
+          }
+        ],
+        "heading": "处理步骤",
+        "section_code": "SEC-003"
+      },
+      {
+        "aliases": [
+          "异常情况",
+          "特殊情况",
+          "分支流程"
+        ],
+        "content": "1. 若多余流水已绑定其他订单，则标记异常，转高级处理。\n2. 若退款失败（如账户已注销），联系客户更换退款方式。\n3. 若银行退款超时（超过7个工作日），升级为工单处理。",
+        "facts": [],
+        "heading": "异常分支",
+        "section_code": "SEC-004"
+      },
+      {
+        "aliases": [
+          "升级标准",
+          "上报条件",
+          "升级规则"
+        ],
+        "content": "1. 退款金额超过万元需升级主管审批。\n2. 同一客户月内出现两次以上重复支付，升级风险控制。\n3. 涉及内外部系统故障导致的批量重复支付，升级技术团队。",
+        "facts": [],
+        "heading": "升级条件",
+        "section_code": "SEC-005"
+      }
+    ],
+    "source_doc_code": "SOP_DUPLICATE_PAYMENT_001",
+    "title": "重复支付处理SOP",
+    "topic": "payment",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "前置检查中第2、3条明确使用标识符S-PAY-001和E-PAY-2002，但未说明其具体用途（如：S-PAY-001是支付系统查询入口码，E-PAY-2002是银行对账API端点），存在轻度执行歧义；虽不影响RAG基础召回，但可能影响一线人员精准操作。",
+          "异常分支中'退款失败（如账户已注销）'未定义‘账户已注销’的判定依据（是支付系统标记？银行返回码？还是人工核实？），构成中低风险操作歧义，但未达严重歧义阈值（因属异常分支且有后续‘更换退款方式’兜底）。",
+          "处理步骤第2条‘确认……退款账户与支付账户一致’属于新增要求，蓝图required_facts中无对应fact_key，但该要求合理且不冲突，故不扣分；但需注意：此为隐含约束，若未来知识图谱抽取事实时未建模该约束，可能导致RAG漏检。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "SOP_DUPLICATE_PAYMENT_001",
+        "structure_score": 0.95,
+        "summary": "文档完全覆盖蓝图全部3个required_facts，fact_text语义精准匹配（如'duplicate_payment_verify'在前置检查中明确定义为‘核对订单号、支付流水和扣款次数’，非泛化描述）；两个required_identifiers S-PAY-001和E-PAY-2002均在前置检查中准确、上下文完整地调用；5个required_sections全部存在，标题、结构、逻辑流完整，无缺失或错位；版本字段与蓝图一致，无supersedes/conflicts_with干扰；内部逻辑自洽：前置检查→处理步骤→异常分支→升级条件形成闭环，时限（1-7工作日）、状态（已支付/待发货）、例外（绑定其他订单、账户注销）均无矛盾。歧义风险仅来自两处实操细节未标准化，属可接受范围。总体质量达标，建议微调异常分支中‘账户已注销’的判定标准以进一步降低RAG解释分歧。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "前置检查中第2、3条明确使用标识符S-PAY-001和E-PAY-2002，但未说明其具体用途（如：S-PAY-001是支付系统查询入口码，E-PAY-2002是银行对账API端点），存在轻度执行歧义；虽不影响RAG基础召回，但可能影响一线人员精准操作。",
+      "异常分支中'退款失败（如账户已注销）'未定义‘账户已注销’的判定依据（是支付系统标记？银行返回码？还是人工核实？），构成中低风险操作歧义，但未达严重歧义阈值（因属异常分支且有后续‘更换退款方式’兜底）。",
+      "处理步骤第2条‘确认……退款账户与支付账户一致’属于新增要求，蓝图required_facts中无对应fact_key，但该要求合理且不冲突，故不扣分；但需注意：此为隐含约束，若未来知识图谱抽取事实时未建模该约束，可能导致RAG漏检。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "SOP_DUPLICATE_PAYMENT_001",
+    "structure_score": 0.95,
+    "summary": "文档完全覆盖蓝图全部3个required_facts，fact_text语义精准匹配（如'duplicate_payment_verify'在前置检查中明确定义为‘核对订单号、支付流水和扣款次数’，非泛化描述）；两个required_identifiers S-PAY-001和E-PAY-2002均在前置检查中准确、上下文完整地调用；5个required_sections全部存在，标题、结构、逻辑流完整，无缺失或错位；版本字段与蓝图一致，无supersedes/conflicts_with干扰；内部逻辑自洽：前置检查→处理步骤→异常分支→升级条件形成闭环，时限（1-7工作日）、状态（已支付/待发货）、例外（绑定其他订单、账户注销）均无矛盾。歧义风险仅来自两处实操细节未标准化，属可接受范围。总体质量达标，建议微调异常分支中‘账户已注销’的判定标准以进一步降低RAG解释分歧。",
+    "version_consistency": 1.0
+  }
+}

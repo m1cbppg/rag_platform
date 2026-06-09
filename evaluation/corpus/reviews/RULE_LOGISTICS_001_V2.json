@@ -1,0 +1,122 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2025-11-01",
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "适用范围",
+          "适用场景",
+          "Scope"
+        ],
+        "content": "本规则适用于所有通过企业合作承运商发出的订单，包括揽收、转运、派送全链路物流节点。相关标识符：R-LOGISTICS-001, LOGISTICS-V2。",
+        "facts": [
+          {
+            "fact_key": "logistics_v2_node_sla",
+            "fact_text": "V2按揽收、转运和派送节点分别设置观察期。揽收节点观察期为24小时，转运节点为48小时，派送节点为72小时。"
+          }
+        ],
+        "heading": "适用范围",
+        "section_code": "SEC_001"
+      },
+      {
+        "aliases": [
+          "规则条款",
+          "判定规则",
+          "条款说明"
+        ],
+        "content": "1. 每个物流节点（揽收、转运、派送）均设有独立观察期。\n2. 若节点在观察期内未更新状态，系统自动标记为“节点超时”。\n3. 节点超时后，系统向承运商发起反馈请求；若承运商在24小时内无有效反馈，则进入丢失核查流程。\n4. 丢失核查流程启动的条件：节点超时且承运商无反馈。相关标识符：LOGISTICS-V2。",
+        "facts": [
+          {
+            "fact_key": "logistics_v2_loss",
+            "fact_text": "满足节点超时和承运商无反馈才进入丢失核查。"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "SEC_002"
+      },
+      {
+        "aliases": [
+          "例外条件",
+          "例外情况",
+          "异常处理"
+        ],
+        "content": "若承运商所在区域处于预警中的极端天气（如台风、暴雪等），则暂停时效补偿，但仍需保留节点超时标记，待预警解除后恢复判定。相关标识符：R-LOGISTICS-001。",
+        "facts": [
+          {
+            "fact_key": "logistics_v2_exception",
+            "fact_text": "预警中的极端天气区域暂停时效补偿。"
+          }
+        ],
+        "heading": "例外条件",
+        "section_code": "SEC_003"
+      },
+      {
+        "aliases": [
+          "优先级",
+          "规则优先级",
+          "优先顺序"
+        ],
+        "content": "本规则优先级为一级，高于V1版本规则。当与其他物流规则冲突时，以本规则为准。冲突规则：RULE_LOGISTICS_001_V1。",
+        "facts": [],
+        "heading": "优先级",
+        "section_code": "SEC_004"
+      },
+      {
+        "aliases": [
+          "生效日期",
+          "生效时间",
+          "Effective Date"
+        ],
+        "content": "本规则自2025年11月1日起生效，替代RULE_LOGISTICS_001_V1。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "SEC_005"
+      }
+    ],
+    "source_doc_code": "RULE_LOGISTICS_001_V2",
+    "title": "物流延迟判定规则 V2",
+    "topic": "logistics",
+    "version": "2.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "SEC_004（优先级）未声明与冲突规则RULE_LOGISTICS_001_V1的显式'conflicts_with'关系，仅在content中模糊提及'冲突规则：RULE_LOGISTICS_001_V1'，但未说明该冲突是否已通过supersedes机制解除；蓝图要求conflicts_with字段存在且语义需在文档中可验证，当前仅靠文本描述不足以支撑机器可解析的冲突消解逻辑。",
+          "SEC_003（例外条件）中'暂停时效补偿'未明确定义'时效补偿'的适用范围（如是否含赔付、积分、服务降级等），亦未说明'暂停'是自动触发还是需人工确认，存在RAG检索时对补偿类型和执行方式产生多解的风险。",
+          "SEC_002中'承运商在24小时内无有效反馈'未定义何为'有效反馈'（例如：是否接受轨迹更新、文字备注、API回传状态码？），该术语缺失操作性定义，客服依据此条处理工单时可能产生解释分歧。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "RULE_LOGISTICS_001_V2",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部required_facts（logistics_v2_node_sla/logistics_v2_loss/logistics_v2_exception），标识符R-LOGISTICS-001与LOGISTICS-V2在适用范围、规则条款、例外条件三节中均准确复现；结构完全满足required_sections五项，且各节aliases设计合理；生效日期（2025-11-01）与V1失效日（2025-10-31）无缝衔接，supersedes关系清晰。主要风险集中于操作定义缺失：'有效反馈''时效补偿'等关键执行概念未结构化释义，导致中低概率歧义，但尚未破坏核心判定逻辑一致性。整体质量达标，建议补充术语附录或在对应section facts中嵌入最小可执行定义。",
+        "version_consistency": 0.98
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "SEC_004（优先级）未声明与冲突规则RULE_LOGISTICS_001_V1的显式'conflicts_with'关系，仅在content中模糊提及'冲突规则：RULE_LOGISTICS_001_V1'，但未说明该冲突是否已通过supersedes机制解除；蓝图要求conflicts_with字段存在且语义需在文档中可验证，当前仅靠文本描述不足以支撑机器可解析的冲突消解逻辑。",
+      "SEC_003（例外条件）中'暂停时效补偿'未明确定义'时效补偿'的适用范围（如是否含赔付、积分、服务降级等），亦未说明'暂停'是自动触发还是需人工确认，存在RAG检索时对补偿类型和执行方式产生多解的风险。",
+      "SEC_002中'承运商在24小时内无有效反馈'未定义何为'有效反馈'（例如：是否接受轨迹更新、文字备注、API回传状态码？），该术语缺失操作性定义，客服依据此条处理工单时可能产生解释分歧。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "RULE_LOGISTICS_001_V2",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部required_facts（logistics_v2_node_sla/logistics_v2_loss/logistics_v2_exception），标识符R-LOGISTICS-001与LOGISTICS-V2在适用范围、规则条款、例外条件三节中均准确复现；结构完全满足required_sections五项，且各节aliases设计合理；生效日期（2025-11-01）与V1失效日（2025-10-31）无缝衔接，supersedes关系清晰。主要风险集中于操作定义缺失：'有效反馈''时效补偿'等关键执行概念未结构化释义，导致中低概率歧义，但尚未破坏核心判定逻辑一致性。整体质量达标，建议补充术语附录或在对应section facts中嵌入最小可执行定义。",
+    "version_consistency": 0.98
+  }
+}

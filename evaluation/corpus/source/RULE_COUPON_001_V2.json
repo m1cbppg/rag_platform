@@ -1,0 +1,75 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2025-09-01",
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "范围",
+        "适用场景"
+      ],
+      "content": "本规则适用于所有在电商平台发放的平台优惠券和店铺优惠券，包括但不限于满减券、折扣券。标识符：R-COUPON-001, COUPON-V2。",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "SC-001"
+    },
+    {
+      "aliases": [
+        "叠加规则",
+        "门槛规则"
+      ],
+      "content": "平台券和店铺券在满足互斥配置时可叠加使用（coupon_v2_stack）。门槛按扣除店铺优惠后的金额判断（coupon_v2_threshold）。",
+      "facts": [
+        {
+          "fact_key": "coupon_v2_stack",
+          "fact_text": "平台券和店铺券在满足互斥配置时可叠加"
+        },
+        {
+          "fact_key": "coupon_v2_threshold",
+          "fact_text": "门槛按扣除店铺优惠后的金额判断"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "SC-002"
+    },
+    {
+      "aliases": [
+        "例外",
+        "排除"
+      ],
+      "content": "秒杀和虚拟商品仍不可使用平台券（coupon_v2_exception）。",
+      "facts": [
+        {
+          "fact_key": "coupon_v2_exception",
+          "fact_text": "秒杀和虚拟商品仍不可使用平台券"
+        }
+      ],
+      "heading": "例外条件",
+      "section_code": "SC-003"
+    },
+    {
+      "aliases": [
+        "顺序",
+        "优先"
+      ],
+      "content": "当多个优惠券满足条件时，优先使用折扣力度最大的优惠券；若折扣相同，优先使用到期时间最近的。店铺券优先于平台券使用。",
+      "facts": [],
+      "heading": "优先级",
+      "section_code": "SC-004"
+    },
+    {
+      "aliases": [
+        "生效时间",
+        "版本"
+      ],
+      "content": "自2025年9月1日起生效，替代前版规则（RULE_COUPON_001_V1）。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "SC-005"
+    }
+  ],
+  "source_doc_code": "RULE_COUPON_001_V2",
+  "title": "优惠券使用规则 V2",
+  "topic": "coupon",
+  "version": "2.0"
+}

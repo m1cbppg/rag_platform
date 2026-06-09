@@ -1,0 +1,49 @@
+你需要根据下面的单篇文档蓝图，生成一篇企业电商售后知识库文档。
+
+文档蓝图：
+{blueprint_json}
+
+上一版本文档（首次生成为空对象）：
+{previous_document_json}
+
+审核或确定性校验反馈（没有反馈时为空数组）：
+{review_feedback}
+
+当前尝试次数：{attempt}
+
+必须遵守：
+1. 只生成当前蓝图对应的一篇文档，不扩展蓝图之外的业务规则。
+2. source_doc_code、title、doc_type、topic、version和生效日期必须与蓝图完全一致。
+3. required_facts 中每个 fact_key 必须在且仅在一个 facts 元素中出现。
+4. required_identifiers 必须逐字出现在 section 的 heading、content 或 fact_text 中。
+5. required_sections 指定的结构必须在 heading 或 content 中明确出现。
+6. generation_notes 是强约束，不是可选建议。
+7. 蓝图未提供的金额、时限、费用、赔付顺序、状态流转和权限规则一律不得自行补写。
+8. FAQ 为满足问答数量而增加的辅助问答，只能解释已有必要事实，不能创造新的政策事实。
+9. FAQ 必须包含8到15个 section，每个 section 是一组问答，并提供2到4个 aliases。
+10. SOP 必须包含适用场景、前置检查、至少4个编号步骤、异常分支和升级条件。
+11. RULE 必须包含适用范围、规则条款、例外条件、规则优先级和生效日期；历史版本不得使用新版本才有的条件。
+12. MANUAL 必须包含菜单路径、字段说明、按钮名、至少3个编号步骤和错误提示；按钮名使用【按钮】格式。
+13. 不得出现“模拟数据”“AI生成”“示例文档”等生成过程说明。
+14. 只返回合法JSON对象，不要返回Markdown代码块或额外解释。
+
+JSON字段必须为：
+- source_doc_code
+- title
+- doc_type
+- topic
+- version
+- effective_from
+- effective_to
+- sections
+
+每个sections元素必须包含：
+- section_code
+- heading
+- content
+- aliases
+- facts
+
+每个facts元素必须包含：
+- fact_key
+- fact_text

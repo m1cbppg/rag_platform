@@ -1,0 +1,74 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2024-03-01",
+  "effective_to": "2025-12-31",
+  "sections": [
+    {
+      "aliases": [
+        "适用范围",
+        "适用对象"
+      ],
+      "content": "本规则适用于平台普通商品（非定制）的售后退款申请，且申请时间为签收后七日内。",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "SEC001"
+    },
+    {
+      "aliases": [
+        "退款规则",
+        "条款"
+      ],
+      "content": "1. 普通商品签收后七日内可申请退款（标识：REFUND-V1）。\n2. 已发货未签收订单需先拒收或拦截方可申请退款。\n3. 定制商品不适用七日规则。",
+      "facts": [
+        {
+          "fact_key": "refund_v1_window",
+          "fact_text": "普通商品签收后七日内可申请退款"
+        },
+        {
+          "fact_key": "refund_v1_shipping",
+          "fact_text": "已发货未签收订单需先拒收或拦截"
+        },
+        {
+          "fact_key": "refund_v1_exception",
+          "fact_text": "定制商品不适用七日规则"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "SEC002"
+    },
+    {
+      "aliases": [
+        "例外",
+        "不适用情况"
+      ],
+      "content": "定制商品不适用本退款时限规则。其他例外以具体商品详情页说明为准。",
+      "facts": [],
+      "heading": "例外条件",
+      "section_code": "SEC003"
+    },
+    {
+      "aliases": [
+        "优先级",
+        "冲突处理"
+      ],
+      "content": "本规则版本号为1.0，属于规则组R-REFUND-001。当本规则与后续版本（如RULE_REFUND_001_V2）冲突时，以最新版本为准。",
+      "facts": [],
+      "heading": "规则优先级",
+      "section_code": "SEC004"
+    },
+    {
+      "aliases": [
+        "有效期",
+        "生效时间"
+      ],
+      "content": "本规则自2024年3月1日起生效，至2025年12月31日有效。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "SEC005"
+    }
+  ],
+  "source_doc_code": "RULE_REFUND_001_V1",
+  "title": "售后退款时限规则 V1",
+  "topic": "refund",
+  "version": "1.0"
+}

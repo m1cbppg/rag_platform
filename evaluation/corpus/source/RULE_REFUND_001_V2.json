@@ -1,0 +1,60 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2026-01-01",
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [],
+      "content": "本规则适用于所有通过本平台销售的商品（特殊商品除外），包括普通商品和会员商品。涉及退款申请的处理时限。规则编码：R-REFUND-001，关联异常流程编码：E-RF-1002。",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "SCOPE"
+    },
+    {
+      "aliases": [],
+      "content": "1. 普通商品：签收后七日内可申请无理由退款（fact_key: refund_v2_window，内容：普通商品签收后七日内申请，部分会员延长至十五日）。\n2. 优惠券订单：按实付金额退款，优惠券处理遵循独立规则（fact_key: refund_v2_coupon_limit，内容：优惠券订单按实付金额退款且券处理遵循独立规则）。",
+      "facts": [
+        {
+          "fact_key": "refund_v2_window",
+          "fact_text": "普通商品签收后七日内申请，部分会员延长至十五日"
+        },
+        {
+          "fact_key": "refund_v2_coupon_limit",
+          "fact_text": "优惠券订单按实付金额退款且券处理遵循独立规则"
+        }
+      ],
+      "heading": "规则条款",
+      "section_code": "RULE_TERMS"
+    },
+    {
+      "aliases": [],
+      "content": "质量问题不受无理由退货时限限制（fact_key: refund_v2_exception，内容：质量问题不受无理由退货时限限制）。此外，根据异常流程E-RF-1002，质量问题退款无需遵循上述七/十五日时限。",
+      "facts": [
+        {
+          "fact_key": "refund_v2_exception",
+          "fact_text": "质量问题不受无理由退货时限限制"
+        }
+      ],
+      "heading": "例外条件",
+      "section_code": "EXCEPTION"
+    },
+    {
+      "aliases": [],
+      "content": "本规则（V2.0）替代V1版本（RULE_REFUND_001_V1），并与之冲突（原V1规则作废）。当本规则与平台其他退款规则冲突时，以本规则为准，但质量问题相关条款优先适用例外条件。",
+      "facts": [],
+      "heading": "规则优先级",
+      "section_code": "PRIORITY"
+    },
+    {
+      "aliases": [],
+      "content": "本规则自2026年1月1日起生效，无截止日期。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "EFFECTIVE_DATE"
+    }
+  ],
+  "source_doc_code": "RULE_REFUND_001_V2",
+  "title": "售后退款时限规则 V2",
+  "topic": "refund",
+  "version": "2.0"
+}

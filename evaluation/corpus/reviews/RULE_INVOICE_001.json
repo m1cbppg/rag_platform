@@ -1,0 +1,100 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2025-01-01",
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [],
+        "content": "本规则适用于所有涉及发票开具及红冲的售后场景，包括普通发票和增值税专用发票。适用凭证包括R-INVOICE-001和E-IV-6001。",
+        "facts": [
+          {
+            "fact_key": "invoice_issue_amount",
+            "fact_text": "发票金额以实际支付且未退款金额为准。"
+          }
+        ],
+        "heading": "适用范围",
+        "section_code": "SCOPE"
+      },
+      {
+        "aliases": [],
+        "content": "1. 发票开具时，金额必须等于实际支付且未退款的金额。\n2. 若部分退款涉及已开票金额，需对原发票进行部分红冲，红冲金额等于退款金额。\n3. 若全额退款涉及已开票金额，需对原发票进行全额红冲。\n4. 普通发票红冲直接操作，增值税专用发票红冲需先提交审核材料。",
+        "facts": [
+          {
+            "fact_key": "invoice_red_refund",
+            "fact_text": "退款涉及已开票金额时必须红冲。"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "RULE_CLAUSES"
+      },
+      {
+        "aliases": [],
+        "content": "1. 增值税专用发票红冲时，若购买方已认证抵扣，需提供《开具红字增值税专用发票信息表》，否则无法红冲。\n2. 发票已跨月且未认证，需按税务机关要求处理。",
+        "facts": [
+          {
+            "fact_key": "invoice_special_exception",
+            "fact_text": "增值税专用发票红冲需要额外审核材料。"
+          }
+        ],
+        "heading": "例外条件",
+        "section_code": "EXCEPTIONS"
+      },
+      {
+        "aliases": [],
+        "content": "本规则优先级高于通用发票处理规则，低于法律法规要求。",
+        "facts": [],
+        "heading": "优先级",
+        "section_code": "PRIORITY"
+      },
+      {
+        "aliases": [],
+        "content": "自2025年1月1日起生效。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "EFFECTIVE_DATE"
+      }
+    ],
+    "source_doc_code": "RULE_INVOICE_001",
+    "title": "发票开具与红冲规则",
+    "topic": "invoice",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "规则条款第4条'普通发票红冲直接操作，增值税专用发票红冲需先提交审核材料'虽隐含fact_key 'invoice_special_exception'，但未明确'额外审核材料'的具体类型或责任主体（如由谁提交、何时提交），存在轻度执行歧义；建议补充'须由开票方在红冲申请时同步上传税务要求的全部审核材料'以降低RAG/客服误读风险。",
+          "例外条件中第1条提及《开具红字增值税专用发票信息表》，但未说明该表由购买方还是销售方申请开具，亦未关联到'invoice_special_exception'的'额外审核材料'定义是否包含此表——虽不构成事实遗漏，但削弱了例外与主条款的逻辑闭环，属轻微结构松散。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "RULE_INVOICE_001",
+        "structure_score": 0.95,
+        "summary": "文档完全覆盖全部3项required_facts，准确嵌入R-INVOICE-001和E-IV-6001两个required_identifiers；所有required_sections均存在且标题匹配；生效日期与蓝图一致，无supersedes冲突；结构完整、逻辑主线清晰，无实质性内部矛盾。主要待优化点为两处执行细节的明确性，属低风险歧义，不影响合规底线，符合所有硬性通过阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "规则条款第4条'普通发票红冲直接操作，增值税专用发票红冲需先提交审核材料'虽隐含fact_key 'invoice_special_exception'，但未明确'额外审核材料'的具体类型或责任主体（如由谁提交、何时提交），存在轻度执行歧义；建议补充'须由开票方在红冲申请时同步上传税务要求的全部审核材料'以降低RAG/客服误读风险。",
+      "例外条件中第1条提及《开具红字增值税专用发票信息表》，但未说明该表由购买方还是销售方申请开具，亦未关联到'invoice_special_exception'的'额外审核材料'定义是否包含此表——虽不构成事实遗漏，但削弱了例外与主条款的逻辑闭环，属轻微结构松散。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "RULE_INVOICE_001",
+    "structure_score": 0.95,
+    "summary": "文档完全覆盖全部3项required_facts，准确嵌入R-INVOICE-001和E-IV-6001两个required_identifiers；所有required_sections均存在且标题匹配；生效日期与蓝图一致，无supersedes冲突；结构完整、逻辑主线清晰，无实质性内部矛盾。主要待优化点为两处执行细节的明确性，属低风险歧义，不影响合规底线，符合所有硬性通过阈值。",
+    "version_consistency": 1.0
+  }
+}

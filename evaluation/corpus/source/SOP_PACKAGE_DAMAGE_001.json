@@ -1,0 +1,60 @@
+{
+  "doc_type": "SOP",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [],
+      "content": "本SOP适用于客户签收时发现包裹破损或签收后72小时内反馈包裹破损的情况。涉及快递单号标识：S-LOGISTICS-002 和 E-LG-3002 覆盖的订单。",
+      "facts": [],
+      "heading": "适用场景",
+      "section_code": "SOP-001"
+    },
+    {
+      "aliases": [],
+      "content": "处理前需确认客户已提供以下凭证：外包装照片、商品破损照片、快递面单照片。检查凭证完整性（damage_evidence_check）。",
+      "facts": [
+        {
+          "fact_key": "damage_evidence_check",
+          "fact_text": "检查客户提供的凭证（外包装、商品、面单）是否清晰完整，确认破损事实。"
+        }
+      ],
+      "heading": "前置检查",
+      "section_code": "SOP-002"
+    },
+    {
+      "aliases": [],
+      "content": "1. 判断破损责任方（damage_liability）：依据凭证判断是否属于运输破损、商家包装不当或客户原因。\n2. 若责任为运输破损，联系物流公司索赔，并为客户提供退款或补发方案。\n3. 若责任为商家包装问题，商家承担费用，为客户提供补发或退款。\n4. 若责任为客户原因，告知客户无法免费处理，提供自费维修或重新购买选项。\n5. 执行解决方案（damage_resolution）：根据责任判定结果，执行退款、补发或维修流程。",
+      "facts": [
+        {
+          "fact_key": "damage_liability",
+          "fact_text": "依据凭证判断运输破损、商家包装或客户原因，确定责任方。"
+        },
+        {
+          "fact_key": "damage_resolution",
+          "fact_text": "根据责任认定结果，提供退款、补发或维修等解决方案。"
+        }
+      ],
+      "heading": "处理步骤",
+      "section_code": "SOP-003"
+    },
+    {
+      "aliases": [],
+      "content": "签收时拒收：现场拍照留证，直接发起拒收流程，由物流退回，客服介入退款或补发。\n签收后发现：引导客户在签收后72小时内提供凭证，按上述步骤处理。\n涉及S-LOGISTICS-002的订单，需优先联系指定物流客服。涉及E-LG-3002的订单，需参考物流合同条款。",
+      "facts": [],
+      "heading": "异常分支",
+      "section_code": "SOP-004"
+    },
+    {
+      "aliases": [],
+      "content": "若客户索赔金额超过500元，或客户投诉升级至工商/平台，或责任判定存在争议无法协商一致，需升级至主管处理。",
+      "facts": [],
+      "heading": "升级条件",
+      "section_code": "SOP-005"
+    }
+  ],
+  "source_doc_code": "SOP_PACKAGE_DAMAGE_001",
+  "title": "包裹破损处理SOP",
+  "topic": "logistics",
+  "version": "1.0"
+}

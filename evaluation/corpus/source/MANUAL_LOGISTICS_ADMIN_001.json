@@ -1,0 +1,74 @@
+{
+  "doc_type": "MANUAL",
+  "effective_from": null,
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [
+        "导航路径",
+        "访问路径"
+      ],
+      "content": "登录物流管理系统后，通过【物流管理】->【后台管理】进入。对应的功能模块标识为M-LOGISTICS-001和E-LM-8301。",
+      "facts": [],
+      "heading": "菜单路径",
+      "section_code": "SEC_001"
+    },
+    {
+      "aliases": [
+        "字段解释",
+        "字段描述"
+      ],
+      "content": "物流单号：对应物流订单唯一标识。运输方式：如陆运、空运。当前节点：最新物流状态。其中M-LOGISTICS-001为系统内部单号，E-LM-8301为外部承运商编码。",
+      "facts": [],
+      "heading": "字段说明",
+      "section_code": "SEC_002"
+    },
+    {
+      "aliases": [
+        "流程步骤",
+        "操作流程"
+      ],
+      "content": "1. 进入物流管理后台，在查询条件中输入物流单号，点击【查询】。\n2. 查看物流轨迹列表，点击【刷新轨迹】按钮获取最新轨迹。\n3. 若轨迹异常，点击【创建核查单】按钮生成承运商核查工单。\n4. 在异常登记区域，选择丢失、破损或延迟类型，填写详细信息并提交。",
+      "facts": [
+        {
+          "fact_key": "logistics_admin_track",
+          "fact_text": "查询标准化物流轨迹和原始节点"
+        },
+        {
+          "fact_key": "logistics_admin_ticket",
+          "fact_text": "创建承运商核查工单"
+        },
+        {
+          "fact_key": "logistics_admin_exception",
+          "fact_text": "登记丢失、破损和延迟异常"
+        }
+      ],
+      "heading": "操作步骤",
+      "section_code": "SEC_003"
+    },
+    {
+      "aliases": [
+        "按钮解释",
+        "按钮功能"
+      ],
+      "content": "【刷新轨迹】：点击后从承运商接口同步最新物流节点数据。\n【创建核查单】：针对异常轨迹创建工单，由承运商核查反馈。\n【查询】：根据条件检索物流单。",
+      "facts": [],
+      "heading": "按钮说明",
+      "section_code": "SEC_004"
+    },
+    {
+      "aliases": [
+        "报错信息",
+        "异常提示"
+      ],
+      "content": "常见错误：\n- '物流单号不存在'：请检查单号是否正确。\n- '接口超时'：请稍后重试或联系技术支持。\n- '创建核查单失败'：确认承运商编码E-LM-8301是否有效。",
+      "facts": [],
+      "heading": "错误提示",
+      "section_code": "SEC_005"
+    }
+  ],
+  "source_doc_code": "MANUAL_LOGISTICS_ADMIN_001",
+  "title": "物流管理后台操作手册",
+  "topic": "logistics",
+  "version": "1.0"
+}

@@ -1,0 +1,652 @@
+[
+  {
+    "source_doc_code": "FAQ_ORDER_STATUS_001",
+    "doc_type": "FAQ",
+    "title": "订单状态与取消常见问题",
+    "topic": "order",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "order_cancel_pending_payment", "description": "待支付订单可由用户直接取消"},
+      {"fact_key": "order_cancel_paid", "description": "已支付未出库订单需要提交取消申请"},
+      {"fact_key": "order_cancel_shipped", "description": "已发货订单不能直接取消，应走售后流程"}
+    ],
+    "required_identifiers": ["F-ORDER-001", "ORDER_CANCEL_PENDING"],
+    "required_sections": ["待支付订单", "已支付订单", "已发货订单"],
+    "generation_notes": ["生成8到15组问答", "覆盖订单状态变化与取消失败提示"]
+  },
+  {
+    "source_doc_code": "FAQ_PAYMENT_001",
+    "doc_type": "FAQ",
+    "title": "支付失败与重复支付常见问题",
+    "topic": "payment",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "payment_failed_check", "description": "支付失败先检查支付渠道和订单状态"},
+      {"fact_key": "duplicate_payment_refund", "description": "重复支付核实后退回多支付款项"},
+      {"fact_key": "payment_pending_timeout", "description": "支付处理中超过规定时间需要发起人工核查"}
+    ],
+    "required_identifiers": ["F-PAY-001", "E-PAY-2001"],
+    "required_sections": ["支付失败", "重复支付", "支付处理中"],
+    "generation_notes": ["明确支付状态与银行扣款状态可能不同步"]
+  },
+  {
+    "source_doc_code": "FAQ_REFUND_PROGRESS_001",
+    "doc_type": "FAQ",
+    "title": "退款进度常见问题",
+    "topic": "refund",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "refund_processing_time", "description": "不同支付渠道的退款到账时间"},
+      {"fact_key": "refund_status_query", "description": "用户查询退款进度的入口"},
+      {"fact_key": "refund_overdue_escalation", "description": "退款超时后的升级条件"}
+    ],
+    "required_identifiers": ["F-REFUND-001", "REFUND_STATUS"],
+    "required_sections": ["到账时间", "进度查询", "退款超时"],
+    "generation_notes": ["区分平台处理完成和银行实际入账"]
+  },
+  {
+    "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+    "doc_type": "FAQ",
+    "title": "退货运费常见问题",
+    "topic": "return",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "freight_quality_issue", "description": "质量问题退货运费由平台或商家承担"},
+      {"fact_key": "freight_personal_reason", "description": "个人原因退货运费由用户承担"},
+      {"fact_key": "freight_insurance", "description": "运费险赔付与实际运费可能存在差额"},
+      {"fact_key": "freight_reject_difference", "description": "拒收发生在签收前，不属于签收后的退货寄回，不得虚构拦截费或其他收费规则"},
+      {"fact_key": "freight_pickup_difference", "description": "上门取件只是寄回方式，不改变按质量问题或个人原因确定的运费承担方"}
+    ],
+    "required_identifiers": ["F-RETURN-001", "RETURN_FREIGHT"],
+    "required_sections": ["质量问题", "个人原因", "运费险"],
+    "generation_notes": [
+      "明确拒收和上门取件的费用差异",
+      "F-RETURN-001是文档业务编码，RETURN_FREIGHT是主题标识，不得赋予流程或费用语义",
+      "不得生成蓝图未给出的时限、退款进度、拦截费、自动扣费或优先抵扣规则"
+    ]
+  },
+  {
+    "source_doc_code": "FAQ_COUPON_USE_001",
+    "doc_type": "FAQ",
+    "title": "优惠券使用常见问题",
+    "topic": "coupon",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "coupon_threshold", "description": "优惠券使用门槛按商品实付前金额判断"},
+      {"fact_key": "coupon_scope", "description": "优惠券受商品、店铺和类目范围限制"},
+      {"fact_key": "coupon_stack", "description": "不同类型优惠券叠加规则"}
+    ],
+    "required_identifiers": ["F-COUPON-001", "COUPON_APPLY"],
+    "required_sections": ["使用门槛", "适用范围", "叠加规则"],
+    "generation_notes": ["覆盖券过期、不可用和结算页不展示"]
+  },
+  {
+    "source_doc_code": "FAQ_COUPON_RETURN_001",
+    "doc_type": "FAQ",
+    "title": "优惠券退回常见问题",
+    "topic": "coupon",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "coupon_return_full_refund", "description": "整单退款时符合条件的优惠券自动退回"},
+      {"fact_key": "coupon_return_partial_refund", "description": "部分退款通常不退回整单优惠券"},
+      {"fact_key": "coupon_return_expired", "description": "退回时已过期优惠券的处理方式"}
+    ],
+    "required_identifiers": ["F-COUPON-002", "COUPON_RETURN"],
+    "required_sections": ["整单退款", "部分退款", "过期优惠券"],
+    "generation_notes": ["与优惠券使用FAQ保持术语一致"]
+  },
+  {
+    "source_doc_code": "FAQ_INVOICE_001",
+    "doc_type": "FAQ",
+    "title": "发票开具常见问题",
+    "topic": "invoice",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "invoice_apply_entry", "description": "发票申请入口和可申请时间"},
+      {"fact_key": "invoice_title_type", "description": "个人和企业抬头所需信息"},
+      {"fact_key": "invoice_refund_effect", "description": "退款后原发票的红冲或作废处理"}
+    ],
+    "required_identifiers": ["F-INVOICE-001", "INVOICE_APPLY"],
+    "required_sections": ["申请入口", "发票抬头", "退款后处理"],
+    "generation_notes": ["区分电子普通发票和增值税专用发票"]
+  },
+  {
+    "source_doc_code": "FAQ_ADDRESS_CHANGE_001",
+    "doc_type": "FAQ",
+    "title": "收货地址修改常见问题",
+    "topic": "order",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "address_change_unshipped", "description": "未出库订单可在满足校验条件时修改地址"},
+      {"fact_key": "address_change_shipped", "description": "已发货订单需要联系承运商尝试改址"},
+      {"fact_key": "address_change_risk", "description": "跨区域或高风险改址需要人工审核"}
+    ],
+    "required_identifiers": ["F-ORDER-002", "ADDRESS_CHANGE"],
+    "required_sections": ["未出库", "已发货", "风险校验"],
+    "generation_notes": ["说明部分商品和区域不支持改址"]
+  },
+  {
+    "source_doc_code": "FAQ_LOGISTICS_DELAY_001",
+    "doc_type": "FAQ",
+    "title": "物流延迟常见问题",
+    "topic": "logistics",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "delay_normal_window", "description": "物流轨迹短时间未更新的正常观察期"},
+      {"fact_key": "delay_investigation", "description": "超过观察期后发起物流核查"},
+      {"fact_key": "delay_compensation", "description": "满足承诺时效违约条件时的补偿入口"}
+    ],
+    "required_identifiers": ["F-LOGISTICS-001", "LOGISTICS_DELAY"],
+    "required_sections": ["观察期", "物流核查", "时效补偿"],
+    "generation_notes": ["区分揽收延迟、运输延迟和派送延迟"]
+  },
+  {
+    "source_doc_code": "FAQ_PACKAGE_EXCEPTION_001",
+    "doc_type": "FAQ",
+    "title": "包裹丢失或破损常见问题",
+    "topic": "logistics",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "package_loss_evidence", "description": "包裹疑似丢失所需核查信息"},
+      {"fact_key": "package_damage_evidence", "description": "包裹破损需要的照片或视频凭证"},
+      {"fact_key": "package_exception_resolution", "description": "丢失或破损确认后的退款补发方案"}
+    ],
+    "required_identifiers": ["F-LOGISTICS-002", "PACKAGE_EXCEPTION"],
+    "required_sections": ["包裹丢失", "包裹破损", "处理方案"],
+    "generation_notes": ["明确签收前和签收后发现破损的差异"]
+  },
+  {
+    "source_doc_code": "FAQ_MEMBER_RIGHTS_001",
+    "doc_type": "FAQ",
+    "title": "会员权益常见问题",
+    "topic": "member",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "member_shipping_right", "description": "会员免邮权益的适用条件"},
+      {"fact_key": "member_refund_right", "description": "退款对会员成长值或积分的影响"},
+      {"fact_key": "member_expiry", "description": "会员到期后未使用权益的处理"}
+    ],
+    "required_identifiers": ["F-MEMBER-001", "MEMBER_RIGHT"],
+    "required_sections": ["免邮权益", "积分成长值", "会员到期"],
+    "generation_notes": ["避免承诺蓝图外的会员补偿"]
+  },
+  {
+    "source_doc_code": "FAQ_AFTERSALE_PROGRESS_001",
+    "doc_type": "FAQ",
+    "title": "售后进度常见问题",
+    "topic": "after_sales",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "aftersale_status_query", "description": "售后单状态查询入口"},
+      {"fact_key": "aftersale_waiting_user", "description": "待用户操作状态下需要补充的材料"},
+      {"fact_key": "aftersale_overdue", "description": "商家或平台超时未处理的升级方式"}
+    ],
+    "required_identifiers": ["F-AFTERSALE-001", "AFTERSALE_STATUS"],
+    "required_sections": ["进度查询", "待用户操作", "处理超时"],
+    "generation_notes": ["覆盖待审核、待寄回、待收货和退款中状态"]
+  },
+  {
+    "source_doc_code": "SOP_REFUND_ONLY_001",
+    "doc_type": "SOP",
+    "title": "仅退款申请处理SOP",
+    "topic": "refund",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "refund_only_precheck", "description": "核对订单状态、退款原因和凭证"},
+      {"fact_key": "refund_only_decision", "description": "按照未发货、已发货未签收和已签收分支处理"},
+      {"fact_key": "refund_only_escalation", "description": "高金额或争议订单升级人工复核"}
+    ],
+    "required_identifiers": ["S-REFUND-001", "E-RF-1001"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["至少6个编号步骤"]
+  },
+  {
+    "source_doc_code": "SOP_RETURN_REFUND_001",
+    "doc_type": "SOP",
+    "title": "退货退款处理SOP",
+    "topic": "return",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "return_refund_precheck", "description": "检查退货资格、商品状态和物流单号"},
+      {"fact_key": "return_refund_receive", "description": "商家签收后进入验货和退款流程"},
+      {"fact_key": "return_refund_exception", "description": "空包、少件或商品不符时进入异常分支"}
+    ],
+    "required_identifiers": ["S-RETURN-001", "RETURN_RECEIVED"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["至少7个编号步骤", "明确用户寄回时限"]
+  },
+  {
+    "source_doc_code": "SOP_PACKAGE_LOSS_001",
+    "doc_type": "SOP",
+    "title": "包裹丢失排查SOP",
+    "topic": "logistics",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "loss_tracking_check", "description": "核查揽收、转运和派送轨迹"},
+      {"fact_key": "loss_carrier_ticket", "description": "向承运商创建丢失核查工单"},
+      {"fact_key": "loss_resolution", "description": "确认丢失后的退款或补发处理"}
+    ],
+    "required_identifiers": ["S-LOGISTICS-001", "E-LG-3001"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["明确不同物流节点的等待时间"]
+  },
+  {
+    "source_doc_code": "SOP_PACKAGE_DAMAGE_001",
+    "doc_type": "SOP",
+    "title": "包裹破损处理SOP",
+    "topic": "logistics",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "damage_evidence_check", "description": "检查外包装、商品和面单凭证"},
+      {"fact_key": "damage_liability", "description": "判断运输破损、商家包装或用户原因"},
+      {"fact_key": "damage_resolution", "description": "按责任提供退款、补发或维修方案"}
+    ],
+    "required_identifiers": ["S-LOGISTICS-002", "E-LG-3002"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["包含签收时拒收和签收后发现两个分支"]
+  },
+  {
+    "source_doc_code": "SOP_WRONG_ITEM_001",
+    "doc_type": "SOP",
+    "title": "错发商品处理SOP",
+    "topic": "after_sales",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "wrong_item_verify", "description": "核对订单商品和实收商品信息"},
+      {"fact_key": "wrong_item_return", "description": "错发商品由商家承担寄回费用"},
+      {"fact_key": "wrong_item_reship", "description": "补发前确认库存和用户地址"}
+    ],
+    "required_identifiers": ["S-AFTERSALE-001", "E-AS-4001"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["区分少发、漏发和完全错发"]
+  },
+  {
+    "source_doc_code": "SOP_REFUND_FAILURE_001",
+    "doc_type": "SOP",
+    "title": "退款失败排查SOP",
+    "topic": "refund",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "refund_failure_channel", "description": "核对原支付渠道可退款状态"},
+      {"fact_key": "refund_failure_retry", "description": "满足条件时重试退款任务"},
+      {"fact_key": "refund_failure_manual", "description": "重试失败后转人工打款或财务处理"}
+    ],
+    "required_identifiers": ["S-REFUND-002", "E-RF-1002"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["明确原路退款失败和账户异常的差异"]
+  },
+  {
+    "source_doc_code": "SOP_COUPON_COMPLAINT_001",
+    "doc_type": "SOP",
+    "title": "优惠券投诉处理SOP",
+    "topic": "coupon",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "coupon_complaint_verify", "description": "核对券模板、领取记录和适用范围"},
+      {"fact_key": "coupon_complaint_reason", "description": "识别过期、门槛、互斥和商品限制"},
+      {"fact_key": "coupon_complaint_compensation", "description": "系统异常确认后按权限补发优惠券"}
+    ],
+    "required_identifiers": ["S-COUPON-001", "E-CP-5001"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["禁止在未核实系统异常时直接补券"]
+  },
+  {
+    "source_doc_code": "SOP_INVOICE_MODIFY_001",
+    "doc_type": "SOP",
+    "title": "发票修改流程SOP",
+    "topic": "invoice",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "invoice_modify_eligibility", "description": "核对发票状态和可修改字段"},
+      {"fact_key": "invoice_red_issue", "description": "已开票需要先红冲再重开"},
+      {"fact_key": "invoice_modify_escalation", "description": "专票和跨月红冲需要财务升级"}
+    ],
+    "required_identifiers": ["S-INVOICE-001", "E-IV-6001"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["区分开票前修改和开票后重开"]
+  },
+  {
+    "source_doc_code": "SOP_DUPLICATE_PAYMENT_001",
+    "doc_type": "SOP",
+    "title": "重复支付处理SOP",
+    "topic": "payment",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "duplicate_payment_verify", "description": "核对订单号、支付流水和扣款次数"},
+      {"fact_key": "duplicate_payment_match", "description": "确认多余流水未绑定其他订单"},
+      {"fact_key": "duplicate_payment_refund", "description": "对多余支付流水发起原路退款"}
+    ],
+    "required_identifiers": ["S-PAY-001", "E-PAY-2002"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["防止把银行预授权误判为重复支付"]
+  },
+  {
+    "source_doc_code": "SOP_RISK_ESCALATION_001",
+    "doc_type": "SOP",
+    "title": "风控升级流程SOP",
+    "topic": "risk",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "risk_trigger", "description": "高金额、频繁售后或账号异常触发风控"},
+      {"fact_key": "risk_freeze_action", "description": "风险核查期间暂停自动退款或补偿"},
+      {"fact_key": "risk_escalation_sla", "description": "按照风险等级升级并记录处理时限"}
+    ],
+    "required_identifiers": ["S-RISK-001", "E-RK-7001"],
+    "required_sections": ["适用场景", "前置检查", "处理步骤", "异常分支", "升级条件"],
+    "generation_notes": ["说明客服无权绕过风控结论"]
+  },
+  {
+    "source_doc_code": "RULE_ORDER_001_V1",
+    "doc_type": "RULE",
+    "title": "订单取消规则 V1",
+    "topic": "order",
+    "version": "1.0",
+    "effective_from": "2024-01-01",
+    "effective_to": "2025-06-30",
+    "is_current": false,
+    "version_group": "R-ORDER-001",
+    "conflicts_with": ["RULE_ORDER_001_V2"],
+    "required_facts": [
+      {"fact_key": "order_v1_cancel_window", "description": "V1允许未出库订单在支付后两小时内直接取消"},
+      {"fact_key": "order_v1_shipped", "description": "已发货订单不得取消"},
+      {"fact_key": "order_v1_exception", "description": "预售商品不适用两小时取消窗口"}
+    ],
+    "required_identifiers": ["R-ORDER-001", "ORDER-V1"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["明确这是历史版本", "不得引用V2才有的规则"]
+  },
+  {
+    "source_doc_code": "RULE_ORDER_001_V2",
+    "doc_type": "RULE",
+    "title": "订单取消规则 V2",
+    "topic": "order",
+    "version": "2.0",
+    "effective_from": "2025-07-01",
+    "is_current": true,
+    "version_group": "R-ORDER-001",
+    "supersedes": "RULE_ORDER_001_V1",
+    "conflicts_with": ["RULE_ORDER_001_V1"],
+    "required_facts": [
+      {"fact_key": "order_v2_cancel_window", "description": "V2按出库状态判断，不再限制支付后两小时"},
+      {"fact_key": "order_v2_risk_review", "description": "高风险订单取消需要人工复核"},
+      {"fact_key": "order_v2_exception", "description": "虚拟商品支付后不可取消"}
+    ],
+    "required_identifiers": ["R-ORDER-001", "ORDER-V2"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["说明替代V1", "给出与V1的关键差异"]
+  },
+  {
+    "source_doc_code": "RULE_REFUND_001_V1",
+    "doc_type": "RULE",
+    "title": "售后退款时限规则 V1",
+    "topic": "refund",
+    "version": "1.0",
+    "effective_from": "2024-03-01",
+    "effective_to": "2025-12-31",
+    "is_current": false,
+    "version_group": "R-REFUND-001",
+    "conflicts_with": ["RULE_REFUND_001_V2"],
+    "required_facts": [
+      {"fact_key": "refund_v1_window", "description": "普通商品签收后七日内可申请退款"},
+      {"fact_key": "refund_v1_shipping", "description": "已发货未签收订单需先拒收或拦截"},
+      {"fact_key": "refund_v1_exception", "description": "定制商品不适用七日规则"}
+    ],
+    "required_identifiers": ["R-REFUND-001", "REFUND-V1"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["历史版本"]
+  },
+  {
+    "source_doc_code": "RULE_REFUND_001_V2",
+    "doc_type": "RULE",
+    "title": "售后退款时限规则 V2",
+    "topic": "refund",
+    "version": "2.0",
+    "effective_from": "2026-01-01",
+    "is_current": true,
+    "version_group": "R-REFUND-001",
+    "supersedes": "RULE_REFUND_001_V1",
+    "conflicts_with": ["RULE_REFUND_001_V1"],
+    "required_facts": [
+      {"fact_key": "refund_v2_window", "description": "普通商品签收后七日内申请，部分会员延长至十五日"},
+      {"fact_key": "refund_v2_coupon_limit", "description": "优惠券订单按实付金额退款且券处理遵循独立规则"},
+      {"fact_key": "refund_v2_exception", "description": "质量问题不受无理由退货时限限制"}
+    ],
+    "required_identifiers": ["R-REFUND-001", "E-RF-1002"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["说明替代V1", "突出会员和质量问题例外"]
+  },
+  {
+    "source_doc_code": "RULE_COUPON_001_V1",
+    "doc_type": "RULE",
+    "title": "优惠券使用规则 V1",
+    "topic": "coupon",
+    "version": "1.0",
+    "effective_from": "2024-01-01",
+    "effective_to": "2025-08-31",
+    "is_current": false,
+    "version_group": "R-COUPON-001",
+    "conflicts_with": ["RULE_COUPON_001_V2"],
+    "required_facts": [
+      {"fact_key": "coupon_v1_single", "description": "V1每个订单仅可使用一张平台券"},
+      {"fact_key": "coupon_v1_threshold", "description": "门槛按商品原价合计判断"},
+      {"fact_key": "coupon_v1_exception", "description": "特价商品不可使用平台券"}
+    ],
+    "required_identifiers": ["R-COUPON-001", "COUPON-V1"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["历史版本"]
+  },
+  {
+    "source_doc_code": "RULE_COUPON_001_V2",
+    "doc_type": "RULE",
+    "title": "优惠券使用规则 V2",
+    "topic": "coupon",
+    "version": "2.0",
+    "effective_from": "2025-09-01",
+    "is_current": true,
+    "version_group": "R-COUPON-001",
+    "supersedes": "RULE_COUPON_001_V1",
+    "conflicts_with": ["RULE_COUPON_001_V1"],
+    "required_facts": [
+      {"fact_key": "coupon_v2_stack", "description": "平台券和店铺券在满足互斥配置时可叠加"},
+      {"fact_key": "coupon_v2_threshold", "description": "门槛按扣除店铺优惠后的金额判断"},
+      {"fact_key": "coupon_v2_exception", "description": "秒杀和虚拟商品仍不可使用平台券"}
+    ],
+    "required_identifiers": ["R-COUPON-001", "COUPON-V2"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["说明替代V1", "明确叠加顺序"]
+  },
+  {
+    "source_doc_code": "RULE_LOGISTICS_001_V1",
+    "doc_type": "RULE",
+    "title": "物流延迟判定规则 V1",
+    "topic": "logistics",
+    "version": "1.0",
+    "effective_from": "2024-05-01",
+    "effective_to": "2025-10-31",
+    "is_current": false,
+    "version_group": "R-LOGISTICS-001",
+    "conflicts_with": ["RULE_LOGISTICS_001_V2"],
+    "required_facts": [
+      {"fact_key": "logistics_v1_delay", "description": "V1物流轨迹48小时未更新判定延迟"},
+      {"fact_key": "logistics_v1_loss", "description": "七日无轨迹可进入疑似丢失核查"},
+      {"fact_key": "logistics_v1_exception", "description": "偏远地区和不可抗力不适用普通时限"}
+    ],
+    "required_identifiers": ["R-LOGISTICS-001", "LOGISTICS-V1"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["历史版本"]
+  },
+  {
+    "source_doc_code": "RULE_LOGISTICS_001_V2",
+    "doc_type": "RULE",
+    "title": "物流延迟判定规则 V2",
+    "topic": "logistics",
+    "version": "2.0",
+    "effective_from": "2025-11-01",
+    "is_current": true,
+    "version_group": "R-LOGISTICS-001",
+    "supersedes": "RULE_LOGISTICS_001_V1",
+    "conflicts_with": ["RULE_LOGISTICS_001_V1"],
+    "required_facts": [
+      {"fact_key": "logistics_v2_node_sla", "description": "V2按揽收、转运和派送节点分别设置观察期"},
+      {"fact_key": "logistics_v2_loss", "description": "满足节点超时和承运商无反馈才进入丢失核查"},
+      {"fact_key": "logistics_v2_exception", "description": "预警中的极端天气区域暂停时效补偿"}
+    ],
+    "required_identifiers": ["R-LOGISTICS-001", "LOGISTICS-V2"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["说明替代V1", "按节点给出明确时限"]
+  },
+  {
+    "source_doc_code": "RULE_REFUND_002",
+    "doc_type": "RULE",
+    "title": "退款失败与改道规则",
+    "topic": "refund",
+    "version": "1.0",
+    "effective_from": "2025-06-01",
+    "required_facts": [
+      {"fact_key": "refund_retry_limit", "description": "原路退款最多自动重试两次"},
+      {"fact_key": "refund_alternate_route", "description": "原渠道不可用时按审核结果改为人工打款"},
+      {"fact_key": "refund_risk_priority", "description": "风控冻结优先于退款改道"}
+    ],
+    "required_identifiers": ["R-REFUND-002", "E-RF-1002"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["与退款失败SOP保持错误码一致"]
+  },
+  {
+    "source_doc_code": "RULE_COUPON_002",
+    "doc_type": "RULE",
+    "title": "优惠券退回规则",
+    "topic": "coupon",
+    "version": "1.0",
+    "effective_from": "2025-09-01",
+    "required_facts": [
+      {"fact_key": "coupon_return_full", "description": "整单全额退款时未过期券自动退回"},
+      {"fact_key": "coupon_return_partial", "description": "部分退款不退回整单优惠券"},
+      {"fact_key": "coupon_return_exception", "description": "系统故障导致无法使用可人工补发等值券"}
+    ],
+    "required_identifiers": ["R-COUPON-002", "E-CP-5002"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["明确过期券和补发券不是同一张券"]
+  },
+  {
+    "source_doc_code": "RULE_INVOICE_001",
+    "doc_type": "RULE",
+    "title": "发票开具与红冲规则",
+    "topic": "invoice",
+    "version": "1.0",
+    "effective_from": "2025-01-01",
+    "required_facts": [
+      {"fact_key": "invoice_issue_amount", "description": "发票金额以实际支付且未退款金额为准"},
+      {"fact_key": "invoice_red_refund", "description": "退款涉及已开票金额时必须红冲"},
+      {"fact_key": "invoice_special_exception", "description": "增值税专用发票红冲需要额外审核材料"}
+    ],
+    "required_identifiers": ["R-INVOICE-001", "E-IV-6001"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["明确普票和专票处理差异"]
+  },
+  {
+    "source_doc_code": "RULE_MEMBER_001",
+    "doc_type": "RULE",
+    "title": "会员售后权益规则",
+    "topic": "member",
+    "version": "1.0",
+    "effective_from": "2025-01-01",
+    "required_facts": [
+      {"fact_key": "member_extended_return", "description": "指定会员和商品可享十五日无理由退货"},
+      {"fact_key": "member_points_refund", "description": "退款后按退款金额扣回积分和成长值"},
+      {"fact_key": "member_exception", "description": "虚拟、定制和生鲜商品不适用延长退货"}
+    ],
+    "required_identifiers": ["R-MEMBER-001", "MEMBER-15D"],
+    "required_sections": ["适用范围", "规则条款", "例外条件", "优先级", "生效日期"],
+    "generation_notes": ["与退款V2中的会员例外保持一致"]
+  },
+  {
+    "source_doc_code": "MANUAL_ORDER_ADMIN_001",
+    "doc_type": "MANUAL",
+    "title": "订单管理后台操作手册",
+    "topic": "order",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "order_admin_search", "description": "按订单号和用户信息查询订单"},
+      {"fact_key": "order_admin_cancel", "description": "提交取消申请并查看审核状态"},
+      {"fact_key": "order_admin_address", "description": "符合条件时修改收货地址"}
+    ],
+    "required_identifiers": ["M-ORDER-001", "E-OM-8001"],
+    "required_sections": ["菜单路径", "字段说明", "操作步骤", "按钮说明", "错误提示"],
+    "generation_notes": ["按钮名称使用中文方括号【】", "至少5个编号步骤"]
+  },
+  {
+    "source_doc_code": "MANUAL_REFUND_ADMIN_001",
+    "doc_type": "MANUAL",
+    "title": "退款管理后台操作手册",
+    "topic": "refund",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "refund_admin_query", "description": "查询退款单、支付流水和执行状态"},
+      {"fact_key": "refund_admin_retry", "description": "对可重试任务执行退款重试"},
+      {"fact_key": "refund_admin_manual", "description": "创建人工退款审核单"}
+    ],
+    "required_identifiers": ["M-REFUND-001", "E-RM-8101"],
+    "required_sections": ["菜单路径", "字段说明", "操作步骤", "按钮说明", "错误提示"],
+    "generation_notes": ["明确【重试退款】和【创建人工退款】权限差异"]
+  },
+  {
+    "source_doc_code": "MANUAL_COUPON_ADMIN_001",
+    "doc_type": "MANUAL",
+    "title": "优惠券管理后台操作手册",
+    "topic": "coupon",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "coupon_admin_template", "description": "查询券模板和适用范围"},
+      {"fact_key": "coupon_admin_record", "description": "查询用户领券和使用记录"},
+      {"fact_key": "coupon_admin_reissue", "description": "在授权范围内补发优惠券"}
+    ],
+    "required_identifiers": ["M-COUPON-001", "E-CM-8201"],
+    "required_sections": ["菜单路径", "字段说明", "操作步骤", "按钮说明", "错误提示"],
+    "generation_notes": ["记录补发原因和关联工单"]
+  },
+  {
+    "source_doc_code": "MANUAL_LOGISTICS_ADMIN_001",
+    "doc_type": "MANUAL",
+    "title": "物流管理后台操作手册",
+    "topic": "logistics",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "logistics_admin_track", "description": "查询标准化物流轨迹和原始节点"},
+      {"fact_key": "logistics_admin_ticket", "description": "创建承运商核查工单"},
+      {"fact_key": "logistics_admin_exception", "description": "登记丢失、破损和延迟异常"}
+    ],
+    "required_identifiers": ["M-LOGISTICS-001", "E-LM-8301"],
+    "required_sections": ["菜单路径", "字段说明", "操作步骤", "按钮说明", "错误提示"],
+    "generation_notes": ["包含【刷新轨迹】和【创建核查单】按钮"]
+  },
+  {
+    "source_doc_code": "MANUAL_INVOICE_ADMIN_001",
+    "doc_type": "MANUAL",
+    "title": "发票管理后台操作手册",
+    "topic": "invoice",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "invoice_admin_query", "description": "按订单号和发票号码查询"},
+      {"fact_key": "invoice_admin_red", "description": "提交红冲申请并上传材料"},
+      {"fact_key": "invoice_admin_reissue", "description": "红冲完成后重新开票"}
+    ],
+    "required_identifiers": ["M-INVOICE-001", "E-IM-8401"],
+    "required_sections": ["菜单路径", "字段说明", "操作步骤", "按钮说明", "错误提示"],
+    "generation_notes": ["包含普票和专票字段差异"]
+  },
+  {
+    "source_doc_code": "MANUAL_RISK_ADMIN_001",
+    "doc_type": "MANUAL",
+    "title": "风控管理后台操作手册",
+    "topic": "risk",
+    "version": "1.0",
+    "required_facts": [
+      {"fact_key": "risk_admin_case", "description": "查询风险单和命中规则"},
+      {"fact_key": "risk_admin_evidence", "description": "上传核验材料和填写复核意见"},
+      {"fact_key": "risk_admin_escalate", "description": "将高风险案件升级至风控专员"}
+    ],
+    "required_identifiers": ["M-RISK-001", "E-RKM-8501"],
+    "required_sections": ["菜单路径", "字段说明", "操作步骤", "按钮说明", "错误提示"],
+    "generation_notes": ["强调客服只能提交复核，不能直接解除风险"]
+  }
+]

@@ -1,0 +1,185 @@
+{
+  "document": {
+    "doc_type": "FAQ",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "查看售后进度",
+          "售后单状态查询",
+          "如何知道售后进展",
+          "查询售后处理到哪一步了"
+        ],
+        "content": "如何查询售后单的当前进度？您可以通过【我的售后】页面查看售后单状态（AFTERSALE_STATUS），字段来自系统API，取值包括待审核、待寄回、待收货、退款中、已关闭、已拒绝等。",
+        "facts": [
+          {
+            "fact_key": "aftersale_status_query",
+            "fact_text": "售后单状态查询入口为【我的售后】页面，可查看AFTERSALE_STATUS字段值，字段来自系统API，取值包括待审核、待寄回、待收货、退款中、已关闭、已拒绝等。"
+          }
+        ],
+        "heading": "进度查询",
+        "section_code": "SEC-001"
+      },
+      {
+        "aliases": [
+          "待审核操作",
+          "待寄回操作",
+          "用户需要补充材料",
+          "售后单等待用户处理"
+        ],
+        "content": "当售后单处于不同状态时，用户需执行相应操作：待审核状态下，需上传凭证（照片/视频，最多5张，每张不超过5MB）；待寄回状态下，需在7天内填写物流单号并寄回商品；待收货状态下，需确认收货并上传签收凭证（如有）；退款中状态下，可能需要提供银行卡信息以完成退款。",
+        "facts": [
+          {
+            "fact_key": "aftersale_waiting_user",
+            "fact_text": "待用户操作状态下，需补充的材料：待审核时上传凭证（照片/视频，最多5张，每张不超过5MB）；待寄回时在7天内填写物流单号；待收货时需确认收货并上传签收凭证（如有）；退款中时可能需要提供银行卡信息以完成退款。"
+          }
+        ],
+        "heading": "待用户操作",
+        "section_code": "SEC-002"
+      },
+      {
+        "aliases": [
+          "超时未处理怎么办",
+          "商家超时升级",
+          "平台介入条件",
+          "售后超时处理"
+        ],
+        "content": "如果商家或平台超时未处理售后单，用户可以通过【申请平台介入】升级处理。超时规则：商家需在48小时内响应（从用户提交时起算，不含节假日），否则售后单自动升级至平台介入。",
+        "facts": [
+          {
+            "fact_key": "aftersale_overdue",
+            "fact_text": "商家需在48小时内响应售后申请（从用户提交时起算，不含节假日），否则售后单自动升级至平台介入。用户也可在售后详情页点击【申请平台介入】主动升级。"
+          }
+        ],
+        "heading": "处理超时",
+        "section_code": "SEC-003"
+      },
+      {
+        "aliases": [
+          "售后单号",
+          "F-AFTERSALE-001用途",
+          "如何用编号查询",
+          "售后单唯一标识"
+        ],
+        "content": "每个售后单拥有唯一编号，格式为F-AFTERSALE-{YYYYMMDD}-{SEQ}，例如F-AFTERSALE-20230901-001。您可在【我的售后】页面通过编号精确查询。",
+        "facts": [],
+        "heading": "售后单编号",
+        "section_code": "SEC-004"
+      },
+      {
+        "aliases": [
+          "状态变更通知",
+          "如何接收进度消息",
+          "售后进度提醒",
+          "通知方式"
+        ],
+        "content": "售后单状态变更时，平台会通过短信或站内信通知用户。请保持联系方式畅通。",
+        "facts": [],
+        "heading": "状态变更通知",
+        "section_code": "SEC-005"
+      },
+      {
+        "aliases": [
+          "如何取消售后",
+          "修改售后申请",
+          "撤销售后单",
+          "售后单取消条件"
+        ],
+        "content": "在待审核状态下，用户可自行取消售后单。若已进入待寄回，需联系客服取消。修改申请需撤销后重新提交。",
+        "facts": [],
+        "heading": "取消与修改",
+        "section_code": "SEC-006"
+      },
+      {
+        "aliases": [
+          "退款失败",
+          "退款到账异常",
+          "退款未到账怎么办",
+          "联系客服退款"
+        ],
+        "content": "如遇退款失败，请检查退款账户信息是否正确，或联系客服处理。通常重新提供正确的银行卡信息即可。",
+        "facts": [],
+        "heading": "退款失败处理",
+        "section_code": "SEC-007"
+      },
+      {
+        "aliases": [
+          "状态不更新",
+          "售后单异常",
+          "状态卡住怎么办",
+          "售后单错误状态"
+        ],
+        "content": "如果售后单状态长时间未更新或显示异常，建议刷新页面或联系客服。常见异常：状态卡住、信息不一致等。",
+        "facts": [],
+        "heading": "异常处理",
+        "section_code": "SEC-008"
+      }
+    ],
+    "source_doc_code": "FAQ_AFTERSALE_PROGRESS_001",
+    "title": "售后进度常见问题",
+    "topic": "after_sales",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.35,
+        "fact_coverage": 0.67,
+        "identifier_accuracy": 0.5,
+        "internal_consistency": 0.92,
+        "issues": [
+          "required_facts缺失：aftersale_overdue的fact_text未包含超时规则（如'商家需在48小时内响应'），仅描述升级动作，未满足蓝图中'商家或平台超时未处理的升级方式'这一事实要求——必须明确超时判定条件+触发动作；",
+          "required_facts缺失：aftersale_waiting_user的fact_text未覆盖'待收货'和'退款中'状态下的用户操作责任（蓝图generation_notes明确要求覆盖四类状态：待审核、待寄回、待收货、退款中），当前仅提待审核/待寄回，遗漏待收货（如是否需确认收货？是否需上传签收凭证？）及退款中（如是否需提供银行卡信息？是否支持更换退款方式？）；",
+          "required_identifiers不完整且误用：F-AFTERSALE-001在SEC-008中被描述为'每个售后单有唯一编号F-AFTERSALE-001'，但该编号明显是模板占位符/示例编号，非真实编号格式（应为F-AFTERSALE-{YYYYMMDD}-{SEQ}等动态生成格式），构成编号串用风险；AFTERSALE_STATUS在SEC-001中作为字段名出现，但未说明其数据来源（API字段？前端渲染值？）、取值枚举完整性（是否含'已关闭''已拒绝''已取消'等终态？）、以及是否区分平台侧与商家侧状态视图——违反identifier_accuracy要求；",
+          "section冗余且偏离蓝图结构约束：SEC-004至SEC-012共8个额外状态说明类章节，虽内容合理，但蓝图明确限定required_sections仅3项（'进度查询''待用户操作''处理超时'），其余属非必要扩展，稀释核心路径，增加RAG召回噪声，且未与required_sections建立显式映射关系，导致结构合规性表面合格但实质偏离设计意图；",
+          "ambiguity风险点：'待审核状态下需上传相关凭证（如照片、视频）'未定义凭证类型、数量、格式、大小限制及审核失败重传机制；'48小时内响应'未说明计时起点（用户提交时刻？系统生成单号时刻？）、是否含节假日豁免、响应定义（仅点击'已读'？还是必须完成审核动作？）；'申请平台介入'按钮位置描述模糊（'售后详情页'未指明是H5/APP/PC哪一端，也未关联具体UI元素ID），易导致客服话术或RAG答案不一致。"
+        ],
+        "overall_score": 0.74,
+        "passed": false,
+        "source_doc_code": "FAQ_AFTERSALE_PROGRESS_001",
+        "structure_score": 0.92,
+        "summary": "文档结构完整、标题与元数据匹配、版本关系清晰，但存在严重事实覆盖缺陷：3项required_facts中仅1项（aftersale_status_query）完整达标，其余两项关键事实（aftersale_waiting_user、aftersale_overdue）均未按蓝图要求覆盖全部状态场景且缺失可执行规则细节；标识符使用错误，将示例编号F-AFTERSALE-001当作通用编号呈现，且未正确定义AFTERSALE_STATUS的语义边界；虽新增多个状态说明章节提升用户体验，但违背蓝图对required_sections的刚性约束，降低知识库聚焦度。综合不满足fact_coverage=1与identifier_accuracy=1的硬性通过阈值，整体质量未达上线标准。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "SEC-004（售后单编号）虽含required_identifier 'F-AFTERSALE-001'，但仅作为示例格式出现（F-AFTERSALE-{YYYYMMDD}-{SEQ}），未明确声明该编号即为蓝图要求的固定标识符 'F-AFTERSALE-001'；需澄清：'F-AFTERSALE-001' 是模板占位符还是某类通用前缀？当前表述易引发RAG误判为‘所有单号均以F-AFTERSALE-001开头’，构成轻度歧义风险。",
+          "SEC-002中‘退款中状态下，可能需要提供银行卡信息’——‘可能’属模糊情态动词，未说明触发条件（如原支付方式非银行卡、原渠道不可退等），削弱事实确定性；虽未违反fact_coverage（因fact_text已完整转述该句），但增加客服解释负担，属ambiguity_risk来源。",
+          "SEC-003中‘商家需在48小时内响应（从用户提交时起算，不含节假日）’与‘自动升级至平台介入’逻辑链不完整：未说明自动升级是否实时触发、是否有确认环节、用户是否仍可手动申请；但因蓝图仅要求‘升级方式’，且内容已覆盖【申请平台介入】入口和超时规则，故不扣fact_coverage，仅计入ambiguity_risk。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "FAQ_AFTERSALE_PROGRESS_001",
+        "structure_score": 0.95,
+        "summary": "文档完全覆盖蓝图全部required_facts（aftersale_status_query、aftersale_waiting_user、aftersale_overdue），required_identifiers（F-AFTERSALE-001、AFTERSALE_STATUS）均准确出现且上下文合理；结构完整包含全部required_sections，额外章节无害；版本字段与蓝图一致；内部逻辑无硬冲突（如时限矛盾、状态互斥错误）。主要风险为三处低至中度歧义：编号示例易被误读、‘可能需要’缺乏条件限定、自动升级机制描述略简略。整体质量优秀，符合发布阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 1
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "SEC-004（售后单编号）虽含required_identifier 'F-AFTERSALE-001'，但仅作为示例格式出现（F-AFTERSALE-{YYYYMMDD}-{SEQ}），未明确声明该编号即为蓝图要求的固定标识符 'F-AFTERSALE-001'；需澄清：'F-AFTERSALE-001' 是模板占位符还是某类通用前缀？当前表述易引发RAG误判为‘所有单号均以F-AFTERSALE-001开头’，构成轻度歧义风险。",
+      "SEC-002中‘退款中状态下，可能需要提供银行卡信息’——‘可能’属模糊情态动词，未说明触发条件（如原支付方式非银行卡、原渠道不可退等），削弱事实确定性；虽未违反fact_coverage（因fact_text已完整转述该句），但增加客服解释负担，属ambiguity_risk来源。",
+      "SEC-003中‘商家需在48小时内响应（从用户提交时起算，不含节假日）’与‘自动升级至平台介入’逻辑链不完整：未说明自动升级是否实时触发、是否有确认环节、用户是否仍可手动申请；但因蓝图仅要求‘升级方式’，且内容已覆盖【申请平台介入】入口和超时规则，故不扣fact_coverage，仅计入ambiguity_risk。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "FAQ_AFTERSALE_PROGRESS_001",
+    "structure_score": 0.95,
+    "summary": "文档完全覆盖蓝图全部required_facts（aftersale_status_query、aftersale_waiting_user、aftersale_overdue），required_identifiers（F-AFTERSALE-001、AFTERSALE_STATUS）均准确出现且上下文合理；结构完整包含全部required_sections，额外章节无害；版本字段与蓝图一致；内部逻辑无硬冲突（如时限矛盾、状态互斥错误）。主要风险为三处低至中度歧义：编号示例易被误读、‘可能需要’缺乏条件限定、自动升级机制描述略简略。整体质量优秀，符合发布阈值。",
+    "version_consistency": 1.0
+  }
+}

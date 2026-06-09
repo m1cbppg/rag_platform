@@ -1,0 +1,210 @@
+{
+  "document": {
+    "doc_type": "FAQ",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "质量问题运费",
+          "瑕疵退货费用",
+          "商品故障退货运费"
+        ],
+        "content": "如果商品存在质量问题，退货运费由谁承担？\nA：由平台或商家承担。用户无需支付退货运费。",
+        "facts": [
+          {
+            "fact_key": "freight_quality_issue",
+            "fact_text": "质量问题退货运费由平台或商家承担"
+          }
+        ],
+        "heading": "质量问题",
+        "section_code": "Q01"
+      },
+      {
+        "aliases": [
+          "个人原因运费",
+          "不喜欢退货费用",
+          "无理由退货运费"
+        ],
+        "content": "因个人原因（如不喜欢、不想要）退货，运费由谁承担？\nA：由用户承担。用户需支付退货运费。",
+        "facts": [
+          {
+            "fact_key": "freight_personal_reason",
+            "fact_text": "个人原因退货运费由用户承担"
+          }
+        ],
+        "heading": "个人原因",
+        "section_code": "Q02"
+      },
+      {
+        "aliases": [
+          "运费险说明",
+          "运费险赔付",
+          "保险金额"
+        ],
+        "content": "运费险是什么？赔付多少？\nA：运费险是一种保险，用户退货时可获得一定金额的赔付，但赔付金额与实际运费可能存在差额。",
+        "facts": [
+          {
+            "fact_key": "freight_insurance",
+            "fact_text": "运费险赔付与实际运费可能存在差额"
+          }
+        ],
+        "heading": "运费险",
+        "section_code": "Q03"
+      },
+      {
+        "aliases": [
+          "拒收运费",
+          "拒绝签收",
+          "未签收退货"
+        ],
+        "content": "拒收和退货有什么区别？\nA：拒收发生在签收前，退货发生在签收后。拒收不涉及签收后的退货寄回流程。",
+        "facts": [
+          {
+            "fact_key": "freight_reject_difference",
+            "fact_text": "拒收发生在签收前，不属于签收后的退货寄回，不得虚构拦截费或其他收费规则"
+          }
+        ],
+        "heading": "拒收说明",
+        "section_code": "Q04"
+      },
+      {
+        "aliases": [
+          "上门取件费用",
+          "取件运费",
+          "上门退货运费"
+        ],
+        "content": "上门取件方式下，运费由谁承担？\nA：上门取件只是退货寄回的一种方式，运费承担方仍由退货原因（质量问题或个人原因）决定。",
+        "facts": [
+          {
+            "fact_key": "freight_pickup_difference",
+            "fact_text": "上门取件只是寄回方式，不改变按质量问题或个人原因确定的运费承担方"
+          }
+        ],
+        "heading": "上门取件",
+        "section_code": "Q05"
+      },
+      {
+        "aliases": [
+          "业务编码",
+          "文档标识",
+          "F-RETURN-001",
+          "RETURN_FREIGHT"
+        ],
+        "content": "业务编码：F-RETURN-001，主题标识：RETURN_FREIGHT。",
+        "facts": [],
+        "heading": "文档标识",
+        "section_code": "Q06"
+      },
+      {
+        "aliases": [
+          "运费规则",
+          "承担原则",
+          "退货运费总则"
+        ],
+        "content": "退货运费根据退货原因如何确定？\nA：退货运费根据退货原因确定：质量问题由平台或商家承担，个人原因由用户承担。运费险可能提供赔付。",
+        "facts": [],
+        "heading": "退货运费总则",
+        "section_code": "Q07"
+      },
+      {
+        "aliases": [
+          "运费承担查询",
+          "谁付运费",
+          "运费责任"
+        ],
+        "content": "如何知道退货运费由谁承担？\nA：查看退货原因：如果是质量问题，由平台或商家承担；如果是个人原因，由用户承担。",
+        "facts": [],
+        "heading": "运费承担查询",
+        "section_code": "Q08"
+      }
+    ],
+    "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+    "title": "退货运费常见问题",
+    "topic": "return",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.75,
+        "fact_coverage": 0.8333333333333334,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.85,
+        "issues": [
+          "section Q04 ('拒收费用') states '拒收发生在签收前，不属于签收后的退货寄回，因此不产生退货运费' — this implies zero cost, but the blueprint's required_fact 'freight_reject_difference' strictly forbids assigning *any* fee semantics (e.g., 'no fee', 'free', 'not charged') to rejection; it only mandates distinguishing rejection from post-signature return and prohibits inventing interception fees — stating 'does not generate return freight' introduces a positive assertion about cost that is neither required nor permitted, creating logical overreach.",
+          "section Q06 ('退货流程标识') includes 'F-RETURN-001' and 'RETURN_FREIGHT' as identifiers but violates generation_notes: 'F-RETURN-001 is document business code, RETURN_FREIGHT is topic identifier, must NOT be assigned process or fee semantics' — yet the content says they 'are used to identify return freight related issues', which implicitly ties them to freight *handling*, i.e., fee/process semantics; this misassigns semantic scope.",
+          "section Q07 ('运费险差额') adds explanatory detail ('based on insured amount', 'distance/weight factors') not present in required_fact 'freight_insurance', and introduces new causal framing ('so there is a difference') — while not directly contradictory, it risks RAG inferring deterministic rules about calculation logic, violating generation_notes' prohibition on adding unauthorised rules.",
+          "section Q08 ('质量问题申请') introduces a new procedural step ('upload evidence', 'review approved', 'freight borne by platform after approval') — this implies a conditional workflow and timing not in blueprint; required_fact 'freight_quality_issue' only specifies *who bears* cost, not *how* or *when* reimbursement occurs — violates generation_notes' ban on 'refund progress' and 'automatic deduction rules'.",
+          "section Q09 ('个人原因退货运费支付') introduces 'prepay freight', 'deduct from refund', 'cash-on-delivery', and 'page prompt dependency' — all constitute unauthorised payment mechanics, timing, and system behavior, violating generation_notes' prohibition on 'automatic deduction', 'priority offset rules', and 'payment method details'.",
+          "section Q10 ('运费险理赔') states 'automatically initiates claim after successful return' and 'payout enters user account' — introduces 'automatic claim initiation' and 'account crediting' as guaranteed behaviors, exceeding the required_fact 'freight_insurance' (which only acknowledges possible payout *differences*) and violating generation_notes' ban on 'automatic deduction' and implied process rules.",
+          "section Q11 ('拒收与退货区别') asserts 'rejection incurs no freight; return incurs freight per rules' — again, assigns explicit cost presence/absence to rejection, contradicting blueprint's strict neutrality: 'reject is pre-signature → not return → do NOT invent interception fee OR free status'. This creates binary cost framing absent from requirements.",
+          "section Q12 ('上门取件与自行寄回') says 'same freight bearer' — while aligned with 'freight_pickup_difference', it redundantly rephrases and subtly implies equivalence of *cost amount*, whereas blueprint only requires equivalence of *responsibility assignment*; this risks RAG conflating 'same bearer' with 'same amount', introducing ambiguity about whether pickup premium fees are covered — not addressed in required_facts."
+        ],
+        "overall_score": 0.825,
+        "passed": false,
+        "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+        "structure_score": 0.9166666666666666,
+        "summary": "The document structurally complies (12 sections, correct title/topic/version, all required_sections present), and required_identifiers appear verbatim without reuse. However, 7 sections introduce unauthorized procedural, temporal, or cost-assignment assertions beyond the 5 required_facts — especially around rejection (Q04, Q11), insurance mechanics (Q07, Q10), quality reimbursement workflow (Q08), and personal-reason payment methods (Q09). These violate generation_notes' strict boundaries, reduce internal consistency (e.g., Q04/Q11 contradict blueprint's neutral framing of rejection), and create ambiguity risk for RAG inference. Fact coverage is incomplete: 'freight_reject_difference' and 'freight_pickup_difference' are referenced but their fact_text is truncated or semantically weakened (e.g., Q04 omits 'must NOT assign interception fee or other charging rules'); only 5 of 6 required_facts have fully compliant fact_text — 'freight_reject_difference' is misrepresented in Q04 and Q11, and 'freight_pickup_difference' is diluted in Q12. Overall score falls below pass threshold due to fact_coverage < 1 and internal_consistency < 0.90.",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.3,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 0.83,
+        "internal_consistency": 0.95,
+        "issues": [
+          "section_code Q06 introduces 'F-RETURN-001' and 'RETURN_FREIGHT' as content in a FAQ answer, violating generation_notes: 'F-RETURN-001 is document business code, RETURN_FREIGHT is topic identifier — must NOT be assigned process or fee semantics'. Presenting them as explanatory content (e.g., 'used to identify this topic') risks RAG or客服 interpreting them as actionable identifiers with procedural meaning — this is semantic overreach.",
+          "section_code Q10 states '拒收不属于退货，因此不涉及退货流程' — this contradicts standard e-commerce domain logic where拒收 is a *type* of return initiation (pre-delivery), and more critically, conflicts with required_fact freight_reject_difference which only defines temporal distinction ('happens before signature') and prohibits inventing fees — but does NOT assert 'not part of return process'. The phrase '不涉及退货流程' introduces an unsupported process boundary, creating ambiguity for workflow systems and agents.",
+          "section_code Q12's summary '质量问题由平台承担，个人原因由用户承担' omits 'or商家' from freight_quality_issue fact_text, thus under-specifying the responsible party — violates fidelity to required_fact freight_quality_issue whose exact phrasing is '平台或商家承担'. This creates ambiguity: does 'platform' here mean exclusive platform liability? That contradicts the 'or商家' disjunction.",
+          "identifier_accuracy is reduced because F-RETURN-001 appears in Q06 as explanatory text (not just metadata), and RETURN_FREIGHT is similarly embedded in prose — while both strings appear verbatim (satisfying literal presence), generation_notes explicitly forbid assigning them *any process or fee semantics*. Their use in Q06 as 'used to identify this topic' constitutes semantic assignment (i.e., implying functional role beyond static identification), breaching the constraint."
+        ],
+        "overall_score": 0.87,
+        "passed": false,
+        "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+        "structure_score": 0.92,
+        "summary": "Document fully covers all 5 required_facts with correct fact_key and verbatim fact_text in Q01–Q05. Structure exceeds minimum requirements (12 sections vs 3 required; all required_sections present). Version fields align with blueprint. However, two critical issues breach generation_notes: (1) Q06 misuses identifiers by assigning them semantic purpose, violating 'must not赋予流程或费用语义'; (2) Q10 and Q12 introduce unsupported process boundaries and omit disjunctive 'or商家', harming factual fidelity and creating RAG/agent ambiguity. These reduce identifier_accuracy and increase ambiguity_risk, pulling overall_score just below 0.88 threshold. Not approved.",
+        "version_consistency": 1.0
+      },
+      "round_no": 1
+    },
+    {
+      "review": {
+        "ambiguity_risk": 0.1,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "section_code Q04 ('拒收说明') contains fact_text '拒收发生在签收前，不属于签收后的退货寄回，不得虚构拦截费或其他收费规则' —— 该fact_text verbatim matches required_fact freight_reject_difference, but the section content only states '拒收发生在签收前，退货发生在签收后。拒收不涉及签收后的退货寄回流程。'，未显式禁止虚构拦截费或其他收费规则；虽语义隐含，但generation_notes要求'不得虚构拦截费'为强约束，应显式体现以避免RAG误读或客服自行推导，构成弱歧义风险（已计入ambiguity_risk=0.1）。",
+          "section_code Q07 ('退货运费总则') and Q08 ('运费承担查询') contain no facts — this is permitted per blueprint (only required_sections must exist, not all sections need facts), but their content redundantly reiterates facts already fully covered in Q01–Q03 and Q05; while not violating any constraint, it marginally increases ambiguity risk by offering multiple phrasings of same rule without disambiguating edge cases (e.g., '运费险可能提供赔付' in Q07 lacks the mandated qualifier '可能存在差额', unlike Q03's precise fact_text — though Q07 has no facts, its plain-text content is non-factual and thus outside fact coverage scope; still, as unqualified statement, it risks implying guaranteed or proportional coverage)."
+        ],
+        "overall_score": 0.91,
+        "passed": true,
+        "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+        "structure_score": 0.92,
+        "summary": "文档完整覆盖全部5个required_facts with exact fact_text matches; both required_identifiers 'F-RETURN-001' and 'RETURN_FREIGHT' appear verbatim in Q06; structure includes all 3 required_sections ('质量问题','个人原因','运费险') plus 4 permissible optional sections; no internal contradictions, no generation_notes violations (e.g., no mention of时限、退款进度、拦截费、自动扣费、优先抵扣）；version fields align with blueprint; ambiguity is low but non-zero due to two minor phrasing gaps: Q04 omits explicit '不得虚构拦截费' in content despite having it in fact_text, and Q07's unqualified '运费险可能提供赔付' diverges from the precision of required_fact freight_insurance — both are low-severity and do not break constraints, but slightly elevate interpretation risk for downstream systems.",
+        "version_consistency": 1.0
+      },
+      "round_no": 2
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.1,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "section_code Q04 ('拒收说明') contains fact_text '拒收发生在签收前，不属于签收后的退货寄回，不得虚构拦截费或其他收费规则' —— 该fact_text verbatim matches required_fact freight_reject_difference, but the section content only states '拒收发生在签收前，退货发生在签收后。拒收不涉及签收后的退货寄回流程。'，未显式禁止虚构拦截费或其他收费规则；虽语义隐含，但generation_notes要求'不得虚构拦截费'为强约束，应显式体现以避免RAG误读或客服自行推导，构成弱歧义风险（已计入ambiguity_risk=0.1）。",
+      "section_code Q07 ('退货运费总则') and Q08 ('运费承担查询') contain no facts — this is permitted per blueprint (only required_sections must exist, not all sections need facts), but their content redundantly reiterates facts already fully covered in Q01–Q03 and Q05; while not violating any constraint, it marginally increases ambiguity risk by offering multiple phrasings of same rule without disambiguating edge cases (e.g., '运费险可能提供赔付' in Q07 lacks the mandated qualifier '可能存在差额', unlike Q03's precise fact_text — though Q07 has no facts, its plain-text content is non-factual and thus outside fact coverage scope; still, as unqualified statement, it risks implying guaranteed or proportional coverage)."
+    ],
+    "overall_score": 0.91,
+    "passed": true,
+    "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+    "structure_score": 0.92,
+    "summary": "文档完整覆盖全部5个required_facts with exact fact_text matches; both required_identifiers 'F-RETURN-001' and 'RETURN_FREIGHT' appear verbatim in Q06; structure includes all 3 required_sections ('质量问题','个人原因','运费险') plus 4 permissible optional sections; no internal contradictions, no generation_notes violations (e.g., no mention of时限、退款进度、拦截费、自动扣费、优先抵扣）；version fields align with blueprint; ambiguity is low but non-zero due to two minor phrasing gaps: Q04 omits explicit '不得虚构拦截费' in content despite having it in fact_text, and Q07's unqualified '运费险可能提供赔付' diverges from the precision of required_fact freight_insurance — both are low-severity and do not break constraints, but slightly elevate interpretation risk for downstream systems.",
+    "version_consistency": 1.0
+  }
+}

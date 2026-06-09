@@ -1,0 +1,59 @@
+{
+  "doc_type": "RULE",
+  "effective_from": "2025-09-01",
+  "effective_to": null,
+  "sections": [
+    {
+      "aliases": [],
+      "content": "本规则适用于整单全额退款和部分退款场景下的优惠券退回处理，以及因系统故障导致的优惠券无法使用时的补发情形。",
+      "facts": [],
+      "heading": "适用范围",
+      "section_code": "SEC01"
+    },
+    {
+      "aliases": [],
+      "content": "1. 整单全额退款时，未过期的优惠券将自动退回至用户账户，可继续使用。\n2. 部分退款时，整单使用的优惠券不予退回。\n3. 因系统故障导致用户无法使用优惠券时，可人工补发等值优惠券。注意：过期券与补发券视为不同券，过期券不补发。",
+      "facts": [
+        {
+          "fact_key": "coupon_return_full",
+          "fact_text": "整单全额退款时，未过期的优惠券将自动退回至用户账户。"
+        },
+        {
+          "fact_key": "coupon_return_partial",
+          "fact_text": "部分退款时，整单使用的优惠券不予退回。"
+        },
+        {
+          "fact_key": "coupon_return_exception",
+          "fact_text": "系统故障导致用户无法使用优惠券时，可人工补发等值优惠券。"
+        }
+      ],
+      "heading": "规则条款（规则编码：R-COUPON-002）",
+      "section_code": "SEC02"
+    },
+    {
+      "aliases": [],
+      "content": "1. 因用户自身原因导致优惠券过期（编码：E-CP-5002），不适用退回或补发规则。\n2. 已经人工补发的优惠券不再视为原券退回。",
+      "facts": [],
+      "heading": "例外条件",
+      "section_code": "SEC03"
+    },
+    {
+      "aliases": [],
+      "content": "本规则优先于其他平行规则执行。当与活动规则冲突时，以本规则为准。",
+      "facts": [],
+      "heading": "优先级",
+      "section_code": "SEC04"
+    },
+    {
+      "aliases": [],
+      "content": "本规则自2025年9月1日起生效。",
+      "facts": [],
+      "heading": "生效日期",
+      "section_code": "SEC05"
+    }
+  ],
+  "source_doc_code": "RULE_COUPON_002",
+  "title": "优惠券退回规则",
+  "topic": "coupon",
+  "version": "1.0"
+}

@@ -1,0 +1,115 @@
+{
+  "document": {
+    "doc_type": "MANUAL",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "退款查询",
+          "退款单列表"
+        ],
+        "content": "登录管理后台 → 退款管理 → 退款单查询（M-REFUND-001）",
+        "facts": [
+          {
+            "fact_key": "refund_admin_query",
+            "fact_text": "查询退款单、支付流水和执行状态"
+          }
+        ],
+        "heading": "菜单路径",
+        "section_code": "MENU_PATH"
+      },
+      {
+        "aliases": [
+          "字段解释"
+        ],
+        "content": "退款单号：系统唯一标识（E-RM-8101）；退款金额：实际退款金额；支付流水号：第三方支付流水；状态：待处理/处理中/成功/失败",
+        "facts": [],
+        "heading": "字段说明",
+        "section_code": "FIELD_DESC"
+      },
+      {
+        "aliases": [
+          "操作流程",
+          "步骤指南"
+        ],
+        "content": "1. 进入退款单查询页面，筛选状态为“待处理”的退款单；\n2. 点击单据进入详情，检查支付流水和执行状态；\n3. 若支付平台返回失败且可重试，点击【重试退款】；\n4. 若需手动处理，点击【创建人工退款】生成审核单。",
+        "facts": [
+          {
+            "fact_key": "refund_admin_retry",
+            "fact_text": "对可重试任务执行退款重试"
+          }
+        ],
+        "heading": "操作步骤",
+        "section_code": "OPERATION_STEPS"
+      },
+      {
+        "aliases": [
+          "按钮解释"
+        ],
+        "content": "【重试退款】：对支付失败且可重试的退款单重新发起退款；\n【创建人工退款】：生成人工退款审核单，需审核后执行；\n【查询】：刷新列表。",
+        "facts": [],
+        "heading": "按钮说明",
+        "section_code": "BUTTON_DESC"
+      },
+      {
+        "aliases": [
+          "错误码说明",
+          "常见问题"
+        ],
+        "content": "常见错误：\n- “退款单不存在”：检查退款单号是否输入正确（E-RM-8101）；\n- “支付平台异常”：稍后重试或联系运维；\n- “权限不足”：需配置refund_admin_manual权限。",
+        "facts": [
+          {
+            "fact_key": "refund_admin_manual",
+            "fact_text": "创建人工退款审核单"
+          }
+        ],
+        "heading": "错误提示",
+        "section_code": "ERROR_TIPS"
+      }
+    ],
+    "source_doc_code": "MANUAL_REFUND_ADMIN_001",
+    "title": "退款管理后台操作手册",
+    "topic": "refund",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "【操作步骤】中‘若需手动处理，点击【创建人工退款】生成审核单’未明确该操作需独立权限（refund_admin_manual），仅在【错误提示】中通过‘权限不足’间接体现，存在操作指引与权限要求脱节风险；",
+          "【按钮说明】中‘【创建人工退款】：生成人工退款审核单，需审核后执行’未说明权限前提，易误导无权限用户尝试操作；",
+          "【字段说明】中‘状态：待处理/处理中/成功/失败’未与【操作步骤】中‘筛选状态为‘待处理’的退款单’形成闭环验证——未说明‘处理中’是否可重试、‘失败’是否等同于‘可重试’，存在状态语义模糊（如‘失败’可能含不可重试场景），构成轻度歧义风险。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "MANUAL_REFUND_ADMIN_001",
+        "structure_score": 0.95,
+        "summary": "文档完整覆盖全部required_facts（refund_admin_query/retry/manual）、required_identifiers（M-REFUND-001/E-RM-8101准确嵌入菜单路径、字段说明、错误提示三处），结构严格匹配required_sections，无版本冲突，格式规范。主要问题在于权限逻辑未贯穿操作流：‘创建人工退款’的权限约束仅隐含于错误提示，未在按钮说明和操作步骤中主动声明，削弱流程严谨性；同时‘失败’状态未区分可重试性，可能引发RAG对重试条件的误判。整体质量优良，但需微调以消除执行层歧义。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "【操作步骤】中‘若需手动处理，点击【创建人工退款】生成审核单’未明确该操作需独立权限（refund_admin_manual），仅在【错误提示】中通过‘权限不足’间接体现，存在操作指引与权限要求脱节风险；",
+      "【按钮说明】中‘【创建人工退款】：生成人工退款审核单，需审核后执行’未说明权限前提，易误导无权限用户尝试操作；",
+      "【字段说明】中‘状态：待处理/处理中/成功/失败’未与【操作步骤】中‘筛选状态为‘待处理’的退款单’形成闭环验证——未说明‘处理中’是否可重试、‘失败’是否等同于‘可重试’，存在状态语义模糊（如‘失败’可能含不可重试场景），构成轻度歧义风险。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "MANUAL_REFUND_ADMIN_001",
+    "structure_score": 0.95,
+    "summary": "文档完整覆盖全部required_facts（refund_admin_query/retry/manual）、required_identifiers（M-REFUND-001/E-RM-8101准确嵌入菜单路径、字段说明、错误提示三处），结构严格匹配required_sections，无版本冲突，格式规范。主要问题在于权限逻辑未贯穿操作流：‘创建人工退款’的权限约束仅隐含于错误提示，未在按钮说明和操作步骤中主动声明，削弱流程严谨性；同时‘失败’状态未区分可重试性，可能引发RAG对重试条件的误判。整体质量优良，但需微调以消除执行层歧义。",
+    "version_consistency": 1.0
+  }
+}

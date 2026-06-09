@@ -1,0 +1,124 @@
+{
+  "document": {
+    "doc_type": "SOP",
+    "effective_from": null,
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "发票修改场景",
+          "发票变更范围",
+          "适用条件"
+        ],
+        "content": "本流程适用于发票信息需要修改的情形，包括开票前尚未交付的发票修改，以及开票后已交付的发票重开。修改原因可能包括购方信息错误、商品明细错误、税率错误等。涉及单据类型：S-INVOICE-001（销售发票）和E-IV-6001（采购发票）。",
+        "facts": [],
+        "heading": "适用场景",
+        "section_code": "S-INVOICE-001-SCENE"
+      },
+      {
+        "aliases": [
+          "检查条件",
+          "前置条件",
+          "资格校验"
+        ],
+        "content": "在执行发票修改前，需核对发票状态和可修改字段（invoice_modify_eligibility）。具体检查项包括：发票是否已开具、是否跨越会计月、是否已抵扣等。若发票已开具，则需进行红字发票冲销（invoice_red_issue）操作。注意：涉及专票或跨月红冲时，需按照升级条件处理。",
+        "facts": [
+          {
+            "fact_key": "invoice_modify_eligibility",
+            "fact_text": "核对发票状态和可修改字段，确认发票当前是否允许修改。未开票的直接修改；已开票的需先红冲后重开。"
+          }
+        ],
+        "heading": "前置检查",
+        "section_code": "S-INVOICE-001-PREC"
+      },
+      {
+        "aliases": [
+          "操作步骤",
+          "修改流程",
+          "重开步骤"
+        ],
+        "content": "1. 确认修改需求：区分开票前修改和开票后重开。\n2. 若为开票前修改：在系统中找到原发票S-INVOICE-001或E-IV-6001，直接修改对应字段并保存。\n3. 若为开票后重开：先申请红字发票冲销（invoice_red_issue），待红字发票生成后，再重新开具正确发票。\n4. 若涉及专票或跨月红冲，将工单升级至财务部门处理。\n5. 修改完成后，通知相关方确认。",
+        "facts": [
+          {
+            "fact_key": "invoice_red_issue",
+            "fact_text": "已开票需要先红冲再重开，红冲操作需在系统中发起红字发票申请，经审批后生成红字发票。"
+          }
+        ],
+        "heading": "处理步骤",
+        "section_code": "S-INVOICE-001-STEPS"
+      },
+      {
+        "aliases": [
+          "异常处理",
+          "特殊情况",
+          "边界情形"
+        ],
+        "content": "1. 发票已抵扣：需先由购方发起红字通知单，销方依据通知单红冲。\n2. 发票已跨月：必须按照红冲流程处理，且涉及跨月红冲时需升级。\n3. 修改字段受限：若需修改已锁定字段（如税号），需联系财务解锁。",
+        "facts": [],
+        "heading": "异常分支",
+        "section_code": "S-INVOICE-001-EXCP"
+      },
+      {
+        "aliases": [
+          "升级规则",
+          "上报条件",
+          "审批升级"
+        ],
+        "content": "以下情况需升级至财务主管或更高层级处理：\n- 涉及专用发票（专票）的修改或重开。\n- 跨月红字冲销（invoice_modify_escalation）。\n- 单笔金额超过10万元。\n- 发票已用于退税。",
+        "facts": [
+          {
+            "fact_key": "invoice_modify_escalation",
+            "fact_text": "专票和跨月红冲需要财务升级，由财务主管审批后方可执行。"
+          }
+        ],
+        "heading": "升级条件",
+        "section_code": "S-INVOICE-001-ESC"
+      }
+    ],
+    "source_doc_code": "SOP_INVOICE_MODIFY_001",
+    "title": "发票修改流程SOP",
+    "topic": "invoice",
+    "version": "1.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.15,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "前置检查节中'invoice_modify_eligibility'事实描述虽覆盖核心逻辑，但未明确区分'开票前可直接修改'与'开票后禁止修改字段（仅允许红冲）'的刚性边界，存在轻微执行歧义风险；",
+          "异常分支节中'发票已抵扣'和'发票已跨月'两条异常情形未引用对应required_facts（如invoice_red_issue或invoice_modify_escalation），导致事实链断裂，虽不降低fact_coverage得分（因facts已在其他节显式声明），但削弱流程闭环性；",
+          "处理步骤第4步'若涉及专票或跨月红冲，将工单升级至财务部门处理'未说明升级触发时机（是红冲申请前？还是红冲审批被拒后？），与升级条件节中'需财务主管审批后方可执行'存在隐含时序模糊，构成低概率操作分歧点；",
+          "升级条件节新增'单笔金额超过10万元'和'发票已用于退税'两项升级规则，超出蓝图required_facts范围，属合理扩展但未在generation_notes中声明，可能引发未来版本比对困惑（当前不影响通过）"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "SOP_INVOICE_MODIFY_001",
+        "structure_score": 0.95,
+        "summary": "文档严格覆盖全部3项required_facts（invoice_modify_eligibility、invoice_red_issue、invoice_modify_escalation），事实文本准确传达蓝图语义；S-INVOICE-001与E-IV-6001编号在适用场景、处理步骤中均正确出现且无串用；5个required_sections完整存在，标题、别名、内容结构符合SOP规范；无生效日期/替代关系冲突；整体逻辑自洽，仅存在两处轻度时序模糊和一处事实引用疏漏，不构成实质性冲突或合规风险。总体质量优秀，符合发布阈值。",
+        "version_consistency": 1.0
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.15,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "前置检查节中'invoice_modify_eligibility'事实描述虽覆盖核心逻辑，但未明确区分'开票前可直接修改'与'开票后禁止修改字段（仅允许红冲）'的刚性边界，存在轻微执行歧义风险；",
+      "异常分支节中'发票已抵扣'和'发票已跨月'两条异常情形未引用对应required_facts（如invoice_red_issue或invoice_modify_escalation），导致事实链断裂，虽不降低fact_coverage得分（因facts已在其他节显式声明），但削弱流程闭环性；",
+      "处理步骤第4步'若涉及专票或跨月红冲，将工单升级至财务部门处理'未说明升级触发时机（是红冲申请前？还是红冲审批被拒后？），与升级条件节中'需财务主管审批后方可执行'存在隐含时序模糊，构成低概率操作分歧点；",
+      "升级条件节新增'单笔金额超过10万元'和'发票已用于退税'两项升级规则，超出蓝图required_facts范围，属合理扩展但未在generation_notes中声明，可能引发未来版本比对困惑（当前不影响通过）"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "SOP_INVOICE_MODIFY_001",
+    "structure_score": 0.95,
+    "summary": "文档严格覆盖全部3项required_facts（invoice_modify_eligibility、invoice_red_issue、invoice_modify_escalation），事实文本准确传达蓝图语义；S-INVOICE-001与E-IV-6001编号在适用场景、处理步骤中均正确出现且无串用；5个required_sections完整存在，标题、别名、内容结构符合SOP规范；无生效日期/替代关系冲突；整体逻辑自洽，仅存在两处轻度时序模糊和一处事实引用疏漏，不构成实质性冲突或合规风险。总体质量优秀，符合发布阈值。",
+    "version_consistency": 1.0
+  }
+}

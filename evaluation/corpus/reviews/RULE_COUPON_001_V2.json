@@ -1,0 +1,114 @@
+{
+  "document": {
+    "doc_type": "RULE",
+    "effective_from": "2025-09-01",
+    "effective_to": null,
+    "sections": [
+      {
+        "aliases": [
+          "范围",
+          "适用场景"
+        ],
+        "content": "本规则适用于所有在电商平台发放的平台优惠券和店铺优惠券，包括但不限于满减券、折扣券。标识符：R-COUPON-001, COUPON-V2。",
+        "facts": [],
+        "heading": "适用范围",
+        "section_code": "SC-001"
+      },
+      {
+        "aliases": [
+          "叠加规则",
+          "门槛规则"
+        ],
+        "content": "平台券和店铺券在满足互斥配置时可叠加使用（coupon_v2_stack）。门槛按扣除店铺优惠后的金额判断（coupon_v2_threshold）。",
+        "facts": [
+          {
+            "fact_key": "coupon_v2_stack",
+            "fact_text": "平台券和店铺券在满足互斥配置时可叠加"
+          },
+          {
+            "fact_key": "coupon_v2_threshold",
+            "fact_text": "门槛按扣除店铺优惠后的金额判断"
+          }
+        ],
+        "heading": "规则条款",
+        "section_code": "SC-002"
+      },
+      {
+        "aliases": [
+          "例外",
+          "排除"
+        ],
+        "content": "秒杀和虚拟商品仍不可使用平台券（coupon_v2_exception）。",
+        "facts": [
+          {
+            "fact_key": "coupon_v2_exception",
+            "fact_text": "秒杀和虚拟商品仍不可使用平台券"
+          }
+        ],
+        "heading": "例外条件",
+        "section_code": "SC-003"
+      },
+      {
+        "aliases": [
+          "顺序",
+          "优先"
+        ],
+        "content": "当多个优惠券满足条件时，优先使用折扣力度最大的优惠券；若折扣相同，优先使用到期时间最近的。店铺券优先于平台券使用。",
+        "facts": [],
+        "heading": "优先级",
+        "section_code": "SC-004"
+      },
+      {
+        "aliases": [
+          "生效时间",
+          "版本"
+        ],
+        "content": "自2025年9月1日起生效，替代前版规则（RULE_COUPON_001_V1）。",
+        "facts": [],
+        "heading": "生效日期",
+        "section_code": "SC-005"
+      }
+    ],
+    "source_doc_code": "RULE_COUPON_001_V2",
+    "title": "优惠券使用规则 V2",
+    "topic": "coupon",
+    "version": "2.0"
+  },
+  "history": [
+    {
+      "review": {
+        "ambiguity_risk": 0.2,
+        "fact_coverage": 1.0,
+        "identifier_accuracy": 1.0,
+        "internal_consistency": 0.95,
+        "issues": [
+          "优先级章节（SC-004）中'店铺券优先于平台券使用'与required_facts中'平台券和店铺券在满足互斥配置时可叠加'存在隐性张力：若店铺券优先使用，则叠加逻辑需明确定义'同时生效'的计算时序（如是否并行抵扣、是否分步门槛校验），当前描述未澄清叠加是'共存可用'还是'顺序触发'，可能引发RAG对'叠加'语义的歧义理解（例如客服可能误判为'先用店铺券、再用平台券'而非'双券同享门槛条件'）；建议补充'叠加指两券在单订单中同时参与计算，门槛以扣除店铺优惠后金额为准，平台券折扣在店铺优惠后二次应用'。",
+          "生效日期章节（SC-005）仅写'替代前版规则（RULE_COUPON_001_V1）'，未显式声明'supersedes: RULE_COUPON_001_V1'或注明V1已失效，虽与蓝图一致，但相比V1文档中明确写出'2024年1月1日至2025年8月31日'的完整有效期，V2未强调V1的effective_to=2025-08-31，存在版本衔接弱提示风险（依赖外部元数据），属轻微版本一致性瑕疵。"
+        ],
+        "overall_score": 0.92,
+        "passed": true,
+        "source_doc_code": "RULE_COUPON_001_V2",
+        "structure_score": 0.95,
+        "summary": "文档整体质量优秀：所有required_facts均被准确覆盖且fact_text与蓝图描述完全一致；required_identifiers（R-COUPON-001, COUPON-V2）在适用范围章节中完整、无串用；结构完整覆盖全部required_sections，章节标题、别名、内容组织规范；生效日期（2025-09-01）与V1的effective_to（2025-08-31）无缝衔接，supersedes关系逻辑成立；内部无硬性冲突。主要风险在于'优先级'与'叠加'的语义耦合未解耦，可能导致下游系统或人工解读偏差，但尚未构成事实错误，故internal_consistency和ambiguity_risk仍处于可控区间。总体符合所有硬性通过阈值。",
+        "version_consistency": 0.95
+      },
+      "round_no": 0
+    }
+  ],
+  "review": {
+    "ambiguity_risk": 0.2,
+    "fact_coverage": 1.0,
+    "identifier_accuracy": 1.0,
+    "internal_consistency": 0.95,
+    "issues": [
+      "优先级章节（SC-004）中'店铺券优先于平台券使用'与required_facts中'平台券和店铺券在满足互斥配置时可叠加'存在隐性张力：若店铺券优先使用，则叠加逻辑需明确定义'同时生效'的计算时序（如是否并行抵扣、是否分步门槛校验），当前描述未澄清叠加是'共存可用'还是'顺序触发'，可能引发RAG对'叠加'语义的歧义理解（例如客服可能误判为'先用店铺券、再用平台券'而非'双券同享门槛条件'）；建议补充'叠加指两券在单订单中同时参与计算，门槛以扣除店铺优惠后金额为准，平台券折扣在店铺优惠后二次应用'。",
+      "生效日期章节（SC-005）仅写'替代前版规则（RULE_COUPON_001_V1）'，未显式声明'supersedes: RULE_COUPON_001_V1'或注明V1已失效，虽与蓝图一致，但相比V1文档中明确写出'2024年1月1日至2025年8月31日'的完整有效期，V2未强调V1的effective_to=2025-08-31，存在版本衔接弱提示风险（依赖外部元数据），属轻微版本一致性瑕疵。"
+    ],
+    "overall_score": 0.92,
+    "passed": true,
+    "source_doc_code": "RULE_COUPON_001_V2",
+    "structure_score": 0.95,
+    "summary": "文档整体质量优秀：所有required_facts均被准确覆盖且fact_text与蓝图描述完全一致；required_identifiers（R-COUPON-001, COUPON-V2）在适用范围章节中完整、无串用；结构完整覆盖全部required_sections，章节标题、别名、内容组织规范；生效日期（2025-09-01）与V1的effective_to（2025-08-31）无缝衔接，supersedes关系逻辑成立；内部无硬性冲突。主要风险在于'优先级'与'叠加'的语义耦合未解耦，可能导致下游系统或人工解读偏差，但尚未构成事实错误，故internal_consistency和ambiguity_risk仍处于可控区间。总体符合所有硬性通过阈值。",
+    "version_consistency": 0.95
+  }
+}
