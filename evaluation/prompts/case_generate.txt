@@ -1,0 +1,42 @@
+请根据“评测题种子”和“允许使用的源文档”生成评测题。
+
+你只能改写问题和参考答案，不能修改种子中的题型、事实、文档、预期行为或分片。
+每个 seed_code 必须输出且只能输出一道题。
+
+题型要求：
+1. DIRECT：直接询问给定事实，表达自然。
+2. PARAPHRASE：使用口语、同义表达或不完整业务术语，不能直接复制事实原句。
+3. EXACT：问题中必须原样包含 required_identifier。
+4. MULTI_CONDITION：问题必须同时包含种子中全部事实所需的条件。
+5. MULTI_HOP：问题必须同时依赖种子中来自不同文档的全部事实。
+6. CONFLICT：问题必须要求区分新旧版本、适用时间或冲突结论。
+7. NO_ANSWER：
+   - KNOWLEDGE_GAP：询问电商售后域内但语料未提供的具体规则，应拒答。
+   - MISSING_CONDITION：缺少订单状态、时间或其他必要条件，应追问澄清。
+   - OUT_OF_DOMAIN：不属于电商售后业务域，应拒答。
+
+通用约束：
+- 问题中不能出现源文档完整标题。
+- 不得在问题中直接写出完整答案。
+- ANSWER 题的 reference_answer 必须覆盖种子中的全部事实。
+- REFUSE 或 CLARIFY 题的 reference_answer 必须为 null。
+- 参考答案不得使用 C1、C2 等生产引用编号。
+- 不得引入给定事实之外的金额、时限、流程或规则。
+
+只返回一个 JSON 对象，格式如下：
+{{
+  "cases": [
+    {{
+      "seed_code": "SEED_DIRECT_001",
+      "question": "用户问题",
+      "reference_answer": "参考答案或null",
+      "difficulty": "EASY|MEDIUM|HARD"
+    }}
+  ]
+}}
+
+评测题种子：
+{seed_batch_json}
+
+允许使用的源文档：
+{source_documents_json}

@@ -1,0 +1,3445 @@
+{
+  "dataset_code": "rag_eval_ecommerce",
+  "dataset_id": 7,
+  "dataset_version": "v1",
+  "document_count": 40,
+  "documents": [
+    {
+      "chunk_ids": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "chunks": [
+        {
+          "chunk_id": 27,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：未出库订单可在满足校验条件时修改地址。例如，您可以通过订单编号F-ORDER-002使用ADDRESS_CHANGE功能提交修改申请。注意，部分商品或区域可能不支持改址。\n关键事实：未出库订单满足校验条件时可修改地址。",
+          "title": "未出库订单地址修改",
+          "title_path": "FAQ > 未出库订单地址修改"
+        },
+        {
+          "chunk_id": 28,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "已发货订单需要联系承运商尝试改址。您可联系客服提供订单号，客服会与承运商协调，但无法保证成功。",
+          "title": "已发货订单地址修改",
+          "title_path": "FAQ > 已发货订单地址修改"
+        },
+        {
+          "chunk_id": 29,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "跨区域或高风险改址需要人工审核。例如，从不同省份或边境地区改址时，系统会触发审核流程，需提交相关证明。",
+          "title": "风险校验与人工审核",
+          "title_path": "FAQ > 风险校验与人工审核"
+        },
+        {
+          "chunk_id": 30,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "部分特殊商品（如生鲜、定制商品）及偏远区域（如港澳台、海外）可能不支持地址修改。请在订单详情页查看是否支持改址。",
+          "title": "哪些商品或区域不支持改址",
+          "title_path": "FAQ > 哪些商品或区域不支持改址"
+        },
+        {
+          "chunk_id": 31,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "通常需要提供订单编号、原地址、新地址、收件人姓名及联系方式。若涉及人工审核，可能还需提供身份证明。",
+          "title": "修改地址需要提供哪些信息",
+          "title_path": "FAQ > 修改地址需要提供哪些信息"
+        },
+        {
+          "chunk_id": 32,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "未出库订单修改地址后立即生效；已发货订单需等待承运商确认，通常1-3个工作日。",
+          "title": "地址修改的生效时间",
+          "title_path": "FAQ > 地址修改的生效时间"
+        },
+        {
+          "chunk_id": 33,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "若改址被拒，可联系客服申诉。提供订单号及原因，客服会重新评估。注意，高风险改址被拒后需补充材料。",
+          "title": "地址修改失败后如何申诉",
+          "title_path": "FAQ > 地址修改失败后如何申诉"
+        },
+        {
+          "chunk_id": 34,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "改址可能导致运费变更。若新地址更远或产生额外费用，需补差价；若更近，可能退差额。具体以承运商结算为准。",
+          "title": "地址修改对物流费用的影响",
+          "title_path": "FAQ > 地址修改对物流费用的影响"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            27
+          ],
+          "fact_key": "address_change_unshipped",
+          "fact_text": "未出库订单满足校验条件时可修改地址。"
+        },
+        {
+          "chunk_ids": [
+            28
+          ],
+          "fact_key": "address_change_shipped",
+          "fact_text": "已发货订单需要联系承运商尝试改址。"
+        },
+        {
+          "chunk_ids": [
+            29
+          ],
+          "fact_key": "address_change_risk",
+          "fact_text": "跨区域或高风险改址需要人工审核。"
+        }
+      ],
+      "mapped_doc_id": 11,
+      "rendered_file_sha256": "0dc6bd9a8bf8ccd87246dc357acc7f129cb863662823e3f82009a60188ec4aa0",
+      "source_content_sha256": "2dd7a9f2e4393be8fc825b4c623cab603945954ff34226bafa2bb33c774f2b28",
+      "source_doc_code": "FAQ_ADDRESS_CHANGE_001",
+      "title": "收货地址修改常见问题",
+      "topic": "order",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "chunks": [
+        {
+          "chunk_id": 143,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：如何查询售后单的当前进度？您可以通过【我的售后】页面查看售后单状态（AFTERSALE_STATUS），字段来自系统API，取值包括待审核、待寄回、待收货、退款中、已关闭、已拒绝等。\n关键事实：售后单状态查询入口为【我的售后】页面，可查看AFTERSALE_STATUS字段值，字段来自系统API，取值包括待审核、待寄回、待收货、退款中、已关闭、已拒绝等。",
+          "title": "进度查询",
+          "title_path": "FAQ > 进度查询"
+        },
+        {
+          "chunk_id": 144,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：当售后单处于不同状态时，用户需执行相应操作：待审核状态下，需上传凭证（照片/视频，最多5张，每张不超过5MB）；待寄回状态下，需在7天内填写物流单号并寄回商品；待收货状态下，需确认收货并上传签收凭证（如有）；退款中状态下，可能需要提供银行卡信息以完成退款。\n关键事实：待用户操作状态下，需补充的材料：待审核时上传凭证（照片/视频，最多5张，每张不超过5MB）；待寄回时在7天内填写物流单号；待收货",
+          "title": "待用户操作",
+          "title_path": "FAQ > 待用户操作"
+        },
+        {
+          "chunk_id": 145,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：如果商家或平台超时未处理售后单，用户可以通过【申请平台介入】升级处理。超时规则：商家需在48小时内响应（从用户提交时起算，不含节假日），否则售后单自动升级至平台介入。\n关键事实：商家需在48小时内响应售后申请（从用户提交时起算，不含节假日），否则售后单自动升级至平台介入。用户也可在售后详情页点击【申请平台介入】主动升级。",
+          "title": "处理超时",
+          "title_path": "FAQ > 处理超时"
+        },
+        {
+          "chunk_id": 146,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "每个售后单拥有唯一编号，格式为F-AFTERSALE-{YYYYMMDD}-{SEQ}，例如F-AFTERSALE-20230901-001。您可在【我的售后】页面通过编号精确查询。",
+          "title": "售后单编号",
+          "title_path": "FAQ > 售后单编号"
+        },
+        {
+          "chunk_id": 147,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "售后单状态变更时，平台会通过短信或站内信通知用户。请保持联系方式畅通。",
+          "title": "状态变更通知",
+          "title_path": "FAQ > 状态变更通知"
+        },
+        {
+          "chunk_id": 148,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "在待审核状态下，用户可自行取消售后单。若已进入待寄回，需联系客服取消。修改申请需撤销后重新提交。",
+          "title": "取消与修改",
+          "title_path": "FAQ > 取消与修改"
+        },
+        {
+          "chunk_id": 149,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "如遇退款失败，请检查退款账户信息是否正确，或联系客服处理。通常重新提供正确的银行卡信息即可。",
+          "title": "退款失败处理",
+          "title_path": "FAQ > 退款失败处理"
+        },
+        {
+          "chunk_id": 150,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "如果售后单状态长时间未更新或显示异常，建议刷新页面或联系客服。常见异常：状态卡住、信息不一致等。",
+          "title": "异常处理",
+          "title_path": "FAQ > 异常处理"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            143
+          ],
+          "fact_key": "aftersale_status_query",
+          "fact_text": "售后单状态查询入口为【我的售后】页面，可查看AFTERSALE_STATUS字段值，字段来自系统API，取值包括待审核、待寄回、待收货、退款中、已关闭、已拒绝等。"
+        },
+        {
+          "chunk_ids": [
+            144
+          ],
+          "fact_key": "aftersale_waiting_user",
+          "fact_text": "待用户操作状态下，需补充的材料：待审核时上传凭证（照片/视频，最多5张，每张不超过5MB）；待寄回时在7天内填写物流单号；待收货时需确认收货并上传签收凭证（如有）；退款中时可能需要提供银行卡信息以完成退款。"
+        },
+        {
+          "chunk_ids": [
+            145
+          ],
+          "fact_key": "aftersale_overdue",
+          "fact_text": "商家需在48小时内响应售后申请（从用户提交时起算，不含节假日），否则售后单自动升级至平台介入。用户也可在售后详情页点击【申请平台介入】主动升级。"
+        }
+      ],
+      "mapped_doc_id": 25,
+      "rendered_file_sha256": "2d1a93cdd6f1c9b0676218748955383cd922379c12a129cabe48351001e9971e",
+      "source_content_sha256": "3d157d845bd266b82a39433486ced803475091b444e9700d5c4c1a6c3a6ef0b3",
+      "source_doc_code": "FAQ_AFTERSALE_PROGRESS_001",
+      "title": "售后进度常见问题",
+      "topic": "after_sales",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104
+      ],
+      "chunks": [
+        {
+          "chunk_id": 95,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：当整单退款发生时，符合条件的优惠券会自动退回至用户的账户。优惠券的退回规则请参考文档F-COUPON-002和COUPON_RETURN。\n关键事实：整单退款时，符合条件的优惠券会自动退回至用户账户，退回的优惠券有效期保持不变，但若已过期则按过期优惠券处理。",
+          "title": "整单退款时优惠券是否退回",
+          "title_path": "FAQ > 整单退款时优惠券是否退回"
+        },
+        {
+          "chunk_id": 96,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：部分退款通常不退回整单使用的优惠券。优惠券一旦在整单中使用，除非发生整单退款，否则不退还。\n关键事实：部分退款通常不退回整单优惠券，优惠券不予退还。",
+          "title": "部分退款是否退回整单优惠券",
+          "title_path": "FAQ > 部分退款是否退回整单优惠券"
+        },
+        {
+          "chunk_id": 97,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：如果退回的优惠券在退回时已经过期，则无法继续使用。过期优惠券不会恢复有效期，请及时使用。\n关键事实：退回时已过期的优惠券无法使用，系统不会延长有效期，该优惠券作废。",
+          "title": "退回的优惠券已过期怎么办",
+          "title_path": "FAQ > 退回的优惠券已过期怎么办"
+        },
+        {
+          "chunk_id": 98,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "整单退款审核通过后，优惠券通常立即退回。具体到账时间以系统显示为准，一般不超过24小时。",
+          "title": "整单退款后优惠券什么时候到账",
+          "title_path": "FAQ > 整单退款后优惠券什么时候到账"
+        },
+        {
+          "chunk_id": 99,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "不会。部分退款时，整单使用的优惠券不进行拆分退还，即优惠券不予退回。",
+          "title": "使用优惠券的订单部分退款，优惠券会部分退回吗",
+          "title_path": "FAQ > 使用优惠券的订单部分退款，优惠券会部分退回吗"
+        },
+        {
+          "chunk_id": 100,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "退回的优惠券保持原有的使用规则和有效期，但需注意优惠券可能已过期。请参照优惠券详情确认。",
+          "title": "退回的优惠券使用规则是否有变化",
+          "title_path": "FAQ > 退回的优惠券使用规则是否有变化"
+        },
+        {
+          "chunk_id": 101,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "如果优惠券在购买时已过期，则无法使用，整单退款也不会退回已过期的优惠券。",
+          "title": "如果优惠券在退款前已过期，整单退款会退回吗",
+          "title_path": "FAQ > 如果优惠券在退款前已过期，整单退款会退回吗"
+        },
+        {
+          "chunk_id": 102,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "可能原因：非整单退款、优惠券不符合退回条件、优惠券已过期。请检查退款类型和优惠券有效期。若为整单退款且符合条件，建议联系客服。",
+          "title": "为什么退款后没收到优惠券",
+          "title_path": "FAQ > 为什么退款后没收到优惠券"
+        },
+        {
+          "chunk_id": 103,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "可以，只要优惠券退回时未过期且在有效期内，即可继续使用。使用条件与原券一致。",
+          "title": "优惠券退回后还能使用吗",
+          "title_path": "FAQ > 优惠券退回后还能使用吗"
+        },
+        {
+          "chunk_id": 104,
+          "sort_order": 10,
+          "source_section": "FAQ-10",
+          "summary": "整单退款时，所有符合条件的优惠券均会退回。但需注意，退回的优惠券可能因有效期问题无法再次使用。",
+          "title": "多个优惠券同时使用，整单退款怎么退",
+          "title_path": "FAQ > 多个优惠券同时使用，整单退款怎么退"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            95
+          ],
+          "fact_key": "coupon_return_full_refund",
+          "fact_text": "整单退款时，符合条件的优惠券会自动退回至用户账户，退回的优惠券有效期保持不变，但若已过期则按过期优惠券处理。"
+        },
+        {
+          "chunk_ids": [
+            96
+          ],
+          "fact_key": "coupon_return_partial_refund",
+          "fact_text": "部分退款通常不退回整单优惠券，优惠券不予退还。"
+        },
+        {
+          "chunk_ids": [
+            97
+          ],
+          "fact_key": "coupon_return_expired",
+          "fact_text": "退回时已过期的优惠券无法使用，系统不会延长有效期，该优惠券作废。"
+        }
+      ],
+      "mapped_doc_id": 20,
+      "rendered_file_sha256": "c4daf096e5eff54f85b521552c81bf8a3543572a29c7928920f72cd39a521121",
+      "source_content_sha256": "5d5cbbcb505b2f6246ce2aba43285ecbcab3b5b6cc317f3e6e4cf30560c98c2d",
+      "source_doc_code": "FAQ_COUPON_RETURN_001",
+      "title": "优惠券退回常见问题",
+      "topic": "coupon",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94
+      ],
+      "chunks": [
+        {
+          "chunk_id": 86,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：优惠券的使用门槛按商品实付前的金额判断，即商品原价或活动价（不含运费、税费等）需达到券面要求的最低消费金额。例如，满100元减10元券，需实付前商品金额≥100元。\n关键事实：优惠券使用门槛按商品实付前金额判断",
+          "title": "优惠券的使用门槛是什么？",
+          "title_path": "FAQ > 优惠券的使用门槛是什么？"
+        },
+        {
+          "chunk_id": 87,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "优惠券受商品、店铺和类目范围限制。每张优惠券都有指定的适用商品、店铺或类目，在券面或活动规则中标注。若不在此范围内，则无法使用。",
+          "title": "优惠券适用哪些商品？",
+          "title_path": "FAQ > 优惠券适用哪些商品？"
+        },
+        {
+          "chunk_id": 88,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：不同类型优惠券的叠加规则不同。一般情况下，平台券、店铺券、商品券不能相互叠加，但可与满减活动、红包等叠加。具体以结算页展示为准。注意：同类优惠券（如多张商品券）不可叠加。\n关键事实：不同类型优惠券叠加规则",
+          "title": "优惠券能否叠加使用？",
+          "title_path": "FAQ > 优惠券能否叠加使用？"
+        },
+        {
+          "chunk_id": 89,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "优惠券过期后无法使用，系统不会自动延期。建议在有效期内使用。若因平台原因导致过期，可联系客服处理，但需提供券码F-COUPON-001。",
+          "title": "优惠券过期了怎么办？",
+          "title_path": "FAQ > 优惠券过期了怎么办？"
+        },
+        {
+          "chunk_id": 90,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "结算页不展示优惠券可能原因：1. 商品不适用该券；2. 未达到使用门槛；3. 已与其他优惠冲突；4. 已经过期。请检查券的适用范围、门槛及有效期。若仍无显示，请确认是否已领券，或联系客服查询COUPON_APPLY应用日志。",
+          "title": "为什么结算页不展示优惠券？",
+          "title_path": "FAQ > 为什么结算页不展示优惠券？"
+        },
+        {
+          "chunk_id": 91,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "优惠券不可用常见原因：1. 商品不在适用范围内；2. 未达到使用门槛；3. 已过有效期；4. 与其他优惠互斥；5. 同一订单已使用过该券。请逐一排查。若仍有问题，可联系在线客服。",
+          "title": "优惠券提示不可用是什么原因？",
+          "title_path": "FAQ > 优惠券提示不可用是什么原因？"
+        },
+        {
+          "chunk_id": 92,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "登录账号后，在“我的优惠券”页面可查看所有已领取的优惠券，包括券码（如F-COUPON-001）、面额、有效期、使用门槛及适用范围。您也可以在此页面筛选有效或已过期的优惠券。",
+          "title": "如何查看我的优惠券？",
+          "title_path": "FAQ > 如何查看我的优惠券？"
+        },
+        {
+          "chunk_id": 93,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "优惠券仅限领取账号本人使用，不可转让、转赠或出售。部分特殊活动券可能有转赠功能，具体以券面说明为准。",
+          "title": "优惠券可以转让给他人吗？",
+          "title_path": "FAQ > 优惠券可以转让给他人吗？"
+        },
+        {
+          "chunk_id": 94,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "若订单全额退款且优惠券在有效期内，通常券会原路退回，可再次使用；若券已过期，则不予退回。部分活动券可能不予退还，具体以规则为准。部分退款时，券可能按比例退还或不退。",
+          "title": "使用优惠券后订单退款，券会退吗？",
+          "title_path": "FAQ > 使用优惠券后订单退款，券会退吗？"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            86
+          ],
+          "fact_key": "coupon_threshold",
+          "fact_text": "优惠券使用门槛按商品实付前金额判断"
+        },
+        {
+          "chunk_ids": [
+            87
+          ],
+          "fact_key": "coupon_scope",
+          "fact_text": "优惠券受商品、店铺和类目范围限制"
+        },
+        {
+          "chunk_ids": [
+            88
+          ],
+          "fact_key": "coupon_stack",
+          "fact_text": "不同类型优惠券叠加规则"
+        }
+      ],
+      "mapped_doc_id": 19,
+      "rendered_file_sha256": "b0391033806a83dc564e515f25d6e161c0bb8efc3c19ea8eab1cd94d9eb5c543",
+      "source_content_sha256": "efd12c4c8a54692e9ef7c6574153a2aac877e26132dc77977ecb5322a11b9bdf",
+      "source_doc_code": "FAQ_COUPON_USE_001",
+      "title": "优惠券使用常见问题",
+      "topic": "coupon",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "chunks": [
+        {
+          "chunk_id": 105,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：Q: 如何申请发票？A: 在订单详情页找到“申请发票”按钮，或进入“我的发票”页面提交申请。Q: 申请时间有限制吗？A: 订单完成后30天内可申请电子普通发票，60天内可申请增值税专用发票。Q: 可以多次申请吗？A: 同一订单只能申请一次，如需变更请先作废原发票。\n关键事实：发票申请入口：订单详情页“申请发票”按钮或“我的发票”页面。电子普通发票可于订单完成后30天内申请，增值税专用发票60天",
+          "title": "申请入口",
+          "title_path": "FAQ > 申请入口"
+        },
+        {
+          "chunk_id": 106,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：Q: 个人抬头需要哪些信息？A: 个人姓名和身份证号码（可选）。Q: 企业抬头需要哪些信息？A: 企业名称、纳税人识别号、注册地址、电话、开户行及账号。Q: 抬头填写错误能修改吗？A: 未开具前可自行修改，已开具需作废重开。\n关键事实：个人抬头：姓名、身份证号（可选）；企业抬头：名称、纳税人识别号、注册地址、电话、开户行及账号。",
+          "title": "发票抬头",
+          "title_path": "FAQ > 发票抬头"
+        },
+        {
+          "chunk_id": 107,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：Q: 退款后发票怎么处理？A: 若发票未抵扣，需将原发票寄回或线上作废；若已抵扣，需开具红字发票信息表。Q: 电子发票退款后如何处理？A: 系统自动红冲，无需操作。Q: 退税流程多久？A: 一般在退款后15个工作日内完成。\n关键事实：退款后电子普通发票自动红冲；增值税专用发票需根据是否抵扣分别处理（未抵扣作废，已抵扣开具红字信息表）。",
+          "title": "退款后处理",
+          "title_path": "FAQ > 退款后处理"
+        },
+        {
+          "chunk_id": 108,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "Q: 电子普通发票和增值税专用发票有什么区别？A: 电子普通发票适用于个人或小规模纳税人，不能抵扣进项税；增值税专用发票适用于一般纳税人，可抵扣进项税。Q: 可以申请专用发票吗？A: 企业如有一般纳税人资质可申请。",
+          "title": "发票类型",
+          "title_path": "FAQ > 发票类型"
+        },
+        {
+          "chunk_id": 109,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "Q: 发票金额包含运费吗？A: 包含订单总金额（含运费和优惠），实际支付多少开多少。Q: 可以开部分金额吗？A: 不可以，必须按订单实付金额开具。Q: 商品明细显示在发票上吗？A: 普通发票显示大类，专票可显示明细。",
+          "title": "发票内容与金额",
+          "title_path": "FAQ > 发票内容与金额"
+        },
+        {
+          "chunk_id": 110,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "Q: 发票如何获取？A: 电子发票通过邮件或短信发送，增值税专用发票快递寄送。Q: 电子发票PDF打不开怎么办？A: 请使用最新阅读器，或联系客服重新发送。Q: 快递多久到？A: 一般3-7个工作日。",
+          "title": "发票交付",
+          "title_path": "FAQ > 发票交付"
+        },
+        {
+          "chunk_id": 111,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "Q: 如何验证发票真伪？A: 登录国家税务总局官网或使用12366 APP查询。Q: 增值税专用发票多久内需认证？A: 自开具之日起360日内认证抵扣。Q: 认证失败怎么办？A: 联系开票方或税务部门。",
+          "title": "发票验真与抵扣",
+          "title_path": "FAQ > 发票验真与抵扣"
+        },
+        {
+          "chunk_id": 112,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "Q: 电子发票遗失可以补开吗？A: 可以，在原申请入口重新下载。Q: 增值税专用发票遗失怎么办？A: 需向税务机关报告丢失，并补办报税证明。Q: 补开是否收费？A: 免费。",
+          "title": "发票遗失补开",
+          "title_path": "FAQ > 发票遗失补开"
+        },
+        {
+          "chunk_id": 113,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "Q: 提示“INVOICE_APPLY”错误？A: 该错误表示发票申请参数异常，请检查订单状态或联系客服。Q: 代码“F-INVOICE-001”是什么意思？A: 发票已作废或逾期未申请，请重新提交。Q: 其他错误如何处理？A: 联系在线客服提供截图。",
+          "title": "常见错误代码",
+          "title_path": "FAQ > 常见错误代码"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            105
+          ],
+          "fact_key": "invoice_apply_entry",
+          "fact_text": "发票申请入口：订单详情页“申请发票”按钮或“我的发票”页面。电子普通发票可于订单完成后30天内申请，增值税专用发票60天内申请。"
+        },
+        {
+          "chunk_ids": [
+            106
+          ],
+          "fact_key": "invoice_title_type",
+          "fact_text": "个人抬头：姓名、身份证号（可选）；企业抬头：名称、纳税人识别号、注册地址、电话、开户行及账号。"
+        },
+        {
+          "chunk_ids": [
+            107
+          ],
+          "fact_key": "invoice_refund_effect",
+          "fact_text": "退款后电子普通发票自动红冲；增值税专用发票需根据是否抵扣分别处理（未抵扣作废，已抵扣开具红字信息表）。"
+        }
+      ],
+      "mapped_doc_id": 21,
+      "rendered_file_sha256": "6f81cdd41720591435432a01742f871a8b34b71366617990e184cb5239ed9178",
+      "source_content_sha256": "c37f8d739b1a7602772a9e4ccf905164dc9595c4d1d9db6c25e6ff976f91e4de",
+      "source_doc_code": "FAQ_INVOICE_001",
+      "title": "发票开具常见问题",
+      "topic": "invoice",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ],
+      "chunks": [
+        {
+          "chunk_id": 114,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：Q: 物流轨迹多久不更新算正常？如何区分不同类型延迟？\nA: 我们设置了一个正常观察期，不同类型延迟的观察期不同：\n- 揽收延迟：揽收扫描后24小时内无下一轨迹更新属于正常。\n- 运输延迟：揽收后48小时内无中途轨迹更新属于正常。\n- 派送延迟：到达派送站点后24小时内无派送轨迹更新属于正常。\n超过观察期后，您可发起物流核查。\n关键事实：揽收延迟观察期为揽收后24小时，运输延迟观察期为揽收后4",
+          "title": "观察期",
+          "title_path": "FAQ > 观察期"
+        },
+        {
+          "chunk_id": 115,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：Q: 超过观察期仍无更新怎么办？如何根据延迟类型发起核查？\nA: 您可以联系客服发起物流核查（工单编号：F-LOGISTICS-001）。我们会根据延迟类型分配不同责任方：\n- 揽收延迟：由我方仓储团队核查。\n- 运输延迟：由物流承运商核查。\n- 派送延迟：由末端配送合作方核查。\n核查结果将在1-3个工作日内反馈。\n关键事实：超过观察期后，揽收延迟由我方仓储发起核查（工单F-LOGISTICS",
+          "title": "物流核查",
+          "title_path": "FAQ > 物流核查"
+        },
+        {
+          "chunk_id": 116,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：Q: 物流延迟导致承诺时效违约怎么办？不同类型的延迟补偿规则有何不同？\nA: 满足以下条件可申请时效补偿：\n- 揽收延迟超过承诺时间24小时（从订单支付成功算起）。\n- 运输延迟超过承诺时间48小时。\n- 派送延迟超过承诺时间24小时。\n且延迟导致实际签收时间晚于承诺时效。\n补偿形式为优惠券，请在订单详情页点击【申请补偿】按钮进入（需先完成物流核查）。\n具体补偿标准详见 LOGISTICS_D",
+          "title": "时效补偿",
+          "title_path": "FAQ > 时效补偿"
+        },
+        {
+          "chunk_id": 117,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "A：Q: 物流延迟常见原因有哪些？如何了解具体原因？\nA: 常见原因包括天气影响、节假日、物流商运力不足等。不同类型延迟可能原因不同：揽收延迟多为仓储内部操作问题，运输延迟多为干线拥堵，派送延迟多为末端人力不足。您可在物流详情页查看原因说明。",
+          "title": "延迟原因",
+          "title_path": "FAQ > 延迟原因"
+        },
+        {
+          "chunk_id": 118,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "A：Q: 如何查询最新物流状态？\nA: 在订单页面点击“查看物流”即可。物流信息更新频率通常为每天1-2次，高峰期可能略有延迟。",
+          "title": "查询物流",
+          "title_path": "FAQ > 查询物流"
+        },
+        {
+          "chunk_id": 119,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "A：Q: 标准配送时间多长？延迟是否影响配送时间？\nA: 根据地区不同，标准配送时间一般为3-7个工作日。发生延迟时会相应延长，请关注物流轨迹中的预计送达时间。",
+          "title": "配送时间",
+          "title_path": "FAQ > 配送时间"
+        },
+        {
+          "chunk_id": 120,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "A：Q: 国际订单物流延迟如何处理？\nA: 同样适用观察期和物流核查流程，但国际物流的观察期更长：\n- 揽收延迟：48小时\n- 运输延迟：72小时\n- 派送延迟：48小时\n其他流程与国内订单一致。",
+          "title": "国际物流",
+          "title_path": "FAQ > 国际物流"
+        },
+        {
+          "chunk_id": 121,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "A：Q: 物流异常会有提醒吗？\nA: 会通过短信或APP推送通知。您可以在账户设置中开启或关闭物流通知。",
+          "title": "异常提醒",
+          "title_path": "FAQ > 异常提醒"
+        },
+        {
+          "chunk_id": 122,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "A：Q: 物流延迟导致商品损坏怎么办？\nA: 请联系售后，提供物流凭证和商品照片。售后将在24小时内回复处理方案。",
+          "title": "售后服务",
+          "title_path": "FAQ > 售后服务"
+        },
+        {
+          "chunk_id": 123,
+          "sort_order": 10,
+          "source_section": "FAQ-10",
+          "summary": "A：Q: 对物流服务不满意如何投诉？\nA: 可通过客服热线或在线投诉渠道反馈。投诉处理时效为48小时内反馈结果。",
+          "title": "投诉建议",
+          "title_path": "FAQ > 投诉建议"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            114
+          ],
+          "fact_key": "delay_normal_window",
+          "fact_text": "揽收延迟观察期为揽收后24小时，运输延迟观察期为揽收后48小时，派送延迟观察期为到达派送站点后24小时，从上一条轨迹时间起算。"
+        },
+        {
+          "chunk_ids": [
+            115
+          ],
+          "fact_key": "delay_investigation",
+          "fact_text": "超过观察期后，揽收延迟由我方仓储发起核查（工单F-LOGISTICS-001），运输延迟由物流商发起核查，派送延迟由末端合作方发起核查，统一入口为联系客服。"
+        },
+        {
+          "chunk_ids": [
+            116
+          ],
+          "fact_key": "delay_compensation",
+          "fact_text": "揽收延迟超过承诺时间24小时、运输延迟超过48小时、派送延迟超过24小时，且实际签收时间晚于承诺时效，可申请补偿。补偿形式为优惠券，入口为订单详情页【申请补偿】按钮，需先完成物流核查。具体条款详见LOGISTICS_DELAY规则文档。"
+        }
+      ],
+      "mapped_doc_id": 22,
+      "rendered_file_sha256": "da4f0bc67d5885bb1148140566ffe84a3748f63c2c3418b514ab4f0ee3a11aad",
+      "source_content_sha256": "c0abee8b57824447a6f85279cef4458c268929b85b730bf6cd47313be605b844",
+      "source_doc_code": "FAQ_LOGISTICS_DELAY_001",
+      "title": "物流延迟常见问题",
+      "topic": "logistics",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "chunks": [
+        {
+          "chunk_id": 133,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：Q: 会员免邮权益的适用条件是什么？A: 会员在有效期内，单笔订单满一定金额即可享受免邮权益。具体标准请参考会员权益说明。引用标识：F-MEMBER-001 和 MEMBER_RIGHT。\n关键事实：会员免邮权益适用于有效期内会员，单笔订单金额满足条件即可享受免邮，具体金额标准见权益说明。",
+          "title": "免邮权益",
+          "title_path": "FAQ > 免邮权益"
+        },
+        {
+          "chunk_id": 134,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：Q: 退款对会员成长值或积分有什么影响？A: 若订单退款，该笔交易所获成长值和积分将被扣除，可能导致会员等级下降。详细信息请参考 MEMBER_RIGHT 规则。\n关键事实：订单退款时，该笔交易对应的成长值和积分将被相应扣除，可能影响会员等级和权益。",
+          "title": "积分成长值",
+          "title_path": "FAQ > 积分成长值"
+        },
+        {
+          "chunk_id": 135,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：Q: 会员到期后未使用的权益如何处理？A: 会员到期后，未使用的权益（如免邮券、折扣券）将自动失效，无法继续使用。请及时在有效期内使用。相关规则见 F-MEMBER-001。\n关键事实：会员到期后，所有未使用的权益自动失效，无法延期或补偿。",
+          "title": "会员到期",
+          "title_path": "FAQ > 会员到期"
+        },
+        {
+          "chunk_id": 136,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "Q: 会员折扣如何应用？A: 会员在购买指定商品时可享受专属折扣，折扣力度根据会员等级不同。具体折扣商品以页面标注为准。",
+          "title": "折扣权益",
+          "title_path": "FAQ > 折扣权益"
+        },
+        {
+          "chunk_id": 137,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "Q: 什么是会员专享价？A: 会员专享价是会员专属的优惠价格，仅限会员购买，非会员无法享受。",
+          "title": "专享价权益",
+          "title_path": "FAQ > 专享价权益"
+        },
+        {
+          "chunk_id": 138,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "Q: 如何提升会员等级？A: 通过累计消费金额和活跃度提升成长值，达到升级门槛后自动升级。成长值越高，等级越高，权益越丰富。",
+          "title": "会员等级",
+          "title_path": "FAQ > 会员等级"
+        },
+        {
+          "chunk_id": 139,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "Q: 如何查看我的会员权益？A: 登录账户后，进入“我的会员”页面即可查看当前等级、权益详情及有效期。",
+          "title": "权益查看",
+          "title_path": "FAQ > 权益查看"
+        },
+        {
+          "chunk_id": 140,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "Q: 会员权益调整会提前通知吗？A: 如有权益调整，我们将通过站内信或公告提前通知，请关注官方消息。",
+          "title": "权益调整",
+          "title_path": "FAQ > 权益调整"
+        },
+        {
+          "chunk_id": 141,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "Q: 会员权益能否与其他优惠活动叠加使用？A: 一般情况下可叠加，但具体以活动规则为准。部分活动可能互斥，请仔细阅读活动说明。",
+          "title": "活动叠加",
+          "title_path": "FAQ > 活动叠加"
+        },
+        {
+          "chunk_id": 142,
+          "sort_order": 10,
+          "source_section": "FAQ-10",
+          "summary": "Q: 会员生日礼遇如何领取？A: 生日当月登录账户，在“生日礼遇”专区即可领取专属礼物或优惠券，逾期不补。",
+          "title": "生日礼遇",
+          "title_path": "FAQ > 生日礼遇"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            133
+          ],
+          "fact_key": "member_shipping_right",
+          "fact_text": "会员免邮权益适用于有效期内会员，单笔订单金额满足条件即可享受免邮，具体金额标准见权益说明。"
+        },
+        {
+          "chunk_ids": [
+            134
+          ],
+          "fact_key": "member_refund_right",
+          "fact_text": "订单退款时，该笔交易对应的成长值和积分将被相应扣除，可能影响会员等级和权益。"
+        },
+        {
+          "chunk_ids": [
+            135
+          ],
+          "fact_key": "member_expiry",
+          "fact_text": "会员到期后，所有未使用的权益自动失效，无法延期或补偿。"
+        }
+      ],
+      "mapped_doc_id": 24,
+      "rendered_file_sha256": "c7cf9dc300f52d3f58d82a6aa5bbea9541d6fb710bae310698856e27d7b4a120",
+      "source_content_sha256": "6bd660c2b88b94981bff0e90cbae3a3984224f6f8b733e02025bd3ea3f3b679a",
+      "source_doc_code": "FAQ_MEMBER_RIGHTS_001",
+      "title": "会员权益常见问题",
+      "topic": "member",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "chunks": [
+        {
+          "chunk_id": 50,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：待支付订单可由用户直接在订单列表中点击取消按钮，无需审核，即时生效。\n关键事实：待支付订单可由用户直接取消",
+          "title": "如何取消待支付订单？",
+          "title_path": "FAQ > 如何取消待支付订单？"
+        },
+        {
+          "chunk_id": 51,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "若取消待支付订单时提示失败，请先检查网络连接，刷新页面后重试。如仍失败，请联系客服处理。",
+          "title": "待支付订单取消失败怎么办？",
+          "title_path": "FAQ > 待支付订单取消失败怎么办？"
+        },
+        {
+          "chunk_id": 52,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "已支付未出库订单需要提交取消申请，路径：订单详情页点击申请取消，审核通过后退款。",
+          "title": "如何取消已支付订单？",
+          "title_path": "FAQ > 如何取消已支付订单？"
+        },
+        {
+          "chunk_id": 53,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "若提交取消申请后订单状态长时间未更新，建议联系客服核实，可能因系统延迟或审核驳回。",
+          "title": "已支付订单取消失败如何处理？",
+          "title_path": "FAQ > 已支付订单取消失败如何处理？"
+        },
+        {
+          "chunk_id": 54,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "已发货订单不能直接取消，应走售后流程，申请退货退款或换货。",
+          "title": "已发货订单如何取消？",
+          "title_path": "FAQ > 已发货订单如何取消？"
+        },
+        {
+          "chunk_id": 55,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "进入订单详情点击【退换货】按钮，选择退货原因，提交后等待审核，审核通过后按地址寄回商品。",
+          "title": "已发货订单退货具体流程？",
+          "title_path": "FAQ > 已发货订单退货具体流程？"
+        },
+        {
+          "chunk_id": 56,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "常见订单状态包括：待支付、已支付（待出库）、已发货、已签收、已完成、已取消等。",
+          "title": "订单有哪些常见状态？",
+          "title_path": "FAQ > 订单有哪些常见状态？"
+        },
+        {
+          "chunk_id": 57,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "错误码F-ORDER-001表示当前订单状态不允许取消，请根据页面提示调整操作。",
+          "title": "提示F-ORDER-001是什么意思？",
+          "title_path": "FAQ > 提示F-ORDER-001是什么意思？"
+        },
+        {
+          "chunk_id": 58,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "提示ORDER_CANCEL_PENDING表示订单处于待支付状态，可以执行取消操作。",
+          "title": "提示ORDER_CANCEL_PENDING是什么含义？",
+          "title_path": "FAQ > 提示ORDER_CANCEL_PENDING是什么含义？"
+        },
+        {
+          "chunk_id": 59,
+          "sort_order": 10,
+          "source_section": "FAQ-10",
+          "summary": "待支付订单取消不涉及退款；已支付订单取消审核通过后，退款通常在1-3个工作日内原路返回。",
+          "title": "订单取消后多久退款？",
+          "title_path": "FAQ > 订单取消后多久退款？"
+        },
+        {
+          "chunk_id": 60,
+          "sort_order": 11,
+          "source_section": "FAQ-11",
+          "summary": "如果部分商品未发货，可以申请部分取消；已发货的商品不可部分取消，需走售后流程。",
+          "title": "多商品订单可以部分取消吗？",
+          "title_path": "FAQ > 多商品订单可以部分取消吗？"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            50
+          ],
+          "fact_key": "order_cancel_pending_payment",
+          "fact_text": "待支付订单可由用户直接取消"
+        },
+        {
+          "chunk_ids": [
+            52
+          ],
+          "fact_key": "order_cancel_paid",
+          "fact_text": "已支付未出库订单需要提交取消申请"
+        },
+        {
+          "chunk_ids": [
+            54
+          ],
+          "fact_key": "order_cancel_shipped",
+          "fact_text": "已发货订单不能直接取消，应走售后流程"
+        }
+      ],
+      "mapped_doc_id": 15,
+      "rendered_file_sha256": "c574ead536d1687e3173c5c4814f3d91f67fa738b9938e1dbca2a5ded8947bfe",
+      "source_content_sha256": "12acc22e67dbd85740ee8f5615c719b86d3eec054f88866260687d996643b2e5",
+      "source_doc_code": "FAQ_ORDER_STATUS_001",
+      "title": "订单状态与取消常见问题",
+      "topic": "order",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "chunks": [
+        {
+          "chunk_id": 124,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：如果包裹显示签收但实际未收到，可能属于包裹丢失。请先确认物流状态，并提供收件人姓名、地址、手机号和订单号。\n关键事实：检查物流信息、联系快递员、提供订单号和收件人信息",
+          "title": "包裹丢失",
+          "title_path": "FAQ > 包裹丢失"
+        },
+        {
+          "chunk_id": 125,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：签收前发现包裹破损，请当场拒收并拍照/录像，联系客服。签收后24小时内发现破损，需提供外包装和内件损坏的清晰照片。\n关键事实：外包装和内件损坏照片或视频，需清晰可见",
+          "title": "包裹破损",
+          "title_path": "FAQ > 包裹破损"
+        },
+        {
+          "chunk_id": 126,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：包裹确认丢失或破损后，我们将提供补发或退款。具体方案根据库存和订单状态决定，通常2个工作日内处理。参考PACKAGE_EXCEPTION流程。\n关键事实：确认后补发或退款，2个工作日内处理",
+          "title": "处理方案",
+          "title_path": "FAQ > 处理方案"
+        },
+        {
+          "chunk_id": 127,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "您可以通过在线客服、电话或邮件联系我们，提供订单号和异常描述。我们会分配工单并跟进，工单编号与F-LOGISTICS-002关联。",
+          "title": "如何联系客服报告包裹异常",
+          "title_path": "FAQ > 如何联系客服报告包裹异常"
+        },
+        {
+          "chunk_id": 128,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "请先核对是否为他人代签，或联系快递员确认。若确实丢失，提供签收底单和监控（如有），我们将在核查后处理。",
+          "title": "包裹显示已签收但实际未收到怎么办",
+          "title_path": "FAQ > 包裹显示已签收但实际未收到怎么办"
+        },
+        {
+          "chunk_id": 129,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "建议在签收后24小时内反馈，并提供照片。超时反馈可能影响处理，但特殊情形可酌情处理。",
+          "title": "签收后多久内可以反馈破损",
+          "title_path": "FAQ > 签收后多久内可以反馈破损"
+        },
+        {
+          "chunk_id": 130,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "因物流原因导致的丢失或破损，补发不收取额外运费。若因客户地址错误等原因，可能需要客户承担。",
+          "title": "补发需要额外运费吗",
+          "title_path": "FAQ > 补发需要额外运费吗"
+        },
+        {
+          "chunk_id": 131,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "退款通常在原支付方式退回，1-7个工作日到账，具体取决于支付平台。我们会在确认后48小时内发起退款。",
+          "title": "退款多久到账",
+          "title_path": "FAQ > 退款多久到账"
+        },
+        {
+          "chunk_id": 132,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "如果订单中部分商品破损，请提供整体和单独照片。我们将根据破损情况补发或退还对应商品金额。",
+          "title": "部分商品破损怎么办",
+          "title_path": "FAQ > 部分商品破损怎么办"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            124
+          ],
+          "fact_key": "package_loss_evidence",
+          "fact_text": "检查物流信息、联系快递员、提供订单号和收件人信息"
+        },
+        {
+          "chunk_ids": [
+            125
+          ],
+          "fact_key": "package_damage_evidence",
+          "fact_text": "外包装和内件损坏照片或视频，需清晰可见"
+        },
+        {
+          "chunk_ids": [
+            126
+          ],
+          "fact_key": "package_exception_resolution",
+          "fact_text": "确认后补发或退款，2个工作日内处理"
+        }
+      ],
+      "mapped_doc_id": 23,
+      "rendered_file_sha256": "dcf60229a875e0fe39a32d454fb55f860e82c06b8c40530d12b771520eacdd90",
+      "source_content_sha256": "6adb420fe8d9b3172102a92c45e61c8f639dbac56f774edc6a54f217f5022cca",
+      "source_doc_code": "FAQ_PACKAGE_EXCEPTION_001",
+      "title": "包裹丢失或破损常见问题",
+      "topic": "logistics",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "chunks": [
+        {
+          "chunk_id": 61,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：支付失败可能由于银行卡余额不足、网络延迟、银行系统维护或支付渠道限制导致。请先检查支付渠道并确认订单状态，参考标识符F-PAY-001。\n关键事实：支付失败应先检查支付渠道和订单状态，确认是否成功扣款。",
+          "title": "支付失败的可能原因",
+          "title_path": "FAQ > 支付失败的可能原因"
+        },
+        {
+          "chunk_id": 62,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "如果支付时提示余额不足，建议更换银行卡或充值后重试。部分银行可能有单笔限额，请确认。",
+          "title": "银行卡余额不足导致的支付失败",
+          "title_path": "FAQ > 银行卡余额不足导致的支付失败"
+        },
+        {
+          "chunk_id": 63,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "网络波动可能导致支付请求超时，请检查网络连接后重新支付。如已扣款但订单未更新，请联系客服。",
+          "title": "网络延迟导致的支付失败",
+          "title_path": "FAQ > 网络延迟导致的支付失败"
+        },
+        {
+          "chunk_id": 64,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "重复支付指同一笔订单被多次扣款，通常由于支付页面重复提交或银行处理延迟导致。请核实重复支付记录，参考标识符E-PAY-2001。",
+          "title": "重复支付的现象",
+          "title_path": "FAQ > 重复支付的现象"
+        },
+        {
+          "chunk_id": 65,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "A：核实重复支付后，多支付的款项将在3-5个工作日内原路退回。如需加急，可联系客服提供订单号和扣款截图。\n关键事实：核实重复支付后，将退回多支付的款项至原支付账户。",
+          "title": "重复支付的退款流程",
+          "title_path": "FAQ > 重复支付的退款流程"
+        },
+        {
+          "chunk_id": 66,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "登录账户查看订单支付记录，对比银行账单中的扣款笔数。如不一致，提供截图给客服核实。",
+          "title": "重复支付的核实方法",
+          "title_path": "FAQ > 重复支付的核实方法"
+        },
+        {
+          "chunk_id": 67,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "支付处理中表示银行已收到请求但尚未返回最终结果。请等待1-2分钟后刷新页面，或查看银行扣款短信。",
+          "title": "支付处理中状态说明",
+          "title_path": "FAQ > 支付处理中状态说明"
+        },
+        {
+          "chunk_id": 68,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "A：如果支付处理中状态超过30分钟仍未更新，可能因银行系统异常导致。建议发起人工核查，客服将核实后处理。\n关键事实：支付处理中超过规定时间（30分钟）需发起人工核查。",
+          "title": "支付处理中超时处理",
+          "title_path": "FAQ > 支付处理中超时处理"
+        },
+        {
+          "chunk_id": 69,
+          "sort_order": 9,
+          "source_section": "FAQ-9",
+          "summary": "通过在线客服或电话客服提供订单号，客服将联系银行核实支付状态，并在24小时内反馈结果。",
+          "title": "支付处理中发起人工核查",
+          "title_path": "FAQ > 支付处理中发起人工核查"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            61
+          ],
+          "fact_key": "payment_failed_check",
+          "fact_text": "支付失败应先检查支付渠道和订单状态，确认是否成功扣款。"
+        },
+        {
+          "chunk_ids": [
+            65
+          ],
+          "fact_key": "duplicate_payment_refund",
+          "fact_text": "核实重复支付后，将退回多支付的款项至原支付账户。"
+        },
+        {
+          "chunk_ids": [
+            68
+          ],
+          "fact_key": "payment_pending_timeout",
+          "fact_text": "支付处理中超过规定时间（30分钟）需发起人工核查。"
+        }
+      ],
+      "mapped_doc_id": 16,
+      "rendered_file_sha256": "fb1c98b64cefe6b60470fd282d74892e975b64d45cc2d13f8a161a6008a56bc8",
+      "source_content_sha256": "a4bb401a707e6e3b843c47f3876ec657988bf9b4f83e8c259a2ac97a8798b8d0",
+      "source_doc_code": "FAQ_PAYMENT_001",
+      "title": "支付失败与重复支付常见问题",
+      "topic": "payment",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ],
+      "chunks": [
+        {
+          "chunk_id": 70,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：退款到账时间取决于支付渠道。平台处理完成后，银行实际入账时间通常为1-7个工作日。信用卡支付可能需3-5个工作日，借记卡或余额支付一般为即时到账。请留意退款状态变更后，银行入账需额外时间。\n关键事实：不同支付渠道的退款到账时间：信用卡3-5工作日，借记卡即时到账，余额即时到账。",
+          "title": "退款到账时间",
+          "title_path": "FAQ > 退款到账时间"
+        },
+        {
+          "chunk_id": 71,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：您可以在订单详情页查看退款状态，状态代码REFUND_STATUS包含以下取值：REFUND_STATUS=处理中、REFUND_STATUS=成功、REFUND_STATUS=失败。若显示REFUND_STATUS=成功但超过预估到账时间仍未到账，请联系银行核实。\n关键事实：用户可通过订单详情页的退款状态入口查询进度，状态码REFUND_STATUS显示当前阶段，取值包括处理中、成功、失败。",
+          "title": "退款进度查询",
+          "title_path": "FAQ > 退款进度查询"
+        },
+        {
+          "chunk_id": 72,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：若退款状态为REFUND_STATUS=成功但超过7个工作日未到账，或REFUND_STATUS=处理中超过7个工作日，请提交工单升级处理。平台将联系支付渠道核实。\n关键事实：退款超时7个工作日以上可升级至人工处理，需提供订单号和支付凭证。",
+          "title": "退款超时处理",
+          "title_path": "FAQ > 退款超时处理"
+        },
+        {
+          "chunk_id": 73,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "常见原因：银行卡号变更、账户异常、支付渠道限制。请检查账户信息或联系客服。",
+          "title": "退款失败原因",
+          "title_path": "FAQ > 退款失败原因"
+        },
+        {
+          "chunk_id": 74,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "部分退款是指仅退回部分金额。到账时间与全额退款一致，但金额会分开显示。",
+          "title": "部分退款到账",
+          "title_path": "FAQ > 部分退款到账"
+        },
+        {
+          "chunk_id": 75,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "实际到账金额可能因使用优惠券、积分或运费而不同。请查看退款明细。",
+          "title": "退款金额不一致",
+          "title_path": "FAQ > 退款金额不一致"
+        },
+        {
+          "chunk_id": 76,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "退款完成后订单状态显示为已关闭或已退款。若未更新，可尝试刷新页面。",
+          "title": "退款后订单状态",
+          "title_path": "FAQ > 退款后订单状态"
+        },
+        {
+          "chunk_id": 77,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "A：使用第三方支付如微信、支付宝时，退款需经对方平台处理，进度可能较慢。请使用标识符F-REFUND-001追踪此类退款。\n关键事实：跨平台退款标识符F-REFUND-001用于跟踪第三方支付退款。",
+          "title": "跨平台退款进度",
+          "title_path": "FAQ > 跨平台退款进度"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            70
+          ],
+          "fact_key": "refund_processing_time",
+          "fact_text": "不同支付渠道的退款到账时间：信用卡3-5工作日，借记卡即时到账，余额即时到账。"
+        },
+        {
+          "chunk_ids": [
+            71
+          ],
+          "fact_key": "refund_status_query",
+          "fact_text": "用户可通过订单详情页的退款状态入口查询进度，状态码REFUND_STATUS显示当前阶段，取值包括处理中、成功、失败。"
+        },
+        {
+          "chunk_ids": [
+            71
+          ],
+          "fact_key": "REFUND_STATUS",
+          "fact_text": "REFUND_STATUS是退款状态代码，用于标识退款流程阶段，包括处理中、成功、失败。"
+        },
+        {
+          "chunk_ids": [
+            72
+          ],
+          "fact_key": "refund_overdue_escalation",
+          "fact_text": "退款超时7个工作日以上可升级至人工处理，需提供订单号和支付凭证。"
+        },
+        {
+          "chunk_ids": [
+            77
+          ],
+          "fact_key": "F-REFUND-001",
+          "fact_text": "跨平台退款标识符F-REFUND-001用于跟踪第三方支付退款。"
+        }
+      ],
+      "mapped_doc_id": 17,
+      "rendered_file_sha256": "1f838da5eb91fb69830802624d4ac15358cc4d6ce7ecdab383333049d1b3fa65",
+      "source_content_sha256": "56b885af0218a8ec66093199117752e142b1d4c02c31d5ccf67c5b795602fe5b",
+      "source_doc_code": "FAQ_REFUND_PROGRESS_001",
+      "title": "退款进度常见问题",
+      "topic": "refund",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85
+      ],
+      "chunks": [
+        {
+          "chunk_id": 78,
+          "sort_order": 1,
+          "source_section": "FAQ-1",
+          "summary": "A：如果商品存在质量问题，退货运费由谁承担？\nA：由平台或商家承担。用户无需支付退货运费。\n关键事实：质量问题退货运费由平台或商家承担",
+          "title": "质量问题",
+          "title_path": "FAQ > 质量问题"
+        },
+        {
+          "chunk_id": 79,
+          "sort_order": 2,
+          "source_section": "FAQ-2",
+          "summary": "A：因个人原因（如不喜欢、不想要）退货，运费由谁承担？\nA：由用户承担。用户需支付退货运费。\n关键事实：个人原因退货运费由用户承担",
+          "title": "个人原因",
+          "title_path": "FAQ > 个人原因"
+        },
+        {
+          "chunk_id": 80,
+          "sort_order": 3,
+          "source_section": "FAQ-3",
+          "summary": "A：运费险是什么？赔付多少？\nA：运费险是一种保险，用户退货时可获得一定金额的赔付，但赔付金额与实际运费可能存在差额。\n关键事实：运费险赔付与实际运费可能存在差额",
+          "title": "运费险",
+          "title_path": "FAQ > 运费险"
+        },
+        {
+          "chunk_id": 81,
+          "sort_order": 4,
+          "source_section": "FAQ-4",
+          "summary": "A：拒收和退货有什么区别？\nA：拒收发生在签收前，退货发生在签收后。拒收不涉及签收后的退货寄回流程。\n关键事实：拒收发生在签收前，不属于签收后的退货寄回，不得虚构拦截费或其他收费规则",
+          "title": "拒收说明",
+          "title_path": "FAQ > 拒收说明"
+        },
+        {
+          "chunk_id": 82,
+          "sort_order": 5,
+          "source_section": "FAQ-5",
+          "summary": "A：上门取件方式下，运费由谁承担？\nA：上门取件只是退货寄回的一种方式，运费承担方仍由退货原因（质量问题或个人原因）决定。\n关键事实：上门取件只是寄回方式，不改变按质量问题或个人原因确定的运费承担方",
+          "title": "上门取件",
+          "title_path": "FAQ > 上门取件"
+        },
+        {
+          "chunk_id": 83,
+          "sort_order": 6,
+          "source_section": "FAQ-6",
+          "summary": "业务编码：F-RETURN-001，主题标识：RETURN_FREIGHT。",
+          "title": "文档标识",
+          "title_path": "FAQ > 文档标识"
+        },
+        {
+          "chunk_id": 84,
+          "sort_order": 7,
+          "source_section": "FAQ-7",
+          "summary": "A：退货运费根据退货原因如何确定？\nA：退货运费根据退货原因确定：质量问题由平台或商家承担，个人原因由用户承担。运费险可能提供赔付。",
+          "title": "退货运费总则",
+          "title_path": "FAQ > 退货运费总则"
+        },
+        {
+          "chunk_id": 85,
+          "sort_order": 8,
+          "source_section": "FAQ-8",
+          "summary": "A：如何知道退货运费由谁承担？\nA：查看退货原因：如果是质量问题，由平台或商家承担；如果是个人原因，由用户承担。",
+          "title": "运费承担查询",
+          "title_path": "FAQ > 运费承担查询"
+        }
+      ],
+      "doc_type": "FAQ",
+      "facts": [
+        {
+          "chunk_ids": [
+            78
+          ],
+          "fact_key": "freight_quality_issue",
+          "fact_text": "质量问题退货运费由平台或商家承担"
+        },
+        {
+          "chunk_ids": [
+            79
+          ],
+          "fact_key": "freight_personal_reason",
+          "fact_text": "个人原因退货运费由用户承担"
+        },
+        {
+          "chunk_ids": [
+            80
+          ],
+          "fact_key": "freight_insurance",
+          "fact_text": "运费险赔付与实际运费可能存在差额"
+        },
+        {
+          "chunk_ids": [
+            81
+          ],
+          "fact_key": "freight_reject_difference",
+          "fact_text": "拒收发生在签收前，不属于签收后的退货寄回，不得虚构拦截费或其他收费规则"
+        },
+        {
+          "chunk_ids": [
+            82
+          ],
+          "fact_key": "freight_pickup_difference",
+          "fact_text": "上门取件只是寄回方式，不改变按质量问题或个人原因确定的运费承担方"
+        }
+      ],
+      "mapped_doc_id": 18,
+      "rendered_file_sha256": "5b965444cad75acd7b9fcd35cd23c5e4991c6342ad512f01e6f0c6a9384f46b5",
+      "source_content_sha256": "b9778aaa96d6ac7511535f7408ede4c1a2ba049e2649dd9ee2a2f0faa0f6356d",
+      "source_doc_code": "FAQ_RETURN_FREIGHT_001",
+      "title": "退货运费常见问题",
+      "topic": "return",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        242
+      ],
+      "chunks": [
+        {
+          "chunk_id": 242,
+          "sort_order": 1,
+          "source_section": "字段说明 > 按钮说明",
+          "summary": "1. 进入优惠券管理后台（E-CM-8201），点击【查询】按钮，输入券模板ID或用户ID，查询用户领\n2. 在结果列表中选择需要补发的记录，点击【补发】按钮，系统弹出补发窗口。\n3. 在补发窗口中确认补发原因，并关联工单编号，然后点击【确认补发】。系统将根据券模板（\n4. 补发完成后，系统显示补发成功提示，并记录补发日志。",
+          "title": "优惠券管理后台操作手册",
+          "title_path": "操作手册 > 字段说明 > 按钮说明"
+        }
+      ],
+      "doc_type": "MANUAL",
+      "facts": [
+        {
+          "chunk_ids": [
+            242
+          ],
+          "fact_key": "coupon_admin_template",
+          "fact_text": "查询券模板和适用范围，用于确定补发券的模板信息。"
+        },
+        {
+          "chunk_ids": [
+            242
+          ],
+          "fact_key": "coupon_admin_record",
+          "fact_text": "查询用户领券和使用记录，用于定位需要补发的订单。"
+        },
+        {
+          "chunk_ids": [
+            242
+          ],
+          "fact_key": "coupon_admin_reissue",
+          "fact_text": "在授权范围内补发优惠券，实际执行补发操作。"
+        }
+      ],
+      "mapped_doc_id": 47,
+      "rendered_file_sha256": "8f0ed222c7d78d70467b5586dd0575951b25614e1134f46d13c4688dee38547c",
+      "source_content_sha256": "7c54bff3d3a81bc490f47d2684f9179eaa3417aaa1ae06679c197231d8e7c35a",
+      "source_doc_code": "MANUAL_COUPON_ADMIN_001",
+      "title": "优惠券管理后台操作手册",
+      "topic": "coupon",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        244
+      ],
+      "chunks": [
+        {
+          "chunk_id": 244,
+          "sort_order": 1,
+          "source_section": "字段说明 > 按钮说明",
+          "summary": "1. 登录电商后台，进入【发票管理后台】页面。\n2. 在查询区域输入订单号和发票号码，点击【查询】按钮，系统显示匹配的发票记录。\n3. 如需红冲，点击目标记录后的【红冲】按钮，系统弹出红冲申请窗口。\n4. 在红冲申请窗口上传红冲证明材料（如退货单据、折让证明等），提交红冲申请。\n5. 审核通过后，系统自动完成红冲。红冲完成后，可点击【重新开票】按钮，系统基于原订单生成\n6. 确认新发票信息无误，点",
+          "title": "发票管理后台操作手册",
+          "title_path": "操作手册 > 字段说明 > 按钮说明"
+        }
+      ],
+      "doc_type": "MANUAL",
+      "facts": [
+        {
+          "chunk_ids": [
+            244
+          ],
+          "fact_key": "invoice_admin_query",
+          "fact_text": "按订单号和发票号码查询，在【发票管理后台】页面输入对应信息后点击【查询】按钮。"
+        },
+        {
+          "chunk_ids": [
+            244
+          ],
+          "fact_key": "invoice_admin_red",
+          "fact_text": "提交红冲申请并上传材料：点击【红冲】按钮，上传退货单据或折让证明等材料，提交申请。"
+        },
+        {
+          "chunk_ids": [
+            244
+          ],
+          "fact_key": "invoice_admin_reissue",
+          "fact_text": "红冲完成后重新开票：红冲完成后点击【重新开票】按钮，确认信息后开票。"
+        }
+      ],
+      "mapped_doc_id": 49,
+      "rendered_file_sha256": "703d4cc2c085eb5b30fb4511e4e38aec3fd8a705e312427804b7c86a5f0df352",
+      "source_content_sha256": "7834258a233e0e32e3826994374fa05745a2a623e48890a0d37abedafff4ecbb",
+      "source_doc_code": "MANUAL_INVOICE_ADMIN_001",
+      "title": "发票管理后台操作手册",
+      "topic": "invoice",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        243
+      ],
+      "chunks": [
+        {
+          "chunk_id": 243,
+          "sort_order": 1,
+          "source_section": "字段说明 > 按钮说明",
+          "summary": "1. 进入物流管理后台，在查询条件中输入物流单号，点击【查询】。\n2. 查看物流轨迹列表，点击【刷新轨迹】按钮获取最新轨迹。\n3. 若轨迹异常，点击【创建核查单】按钮生成承运商核查工单。\n4. 在异常登记区域，选择丢失、破损或延迟类型，填写详细信息并提交。",
+          "title": "物流管理后台操作手册",
+          "title_path": "操作手册 > 字段说明 > 按钮说明"
+        }
+      ],
+      "doc_type": "MANUAL",
+      "facts": [
+        {
+          "chunk_ids": [
+            243
+          ],
+          "fact_key": "logistics_admin_track",
+          "fact_text": "查询标准化物流轨迹和原始节点"
+        },
+        {
+          "chunk_ids": [
+            243
+          ],
+          "fact_key": "logistics_admin_ticket",
+          "fact_text": "创建承运商核查工单"
+        },
+        {
+          "chunk_ids": [
+            243
+          ],
+          "fact_key": "logistics_admin_exception",
+          "fact_text": "登记丢失、破损和延迟异常"
+        }
+      ],
+      "mapped_doc_id": 48,
+      "rendered_file_sha256": "2dfd0c33147622e4e7e98f83e2fab03ce7a7442093cdf8ea1c2e86c5b225fa12",
+      "source_content_sha256": "5d1786d34274b81fe017f248db5895311e5ea0a7099ff45acce9040b71c3ae73",
+      "source_doc_code": "MANUAL_LOGISTICS_ADMIN_001",
+      "title": "物流管理后台操作手册",
+      "topic": "logistics",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        241
+      ],
+      "chunks": [
+        {
+          "chunk_id": 241,
+          "sort_order": 1,
+          "source_section": "字段说明 > 按钮说明",
+          "summary": "1. 在订单列表页输入订单号或用户信息，点击【搜索】按钮，系统展示匹配订单。\n2. 点击目标订单后的【查看详情】按钮，进入订单详情页。\n3. 在详情页如需取消订单，点击【取消订单】按钮，填写取消原因并提交申请。\n4. 提交后，在【取消审核】状态栏查看审核状态，审核通过则订单取消。\n5. 如需修改收货地址，在订单未发货状态下，点击【修改地址】按钮，输入新地址并保存。\n6. 确认修改后，系统返回订单详",
+          "title": "订单管理后台操作手册",
+          "title_path": "操作手册 > 字段说明 > 按钮说明"
+        }
+      ],
+      "doc_type": "MANUAL",
+      "facts": [
+        {
+          "chunk_ids": [
+            241
+          ],
+          "fact_key": "order_admin_search",
+          "fact_text": "管理员可通过订单号和用户信息在订单列表页查询订单，支持精确和模糊搜索。"
+        },
+        {
+          "chunk_ids": [
+            241
+          ],
+          "fact_key": "order_admin_cancel",
+          "fact_text": "提交取消申请后，可在订单详情页的取消审核状态栏查看审核状态，审核结果会实时更新。"
+        },
+        {
+          "chunk_ids": [
+            241
+          ],
+          "fact_key": "order_admin_address",
+          "fact_text": "修改收货地址功能仅在订单未发货且符合系统规则时可用，修改后需保存生效。"
+        }
+      ],
+      "mapped_doc_id": 46,
+      "rendered_file_sha256": "8f928634976645a8b4da1f4a7922d0bb193812557130e2a0292783032c8e7212",
+      "source_content_sha256": "10fd436a5f9a7873704deb001838b842ab876785459aaaada2c7485cfde410c3",
+      "source_doc_code": "MANUAL_ORDER_ADMIN_001",
+      "title": "订单管理后台操作手册",
+      "topic": "order",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        49
+      ],
+      "chunks": [
+        {
+          "chunk_id": 49,
+          "sort_order": 1,
+          "source_section": "字段说明 > 按钮说明",
+          "summary": "1. 进入退款单查询页面，筛选状态为“待处理”的退款单；\n2. 点击单据进入详情，检查支付流水和执行状态；\n3. 若支付平台返回失败且可重试，点击【重试退款】；\n4. 若需手动处理，点击【创建人工退款】生成审核单。",
+          "title": "退款管理后台操作手册",
+          "title_path": "操作手册 > 字段说明 > 按钮说明"
+        }
+      ],
+      "doc_type": "MANUAL",
+      "facts": [
+        {
+          "chunk_ids": [
+            49
+          ],
+          "fact_key": "refund_admin_query",
+          "fact_text": "查询退款单、支付流水和执行状态"
+        },
+        {
+          "chunk_ids": [
+            49
+          ],
+          "fact_key": "refund_admin_retry",
+          "fact_text": "对可重试任务执行退款重试"
+        },
+        {
+          "chunk_ids": [
+            49
+          ],
+          "fact_key": "refund_admin_manual",
+          "fact_text": "创建人工退款审核单"
+        }
+      ],
+      "mapped_doc_id": 14,
+      "rendered_file_sha256": "f3c91fc0e6e709cd1d9a5a07d934576e22eee5c8783f9a1f109feb7dc0a97bf4",
+      "source_content_sha256": "f5c2aeba510d2f6c913bb1c18523d00ff016fbd7e0817fedcb66d6f32ade901d",
+      "source_doc_code": "MANUAL_REFUND_ADMIN_001",
+      "title": "退款管理后台操作手册",
+      "topic": "refund",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        245
+      ],
+      "chunks": [
+        {
+          "chunk_id": 245,
+          "sort_order": 1,
+          "source_section": "字段说明 > 按钮说明",
+          "summary": "1. 进入【风控后台】菜单，在风险单列表中选择待处理案件。\n2. 点击案件进入详情页，查看风险单信息及命中规则详情。\n3. 上传核验材料：点击【上传证据】按钮，选择相关文件（如截图、聊天记录等）并填写复核意见。\n4. 若案件风险等级为高，需点击【升级至风控专员】按钮，将案件转交高级处理。\n5. 确认无误后点击【提交复核】按钮，系统将自动流转至复核队列。注意：客服仅能提交复核，无",
+          "title": "风控管理后台操作手册",
+          "title_path": "操作手册 > 字段说明 > 按钮说明"
+        }
+      ],
+      "doc_type": "MANUAL",
+      "facts": [
+        {
+          "chunk_ids": [
+            245
+          ],
+          "fact_key": "risk_admin_case",
+          "fact_text": "风险单号（M-RISK-001）和命中规则（E-RKM-8501）可通过风险单列表查询，支持按单号、规则编号、风险等级等条件筛选。"
+        },
+        {
+          "chunk_ids": [
+            245
+          ],
+          "fact_key": "risk_admin_evidence",
+          "fact_text": "上传核验材料时，需点击【上传证据】按钮，选择PDF、图片或文档格式，并在文本框内填写详细的复核意见，包括对风险判定的认可或质疑理由。"
+        },
+        {
+          "chunk_ids": [
+            245
+          ],
+          "fact_key": "risk_admin_escalate",
+          "fact_text": "当案件风险等级为高或存在异常时，客服应点击【升级至风控专员】按钮，将案件升级至风控专员处理，升级后需在备注中说明升级原因。"
+        }
+      ],
+      "mapped_doc_id": 50,
+      "rendered_file_sha256": "31631c7d9fe8b03f09de8f6c8056416d077ba35fd2bfee94bbb2fb53c659f27a",
+      "source_content_sha256": "81bd4393bba9ab99b89f7055d1630b8c214a47ae79b348b73cb7f2c2722c540a",
+      "source_doc_code": "MANUAL_RISK_ADMIN_001",
+      "title": "风控管理后台操作手册",
+      "topic": "risk",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "chunks": [
+        {
+          "chunk_id": 44,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则（R-COUPON-001）适用于平台优惠券（COUPON-V1）在订单中的使用场景。",
+          "title": "1 适用范围：本规则（R-COUPON-001）适用于平台优惠券",
+          "title_path": "业务规则 > 优惠券使用规则 V1 > "
+        },
+        {
+          "chunk_id": 45,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：每个订单仅可使用一张平台券；门槛按商品原价合计判断。\n关键事实：V1每个订单仅可使用一张平台券",
+          "title": "2 规则条款：每个订单仅可使用一张平台券；门槛按商品原价合计判断",
+          "title_path": "业务规则 > 优惠券使用规则 V1 > "
+        },
+        {
+          "chunk_id": 46,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：特价商品不可使用平台券。",
+          "title": "3 例外条件：特价商品不可使用平台券。",
+          "title_path": "业务规则 > 优惠券使用规则 V1 > "
+        },
+        {
+          "chunk_id": 47,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：本规则（R-COUPON-001）优先级高于一般促销规则，与满减规则互斥时以本规则为准。",
+          "title": "4 优先级：本规则（R-COUPON-001）优先级高于一般促销",
+          "title_path": "业务规则 > 优惠券使用规则 V1 > "
+        },
+        {
+          "chunk_id": 48,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：2024年1月1日至2025年8月31日。",
+          "title": "5 生效日期：2024年1月1日至2025年8月31日。",
+          "title_path": "业务规则 > 优惠券使用规则 V1 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            45
+          ],
+          "fact_key": "coupon_v1_single",
+          "fact_text": "V1每个订单仅可使用一张平台券"
+        },
+        {
+          "chunk_ids": [
+            45
+          ],
+          "fact_key": "coupon_v1_threshold",
+          "fact_text": "门槛按商品原价合计判断"
+        },
+        {
+          "chunk_ids": [
+            46
+          ],
+          "fact_key": "coupon_v1_exception",
+          "fact_text": "特价商品不可使用平台券"
+        }
+      ],
+      "mapped_doc_id": 13,
+      "rendered_file_sha256": "45ee827799c0e8d9b5c5d299ab5731ace9d107633ec9bff77df768614210946c",
+      "source_content_sha256": "2c0bed601b65d25de68e577e945cc21c17b41ffb233f6a3196c4c763ed07234d",
+      "source_doc_code": "RULE_COUPON_001_V1",
+      "title": "优惠券使用规则 V1",
+      "topic": "coupon",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        206,
+        207,
+        208,
+        209,
+        210
+      ],
+      "chunks": [
+        {
+          "chunk_id": 206,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有在电商平台发放的平台优惠券和店铺优惠券，包括但不限于满减券、折扣券。标识符：R-COUPON-001, COUPON-V2。",
+          "title": "1 适用范围：本规则适用于所有在电商平台发放的平台优惠券和店铺优",
+          "title_path": "业务规则 > 优惠券使用规则 V2 > "
+        },
+        {
+          "chunk_id": 207,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：平台券和店铺券在满足互斥配置时可叠加使用（coupon_v2_stack）。门槛按扣除店铺优惠后的金额判断（coupon_v2_threshold）。",
+          "title": "2 规则条款：平台券和店铺券在满足互斥配置时可叠加使用（coup",
+          "title_path": "业务规则 > 优惠券使用规则 V2 > "
+        },
+        {
+          "chunk_id": 208,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：秒杀和虚拟商品仍不可使用平台券（coupon_v2_exception）。",
+          "title": "3 例外条件：秒杀和虚拟商品仍不可使用平台券（coupon_v2",
+          "title_path": "业务规则 > 优惠券使用规则 V2 > "
+        },
+        {
+          "chunk_id": 209,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：当多个优惠券满足条件时，优先使用折扣力度最大的优惠券；若折扣相同，优先使用到期时间最近的。店铺券优先于平台券使用。",
+          "title": "4 优先级：当多个优惠券满足条件时，优先使用折扣力度最大的优惠券",
+          "title_path": "业务规则 > 优惠券使用规则 V2 > "
+        },
+        {
+          "chunk_id": 210,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：自2025年9月1日起生效，替代前版规则（RULE_COUPON_001_V1）。",
+          "title": "5 生效日期：自2025年9月1日起生效，替代前版规则（RULE",
+          "title_path": "业务规则 > 优惠券使用规则 V2 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            207
+          ],
+          "fact_key": "coupon_v2_stack",
+          "fact_text": "平台券和店铺券在满足互斥配置时可叠加"
+        },
+        {
+          "chunk_ids": [
+            207
+          ],
+          "fact_key": "coupon_v2_threshold",
+          "fact_text": "门槛按扣除店铺优惠后的金额判断"
+        },
+        {
+          "chunk_ids": [
+            208
+          ],
+          "fact_key": "coupon_v2_exception",
+          "fact_text": "秒杀和虚拟商品仍不可使用平台券"
+        }
+      ],
+      "mapped_doc_id": 39,
+      "rendered_file_sha256": "36ba5c02bd9d4f7e2d76c842507fb5faa384c6ef018db9f1e5bfd0c0f7ddf84f",
+      "source_content_sha256": "006cecc40896c8c7b1761f965a12c3c12826102fcaa41f8219fd44905eb9ae05",
+      "source_doc_code": "RULE_COUPON_001_V2",
+      "title": "优惠券使用规则 V2",
+      "topic": "coupon",
+      "version": "2.0"
+    },
+    {
+      "chunk_ids": [
+        226,
+        227,
+        228,
+        229,
+        230
+      ],
+      "chunks": [
+        {
+          "chunk_id": 226,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于整单全额退款和部分退款场景下的优惠券退回处理，以及因系统故障导致的优惠券无法使用时的补发情形。",
+          "title": "1 适用范围：本规则适用于整单全额退款和部分退款场景下的优惠券退",
+          "title_path": "业务规则 > 优惠券退回规则 > 优惠券退回规则"
+        },
+        {
+          "chunk_id": 227,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款（规则编码：R-COUPON-002）：1. 整单全额退款时，未过期的优惠券将自动退回至用户账户，可继续使用。\n2. 部分退款时，整单使用的优惠券不予退回。\n3. 因系统故障导致用户无法使用优惠券时，可人工补发等值优惠券。注意：过期券与补发券视为不同券，过期券不补发。\n关键事实：整单全额退款时，未过期的优惠券将自动退回至用户账户。",
+          "title": "2 规则条款（规则编码：R-COUPON-002）：1. 整单全",
+          "title_path": "业务规则 > 优惠券退回规则 > 优惠券退回规则"
+        },
+        {
+          "chunk_id": 228,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：1. 因用户自身原因导致优惠券过期（编码：E-CP-5002），不适用退回或补发规则。\n2. 已经人工补发的优惠券不再视为原券退回。",
+          "title": "3 例外条件：1. 因用户自身原因导致优惠券过期（编码：E-CP",
+          "title_path": "业务规则 > 优惠券退回规则 > 优惠券退回规则"
+        },
+        {
+          "chunk_id": 229,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：本规则优先于其他平行规则执行。当与活动规则冲突时，以本规则为准。",
+          "title": "4 优先级：本规则优先于其他平行规则执行。当与活动规则冲突时，以",
+          "title_path": "业务规则 > 优惠券退回规则 > 优惠券退回规则"
+        },
+        {
+          "chunk_id": 230,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：本规则自2025年9月1日起生效。",
+          "title": "5 生效日期：本规则自2025年9月1日起生效。",
+          "title_path": "业务规则 > 优惠券退回规则 > 优惠券退回规则"
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            227
+          ],
+          "fact_key": "coupon_return_full",
+          "fact_text": "整单全额退款时，未过期的优惠券将自动退回至用户账户。"
+        },
+        {
+          "chunk_ids": [
+            227
+          ],
+          "fact_key": "coupon_return_partial",
+          "fact_text": "部分退款时，整单使用的优惠券不予退回。"
+        },
+        {
+          "chunk_ids": [
+            227
+          ],
+          "fact_key": "coupon_return_exception",
+          "fact_text": "系统故障导致用户无法使用优惠券时，可人工补发等值优惠券。"
+        }
+      ],
+      "mapped_doc_id": 43,
+      "rendered_file_sha256": "5efa93ba2b100cf9439ec4dd08700407d201b888168c0a301f8710721f4a2dae",
+      "source_content_sha256": "731f027ffca78c6da393a956d9b499130f89b7697032e44cd82b00c5ca57d9a2",
+      "source_doc_code": "RULE_COUPON_002",
+      "title": "优惠券退回规则",
+      "topic": "coupon",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        231,
+        232,
+        233,
+        234,
+        235
+      ],
+      "chunks": [
+        {
+          "chunk_id": 231,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有涉及发票开具及红冲的售后场景，包括普通发票和增值税专用发票。适用凭证包括R-INVOICE-001和E-IV-6001。\n关键事实：发票金额以实际支付且未退款金额为准。",
+          "title": "1 适用范围：本规则适用于所有涉及发票开具及红冲的售后场景，包括",
+          "title_path": "业务规则 > 发票开具与红冲规则 > 发票开具与红冲规则"
+        },
+        {
+          "chunk_id": 232,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：1. 发票开具时，金额必须等于实际支付且未退款的金额。\n2. 若部分退款涉及已开票金额，需对原发票进行部分红冲，红冲金额等于退款金额。\n3. 若全额退款涉及已开票金额，需对原发票进行全额红冲。\n4. 普通发票红冲直接操作，增值税专用发票红冲需先提交审核材料。\n关键事实：退款涉及已开票金额时必须红冲。",
+          "title": "2 规则条款：1. 发票开具时，金额必须等于实际支付且未退款的金",
+          "title_path": "业务规则 > 发票开具与红冲规则 > 发票开具与红冲规则"
+        },
+        {
+          "chunk_id": 233,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：1. 增值税专用发票红冲时，若购买方已认证抵扣，需提供《开具红字增值税专用发票信息表》，否则无法红冲。\n2. 发票已跨月且未认证，需按税务机关要求处理。\n关键事实：增值税专用发票红冲需要额外审核材料。",
+          "title": "3 例外条件：1. 增值税专用发票红冲时，若购买方已认证抵扣，需",
+          "title_path": "业务规则 > 发票开具与红冲规则 > 发票开具与红冲规则"
+        },
+        {
+          "chunk_id": 234,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：本规则优先级高于通用发票处理规则，低于法律法规要求。",
+          "title": "4 优先级：本规则优先级高于通用发票处理规则，低于法律法规要求。",
+          "title_path": "业务规则 > 发票开具与红冲规则 > 发票开具与红冲规则"
+        },
+        {
+          "chunk_id": 235,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：自2025年1月1日起生效。",
+          "title": "5 生效日期：自2025年1月1日起生效。",
+          "title_path": "业务规则 > 发票开具与红冲规则 > 发票开具与红冲规则"
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            231
+          ],
+          "fact_key": "invoice_issue_amount",
+          "fact_text": "发票金额以实际支付且未退款金额为准。"
+        },
+        {
+          "chunk_ids": [
+            232
+          ],
+          "fact_key": "invoice_red_refund",
+          "fact_text": "退款涉及已开票金额时必须红冲。"
+        },
+        {
+          "chunk_ids": [
+            233
+          ],
+          "fact_key": "invoice_special_exception",
+          "fact_text": "增值税专用发票红冲需要额外审核材料。"
+        }
+      ],
+      "mapped_doc_id": 44,
+      "rendered_file_sha256": "b276743bd5b700509f67750da38fbfe4fd1661bf3f48c596548f6406d76847b7",
+      "source_content_sha256": "e3026592dc1745dbb5964b0828724fd1a8866aa50167ec91affc797b8f6bb00e",
+      "source_doc_code": "RULE_INVOICE_001",
+      "title": "发票开具与红冲规则",
+      "topic": "invoice",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        211,
+        212,
+        213,
+        214,
+        215
+      ],
+      "chunks": [
+        {
+          "chunk_id": 211,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有使用LOGISTICS-V1的订单物流轨迹判定。涉及标识符R-LOGISTICS-001。",
+          "title": "1 适用范围：本规则适用于所有使用LOGISTICS-V1的订单",
+          "title_path": "业务规则 > 物流延迟判定规则 V1 > "
+        },
+        {
+          "chunk_id": 212,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：物流延迟判定标准：若物流轨迹48小时未更新，判定为延迟（fact_key: logistics_v1_delay）。若连续七日无轨迹，进入疑似丢失核查（fact_key: logistics_v1_loss）。\n关键事实：V1物流轨迹48小时未更新判定延迟；七日无轨迹可进入疑似丢失核查",
+          "title": "2 规则条款：物流延迟判定标准：若物流轨迹48小时未更新，判定为",
+          "title_path": "业务规则 > 物流延迟判定规则 V1 > "
+        },
+        {
+          "chunk_id": 213,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：偏远地区和不可抗力不适用普通时限（fact_key: logistics_v1_exception）。",
+          "title": "3 例外条件：偏远地区和不可抗力不适用普通时限（fact_key",
+          "title_path": "业务规则 > 物流延迟判定规则 V1 > "
+        },
+        {
+          "chunk_id": 214,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：本规则优先级高于一般物流规则，与R-LOGISTICS-001其他版本冲突时以当前版本为准。",
+          "title": "4 优先级：本规则优先级高于一般物流规则，与R-LOGISTIC",
+          "title_path": "业务规则 > 物流延迟判定规则 V1 > "
+        },
+        {
+          "chunk_id": 215,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：本规则自2024-05-01起生效，至2025-10-31失效。",
+          "title": "5 生效日期：本规则自2024-05-01起生效，至2025-1",
+          "title_path": "业务规则 > 物流延迟判定规则 V1 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            212
+          ],
+          "fact_key": "logistics_v1_delay",
+          "fact_text": "V1物流轨迹48小时未更新判定延迟"
+        },
+        {
+          "chunk_ids": [
+            212
+          ],
+          "fact_key": "logistics_v1_loss",
+          "fact_text": "七日无轨迹可进入疑似丢失核查"
+        },
+        {
+          "chunk_ids": [
+            213
+          ],
+          "fact_key": "logistics_v1_exception",
+          "fact_text": "偏远地区和不可抗力不适用普通时限"
+        }
+      ],
+      "mapped_doc_id": 40,
+      "rendered_file_sha256": "c3c195ed60eed00191196e853f68777df4723c67403be836c952f45ad97ce14b",
+      "source_content_sha256": "22c139693554e455b305319ef963120260bd24f0a7d54d7a2529ae4a7559dc10",
+      "source_doc_code": "RULE_LOGISTICS_001_V1",
+      "title": "物流延迟判定规则 V1",
+      "topic": "logistics",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        216,
+        217,
+        218,
+        219,
+        220
+      ],
+      "chunks": [
+        {
+          "chunk_id": 216,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有通过企业合作承运商发出的订单，包括揽收、转运、派送全链路物流节点。相关标识符：R-LOGISTICS-001, LOGISTICS-V2。\n关键事实：V2按揽收、转运和派送节点分别设置观察期。揽收节点观察期为24小时，转运节点为48小时，派送节点为72小时。",
+          "title": "1 适用范围：本规则适用于所有通过企业合作承运商发出的订单，包括",
+          "title_path": "业务规则 > 物流延迟判定规则 V2 > "
+        },
+        {
+          "chunk_id": 217,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：1. 每个物流节点（揽收、转运、派送）均设有独立观察期。\n2. 若节点在观察期内未更新状态，系统自动标记为“节点超时”。\n3. 节点超时后，系统向承运商发起反馈请求；若承运商在24小时内无有效反馈，则进入丢失核查流程。\n4. 丢失核查流程启动的条件：节点超时且承运商无反馈。相关标识符：LOGISTICS-V2。\n关键事实：满足节点超时和承运商无反馈才进入丢失核查。",
+          "title": "2 规则条款：1. 每个物流节点（揽收、转运、派送）均设有独立观",
+          "title_path": "业务规则 > 物流延迟判定规则 V2 > "
+        },
+        {
+          "chunk_id": 218,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：若承运商所在区域处于预警中的极端天气（如台风、暴雪等），则暂停时效补偿，但仍需保留节点超时标记，待预警解除后恢复判定。相关标识符：R-LOGISTICS-001。\n关键事实：预警中的极端天气区域暂停时效补偿。",
+          "title": "3 例外条件：若承运商所在区域处于预警中的极端天气（如台风、暴雪",
+          "title_path": "业务规则 > 物流延迟判定规则 V2 > "
+        },
+        {
+          "chunk_id": 219,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：本规则优先级为一级，高于V1版本规则。当与其他物流规则冲突时，以本规则为准。冲突规则：RULE_LOGISTICS_001_V1。",
+          "title": "4 优先级：本规则优先级为一级，高于V1版本规则。当与其他物流规",
+          "title_path": "业务规则 > 物流延迟判定规则 V2 > "
+        },
+        {
+          "chunk_id": 220,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：本规则自2025年11月1日起生效，替代RULE_LOGISTICS_001_V1。",
+          "title": "5 生效日期：本规则自2025年11月1日起生效，替代RULE_",
+          "title_path": "业务规则 > 物流延迟判定规则 V2 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            216
+          ],
+          "fact_key": "logistics_v2_node_sla",
+          "fact_text": "V2按揽收、转运和派送节点分别设置观察期。揽收节点观察期为24小时，转运节点为48小时，派送节点为72小时。"
+        },
+        {
+          "chunk_ids": [
+            217
+          ],
+          "fact_key": "logistics_v2_loss",
+          "fact_text": "满足节点超时和承运商无反馈才进入丢失核查。"
+        },
+        {
+          "chunk_ids": [
+            218
+          ],
+          "fact_key": "logistics_v2_exception",
+          "fact_text": "预警中的极端天气区域暂停时效补偿。"
+        }
+      ],
+      "mapped_doc_id": 41,
+      "rendered_file_sha256": "4297504ef250f4b4f43c188def2b3e56ca55991c45994ecc787d9722faba5b96",
+      "source_content_sha256": "92c932703d8883e7e406165640bccaeb8f9d781309ba9fdc19a2d5a636d1aba1",
+      "source_doc_code": "RULE_LOGISTICS_001_V2",
+      "title": "物流延迟判定规则 V2",
+      "topic": "logistics",
+      "version": "2.0"
+    },
+    {
+      "chunk_ids": [
+        236,
+        237,
+        238,
+        239,
+        240
+      ],
+      "chunks": [
+        {
+          "chunk_id": 236,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于指定会员（R-MEMBER-001）和指定商品，会员可享十五日无理由退货（MEMBER-15D）。\n关键事实：指定会员和商品可享十五日无理由退货",
+          "title": "1 适用范围：本规则适用于指定会员（R-MEMBER-001）和",
+          "title_path": "业务规则 > 会员售后权益规则 > 会员售后权益规则"
+        },
+        {
+          "chunk_id": 237,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：退款后按退款金额扣回积分和成长值，相关操作参见R-MEMBER-001。",
+          "title": "2 规则条款：退款后按退款金额扣回积分和成长值，相关操作参见R-",
+          "title_path": "业务规则 > 会员售后权益规则 > 会员售后权益规则"
+        },
+        {
+          "chunk_id": 238,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：虚拟、定制和生鲜商品不适用延长退货（MEMBER-15D），与退款V2中的会员例外保持一致。",
+          "title": "3 例外条件：虚拟、定制和生鲜商品不适用延长退货（MEMBER-",
+          "title_path": "业务规则 > 会员售后权益规则 > 会员售后权益规则"
+        },
+        {
+          "chunk_id": 239,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：本规则优先级高于通用售后规则，标识符R-MEMBER-001。",
+          "title": "4 优先级：本规则优先级高于通用售后规则，标识符R-MEMBER",
+          "title_path": "业务规则 > 会员售后权益规则 > 会员售后权益规则"
+        },
+        {
+          "chunk_id": 240,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：自2025年1月1日起生效。",
+          "title": "5 生效日期：自2025年1月1日起生效。",
+          "title_path": "业务规则 > 会员售后权益规则 > 会员售后权益规则"
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            236
+          ],
+          "fact_key": "member_extended_return",
+          "fact_text": "指定会员和商品可享十五日无理由退货"
+        },
+        {
+          "chunk_ids": [
+            237
+          ],
+          "fact_key": "member_points_refund",
+          "fact_text": "退款后按退款金额扣回积分和成长值"
+        },
+        {
+          "chunk_ids": [
+            238
+          ],
+          "fact_key": "member_exception",
+          "fact_text": "虚拟、定制和生鲜商品不适用延长退货"
+        }
+      ],
+      "mapped_doc_id": 45,
+      "rendered_file_sha256": "ddab8a9e3e67e5efe5c05b10caa34fa48d5290894ed995852bdd121757238a47",
+      "source_content_sha256": "ceb5a8abe1df2c2c8881b7c48548dcf103d8acdca3bbfd20d13e2afefa3878a8",
+      "source_doc_code": "RULE_MEMBER_001",
+      "title": "会员售后权益规则",
+      "topic": "member",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        186,
+        187,
+        188,
+        189,
+        190
+      ],
+      "chunks": [
+        {
+          "chunk_id": 186,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有通过电商平台生成且未完成发货的订单。已发货订单不得取消。",
+          "title": "1 适用范围：本规则适用于所有通过电商平台生成且未完成发货的订单",
+          "title_path": "业务规则 > 订单取消规则 V1 > "
+        },
+        {
+          "chunk_id": 187,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：V1允许未出库订单在支付后两小时内直接取消。订单标识R-ORDER-001及版本ORDER-V1适用。",
+          "title": "2 规则条款：V1允许未出库订单在支付后两小时内直接取消。订单标",
+          "title_path": "业务规则 > 订单取消规则 V1 > "
+        },
+        {
+          "chunk_id": 188,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：预售商品不适用两小时取消窗口。",
+          "title": "3 例外条件：预售商品不适用两小时取消窗口。",
+          "title_path": "业务规则 > 订单取消规则 V1 > "
+        },
+        {
+          "chunk_id": 189,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "规则优先级：本规则为V1版本，具有基础优先级。与后续版本冲突时，以更新版本为准。",
+          "title": "4 规则优先级：本规则为V1版本，具有基础优先级。与后续版本冲突",
+          "title_path": "业务规则 > 订单取消规则 V1 > "
+        },
+        {
+          "chunk_id": 190,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：生效日期：2024-01-01 至 2025-06-30。",
+          "title": "5 生效日期：生效日期：2024-01-01 至 2025-06",
+          "title_path": "业务规则 > 订单取消规则 V1 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            186
+          ],
+          "fact_key": "order_v1_shipped",
+          "fact_text": "已发货订单不得取消"
+        },
+        {
+          "chunk_ids": [
+            187
+          ],
+          "fact_key": "order_v1_cancel_window",
+          "fact_text": "V1允许未出库订单在支付后两小时内直接取消"
+        },
+        {
+          "chunk_ids": [
+            188
+          ],
+          "fact_key": "order_v1_exception",
+          "fact_text": "预售商品不适用两小时取消窗口"
+        }
+      ],
+      "mapped_doc_id": 35,
+      "rendered_file_sha256": "9ef13a96b859f7e423ab3387145387158738cb7f943c32c384bf1e715ec06390",
+      "source_content_sha256": "b69f46acdd7ae7c8972bb8b6c3d2df5c36a5131ec9aaef9db207bf709010d2f2",
+      "source_doc_code": "RULE_ORDER_001_V1",
+      "title": "订单取消规则 V1",
+      "topic": "order",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        191,
+        192,
+        193,
+        194,
+        195
+      ],
+      "chunks": [
+        {
+          "chunk_id": 191,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有订单取消操作，包括普通订单和跨境订单。本规则替代RULE_ORDER_001_V1，关键差异为取消窗口判断由支付后两小时改为按出库状态判断。标识ORDER-V2和R-ORDER-001。",
+          "title": "1 适用范围：本规则适用于所有订单取消操作，包括普通订单和跨境订",
+          "title_path": "业务规则 > 订单取消规则 V2 > "
+        },
+        {
+          "chunk_id": 192,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：订单取消规则V2：按出库状态判断取消窗口。已出库订单无法取消，未出库订单可取消。高风险订单需人工复核。标识ORDER-V2和R-ORDER-001。\n关键事实：V2按出库状态判断，不再限制支付后两小时；高风险订单取消需要人工复核",
+          "title": "2 规则条款：订单取消规则V2：按出库状态判断取消窗口。已出库订",
+          "title_path": "业务规则 > 订单取消规则 V2 > "
+        },
+        {
+          "chunk_id": 193,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：虚拟商品支付后不可取消。标识ORDER-V2。",
+          "title": "3 例外条件：虚拟商品支付后不可取消。标识ORDER-V2。",
+          "title_path": "业务规则 > 订单取消规则 V2 > "
+        },
+        {
+          "chunk_id": 194,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：本规则优先级高于旧版RULE_ORDER_001_V1。标识R-ORDER-001。",
+          "title": "4 优先级：本规则优先级高于旧版RULE_ORDER_001_V",
+          "title_path": "业务规则 > 订单取消规则 V2 > "
+        },
+        {
+          "chunk_id": 195,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：自2025年7月1日起生效，取代V1版本。标识R-ORDER-001和ORDER-V2。",
+          "title": "5 生效日期：自2025年7月1日起生效，取代V1版本。标识R-",
+          "title_path": "业务规则 > 订单取消规则 V2 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            192
+          ],
+          "fact_key": "order_v2_cancel_window",
+          "fact_text": "V2按出库状态判断，不再限制支付后两小时"
+        },
+        {
+          "chunk_ids": [
+            192
+          ],
+          "fact_key": "order_v2_risk_review",
+          "fact_text": "高风险订单取消需要人工复核"
+        },
+        {
+          "chunk_ids": [
+            193
+          ],
+          "fact_key": "order_v2_exception",
+          "fact_text": "虚拟商品支付后不可取消"
+        }
+      ],
+      "mapped_doc_id": 36,
+      "rendered_file_sha256": "571d5c18896fc7b35b28142cc3e3de8bc5243897a2e9629396562072766febca",
+      "source_content_sha256": "865bd3e22b906cd30e5762e39e4353183b0c5997a43336f802a5f55493a6bfdd",
+      "source_doc_code": "RULE_ORDER_001_V2",
+      "title": "订单取消规则 V2",
+      "topic": "order",
+      "version": "2.0"
+    },
+    {
+      "chunk_ids": [
+        196,
+        197,
+        198,
+        199,
+        200
+      ],
+      "chunks": [
+        {
+          "chunk_id": 196,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于平台普通商品（非定制）的售后退款申请，且申请时间为签收后七日内。",
+          "title": "1 适用范围：本规则适用于平台普通商品（非定制）的售后退款申请，",
+          "title_path": "业务规则 > 售后退款时限规则 V1 > "
+        },
+        {
+          "chunk_id": 197,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：1. 普通商品签收后七日内可申请退款（标识：REFUND-V1）。\n2. 已发货未签收订单需先拒收或拦截方可申请退款。\n3. 定制商品不适用七日规则。",
+          "title": "2 规则条款：1. 普通商品签收后七日内可申请退款（标识：REF",
+          "title_path": "业务规则 > 售后退款时限规则 V1 > "
+        },
+        {
+          "chunk_id": 198,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：定制商品不适用本退款时限规则。其他例外以具体商品详情页说明为准。",
+          "title": "3 例外条件：定制商品不适用本退款时限规则。其他例外以具体商品详",
+          "title_path": "业务规则 > 售后退款时限规则 V1 > "
+        },
+        {
+          "chunk_id": 199,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "规则优先级：本规则版本号为1.0，属于规则组R-REFUND-001。当本规则与后续版本（如RULE_REFUND_001_V2）冲突时，以最新版本为准。",
+          "title": "4 规则优先级：本规则版本号为1.0，属于规则组R-REFUND",
+          "title_path": "业务规则 > 售后退款时限规则 V1 > "
+        },
+        {
+          "chunk_id": 200,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：本规则自2024年3月1日起生效，至2025年12月31日有效。",
+          "title": "5 生效日期：本规则自2024年3月1日起生效，至2025年12",
+          "title_path": "业务规则 > 售后退款时限规则 V1 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            197
+          ],
+          "fact_key": "refund_v1_window",
+          "fact_text": "普通商品签收后七日内可申请退款"
+        },
+        {
+          "chunk_ids": [
+            197
+          ],
+          "fact_key": "refund_v1_shipping",
+          "fact_text": "已发货未签收订单需先拒收或拦截"
+        },
+        {
+          "chunk_ids": [
+            197
+          ],
+          "fact_key": "refund_v1_exception",
+          "fact_text": "定制商品不适用七日规则"
+        }
+      ],
+      "mapped_doc_id": 37,
+      "rendered_file_sha256": "2d2bfca6fd538a0d6c66e05f142bdb2e8b0007a4a3b9a85278c6670ae9b3931c",
+      "source_content_sha256": "2d64319e5d05dff754a9033776b1262646ce7a9bb08bf3bdab3b9cf4c7ffb676",
+      "source_doc_code": "RULE_REFUND_001_V1",
+      "title": "售后退款时限规则 V1",
+      "topic": "refund",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        201,
+        202,
+        203,
+        204,
+        205
+      ],
+      "chunks": [
+        {
+          "chunk_id": 201,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有通过本平台销售的商品（特殊商品除外），包括普通商品和会员商品。涉及退款申请的处理时限。规则编码：R-REFUND-001，关联异常流程编码：E-RF-1002。",
+          "title": "1 适用范围：本规则适用于所有通过本平台销售的商品（特殊商品除外",
+          "title_path": "业务规则 > 售后退款时限规则 V2 > "
+        },
+        {
+          "chunk_id": 202,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：1. 普通商品：签收后七日内可申请无理由退款（fact_key: refund_v2_window，内容：普通商品签收后七日内申请，部分会员延长至十五日）。\n2. 优惠券订单：按实付金额退款，优惠券处理遵循独立规则（fact_key: refund_v2_coupon_limit，内容：优惠券订单按实付金额退款且券处理遵循独立规则）。",
+          "title": "2 规则条款：1. 普通商品：签收后七日内可申请无理由退款（fa",
+          "title_path": "业务规则 > 售后退款时限规则 V2 > "
+        },
+        {
+          "chunk_id": 203,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：质量问题不受无理由退货时限限制（fact_key: refund_v2_exception，内容：质量问题不受无理由退货时限限制）。此外，根据异常流程E-RF-1002，质量问题退款无需遵循上述七/十五日时限。",
+          "title": "3 例外条件：质量问题不受无理由退货时限限制（fact_key:",
+          "title_path": "业务规则 > 售后退款时限规则 V2 > "
+        },
+        {
+          "chunk_id": 204,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "规则优先级：本规则（V2.0）替代V1版本（RULE_REFUND_001_V1），并与之冲突（原V1规则作废）。当本规则与平台其他退款规则冲突时，以本规则为准，但质量问题相关条款优先适用例外条件。",
+          "title": "4 规则优先级：本规则（V2.0）替代V1版本（RULE_REF",
+          "title_path": "业务规则 > 售后退款时限规则 V2 > "
+        },
+        {
+          "chunk_id": 205,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：本规则自2026年1月1日起生效，无截止日期。",
+          "title": "5 生效日期：本规则自2026年1月1日起生效，无截止日期。",
+          "title_path": "业务规则 > 售后退款时限规则 V2 > "
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            202
+          ],
+          "fact_key": "refund_v2_window",
+          "fact_text": "普通商品签收后七日内申请，部分会员延长至十五日"
+        },
+        {
+          "chunk_ids": [
+            202
+          ],
+          "fact_key": "refund_v2_coupon_limit",
+          "fact_text": "优惠券订单按实付金额退款且券处理遵循独立规则"
+        },
+        {
+          "chunk_ids": [
+            203
+          ],
+          "fact_key": "refund_v2_exception",
+          "fact_text": "质量问题不受无理由退货时限限制"
+        }
+      ],
+      "mapped_doc_id": 38,
+      "rendered_file_sha256": "d20b4f869b55639539b1c8fea9f7f0e7ab3b60668c58a68459dc4d5f1c852e5e",
+      "source_content_sha256": "62955eea8fcf13234db269d3da4462b15803d21499a6adb37abebaf22232f967",
+      "source_doc_code": "RULE_REFUND_001_V2",
+      "title": "售后退款时限规则 V2",
+      "topic": "refund",
+      "version": "2.0"
+    },
+    {
+      "chunk_ids": [
+        221,
+        222,
+        223,
+        224,
+        225
+      ],
+      "chunks": [
+        {
+          "chunk_id": 221,
+          "sort_order": 1,
+          "source_section": "1",
+          "summary": "适用范围：本规则适用于所有使用原路退款方式的订单。相关标识符：R-REFUND-002, E-RF-1002",
+          "title": "1 适用范围：本规则适用于所有使用原路退款方式的订单。相关标识符",
+          "title_path": "业务规则 > 退款失败与改道规则 > 退款失败与改道规则"
+        },
+        {
+          "chunk_id": 222,
+          "sort_order": 2,
+          "source_section": "2",
+          "summary": "规则条款：原路退款最多自动重试两次。当原渠道不可用时，按审核结果改为人工打款。\n关键事实：原渠道不可用时按审核结果改为人工打款",
+          "title": "2 规则条款：原路退款最多自动重试两次。当原渠道不可用时，按审核",
+          "title_path": "业务规则 > 退款失败与改道规则 > 退款失败与改道规则"
+        },
+        {
+          "chunk_id": 223,
+          "sort_order": 3,
+          "source_section": "3",
+          "summary": "例外条件：若退款触发风控，则按风控冻结处理，不执行退款改道。",
+          "title": "3 例外条件：若退款触发风控，则按风控冻结处理，不执行退款改道。",
+          "title_path": "业务规则 > 退款失败与改道规则 > 退款失败与改道规则"
+        },
+        {
+          "chunk_id": 224,
+          "sort_order": 4,
+          "source_section": "4",
+          "summary": "优先级：风控冻结优先于退款改道。",
+          "title": "4 优先级：风控冻结优先于退款改道。",
+          "title_path": "业务规则 > 退款失败与改道规则 > 退款失败与改道规则"
+        },
+        {
+          "chunk_id": 225,
+          "sort_order": 5,
+          "source_section": "5",
+          "summary": "生效日期：本规则自2025年6月1日起生效。",
+          "title": "5 生效日期：本规则自2025年6月1日起生效。",
+          "title_path": "业务规则 > 退款失败与改道规则 > 退款失败与改道规则"
+        }
+      ],
+      "doc_type": "RULE",
+      "facts": [
+        {
+          "chunk_ids": [
+            222
+          ],
+          "fact_key": "refund_retry_limit",
+          "fact_text": "原路退款最多自动重试两次"
+        },
+        {
+          "chunk_ids": [
+            222
+          ],
+          "fact_key": "refund_alternate_route",
+          "fact_text": "原渠道不可用时按审核结果改为人工打款"
+        },
+        {
+          "chunk_ids": [
+            224
+          ],
+          "fact_key": "refund_risk_priority",
+          "fact_text": "风控冻结优先于退款改道"
+        }
+      ],
+      "mapped_doc_id": 42,
+      "rendered_file_sha256": "2367c12ee492fa46bdbf8e5c36c7d220fce181d2453baa93784f8afd5782418a",
+      "source_content_sha256": "d03f562d00d599eb0efecae78c3a9e1aee1fddef17de1d608cb9fb6f938085aa",
+      "source_doc_code": "RULE_REFUND_002",
+      "title": "退款失败与改道规则",
+      "topic": "refund",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        168,
+        169,
+        170,
+        171,
+        172
+      ],
+      "chunks": [
+        {
+          "chunk_id": 168,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "优惠券投诉处理SOP 总览",
+          "title": "优惠券投诉处理SOP",
+          "title_path": "SOP > 优惠券投诉处理SOP"
+        },
+        {
+          "chunk_id": 169,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 确认客户身份及订单号。\n2. 调取优惠券领取记录，核对券模板、领取记录和适用范围（对应fact_key: coupon_complaint_verify）\n3. 识别过期、门槛、互斥和商品限制等具体原因（对应fact_key: coupon_complaint_reason）。",
+          "title": "优惠券投诉处理SOP - 步骤组 1",
+          "title_path": "SOP > 优惠券投诉处理SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 170,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "1. 核实系统状态：检查系统是否存在异常，若异常请参考异常分支。\n2. 正常场景：根据客户诉求提供解释或补券方案。\n3. 系统异常确认后，按权限补发优惠券（对应fact_key: coupon_complaint_compensation）。",
+          "title": "优惠券投诉处理SOP - 步骤组 2",
+          "title_path": "SOP > 优惠券投诉处理SOP > 步骤组 2"
+        },
+        {
+          "chunk_id": 171,
+          "sort_order": 4,
+          "source_section": "步骤组-3",
+          "summary": "4. 记录处理结果并更新工单状态（工单编号S-COUPON-001或E-CP-5001）。\n1. 系统异常且权限不足。\n2. 客户对解释不接受且需要上级协调。",
+          "title": "优惠券投诉处理SOP - 步骤组 3",
+          "title_path": "SOP > 优惠券投诉处理SOP > 步骤组 3"
+        },
+        {
+          "chunk_id": 172,
+          "sort_order": 5,
+          "source_section": "步骤组-4",
+          "summary": "3. 涉及S-COUPON-001或E-CP-5001范围外的复杂问题。",
+          "title": "优惠券投诉处理SOP - 步骤组 4",
+          "title_path": "SOP > 优惠券投诉处理SOP > 步骤组 4"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            168
+          ],
+          "fact_key": "coupon_complaint_verify",
+          "fact_text": "核对券模板、领取记录和适用范围，确保数据准确。"
+        },
+        {
+          "chunk_ids": [
+            168
+          ],
+          "fact_key": "coupon_complaint_reason",
+          "fact_text": "识别过期、门槛、互斥和商品限制，判断投诉原因类型。"
+        },
+        {
+          "chunk_ids": [
+            168
+          ],
+          "fact_key": "coupon_complaint_compensation",
+          "fact_text": "系统异常确认后按权限补发优惠券，禁止在未核实系统异常时直接补券。"
+        }
+      ],
+      "mapped_doc_id": 31,
+      "rendered_file_sha256": "db08f71bc8c5c8ef019867999f416f05b46ae4324facba3b8063379e46bb06ae",
+      "source_content_sha256": "5360a7b56b7d94279ceb24c5d856ea7a3549898cdb0f2d45e5dc32e764f5c4d1",
+      "source_doc_code": "SOP_COUPON_COMPLAINT_001",
+      "title": "优惠券投诉处理SOP",
+      "topic": "coupon",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        177,
+        178,
+        179,
+        180,
+        181,
+        182
+      ],
+      "chunks": [
+        {
+          "chunk_id": 177,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "重复支付处理SOP 总览",
+          "title": "重复支付处理SOP",
+          "title_path": "SOP > 重复支付处理SOP"
+        },
+        {
+          "chunk_id": 178,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 确认订单状态为“已支付”或“待发货”。\n2. 登录支付管理后台，使用标识符S-PAY-001查询支付流水。\n3. 使用标识符E-PAY-2002核对银行返回的支付结果。",
+          "title": "重复支付处理SOP - 步骤组 1",
+          "title_path": "SOP > 重复支付处理SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 179,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "4. 确认是否存在两笔或以上金额相同、时间相近的成功流水。\n1. 核实订单对应的所有支付流水，标记多余流水。\n2. 确认多余流水未绑定其他订单，且退款账户与支付账户一致。",
+          "title": "重复支付处理SOP - 步骤组 2",
+          "title_path": "SOP > 重复支付处理SOP > 步骤组 2"
+        },
+        {
+          "chunk_id": 180,
+          "sort_order": 4,
+          "source_section": "步骤组-3",
+          "summary": "3. 在支付系统中对多余流水发起原路退款，并记录退款单号。\n4. 通知客户退款已发起，预计到账时间为1-7个工作日。\n1. 若多余流水已绑定其他订单，则标记异常，转高级处理。",
+          "title": "重复支付处理SOP - 步骤组 3",
+          "title_path": "SOP > 重复支付处理SOP > 步骤组 3"
+        },
+        {
+          "chunk_id": 181,
+          "sort_order": 5,
+          "source_section": "步骤组-4",
+          "summary": "2. 若退款失败（如账户已注销），联系客户更换退款方式。\n3. 若银行退款超时（超过7个工作日），升级为工单处理。\n1. 退款金额超过万元需升级主管审批。",
+          "title": "重复支付处理SOP - 步骤组 4",
+          "title_path": "SOP > 重复支付处理SOP > 步骤组 4"
+        },
+        {
+          "chunk_id": 182,
+          "sort_order": 6,
+          "source_section": "步骤组-5",
+          "summary": "2. 同一客户月内出现两次以上重复支付，升级风险控制。\n3. 涉及内外部系统故障导致的批量重复支付，升级技术团队。",
+          "title": "重复支付处理SOP - 步骤组 5",
+          "title_path": "SOP > 重复支付处理SOP > 步骤组 5"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            177
+          ],
+          "fact_key": "duplicate_payment_verify",
+          "fact_text": "核对订单号、支付流水和扣款次数，确认重复支付事实。"
+        },
+        {
+          "chunk_ids": [
+            177,
+            179
+          ],
+          "fact_key": "duplicate_payment_match",
+          "fact_text": "确认多余流水未绑定其他订单，且退款账户与支付账户一致。"
+        },
+        {
+          "chunk_ids": [
+            177
+          ],
+          "fact_key": "duplicate_payment_refund",
+          "fact_text": "对多余支付流水发起原路退款。"
+        }
+      ],
+      "mapped_doc_id": 33,
+      "rendered_file_sha256": "9c3b94fb3a624bb51830ca9f72ca43e082c3387b929093fd5c72a911769e64bf",
+      "source_content_sha256": "57361adb9b795b9f407d68af42c873ea3d9b00219020b638e778c14a69d7c685",
+      "source_doc_code": "SOP_DUPLICATE_PAYMENT_001",
+      "title": "重复支付处理SOP",
+      "topic": "payment",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        173,
+        174,
+        175,
+        176
+      ],
+      "chunks": [
+        {
+          "chunk_id": 173,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "发票修改流程SOP 总览",
+          "title": "发票修改流程SOP",
+          "title_path": "SOP > 发票修改流程SOP"
+        },
+        {
+          "chunk_id": 174,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 确认修改需求：区分开票前修改和开票后重开。\n2. 若为开票前修改：在系统中找到原发票S-INVOICE-001或E-IV-6001，直接修改对应字段并保存。\n3. 若为开票后重开：先申请红字发票冲销（invoice_red_issue），待红字发票生成后，再重新开具正",
+          "title": "发票修改流程SOP - 步骤组 1",
+          "title_path": "SOP > 发票修改流程SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 175,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "4. 若涉及专票或跨月红冲，将工单升级至财务部门处理。\n5. 修改完成后，通知相关方确认。\n1. 发票已抵扣：需先由购方发起红字通知单，销方依据通知单红冲。",
+          "title": "发票修改流程SOP - 步骤组 2",
+          "title_path": "SOP > 发票修改流程SOP > 步骤组 2"
+        },
+        {
+          "chunk_id": 176,
+          "sort_order": 4,
+          "source_section": "步骤组-3",
+          "summary": "2. 发票已跨月：必须按照红冲流程处理，且涉及跨月红冲时需升级。\n3. 修改字段受限：若需修改已锁定字段（如税号），需联系财务解锁。",
+          "title": "发票修改流程SOP - 步骤组 3",
+          "title_path": "SOP > 发票修改流程SOP > 步骤组 3"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            173
+          ],
+          "fact_key": "invoice_modify_eligibility",
+          "fact_text": "核对发票状态和可修改字段，确认发票当前是否允许修改。未开票的直接修改；已开票的需先红冲后重开。"
+        },
+        {
+          "chunk_ids": [
+            173
+          ],
+          "fact_key": "invoice_red_issue",
+          "fact_text": "已开票需要先红冲再重开，红冲操作需在系统中发起红字发票申请，经审批后生成红字发票。"
+        },
+        {
+          "chunk_ids": [
+            173
+          ],
+          "fact_key": "invoice_modify_escalation",
+          "fact_text": "专票和跨月红冲需要财务升级，由财务主管审批后方可执行。"
+        }
+      ],
+      "mapped_doc_id": 32,
+      "rendered_file_sha256": "895416ac730e30d889a333c0d495e7bd59deecc51f58a03d02c8299ffdefe790",
+      "source_content_sha256": "d5dd9685123dde0214335282a105f78b18f2ebbd0fc83bd02e6bf5d191db33fe",
+      "source_doc_code": "SOP_INVOICE_MODIFY_001",
+      "title": "发票修改流程SOP",
+      "topic": "invoice",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        157,
+        158,
+        159
+      ],
+      "chunks": [
+        {
+          "chunk_id": 157,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "包裹破损处理SOP 总览",
+          "title": "包裹破损处理SOP",
+          "title_path": "SOP > 包裹破损处理SOP"
+        },
+        {
+          "chunk_id": 158,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 判断破损责任方（damage_liability）：依据凭证判断是否属于运输破损、商家包装不当或客户原因。\n2. 若责任为运输破损，联系物流公司索赔，并为客户提供退款或补发方案。\n3. 若责任为商家包装问题，商家承担费用，为客户提供补发或退款。",
+          "title": "包裹破损处理SOP - 步骤组 1",
+          "title_path": "SOP > 包裹破损处理SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 159,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "4. 若责任为客户原因，告知客户无法免费处理，提供自费维修或重新购买选项。\n5. 执行解决方案（damage_resolution）：根据责任判定结果，执行退款、补发或维修流程。",
+          "title": "包裹破损处理SOP - 步骤组 2",
+          "title_path": "SOP > 包裹破损处理SOP > 步骤组 2"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            157
+          ],
+          "fact_key": "damage_evidence_check",
+          "fact_text": "检查客户提供的凭证（外包装、商品、面单）是否清晰完整，确认破损事实。"
+        },
+        {
+          "chunk_ids": [
+            157
+          ],
+          "fact_key": "damage_liability",
+          "fact_text": "依据凭证判断运输破损、商家包装或客户原因，确定责任方。"
+        },
+        {
+          "chunk_ids": [
+            157
+          ],
+          "fact_key": "damage_resolution",
+          "fact_text": "根据责任认定结果，提供退款、补发或维修等解决方案。"
+        }
+      ],
+      "mapped_doc_id": 28,
+      "rendered_file_sha256": "cb8e7a1dc46aecdf172ad6bd8de2329e188466a5aa31eaaa38e892e33cccaae7",
+      "source_content_sha256": "44fd2c4722c220f2fb376b6129871b05fe930527efbc5af6f702c254a9f11f88",
+      "source_doc_code": "SOP_PACKAGE_DAMAGE_001",
+      "title": "包裹破损处理SOP",
+      "topic": "logistics",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        154,
+        155,
+        156
+      ],
+      "chunks": [
+        {
+          "chunk_id": 154,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "包裹丢失排查SOP 总览",
+          "title": "包裹丢失排查SOP",
+          "title_path": "SOP > 包裹丢失排查SOP"
+        },
+        {
+          "chunk_id": 155,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 确认包裹是否已超过物流承诺时效。\n2. 核查揽收、转运和派送轨迹（loss_tracking_check），各节点停滞时限：揽收后48小时、转运中24\n3. 排除异常天气、地址不详等非丢失因素。",
+          "title": "包裹丢失排查SOP - 步骤组 1",
+          "title_path": "SOP > 包裹丢失排查SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 156,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "1. 包裹价值超过5000元。\n2. 承运商超时未反馈（超过3个工作日）。\n3. 同一客户多次丢失（月内≥2次）。",
+          "title": "包裹丢失排查SOP - 步骤组 2",
+          "title_path": "SOP > 包裹丢失排查SOP > 步骤组 2"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            154
+          ],
+          "fact_key": "loss_tracking_check",
+          "fact_text": "客服需登录物流系统，输入运单号，逐节点核查揽收、转运、派送轨迹。揽收后节点停滞超过48小时视为异常，转运中节点停滞超过24小时视为异常，派送节点停滞超过12小时视为异常。若任一节点符合异常条件，则进入下一步。"
+        },
+        {
+          "chunk_ids": [
+            154
+          ],
+          "fact_key": "loss_carrier_ticket",
+          "fact_text": "使用承运商提供的工单系统，选择“丢失核查”类型，关联S-LOGISTICS-001运单，并备注“请核查揽收/转运/派送节点”。提交后记录工单号。"
+        },
+        {
+          "chunk_ids": [
+            154
+          ],
+          "fact_key": "loss_resolution",
+          "fact_text": "确认丢失以承运商出具书面丢失证明或系统标记“丢失”为准。客服需在系统中选择“丢失处理”方案：客户要求退款则发起退款流程；要求补发则创建补发订单，并通知仓库优先处理。"
+        }
+      ],
+      "mapped_doc_id": 27,
+      "rendered_file_sha256": "22e60638eac00b84cbcf6d00eb79bc45f6712ca92621c276ee7dcf589b1b0272",
+      "source_content_sha256": "cc99a8a9eea2e342496b170d6ba8c10db68d3936ad587cd2fa069cd0f936b226",
+      "source_doc_code": "SOP_PACKAGE_LOSS_001",
+      "title": "包裹丢失排查SOP",
+      "topic": "logistics",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        165,
+        166,
+        167
+      ],
+      "chunks": [
+        {
+          "chunk_id": 165,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "退款失败排查SOP 总览",
+          "title": "退款失败排查SOP",
+          "title_path": "SOP > 退款失败排查SOP"
+        },
+        {
+          "chunk_id": 166,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 检查退款失败原因，根据渠道返回码判断是原路退回限制（S-REFUND-002）还是账户异常（\n2. 若为原路退回限制，则重试退款任务（参考标识S-REFUND-002）；若为账户异常，则直接转人\n3. 重试失败后，转人工打款或财务处理（提交工单）。",
+          "title": "退款失败排查SOP - 步骤组 1",
+          "title_path": "SOP > 退款失败排查SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 167,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "4. 记录处理结果并归档。",
+          "title": "退款失败排查SOP - 步骤组 2",
+          "title_path": "SOP > 退款失败排查SOP > 步骤组 2"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            165
+          ],
+          "fact_key": "refund_failure_channel",
+          "fact_text": "核对原支付渠道可退款状态，确认返回码是否为'NOT_SUPPORTED'或'ACCOUNT_CLOSED'等，以区分原路退回限制与账户异常。"
+        },
+        {
+          "chunk_ids": [
+            165
+          ],
+          "fact_key": "refund_failure_retry",
+          "fact_text": "满足条件时重试退款任务，重试逻辑应基于渠道返回码判断是否可重试。"
+        },
+        {
+          "chunk_ids": [
+            165
+          ],
+          "fact_key": "refund_failure_manual",
+          "fact_text": "重试失败后转人工打款或财务处理，需通过工单系统提交，注明失败原因与重试记录。"
+        }
+      ],
+      "mapped_doc_id": 30,
+      "rendered_file_sha256": "cd650f1a3bd533c6cdd668f82b6352f857ea75d705fbc74089ebf64fdea73ccc",
+      "source_content_sha256": "a7b8b55998b2a55d47d6239ac86f19cca3612c07b80b61be19d68cc25eb301a5",
+      "source_doc_code": "SOP_REFUND_FAILURE_001",
+      "title": "退款失败排查SOP",
+      "topic": "refund",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        151,
+        152,
+        153
+      ],
+      "chunks": [
+        {
+          "chunk_id": 151,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "仅退款申请处理SOP 总览",
+          "title": "仅退款申请处理SOP",
+          "title_path": "SOP > 仅退款申请处理SOP"
+        },
+        {
+          "chunk_id": 152,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 接收退款申请并记录工单号【S-REFUND-001】。\n2. 查询OMS订单状态和物流信息。\n3. 根据OMS订单状态判断发货情况：若状态为“待发货”，则为未发货；若为“已发货”且物流轨",
+          "title": "仅退款申请处理SOP - 步骤组 1",
+          "title_path": "SOP > 仅退款申请处理SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 153,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "4. 未发货：同意退款，系统自动退款至买家账户。\n5. 已发货未签收：发起物流拦截，拦截成功后同意退款；若拦截失败，则转为【E-RF-1001】异常处\n6. 已签收：引导买家发起退货退款流程。但若退款原因为“质量问题”且凭证清晰，可特批仅退款",
+          "title": "仅退款申请处理SOP - 步骤组 2",
+          "title_path": "SOP > 仅退款申请处理SOP > 步骤组 2"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            151
+          ],
+          "fact_key": "refund_only_precheck",
+          "fact_text": "核对订单状态、退款原因和凭证，确认是否符合仅退款条件。"
+        },
+        {
+          "chunk_ids": [
+            151
+          ],
+          "fact_key": "refund_only_decision",
+          "fact_text": "按照未发货、已发货未签收和已签收分支处理，分别执行不同操作。"
+        },
+        {
+          "chunk_ids": [
+            151
+          ],
+          "fact_key": "refund_only_escalation",
+          "fact_text": "高金额或争议订单升级人工复核，确保处理公正。"
+        }
+      ],
+      "mapped_doc_id": 26,
+      "rendered_file_sha256": "6e0b2afff7e9c9088d1bd731f7e9f2486a8813764fae2ea4e5607f8748b55517",
+      "source_content_sha256": "7b03035bc6dae0f5c7f92d1867b6f4152fad525faf2b97eab63b69da6c5f291a",
+      "source_doc_code": "SOP_REFUND_ONLY_001",
+      "title": "仅退款申请处理SOP",
+      "topic": "refund",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "chunks": [
+        {
+          "chunk_id": 35,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "退货退款处理SOP 总览",
+          "title": "退货退款处理SOP",
+          "title_path": "SOP > 退货退款处理SOP"
+        },
+        {
+          "chunk_id": 36,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 用户发起退货申请，提交相关凭证。\n2. 客服审核退货资格，确认符合条件后向用户发送退货地址。\n3. 用户需在7天内寄回商品，并上传物流单号。",
+          "title": "退货退款处理SOP - 步骤组 1",
+          "title_path": "SOP > 退货退款处理SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 37,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "4. 商家签收包裹，记录签收时间及物流单号，状态更新为RETURN_RECEIVED。\n5. 仓库进行验货，核对商品、配件、包装是否完好。\n6. 验货通过后，财务进行退款操作，退款原路返回。",
+          "title": "退货退款处理SOP - 步骤组 2",
+          "title_path": "SOP > 退货退款处理SOP > 步骤组 2"
+        },
+        {
+          "chunk_id": 38,
+          "sort_order": 4,
+          "source_section": "步骤组-3",
+          "summary": "7. 退款完成，通知用户，结束退货流程。",
+          "title": "退货退款处理SOP - 步骤组 3",
+          "title_path": "SOP > 退货退款处理SOP > 步骤组 3"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            35
+          ],
+          "fact_key": "return_refund_precheck",
+          "fact_text": "检查退货资格、商品状态和物流单号"
+        },
+        {
+          "chunk_ids": [
+            35
+          ],
+          "fact_key": "return_refund_receive",
+          "fact_text": "商家签收后进入验货和退款流程"
+        },
+        {
+          "chunk_ids": [
+            35
+          ],
+          "fact_key": "return_refund_exception",
+          "fact_text": "空包、少件或商品不符时进入异常分支"
+        }
+      ],
+      "mapped_doc_id": 12,
+      "rendered_file_sha256": "3a2116608f744e76a3ab6a314a85656c3bcd7ba1d747917813ca4efc47bd6c99",
+      "source_content_sha256": "299867e4e0c6e02b27b9d84cc37d9acfaba0fdca1f0ffc4281a9bc48f28f8887",
+      "source_doc_code": "SOP_RETURN_REFUND_001",
+      "title": "退货退款处理SOP",
+      "topic": "return",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        183,
+        184,
+        185
+      ],
+      "chunks": [
+        {
+          "chunk_id": 183,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "风控升级流程SOP 总览",
+          "title": "风控升级流程SOP",
+          "title_path": "SOP > 风控升级流程SOP"
+        },
+        {
+          "chunk_id": 184,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 识别触发风控的订单，标记为高风险。\n2. 根据风险等级编码标准 S-RISK-001（如L：低、M：中、H：高）对订单进行分级。\n3. 提交风控复核申请，使用记录模板编号 E-RK-7001 填写详细信息。",
+          "title": "风控升级流程SOP - 步骤组 1",
+          "title_path": "SOP > 风控升级流程SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 185,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "4. 等待风控团队反馈，期间不得主动执行退款或补偿操作。",
+          "title": "风控升级流程SOP - 步骤组 2",
+          "title_path": "SOP > 风控升级流程SOP > 步骤组 2"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            183
+          ],
+          "fact_key": "risk_trigger",
+          "fact_text": "高金额、频繁售后或账号异常触发风控"
+        },
+        {
+          "chunk_ids": [
+            183
+          ],
+          "fact_key": "risk_freeze_action",
+          "fact_text": "风险核查期间暂停自动退款或补偿"
+        },
+        {
+          "chunk_ids": [
+            183
+          ],
+          "fact_key": "risk_escalation_sla",
+          "fact_text": "按照风险等级升级并记录处理时限"
+        }
+      ],
+      "mapped_doc_id": 34,
+      "rendered_file_sha256": "eb324f8557a18fb1c64306507c69ddacafbd4a5ffb3814d9953ff02da9d86fb5",
+      "source_content_sha256": "146f16813ed742e9f30e942a997249beb596e97970e899792b2f28dda3a5adfe",
+      "source_doc_code": "SOP_RISK_ESCALATION_001",
+      "title": "风控升级流程SOP",
+      "topic": "risk",
+      "version": "1.0"
+    },
+    {
+      "chunk_ids": [
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "chunks": [
+        {
+          "chunk_id": 160,
+          "sort_order": 1,
+          "source_section": "SOP总览",
+          "summary": "错发商品处理SOP 总览",
+          "title": "错发商品处理SOP",
+          "title_path": "SOP > 错发商品处理SOP"
+        },
+        {
+          "chunk_id": 161,
+          "sort_order": 2,
+          "source_section": "步骤组-1",
+          "summary": "1. 确认客户反馈为整单错发，且客户已提供实物照片或视频。\n2. 核实订单信息（订单号、商品SKU、数量）。\n3. 检查客户提供的关键标识符：S-AFTERSALE-001 和 E-AS-4001 是否在系统中记录。",
+          "title": "错发商品处理SOP - 步骤组 1",
+          "title_path": "SOP > 错发商品处理SOP > 步骤组 1"
+        },
+        {
+          "chunk_id": 162,
+          "sort_order": 3,
+          "source_section": "步骤组-2",
+          "summary": "1. 核实错发情况：通过订单与实物的SKU比对，确认错发事实，记录于工单。\n2. 联系客户说明情况，确认客户是否同意退换：错发商品由商家承担寄回费用（参考\n3. 补发正确商品：确认库存充足（如缺货则进入异常分支），并与客户核实收货地址后发起补发（",
+          "title": "错发商品处理SOP - 步骤组 2",
+          "title_path": "SOP > 错发商品处理SOP > 步骤组 2"
+        },
+        {
+          "chunk_id": 163,
+          "sort_order": 4,
+          "source_section": "步骤组-3",
+          "summary": "4. 关闭工单：客户确认收到补发商品后，更新售后记录并关闭工单。\n1. 单个订单错发金额超过2000元。\n2. 同一客户连续两次错发。",
+          "title": "错发商品处理SOP - 步骤组 3",
+          "title_path": "SOP > 错发商品处理SOP > 步骤组 3"
+        },
+        {
+          "chunk_id": 164,
+          "sort_order": 5,
+          "source_section": "步骤组-4",
+          "summary": "3. 涉及发票或税务问题。",
+          "title": "错发商品处理SOP - 步骤组 4",
+          "title_path": "SOP > 错发商品处理SOP > 步骤组 4"
+        }
+      ],
+      "doc_type": "SOP",
+      "facts": [
+        {
+          "chunk_ids": [
+            160
+          ],
+          "fact_key": "wrong_item_verify",
+          "fact_text": "核对订单商品和实收商品信息"
+        },
+        {
+          "chunk_ids": [
+            160,
+            162
+          ],
+          "fact_key": "wrong_item_return",
+          "fact_text": "错发商品由商家承担寄回费用"
+        },
+        {
+          "chunk_ids": [
+            160
+          ],
+          "fact_key": "wrong_item_reship",
+          "fact_text": "补发前确认库存和用户地址"
+        }
+      ],
+      "mapped_doc_id": 29,
+      "rendered_file_sha256": "fbc2d1adea1a579e57620a9765c50ded6ab8b6abe43c382f4eedcd9f2b1175d8",
+      "source_content_sha256": "11d4ddbc8ec5ede19e14064daeda3c5f9daaa8c72208aa7fe23e572e3e80b3a6",
+      "source_doc_code": "SOP_WRONG_ITEM_001",
+      "title": "错发商品处理SOP",
+      "topic": "after_sales",
+      "version": "1.0"
+    }
+  ],
+  "schema_version": "1.0"
+}

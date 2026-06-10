@@ -1,0 +1,46 @@
+请独立审核以下 RAG 评测题。生成模型是 DeepSeek，你是百炼 Qwen 审核模型。
+
+审核标准：
+1. expected_action_correct：ANSWER、REFUSE 或 CLARIFY 是否正确。
+2. reference_answer_supported：
+   - ANSWER 题的参考答案是否完全由源文档事实支持；
+   - REFUSE/CLARIFY 题是否符合知识边界或缺少条件。
+3. evidence_complete：ANSWER 题的标准证据是否覆盖所有必要事实；无答案题不得有证据。
+4. ambiguity_score：问题在给定语料和预期行为下的歧义风险，0到1。
+5. semantic_duplicate：如果 generation_metadata 中给出了相似题，判断两题是否实质重复。
+   - 只有两题要求获取的信息、必要事实和预期结论实质相同，才判为重复。
+   - 对 ANSWER 题，当前 evidences.fact_key 与 nearest_fact_keys 不同，通常表示考查不同知识点，不得仅因题型、主题、版本组或句式相似而判重。
+   - 对 CONFLICT 题，同一版本组中比较“叠加规则”“门槛计算”“例外商品”等不同事实，属于不同测试能力，不是重复。
+   - 对 NO_ANSWER 题，询问不同的缺失规则、不同业务对象或不同待澄清条件，不得仅因子类型和回答动作相同而判重。
+   - 相同领域、相同题型、相同推理结构或向量相似度较高，本身都不足以判重。
+6. difficulty：重新判断 EASY、MEDIUM 或 HARD。
+
+通过条件由程序确定：
+- expected_action_correct=true
+- reference_answer_supported=true
+- evidence_complete=true
+- ambiguity_score<=0.15
+- semantic_duplicate=false
+
+只返回一个 JSON 对象：
+{{
+  "reviews": [
+    {{
+      "case_code": "SEED_DIRECT_001",
+      "answerable": true,
+      "expected_action_correct": true,
+      "reference_answer_supported": true,
+      "evidence_complete": true,
+      "ambiguity_score": 0.05,
+      "difficulty": "EASY|MEDIUM|HARD",
+      "semantic_duplicate": false,
+      "issues": []
+    }}
+  ]
+}}
+
+待审核评测题：
+{cases_json}
+
+相关源文档：
+{source_documents_json}

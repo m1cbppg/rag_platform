@@ -70,6 +70,20 @@ def test_no_answer_case_rejects_evidence() -> None:
         )
 
 
+def test_no_answer_case_accepts_clarify_without_evidence() -> None:
+    case = GeneratedEvalCase(
+        case_code="CASE_CLARIFY_001",
+        question="我的订单还能申请退款吗？",
+        case_type=EvalCaseType.NO_ANSWER,
+        expected_action=ExpectedAction.CLARIFY,
+        dataset_split=DatasetSplit.TEST,
+        required_fact_count=0,
+        evidences=[],
+    )
+
+    assert case.expected_action == ExpectedAction.CLARIFY
+
+
 def test_multi_hop_case_requires_two_distinct_fact_keys() -> None:
     with pytest.raises(ValidationError):
         GeneratedEvalCase(

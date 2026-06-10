@@ -389,3 +389,36 @@ class DocumentRepository:
                 "relation_type": relation_type,
                 "sort_order": sort_order,
             })
+
+    def list_chunks_by_doc_id(self, doc_id: int) -> list[dict]:
+        sql = text(
+            """
+            SELECT
+                id,
+                chunk_code,
+                doc_id,
+                parent_chunk_id,
+                chunk_type,
+                title,
+                title_path,
+                content,
+                summary,
+                keywords,
+                tags,
+                business_domain,
+                version,
+                source_doc_title,
+                source_page,
+                source_section,
+                token_count,
+                sort_order,
+                status
+            FROM rag_chunk
+            WHERE doc_id = :doc_id
+              AND status = 'ACTIVE'
+            ORDER BY sort_order ASC, id ASC
+            """
+        )
+        with self.engine.begin() as conn:
+            rows = conn.execute(sql, {"doc_id": doc_id}).mappings().all()
+        return [dict(row) for row in rows]

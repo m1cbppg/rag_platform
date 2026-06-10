@@ -86,8 +86,15 @@ class SearchIndexService:
             message="ES 索引任务创建完成",
         )
 
-    def run_tasks(self, limit: int) -> KeywordIndexTaskRunResponse:
-        tasks = self.repository.list_pending_keyword_index_tasks(limit=limit)
+    def run_tasks(
+        self,
+        limit: int,
+        doc_id: int | None = None,
+    ) -> KeywordIndexTaskRunResponse:
+        tasks = self.repository.list_pending_keyword_index_tasks(
+            limit=limit,
+            doc_id=doc_id,
+        )
 
         if not tasks:
             return KeywordIndexTaskRunResponse(
@@ -123,6 +130,12 @@ class SearchIndexService:
             success_count=success_count,
             failed_count=failed_count,
             message="ES 索引任务执行完成",
+        )
+
+    def get_task_summary(self, doc_id: int) -> dict[str, int]:
+        return self.repository.get_keyword_index_task_summary(
+            doc_id=doc_id,
+            index_name=self.settings.es_chunk_index,
         )
 
     def _run_one_batch(self, tasks: list[dict]) -> None:

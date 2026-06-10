@@ -178,8 +178,13 @@ class GeneratedEvalCase(EvaluationModel):
                 raise ValueError("expected_action=ANSWER 时必须提供标准证据")
 
         if self.case_type == EvalCaseType.NO_ANSWER:
-            if self.expected_action != ExpectedAction.REFUSE:
-                raise ValueError("NO_ANSWER 题的 expected_action 必须是 REFUSE")
+            if self.expected_action not in {
+                ExpectedAction.REFUSE,
+                ExpectedAction.CLARIFY,
+            }:
+                raise ValueError(
+                    "NO_ANSWER 题的 expected_action 必须是 REFUSE 或 CLARIFY"
+                )
             if self.evidences:
                 raise ValueError("NO_ANSWER 题不能包含标准证据")
             if self.required_fact_count != 0:
@@ -236,6 +241,7 @@ class RetrievalMetricResult(EvaluationModel):
     reciprocal_rank: float | None = Field(default=None, ge=0.0, le=1.0)
     ndcg_at_5: float | None = Field(default=None, ge=0.0, le=1.0)
     ndcg_at_10: float | None = Field(default=None, ge=0.0, le=1.0)
+    fact_coverage: float | None = Field(default=None, ge=0.0, le=1.0)
     citation_precision: float | None = Field(default=None, ge=0.0, le=1.0)
     citation_recall: float | None = Field(default=None, ge=0.0, le=1.0)
     action_correct: bool | None = None

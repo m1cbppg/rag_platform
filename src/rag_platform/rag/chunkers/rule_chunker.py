@@ -1,3 +1,4 @@
+import re
 from typing import Any
 
 from src.rag_platform.domain.chunk import ChunkBuildItem, ChunkType
@@ -25,8 +26,15 @@ class RuleChunker(BaseChunker):
         for index, clause in enumerate(clauses, start=1):
             clause_no = clause.get("clause_no", "").strip()
             title_path = clause.get("title_path", "").strip()
-            content_text = clause.get("content", "").strip()
             raw_line = clause.get("raw_line", "").strip()
+            content_text = clause.get("content", "").strip()
+            if raw_line:
+                content_text = re.sub(
+                    rf"^{re.escape(clause_no)}[\.、\s]*",
+                    "",
+                    raw_line,
+                    count=1,
+                ).strip()
 
             if not content_text:
                 continue

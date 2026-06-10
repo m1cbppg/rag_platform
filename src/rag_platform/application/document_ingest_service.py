@@ -141,6 +141,36 @@ class DocumentIngestService:
 
             raise
 
+    def ingest_file_path(
+        self,
+        file_path: Path,
+        title: str,
+        doc_type: DocumentType,
+        business_domain: str | None,
+        version: str | None,
+        created_by: str | None,
+    ) -> DocumentUploadResponse:
+        """
+        从本地文件路径导入文档。
+
+        评测语料已经由渲染脚本写入本地，不需要再经过 HTTP 上传。
+        这里复用与接口上传完全相同的解析、清洗和质量检查流程。
+        """
+
+        with file_path.open("rb") as file_object:
+            upload_file = UploadFile(
+                file=file_object,
+                filename=file_path.name,
+            )
+            return self.ingest_upload_file(
+                file=upload_file,
+                title=title,
+                doc_type=doc_type,
+                business_domain=business_domain,
+                version=version,
+                created_by=created_by,
+            )
+
     def _save_upload_file(self, file: UploadFile) -> Path:
         """
         保存上传文件到本地目录。

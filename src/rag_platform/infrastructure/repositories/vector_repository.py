@@ -234,13 +234,14 @@ class VectorRepository:
                 'PENDING'
             )
             ON DUPLICATE KEY UPDATE
-                embedding_text_hash = VALUES(embedding_text_hash),
-                milvus_collection = VALUES(milvus_collection),
                 status = CASE
                     WHEN embedding_text_hash <> VALUES(embedding_text_hash)
+                      OR status = 'PROCESSING'
                     THEN 'PENDING'
                     ELSE status
                 END,
+                embedding_text_hash = VALUES(embedding_text_hash),
+                milvus_collection = VALUES(milvus_collection),
                 updated_at = CURRENT_TIMESTAMP
         """)
 
@@ -255,7 +256,11 @@ class VectorRepository:
                 "milvus_collection": milvus_collection,
             })
 
-    def list_pending_embedding_tasks(self, limit: int) -> list[dict]:
+    def list_pending_embedding_tasks(
+        self,
+        limit: int,
+        doc_id: int | None = None,
+    ) -> list[dict]:
         """
         查询待执行的 embedding 任务。
 
@@ -263,7 +268,8 @@ class VectorRepository:
         FAILED 也查出来，是为了支持失败重试。
         """
 
-        sql = text("""
+        doc_filter = "AND t.doc_id = :doc_id" if doc_id is not None else ""
+        sql = text(f"""
             SELECT
                 t.id AS task_id,
                 t.chunk_id,
@@ -290,14 +296,50 @@ class VectorRepository:
             JOIN rag_chunk c ON t.chunk_id = c.id
             WHERE t.status IN ('PENDING', 'FAILED')
               AND c.status = 'ACTIVE'
+              {doc_filter}
             ORDER BY t.updated_at ASC
             LIMIT :limit
         """)
 
+        params = {"limit": limit}
+        if doc_id is not None:
+            params["doc_id"] = doc_id
         with self.engine.begin() as conn:
-            rows = conn.execute(sql, {"limit": limit}).mappings().all()
+            rows = conn.execute(sql, params).mappings().all()
 
         return [dict(row) for row in rows]
+
+    def get_embedding_task_summary(
+        self,
+        doc_id: int,
+        embedding_model: str,
+        embedding_dimension: int,
+        embedding_output_type: str,
+    ) -> dict[str, int]:
+        sql = text(
+            """
+            SELECT t.status, COUNT(*) AS count
+            FROM rag_embedding_task t
+            JOIN rag_chunk c ON c.id = t.chunk_id
+            WHERE t.doc_id = :doc_id
+              AND t.embedding_model = :embedding_model
+              AND t.embedding_dimension = :embedding_dimension
+              AND t.embedding_output_type = :embedding_output_type
+              AND c.status = 'ACTIVE'
+            GROUP BY t.status
+            """
+        )
+        with self.engine.begin() as conn:
+            rows = conn.execute(
+                sql,
+                {
+                    "doc_id": doc_id,
+                    "embedding_model": embedding_model,
+                    "embedding_dimension": embedding_dimension,
+                    "embedding_output_type": embedding_output_type,
+                },
+            ).mappings().all()
+        return {str(row["status"]): int(row["count"]) for row in rows}
 
     def update_embedding_task_status(
             self,

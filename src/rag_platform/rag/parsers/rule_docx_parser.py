@@ -14,7 +14,8 @@ class RuleDocxParser(BaseDocumentParser):
     """
 
     CLAUSE_PATTERN = re.compile(
-        r"^(\d+(\.\d+)*|第[一二三四五六七八九十]+条)[\.、\s]*(.+)"
+        r"^(\d+(\.\d+)*|第[一二三四五六七八九十]+条)[\.、\s]*(.+)",
+        re.DOTALL,
     )
 
     def parse(self, file_path: str) -> ParseResult:

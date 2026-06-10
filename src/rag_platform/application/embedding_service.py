@@ -72,14 +72,21 @@ class EmbeddingService:
             message="embedding 任务创建完成",
         )
 
-    async def run_tasks(self, limit: int) -> EmbeddingTaskRunResponse:
+    async def run_tasks(
+        self,
+        limit: int,
+        doc_id: int | None = None,
+    ) -> EmbeddingTaskRunResponse:
         """
         执行 embedding 任务。
 
         这里按 batch 调用阿里 text-embedding-v4。
         """
 
-        tasks = self.vector_repository.list_pending_embedding_tasks(limit=limit)
+        tasks = self.vector_repository.list_pending_embedding_tasks(
+            limit=limit,
+            doc_id=doc_id,
+        )
 
         if not tasks:
             return EmbeddingTaskRunResponse(
@@ -114,6 +121,14 @@ class EmbeddingService:
             success_count=success_count,
             failed_count=failed_count,
             message="embedding 任务执行完成",
+        )
+
+    def get_task_summary(self, doc_id: int) -> dict[str, int]:
+        return self.vector_repository.get_embedding_task_summary(
+            doc_id=doc_id,
+            embedding_model=self.settings.embedding_model,
+            embedding_dimension=self.settings.embedding_dimension,
+            embedding_output_type=self.settings.embedding_output_type,
         )
 
     async def _run_one_batch(self, tasks: list[dict]) -> int:

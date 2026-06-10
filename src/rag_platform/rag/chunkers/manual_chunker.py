@@ -29,16 +29,16 @@ class ManualChunker(BaseChunker):
 
         buttons_text = "；".join(button_names)
 
-        content = (
-            f"操作手册：{title}\n"
-            f"标题路径：{title_path}\n"
-        )
+        content = clean_content.strip()
 
-        if steps:
-            content += "操作步骤：\n"
-            content += "\n".join(steps)
-        else:
-            content += clean_content
+        if not content:
+            content = (
+                f"操作手册：{title}\n"
+                f"标题路径：{title_path}\n"
+            )
+            if steps:
+                content += "操作步骤：\n"
+                content += "\n".join(steps)
 
         if buttons_text:
             content += f"\n涉及按钮：{buttons_text}"

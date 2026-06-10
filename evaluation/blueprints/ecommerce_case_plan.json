@@ -1,0 +1,82 @@
+{
+  "case_type_counts": {
+    "CONFLICT": 20,
+    "DIRECT": 90,
+    "EXACT": 30,
+    "MULTI_CONDITION": 45,
+    "MULTI_HOP": 30,
+    "NO_ANSWER": 40,
+    "PARAPHRASE": 45
+  },
+  "generation_batch_size": 5,
+  "generation_pool_multiplier": 1.25,
+  "no_answer_subtype_counts": {
+    "KNOWLEDGE_GAP": 20,
+    "MISSING_CONDITION": 10,
+    "OUT_OF_DOMAIN": 10
+  },
+  "split_case_type_counts": {
+    "DEVELOPMENT": {
+      "CONFLICT": 12,
+      "DIRECT": 54,
+      "EXACT": 18,
+      "MULTI_CONDITION": 27,
+      "MULTI_HOP": 18,
+      "NO_ANSWER": 24,
+      "PARAPHRASE": 27
+    },
+    "TEST": {
+      "CONFLICT": 4,
+      "DIRECT": 18,
+      "EXACT": 6,
+      "MULTI_CONDITION": 9,
+      "MULTI_HOP": 6,
+      "NO_ANSWER": 8,
+      "PARAPHRASE": 9
+    },
+    "VALIDATION": {
+      "CONFLICT": 4,
+      "DIRECT": 18,
+      "EXACT": 6,
+      "MULTI_CONDITION": 9,
+      "MULTI_HOP": 6,
+      "NO_ANSWER": 8,
+      "PARAPHRASE": 9
+    }
+  },
+  "split_no_answer_subtype_counts": {
+    "DEVELOPMENT": {
+      "KNOWLEDGE_GAP": 12,
+      "MISSING_CONDITION": 6,
+      "OUT_OF_DOMAIN": 6
+    },
+    "TEST": {
+      "KNOWLEDGE_GAP": 4,
+      "MISSING_CONDITION": 2,
+      "OUT_OF_DOMAIN": 2
+    },
+    "VALIDATION": {
+      "KNOWLEDGE_GAP": 4,
+      "MISSING_CONDITION": 2,
+      "OUT_OF_DOMAIN": 2
+    }
+  },
+  "split_topics": {
+    "DEVELOPMENT": [
+      "order",
+      "refund",
+      "after_sales",
+      "payment",
+      "risk"
+    ],
+    "TEST": [
+      "logistics",
+      "return"
+    ],
+    "VALIDATION": [
+      "coupon",
+      "invoice",
+      "member"
+    ]
+  }
+}

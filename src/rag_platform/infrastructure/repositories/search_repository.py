@@ -172,12 +172,13 @@ class SearchRepository:
                 'PENDING'
             )
             ON DUPLICATE KEY UPDATE
-                index_text_hash = VALUES(index_text_hash),
                 status = CASE
                     WHEN index_text_hash <> VALUES(index_text_hash)
+                      OR status = 'PROCESSING'
                     THEN 'PENDING'
                     ELSE status
                 END,
+                index_text_hash = VALUES(index_text_hash),
                 updated_at = CURRENT_TIMESTAMP
         """)
 
@@ -189,8 +190,13 @@ class SearchRepository:
                 "index_text_hash": index_text_hash,
             })
 
-    def list_pending_keyword_index_tasks(self, limit: int) -> list[dict]:
-        sql = text("""
+    def list_pending_keyword_index_tasks(
+        self,
+        limit: int,
+        doc_id: int | None = None,
+    ) -> list[dict]:
+        doc_filter = "AND t.doc_id = :doc_id" if doc_id is not None else ""
+        sql = text(f"""
             SELECT
                 t.id AS task_id,
                 t.chunk_id,
@@ -213,14 +219,44 @@ class SearchRepository:
             JOIN rag_chunk c ON t.chunk_id = c.id
             WHERE t.status IN ('PENDING', 'FAILED')
               AND c.status = 'ACTIVE'
+              {doc_filter}
             ORDER BY t.updated_at ASC
             LIMIT :limit
         """)
 
+        params = {"limit": limit}
+        if doc_id is not None:
+            params["doc_id"] = doc_id
         with self.engine.begin() as conn:
-            rows = conn.execute(sql, {"limit": limit}).mappings().all()
+            rows = conn.execute(sql, params).mappings().all()
 
         return [dict(row) for row in rows]
+
+    def get_keyword_index_task_summary(
+        self,
+        doc_id: int,
+        index_name: str,
+    ) -> dict[str, int]:
+        sql = text(
+            """
+            SELECT t.status, COUNT(*) AS count
+            FROM rag_keyword_index_task t
+            JOIN rag_chunk c ON c.id = t.chunk_id
+            WHERE t.doc_id = :doc_id
+              AND t.index_name = :index_name
+              AND c.status = 'ACTIVE'
+            GROUP BY t.status
+            """
+        )
+        with self.engine.begin() as conn:
+            rows = conn.execute(
+                sql,
+                {
+                    "doc_id": doc_id,
+                    "index_name": index_name,
+                },
+            ).mappings().all()
+        return {str(row["status"]): int(row["count"]) for row in rows}
 
     def update_keyword_index_task_status(
         self,

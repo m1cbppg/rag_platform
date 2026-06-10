@@ -110,6 +110,24 @@ def test_repository_persists_complete_evaluation_lifecycle() -> None:
                 evidences=[evidence],
             ),
         )
+        upserted_case_id = repository.upsert_eval_case(
+            dataset_id=dataset_id,
+            case=GeneratedEvalCase(
+                case_code=f"CASE_{suffix}",
+                question="待支付订单是否允许退款？",
+                normalized_question="待支付订单是否允许退款",
+                reference_answer="未发货订单允许直接申请退款。",
+                case_type=EvalCaseType.DIRECT,
+                target_doc_types=[SourceDocumentType.RULE],
+                expected_action=ExpectedAction.ANSWER,
+                dataset_split=DatasetSplit.DEVELOPMENT,
+                business_domain="ecommerce_after_sales",
+                required_fact_count=1,
+                generation_metadata={"source_group": "refund-v1"},
+                evidences=[evidence],
+            ),
+        )
+        assert upserted_case_id == case_id
         repository.update_eval_case_review(
             case_id=case_id,
             review_status=ReviewStatus.PASSED,

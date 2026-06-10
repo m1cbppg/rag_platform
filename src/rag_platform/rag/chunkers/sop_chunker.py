@@ -35,6 +35,7 @@ class SopChunker(BaseChunker):
             scene=scene,
             steps=steps,
             notes=notes,
+            clean_content=clean_content,
         )
 
         chunks.append(
@@ -90,10 +91,14 @@ class SopChunker(BaseChunker):
         scene: str,
         steps: list[str],
         notes: list[str],
+        clean_content: str,
     ) -> str:
         """
         构建 parent chunk 内容。
         """
+
+        if clean_content.strip():
+            return clean_content.strip()
 
         content = f"SOP标题：{title}\n"
 

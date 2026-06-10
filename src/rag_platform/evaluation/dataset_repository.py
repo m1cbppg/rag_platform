@@ -379,6 +379,52 @@ class DatasetRepository:
                 f"source_doc_code={source_doc_code}"
             )
 
+    def list_source_documents(
+        self,
+        dataset_id: int,
+    ) -> list[dict[str, Any]]:
+        sql = text(
+            """
+            SELECT
+                id,
+                dataset_id,
+                source_doc_code,
+                title,
+                doc_type,
+                topic,
+                version,
+                effective_from,
+                effective_to,
+                is_current,
+                relative_file_path,
+                source_content_sha256,
+                generation_spec_json,
+                review_status,
+                review_score,
+                review_reason,
+                mapped_doc_id,
+                created_at,
+                updated_at
+            FROM rag_eval_source_document
+            WHERE dataset_id = :dataset_id
+            ORDER BY source_doc_code ASC
+            """
+        )
+        with self.engine.begin() as connection:
+            rows = connection.execute(
+                sql,
+                {"dataset_id": dataset_id},
+            ).mappings().all()
+        result = []
+        for row in rows:
+            item = dict(row)
+            item["generation_spec_json"] = _json_loads(
+                item.get("generation_spec_json"),
+                {},
+            )
+            result.append(item)
+        return result
+
     def update_source_document_review(
         self,
         source_document_id: int,
@@ -499,6 +545,110 @@ class DatasetRepository:
             connection.execute(count_sql, {"dataset_id": dataset_id})
             return int(result.lastrowid)
 
+    def upsert_eval_case(
+        self,
+        dataset_id: int,
+        case: GeneratedEvalCase | ReviewedEvalCase,
+    ) -> int:
+        sql = text(
+            """
+            INSERT INTO rag_eval_case (
+                dataset_id,
+                case_code,
+                question,
+                normalized_question,
+                reference_answer,
+                case_type,
+                target_doc_types_json,
+                expected_action,
+                difficulty,
+                dataset_split,
+                business_domain,
+                required_fact_count,
+                generation_metadata_json,
+                review_status,
+                review_score,
+                review_reason,
+                status
+            ) VALUES (
+                :dataset_id,
+                :case_code,
+                :question,
+                :normalized_question,
+                :reference_answer,
+                :case_type,
+                CAST(:target_doc_types_json AS JSON),
+                :expected_action,
+                :difficulty,
+                :dataset_split,
+                :business_domain,
+                :required_fact_count,
+                CAST(:generation_metadata_json AS JSON),
+                :review_status,
+                :review_score,
+                :review_reason,
+                :status
+            )
+            ON DUPLICATE KEY UPDATE
+                id = LAST_INSERT_ID(id),
+                question = VALUES(question),
+                normalized_question = VALUES(normalized_question),
+                reference_answer = VALUES(reference_answer),
+                case_type = VALUES(case_type),
+                target_doc_types_json = VALUES(target_doc_types_json),
+                expected_action = VALUES(expected_action),
+                difficulty = VALUES(difficulty),
+                dataset_split = VALUES(dataset_split),
+                business_domain = VALUES(business_domain),
+                required_fact_count = VALUES(required_fact_count),
+                generation_metadata_json = VALUES(generation_metadata_json),
+                review_status = VALUES(review_status),
+                review_score = VALUES(review_score),
+                review_reason = VALUES(review_reason),
+                status = VALUES(status)
+            """
+        )
+        review_status = getattr(case, "review_status", ReviewStatus.PENDING)
+        review_score = getattr(case, "review_score", None)
+        review_reason = getattr(case, "review_reason", None)
+        case_status = getattr(case, "status", EvalCaseStatus.ACTIVE)
+        params = {
+            "dataset_id": dataset_id,
+            "case_code": case.case_code,
+            "question": case.question,
+            "normalized_question": case.normalized_question,
+            "reference_answer": case.reference_answer,
+            "case_type": case.case_type.value,
+            "target_doc_types_json": _json_dumps(
+                [item.value for item in case.target_doc_types]
+            ),
+            "expected_action": case.expected_action.value,
+            "difficulty": case.difficulty.value,
+            "dataset_split": case.dataset_split.value,
+            "business_domain": case.business_domain,
+            "required_fact_count": case.required_fact_count,
+            "generation_metadata_json": _json_dumps(case.generation_metadata),
+            "review_status": review_status.value,
+            "review_score": review_score,
+            "review_reason": review_reason,
+            "status": case_status.value,
+        }
+        count_sql = text(
+            """
+            UPDATE rag_eval_dataset
+            SET case_count = (
+                SELECT COUNT(*)
+                FROM rag_eval_case
+                WHERE dataset_id = :dataset_id
+            )
+            WHERE id = :dataset_id
+            """
+        )
+        with self.engine.begin() as connection:
+            result = connection.execute(sql, params)
+            connection.execute(count_sql, {"dataset_id": dataset_id})
+            return int(result.lastrowid)
+
     def update_eval_case_review(
         self,
         case_id: int,
@@ -585,6 +735,18 @@ class DatasetRepository:
         with self.engine.begin() as connection:
             result = connection.execute(sql, params)
             return int(result.lastrowid)
+
+    def delete_case_evidence(self, case_id: int) -> None:
+        with self.engine.begin() as connection:
+            connection.execute(
+                text(
+                    """
+                    DELETE FROM rag_eval_case_relevance
+                    WHERE case_id = :case_id
+                    """
+                ),
+                {"case_id": case_id},
+            )
 
     def map_case_evidence(
         self,
