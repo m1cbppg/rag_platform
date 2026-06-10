@@ -1,9 +1,39 @@
+import json
+
 from pymilvus import Collection, connections
 
 from src.rag_platform.core.config import get_settings
 from src.rag_platform.domain.search import RetrievalHit
 from src.rag_platform.infrastructure.dashscope_embedding import DashScopeEmbeddingClient
 from src.rag_platform.infrastructure.repositories.vector_repository import VectorRepository
+from src.rag_platform.rag.retrieval.business_domain import (
+    resolve_business_domains,
+)
+
+
+def build_milvus_filter_expression(
+    *,
+    doc_type: str | None,
+    business_domain: str | list[str] | tuple[str, ...] | None,
+) -> str:
+    expr_parts = ['status == "ACTIVE"']
+    if doc_type:
+        expr_parts.append(
+            f"doc_type == {json.dumps(doc_type, ensure_ascii=False)}"
+        )
+    business_domains = resolve_business_domains(business_domain)
+    if len(business_domains) == 1:
+        expr_parts.append(
+            "business_domain == "
+            f"{json.dumps(business_domains[0], ensure_ascii=False)}"
+        )
+    elif business_domains:
+        values = ", ".join(
+            json.dumps(value, ensure_ascii=False)
+            for value in business_domains
+        )
+        expr_parts.append(f"business_domain in [{values}]")
+    return " and ".join(expr_parts)
 
 
 class VectorRetriever:
@@ -42,15 +72,10 @@ class VectorRetriever:
 
         query_vector = await self.embedding_client.embed_query(query)
 
-        expr_parts = ["status == \"ACTIVE\""]
-
-        if doc_type:
-            expr_parts.append(f'doc_type == "{doc_type}"')
-
-        if business_domain:
-            expr_parts.append(f'business_domain == "{business_domain}"')
-
-        expr = " and ".join(expr_parts)
+        expr = build_milvus_filter_expression(
+            doc_type=doc_type,
+            business_domain=business_domain,
+        )
 
         search_params = {
             "metric_type": self.settings.milvus_metric_type,

@@ -182,12 +182,34 @@ def test_repository_persists_complete_evaluation_lifecycle() -> None:
                 total_cases=1,
             )
         )
+        found_run = repository.find_run_by_code(f"RUN_{suffix}")
+        assert found_run is not None
+        assert found_run["id"] == run_id
+        assert found_run["config"] == {"top_k": 10, "rerank_top_n": 5}
+        with repository.engine.begin() as connection:
+            connection.execute(
+                text(
+                    """
+                    UPDATE rag_eval_run
+                    SET started_at = '2020-01-02 03:04:05'
+                    WHERE id = :run_id
+                    """
+                ),
+                {"run_id": run_id},
+            )
         repository.start_run(run_id)
+        resumed_run = repository.find_run_by_code(f"RUN_{suffix}")
+        assert resumed_run is not None
+        assert resumed_run["started_at"].isoformat() == "2020-01-02T03:04:05"
 
-        case_result_id = repository.start_case_result(
+        case_result_id, should_run = repository.prepare_case_result(
             run_id=run_id,
             case_id=case_id,
-            trace_id=f"trace-{suffix}",
+        )
+        assert should_run is True
+        repository.update_case_result_trace(
+            case_result_id,
+            f"trace-{suffix}",
         )
         repository.save_retrieval_hits(
             case_result_id=case_result_id,
@@ -221,6 +243,7 @@ def test_repository_persists_complete_evaluation_lifecycle() -> None:
                 reciprocal_rank=1.0,
                 ndcg_at_5=1.0,
                 ndcg_at_10=1.0,
+                fact_coverage=1.0,
                 citation_precision=1.0,
                 citation_recall=1.0,
                 action_correct=True,
@@ -248,6 +271,74 @@ def test_repository_persists_complete_evaluation_lifecycle() -> None:
                 latency_ms=30,
             ),
         )
+        repeated_judge_result_id = repository.save_judge_result(
+            case_result_id=case_result_id,
+            score=JudgeScore(
+                judge_provider="dashscope",
+                judge_model="qwen-plus",
+                judge_prompt_version="v1",
+                faithfulness_score=0.9,
+                answer_relevance_score=0.9,
+                completeness_score=0.9,
+                citation_entailment_score=0.9,
+                conflict_handling_score=0.9,
+                passed=True,
+                reason={"summary": "重复保存应更新"},
+                raw_response={"result": "updated"},
+                latency_ms=31,
+            ),
+        )
+        assert repeated_judge_result_id == judge_result_id
+
+        existing_result_id, should_run = repository.prepare_case_result(
+            run_id=run_id,
+            case_id=case_id,
+        )
+        assert existing_result_id == case_result_id
+        assert should_run is False
+        run_results = repository.list_run_case_results(run_id)
+        assert len(run_results) == 1
+        assert run_results[0]["case_code"] == f"CASE_{suffix}"
+        assert run_results[0]["question"] == "待支付订单是否允许退款？"
+        assert run_results[0]["reference_answer"] == (
+            "未发货订单允许直接申请退款。"
+        )
+        assert run_results[0]["actual_action"] == "ANSWER"
+        assert run_results[0]["judge_reason"] == {
+            "summary": "重复保存应更新"
+        }
+        diagnostic_hits = repository.list_run_retrieval_hits(run_id)
+        assert len(diagnostic_hits) == 1
+        assert diagnostic_hits[0]["case_result_id"] == case_result_id
+        assert diagnostic_hits[0]["metadata"] == {
+            "source": "integration-test"
+        }
+        run_evidences = repository.list_run_evidences(run_id)
+        assert len(run_evidences) == 1
+        assert run_evidences[0]["case_id"] == case_id
+        assert run_evidences[0]["mapped_chunk_id"] == 910001
+        assert run_evidences[0]["fact_key"] == "refund_rule"
+        domain_diagnostics = repository.get_run_domain_diagnostics(run_id)
+        assert domain_diagnostics["retrieval_hit_count"] == 1
+        assert domain_diagnostics["case_domains"] == [
+            {
+                "business_domain": "ecommerce_after_sales",
+                "case_count": 1,
+            }
+        ]
+        assert set(domain_diagnostics["resolved_case_domains"]) == {
+            "order",
+            "payment",
+            "refund",
+            "return",
+            "after_sales",
+            "logistics",
+            "coupon",
+            "invoice",
+            "member",
+            "risk",
+        }
+        assert domain_diagnostics["active_chunk_domains"]
         repository.finish_run(
             run_id=run_id,
             status=EvalRunStatus.SUCCESS,
@@ -299,6 +390,49 @@ def test_repository_persists_complete_evaluation_lifecycle() -> None:
         assert dataset_row["status"] == DatasetStatus.FROZEN.value
         assert dataset_row["content_sha256"] == "b" * 64
         assert dataset_row["frozen_at"] is not None
+
+        with engine.begin() as connection:
+            connection.execute(
+                text(
+                    """
+                    DELETE FROM rag_eval_judge_result
+                    WHERE case_result_id = :case_result_id
+                    """
+                ),
+                {"case_result_id": case_result_id},
+            )
+        incomplete_result_id, should_run = (
+            repository.prepare_case_result(
+                run_id=run_id,
+                case_id=case_id,
+            )
+        )
+        assert incomplete_result_id == case_result_id
+        assert should_run is True
+        repository.finish_case_result(
+            case_result_id=case_result_id,
+            actual_action=ActualAction.ERROR,
+            generated_answer=None,
+            retrieved_chunk_ids=[],
+            cited_chunk_ids=[],
+            metrics=RetrievalMetricResult(
+                retrieval_rounds=1,
+                action_correct=False,
+            ),
+            error_message="",
+        )
+        with engine.begin() as connection:
+            incomplete_row = connection.execute(
+                text(
+                    """
+                    SELECT status
+                    FROM rag_eval_case_result
+                    WHERE id = :case_result_id
+                    """
+                ),
+                {"case_result_id": case_result_id},
+            ).mappings().one()
+        assert incomplete_row["status"] == "FAILED"
 
     finally:
         if run_id is not None:

@@ -8,6 +8,7 @@ from src.rag_platform.domain.answer import AnswerStatus, ChatStreamEventType
 from src.rag_platform.infrastructure.repositories.answer_repository import AnswerRepository
 from src.rag_platform.rag.answer.citation_validator import CitationValidator
 from src.rag_platform.rag.answer.deepseek_answer_generator import DeepSeekAnswerGenerator
+from src.rag_platform.schemas.chat_execution import ChatExecutionResult
 from src.rag_platform.schemas.chat_v2 import ChatRequestV2, ChatResponseV2
 from src.rag_platform.schemas.rag_workflow import RagRetrievalWorkflowRequest
 
@@ -43,6 +44,13 @@ class ChatService:
         self,
         request: ChatRequestV2,
     ) -> ChatResponseV2:
+        execution = await self.execute(request)
+        return execution.response
+
+    async def execute(
+        self,
+        request: ChatRequestV2,
+    ) -> ChatExecutionResult:
         start_time = time.perf_counter()
 
         workflow_response = await self.workflow_service.run_retrieval_workflow(
@@ -69,17 +77,22 @@ class ChatService:
                 latency_ms=int((time.perf_counter() - start_time) * 1000),
             )
 
-            return ChatResponseV2(
-                trace_id=trace_id,
-                answer_log_id=answer_log_id,
-                question=request.question,
-                rewritten_question=workflow_response.rewritten_question,
-                answer=answer,
-                status=AnswerStatus.REFUSED.value,
-                citations=citations,
-                retrieval_quality=workflow_response.retrieval_quality,
-                rerank_info=workflow_response.rerank_info,
-                context_build_info=workflow_response.context_build_info,
+            latency_ms = int((time.perf_counter() - start_time) * 1000)
+            return ChatExecutionResult(
+                response=ChatResponseV2(
+                    trace_id=trace_id,
+                    answer_log_id=answer_log_id,
+                    question=request.question,
+                    rewritten_question=workflow_response.rewritten_question,
+                    answer=answer,
+                    status=AnswerStatus.REFUSED.value,
+                    citations=citations,
+                    retrieval_quality=workflow_response.retrieval_quality,
+                    rerank_info=workflow_response.rerank_info,
+                    context_build_info=workflow_response.context_build_info,
+                ),
+                workflow=workflow_response,
+                latency_ms=latency_ms,
             )
 
         answer_log_id = self.answer_repository.create_answer_log(
@@ -126,18 +139,22 @@ class ChatService:
                 error_message=None,
             )
 
-            return ChatResponseV2(
-                trace_id=trace_id,
-                answer_log_id=answer_log_id,
-                question=request.question,
-                rewritten_question=workflow_response.rewritten_question,
-                answer=answer,
-                status=AnswerStatus.SUCCESS.value,
-                citations=citations,
-                citation_validation=citation_validation,
-                retrieval_quality=workflow_response.retrieval_quality,
-                rerank_info=workflow_response.rerank_info,
-                context_build_info=workflow_response.context_build_info,
+            return ChatExecutionResult(
+                response=ChatResponseV2(
+                    trace_id=trace_id,
+                    answer_log_id=answer_log_id,
+                    question=request.question,
+                    rewritten_question=workflow_response.rewritten_question,
+                    answer=answer,
+                    status=AnswerStatus.SUCCESS.value,
+                    citations=citations,
+                    citation_validation=citation_validation,
+                    retrieval_quality=workflow_response.retrieval_quality,
+                    rerank_info=workflow_response.rerank_info,
+                    context_build_info=workflow_response.context_build_info,
+                ),
+                workflow=workflow_response,
+                latency_ms=latency_ms,
             )
 
         except Exception as exc:

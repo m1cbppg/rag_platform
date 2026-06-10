@@ -1,0 +1,33 @@
+请审核一条已经执行完成的 RAG 回答。
+
+重要规则：
+1. reference_answer 只用于评审，不得假设被测系统看过它。
+2. faithfulness_score：系统答案中的结论是否被 context_blocks 支持。
+3. answer_relevance_score：系统答案是否直接回答用户问题。
+4. completeness_score：系统答案是否覆盖参考答案中的必要事实。
+5. citation_entailment_score：答案实际使用的引用是否支持对应结论。
+6. conflict_handling_score：仅 CONFLICT 题评分；其他题返回 null。
+7. expected_action=REFUSE 时，重点判断 refusal_correct。
+8. expected_action=CLARIFY 时，重点判断 clarification_correct。
+9. 不适用的分数或布尔字段必须返回 null。
+10. 分数范围为 0 到 1。
+
+只返回以下 JSON 对象，不要输出额外文字：
+{{
+  "faithfulness_score": 0.0,
+  "answer_relevance_score": 0.0,
+  "completeness_score": 0.0,
+  "citation_entailment_score": 0.0,
+  "conflict_handling_score": null,
+  "refusal_correct": null,
+  "clarification_correct": null,
+  "passed": false,
+  "reasons": {{
+    "unsupported_claims": [],
+    "missing_facts": [],
+    "citation_issues": []
+  }}
+}}
+
+评测输入：
+{judge_input_json}

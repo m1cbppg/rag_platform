@@ -2,6 +2,29 @@ from elasticsearch.helpers import bulk
 
 from src.rag_platform.core.config import get_settings
 from src.rag_platform.infrastructure.elasticsearch_client import create_elasticsearch_client
+from src.rag_platform.rag.retrieval.business_domain import (
+    resolve_business_domains,
+)
+
+
+def build_chunk_search_filters(
+    *,
+    doc_type: str | None,
+    business_domain: str | list[str] | tuple[str, ...] | None,
+) -> list[dict]:
+    filters = [{"term": {"status": "ACTIVE"}}]
+    if doc_type:
+        filters.append({"term": {"chunk_type": doc_type}})
+    business_domains = resolve_business_domains(business_domain)
+    if business_domains:
+        filters.append(
+            {
+                "terms": {
+                    "business_domain": list(business_domains),
+                }
+            }
+        )
+    return filters
 
 
 class ElasticsearchChunkStore:
@@ -72,15 +95,10 @@ class ElasticsearchChunkStore:
             可选 metadata filter。
         """
 
-        filters = [
-            {"term": {"status": "ACTIVE"}}
-        ]
-
-        if doc_type:
-            filters.append({"term": {"chunk_type": doc_type}})
-
-        if business_domain:
-            filters.append({"term": {"business_domain": business_domain}})
+        filters = build_chunk_search_filters(
+            doc_type=doc_type,
+            business_domain=business_domain,
+        )
 
         body = {
             "size": top_k,

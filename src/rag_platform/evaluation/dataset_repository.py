@@ -10,6 +10,7 @@ from src.rag_platform.evaluation.models import (
     ActualAction,
     DatasetSplit,
     DatasetStatus,
+    EvalCaseResultStatus,
     EvalRunConfig,
     EvalRunStatus,
     EvalCaseStatus,
@@ -23,6 +24,9 @@ from src.rag_platform.evaluation.models import (
     SourceDocumentSpec,
 )
 from src.rag_platform.infrastructure.mysql import create_mysql_engine
+from src.rag_platform.rag.retrieval.business_domain import (
+    resolve_business_domains,
+)
 
 
 def _enum_value(value: Enum | str) -> str:
@@ -955,6 +959,56 @@ class DatasetRepository:
             result = connection.execute(sql, params)
             return int(result.lastrowid)
 
+    def find_run_by_code(
+        self,
+        run_code: str,
+    ) -> dict[str, Any] | None:
+        sql = text(
+            """
+            SELECT
+                id,
+                run_code,
+                dataset_id,
+                experiment_version,
+                experiment_name,
+                git_commit_sha,
+                retrieval_mode,
+                embedding_model,
+                rerank_model,
+                answer_model,
+                judge_model,
+                config_json,
+                status,
+                total_cases,
+                completed_cases,
+                failed_cases,
+                summary_metrics_json,
+                started_at,
+                finished_at,
+                error_message
+            FROM rag_eval_run
+            WHERE run_code = :run_code
+            LIMIT 1
+            """
+        )
+        with self.engine.begin() as connection:
+            row = connection.execute(
+                sql,
+                {"run_code": run_code},
+            ).mappings().first()
+        if row is None:
+            return None
+        result = dict(row)
+        result["config"] = _json_loads(
+            result.pop("config_json"),
+            {},
+        )
+        result["summary_metrics"] = _json_loads(
+            result.pop("summary_metrics_json"),
+            {},
+        )
+        return result
+
     def update_dataset_status(
         self,
         dataset_id: int,
@@ -1017,7 +1071,7 @@ class DatasetRepository:
             """
             UPDATE rag_eval_run
             SET status = 'RUNNING',
-                started_at = CURRENT_TIMESTAMP,
+                started_at = COALESCE(started_at, CURRENT_TIMESTAMP),
                 error_message = NULL
             WHERE id = :run_id
             """
@@ -1058,6 +1112,138 @@ class DatasetRepository:
                 },
             )
             return int(result.lastrowid)
+
+    def prepare_case_result(
+        self,
+        run_id: int,
+        case_id: int,
+    ) -> tuple[int, bool]:
+        select_sql = text(
+            """
+            SELECT
+                result.id,
+                result.status,
+                result.actual_action,
+                EXISTS (
+                    SELECT 1
+                    FROM rag_eval_judge_result AS judge
+                    WHERE judge.case_result_id = result.id
+                ) AS has_judge
+            FROM rag_eval_case_result AS result
+            WHERE result.run_id = :run_id
+              AND result.case_id = :case_id
+            LIMIT 1
+            FOR UPDATE
+            """
+        )
+        insert_sql = text(
+            """
+            INSERT INTO rag_eval_case_result (
+                run_id,
+                case_id,
+                status,
+                started_at
+            ) VALUES (
+                :run_id,
+                :case_id,
+                'PENDING',
+                CURRENT_TIMESTAMP
+            )
+            """
+        )
+        reset_sql = text(
+            """
+            UPDATE rag_eval_case_result
+            SET trace_id = NULL,
+                actual_action = NULL,
+                generated_answer = NULL,
+                retrieved_chunk_ids_json = NULL,
+                cited_chunk_ids_json = NULL,
+                recall_at_1 = NULL,
+                recall_at_3 = NULL,
+                recall_at_5 = NULL,
+                recall_at_10 = NULL,
+                reciprocal_rank = NULL,
+                ndcg_at_5 = NULL,
+                ndcg_at_10 = NULL,
+                fact_coverage = NULL,
+                citation_precision = NULL,
+                citation_recall = NULL,
+                action_correct = NULL,
+                retrieval_rounds = 1,
+                input_tokens = NULL,
+                output_tokens = NULL,
+                estimated_cost = NULL,
+                latency_ms = NULL,
+                status = 'PENDING',
+                error_message = NULL,
+                started_at = CURRENT_TIMESTAMP,
+                finished_at = NULL
+            WHERE id = :case_result_id
+            """
+        )
+        params = {"run_id": run_id, "case_id": case_id}
+        with self.engine.begin() as connection:
+            row = connection.execute(
+                select_sql,
+                params,
+            ).mappings().first()
+            if row is None:
+                result = connection.execute(insert_sql, params)
+                return int(result.lastrowid), True
+
+            case_result_id = int(row["id"])
+            is_complete_success = (
+                row["status"] == EvalCaseResultStatus.SUCCESS.value
+                and row["actual_action"] != ActualAction.ERROR.value
+                and bool(row["has_judge"])
+            )
+            if is_complete_success:
+                return case_result_id, False
+
+            connection.execute(
+                text(
+                    """
+                    DELETE FROM rag_eval_judge_result
+                    WHERE case_result_id = :case_result_id
+                    """
+                ),
+                {"case_result_id": case_result_id},
+            )
+            connection.execute(
+                text(
+                    """
+                    DELETE FROM rag_eval_retrieval_hit
+                    WHERE case_result_id = :case_result_id
+                    """
+                ),
+                {"case_result_id": case_result_id},
+            )
+            connection.execute(
+                reset_sql,
+                {"case_result_id": case_result_id},
+            )
+            return case_result_id, True
+
+    def update_case_result_trace(
+        self,
+        case_result_id: int,
+        trace_id: str,
+    ) -> None:
+        with self.engine.begin() as connection:
+            connection.execute(
+                text(
+                    """
+                    UPDATE rag_eval_case_result
+                    SET trace_id = :trace_id
+                    WHERE id = :case_result_id
+                    """
+                ),
+                {
+                    "case_result_id": case_result_id,
+                    "trace_id": trace_id,
+                },
+            )
 
     def save_retrieval_hits(
         self,
@@ -1130,7 +1316,11 @@ class DatasetRepository:
         latency_ms: int | None = None,
         error_message: str | None = None,
     ) -> None:
-        status = "FAILED" if error_message else "SUCCESS"
+        status = (
+            "FAILED"
+            if error_message is not None
+            else "SUCCESS"
+        )
         sql = text(
             """
             UPDATE rag_eval_case_result
@@ -1145,6 +1335,7 @@ class DatasetRepository:
                 reciprocal_rank = :reciprocal_rank,
                 ndcg_at_5 = :ndcg_at_5,
                 ndcg_at_10 = :ndcg_at_10,
+                fact_coverage = :fact_coverage,
                 citation_precision = :citation_precision,
                 citation_recall = :citation_recall,
                 action_correct = :action_correct,
@@ -1172,6 +1363,7 @@ class DatasetRepository:
             "reciprocal_rank": metrics.reciprocal_rank,
             "ndcg_at_5": metrics.ndcg_at_5,
             "ndcg_at_10": metrics.ndcg_at_10,
+            "fact_coverage": metrics.fact_coverage,
             "citation_precision": metrics.citation_precision,
             "citation_recall": metrics.citation_recall,
             "action_correct": (
@@ -1230,6 +1422,19 @@ class DatasetRepository:
                 CAST(:raw_response_json AS JSON),
                 :latency_ms
             )
+            ON DUPLICATE KEY UPDATE
+                id = LAST_INSERT_ID(id),
+                faithfulness_score = VALUES(faithfulness_score),
+                answer_relevance_score = VALUES(answer_relevance_score),
+                completeness_score = VALUES(completeness_score),
+                citation_entailment_score = VALUES(citation_entailment_score),
+                conflict_handling_score = VALUES(conflict_handling_score),
+                refusal_correct = VALUES(refusal_correct),
+                clarification_correct = VALUES(clarification_correct),
+                passed = VALUES(passed),
+                reason_json = VALUES(reason_json),
+                raw_response_json = VALUES(raw_response_json),
+                latency_ms = VALUES(latency_ms)
             """
         )
         params = {
@@ -1260,6 +1465,268 @@ class DatasetRepository:
         with self.engine.begin() as connection:
             result = connection.execute(sql, params)
             return int(result.lastrowid)
+
+    def list_run_case_results(
+        self,
+        run_id: int,
+    ) -> list[dict[str, Any]]:
+        sql = text(
+            """
+            SELECT
+                result.id,
+                result.run_id,
+                result.case_id,
+                eval_case.case_code,
+                eval_case.question,
+                eval_case.reference_answer,
+                eval_case.case_type,
+                eval_case.expected_action,
+                eval_case.difficulty,
+                eval_case.dataset_split,
+                eval_case.business_domain,
+                eval_case.required_fact_count,
+                result.trace_id,
+                result.actual_action,
+                result.generated_answer,
+                result.retrieved_chunk_ids_json,
+                result.cited_chunk_ids_json,
+                result.recall_at_1,
+                result.recall_at_3,
+                result.recall_at_5,
+                result.recall_at_10,
+                result.reciprocal_rank,
+                result.ndcg_at_5,
+                result.ndcg_at_10,
+                result.fact_coverage,
+                result.citation_precision,
+                result.citation_recall,
+                result.action_correct,
+                result.retrieval_rounds,
+                result.input_tokens,
+                result.output_tokens,
+                result.estimated_cost,
+                result.latency_ms,
+                result.status,
+                result.error_message,
+                judge.passed AS judge_passed,
+                judge.faithfulness_score,
+                judge.answer_relevance_score,
+                judge.completeness_score,
+                judge.citation_entailment_score,
+                judge.conflict_handling_score,
+                judge.refusal_correct,
+                judge.clarification_correct,
+                judge.reason_json AS judge_reason_json
+            FROM rag_eval_case_result AS result
+            JOIN rag_eval_case AS eval_case
+              ON eval_case.id = result.case_id
+            LEFT JOIN rag_eval_judge_result AS judge
+              ON judge.id = (
+                  SELECT MAX(candidate.id)
+                  FROM rag_eval_judge_result AS candidate
+                  WHERE candidate.case_result_id = result.id
+              )
+            WHERE result.run_id = :run_id
+            ORDER BY result.id
+            """
+        )
+        with self.engine.begin() as connection:
+            rows = connection.execute(
+                sql,
+                {"run_id": run_id},
+            ).mappings().all()
+        results = []
+        for row in rows:
+            item = dict(row)
+            item["retrieved_chunk_ids"] = _json_loads(
+                item.pop("retrieved_chunk_ids_json"),
+                [],
+            )
+            item["cited_chunk_ids"] = _json_loads(
+                item.pop("cited_chunk_ids_json"),
+                [],
+            )
+            item["judge_reason"] = _json_loads(
+                item.pop("judge_reason_json"),
+                {},
+            )
+            results.append(item)
+        return results
+
+    def list_run_retrieval_hits(
+        self,
+        run_id: int,
+    ) -> list[dict[str, Any]]:
+        sql = text(
+            """
+            SELECT
+                hit.id,
+                hit.case_result_id,
+                result.case_id,
+                hit.retrieval_round,
+                hit.query_variant,
+                hit.query_text,
+                hit.channel,
+                hit.chunk_id,
+                hit.rank_no,
+                hit.raw_score,
+                hit.fused_score,
+                hit.rerank_score,
+                hit.is_gold,
+                hit.metadata_json
+            FROM rag_eval_retrieval_hit AS hit
+            JOIN rag_eval_case_result AS result
+              ON result.id = hit.case_result_id
+            WHERE result.run_id = :run_id
+            ORDER BY
+                hit.case_result_id,
+                hit.retrieval_round,
+                hit.channel,
+                hit.rank_no,
+                hit.id
+            """
+        )
+        with self.engine.begin() as connection:
+            rows = connection.execute(
+                sql,
+                {"run_id": run_id},
+            ).mappings().all()
+        results = []
+        for row in rows:
+            item = dict(row)
+            item["metadata"] = _json_loads(
+                item.pop("metadata_json"),
+                {},
+            )
+            results.append(item)
+        return results
+
+    def list_run_evidences(
+        self,
+        run_id: int,
+    ) -> list[dict[str, Any]]:
+        sql = text(
+            """
+            SELECT
+                result.case_id,
+                eval_case.case_code,
+                relevance.id AS evidence_id,
+                source.source_doc_code,
+                source.title AS source_title,
+                source.doc_type,
+                relevance.mapped_doc_id,
+                relevance.mapped_chunk_id,
+                relevance.relevance_grade,
+                relevance.evidence_quote,
+                relevance.fact_key,
+                relevance.mapping_status,
+                relevance.mapping_reason
+            FROM rag_eval_case_result AS result
+            JOIN rag_eval_case AS eval_case
+              ON eval_case.id = result.case_id
+            JOIN rag_eval_case_relevance AS relevance
+              ON relevance.case_id = result.case_id
+            JOIN rag_eval_source_document AS source
+              ON source.id = relevance.source_document_id
+            WHERE result.run_id = :run_id
+            ORDER BY
+                result.case_id,
+                relevance.relevance_grade DESC,
+                relevance.id
+            """
+        )
+        with self.engine.begin() as connection:
+            rows = connection.execute(
+                sql,
+                {"run_id": run_id},
+            ).mappings().all()
+        return [dict(row) for row in rows]
+
+    def get_run_domain_diagnostics(
+        self,
+        run_id: int,
+    ) -> dict[str, Any]:
+        case_domain_sql = text(
+            """
+            SELECT
+                eval_case.business_domain,
+                COUNT(*) AS case_count
+            FROM rag_eval_case_result AS result
+            JOIN rag_eval_case AS eval_case
+              ON eval_case.id = result.case_id
+            WHERE result.run_id = :run_id
+            GROUP BY eval_case.business_domain
+            ORDER BY case_count DESC, eval_case.business_domain
+            """
+        )
+        chunk_domain_sql = text(
+            """
+            SELECT
+                business_domain,
+                COUNT(*) AS chunk_count
+            FROM rag_chunk
+            WHERE status = 'ACTIVE'
+            GROUP BY business_domain
+            ORDER BY chunk_count DESC, business_domain
+            """
+        )
+        gold_domain_sql = text(
+            """
+            SELECT
+                chunk.business_domain,
+                COUNT(DISTINCT relevance.mapped_chunk_id) AS chunk_count
+            FROM rag_eval_case_result AS result
+            JOIN rag_eval_case_relevance AS relevance
+              ON relevance.case_id = result.case_id
+            LEFT JOIN rag_chunk AS chunk
+              ON chunk.id = relevance.mapped_chunk_id
+            WHERE result.run_id = :run_id
+            GROUP BY chunk.business_domain
+            ORDER BY chunk_count DESC, chunk.business_domain
+            """
+        )
+        hit_count_sql = text(
+            """
+            SELECT COUNT(*)
+            FROM rag_eval_retrieval_hit AS hit
+            JOIN rag_eval_case_result AS result
+              ON result.id = hit.case_result_id
+            WHERE result.run_id = :run_id
+            """
+        )
+        params = {"run_id": run_id}
+        with self.engine.begin() as connection:
+            case_domains = connection.execute(
+                case_domain_sql,
+                params,
+            ).mappings().all()
+            chunk_domains = connection.execute(
+                chunk_domain_sql,
+            ).mappings().all()
+            gold_domains = connection.execute(
+                gold_domain_sql,
+                params,
+            ).mappings().all()
+            retrieval_hit_count = connection.execute(
+                hit_count_sql,
+                params,
+            ).scalar_one()
+        normalized_case_domains = [dict(row) for row in case_domains]
+        return {
+            "retrieval_hit_count": int(retrieval_hit_count),
+            "case_domains": normalized_case_domains,
+            "resolved_case_domains": list(
+                resolve_business_domains(
+                    [
+                        item["business_domain"]
+                        for item in normalized_case_domains
+                        if item.get("business_domain")
+                    ]
+                )
+            ),
+            "active_chunk_domains": [dict(row) for row in chunk_domains],
+            "gold_chunk_domains": [dict(row) for row in gold_domains],
+        }
 
     def finish_run(
         self,
