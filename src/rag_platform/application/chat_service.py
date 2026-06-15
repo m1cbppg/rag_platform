@@ -2,9 +2,13 @@ import json
 import time
 from collections.abc import AsyncGenerator
 
+from src.rag_platform.application.answer_action_decision_service import (
+    AnswerActionDecisionService,
+)
 from src.rag_platform.application.rag_workflow_service import RagWorkflowService
 from src.rag_platform.core.config import get_settings
 from src.rag_platform.domain.answer import AnswerStatus, ChatStreamEventType
+from src.rag_platform.domain.answer_action import AnswerAction
 from src.rag_platform.infrastructure.repositories.answer_repository import AnswerRepository
 from src.rag_platform.rag.answer.citation_validator import CitationValidator
 from src.rag_platform.rag.answer.deepseek_answer_generator import DeepSeekAnswerGenerator
@@ -33,12 +37,17 @@ class ChatService:
         answer_generator=None,
         answer_repository=None,
         citation_validator=None,
+        action_decision_service=None,
     ) -> None:
         self.settings = settings or get_settings()
         self.workflow_service = workflow_service or RagWorkflowService()
         self.answer_generator = answer_generator or DeepSeekAnswerGenerator()
         self.answer_repository = answer_repository or AnswerRepository()
         self.citation_validator = citation_validator or CitationValidator()
+        self.action_decision_service = (
+            action_decision_service
+            or AnswerActionDecisionService(settings=self.settings)
+        )
 
     async def chat(
         self,
@@ -66,14 +75,32 @@ class ChatService:
 
         context = workflow_response.context or ""
         citations = workflow_response.citations or []
+        sub_queries = (
+            workflow_response.decomposition.get(
+                "sub_queries",
+                [],
+            )
+            if workflow_response.decomposition.get(
+                "requires_decomposition"
+            )
+            else []
+        )
+        action_decision = await self._decide_action(
+            request=request,
+            workflow_response=workflow_response,
+            context=context,
+            citations=citations,
+        )
+        action_decision_json = action_decision.model_dump(mode="json")
 
-        if self._should_refuse_due_to_empty_context(context):
-            answer = "当前知识库中没有足够信息回答该问题，建议补充相关 FAQ、SOP、业务规则或操作手册后再查询。"
+        if action_decision.action != AnswerAction.ANSWER:
+            status, answer = self._direct_response(action_decision)
 
-            answer_log_id = self._save_refused_answer(
+            answer_log_id = self._save_direct_answer(
                 request=request,
                 workflow_response=workflow_response,
                 answer=answer,
+                status=status,
                 latency_ms=int((time.perf_counter() - start_time) * 1000),
             )
 
@@ -85,8 +112,9 @@ class ChatService:
                     question=request.question,
                     rewritten_question=workflow_response.rewritten_question,
                     answer=answer,
-                    status=AnswerStatus.REFUSED.value,
-                    citations=citations,
+                    status=status,
+                    action_decision=action_decision_json,
+                    citations=[],
                     retrieval_quality=workflow_response.retrieval_quality,
                     rerank_info=workflow_response.rerank_info,
                     context_build_info=workflow_response.context_build_info,
@@ -121,6 +149,7 @@ class ChatService:
                 rewritten_question=workflow_response.rewritten_question,
                 context=context,
                 citations=citations,
+                sub_queries=sub_queries,
             )
 
             citation_validation = self.citation_validator.validate(
@@ -147,6 +176,7 @@ class ChatService:
                     rewritten_question=workflow_response.rewritten_question,
                     answer=answer,
                     status=AnswerStatus.SUCCESS.value,
+                    action_decision=action_decision_json,
                     citations=citations,
                     citation_validation=citation_validation,
                     retrieval_quality=workflow_response.retrieval_quality,
@@ -199,6 +229,23 @@ class ChatService:
         trace_id = workflow_response.trace_id
         context = workflow_response.context or ""
         citations = workflow_response.citations or []
+        sub_queries = (
+            workflow_response.decomposition.get(
+                "sub_queries",
+                [],
+            )
+            if workflow_response.decomposition.get(
+                "requires_decomposition"
+            )
+            else []
+        )
+        action_decision = await self._decide_action(
+            request=request,
+            workflow_response=workflow_response,
+            context=context,
+            citations=citations,
+        )
+        action_decision_json = action_decision.model_dump(mode="json")
 
         yield self._sse(
             event=ChatStreamEventType.TRACE.value,
@@ -213,6 +260,7 @@ class ChatService:
                 "status": workflow_response.status,
                 "retrieval_quality": workflow_response.retrieval_quality,
                 "rerank_info": workflow_response.rerank_info,
+                "action_decision": action_decision_json,
             },
         )
 
@@ -224,13 +272,14 @@ class ChatService:
             },
         )
 
-        if self._should_refuse_due_to_empty_context(context):
-            answer = "当前知识库中没有足够信息回答该问题，建议补充相关 FAQ、SOP、业务规则或操作手册后再查询。"
+        if action_decision.action != AnswerAction.ANSWER:
+            status, answer = self._direct_response(action_decision)
 
-            answer_log_id = self._save_refused_answer(
+            answer_log_id = self._save_direct_answer(
                 request=request,
                 workflow_response=workflow_response,
                 answer=answer,
+                status=status,
                 latency_ms=int((time.perf_counter() - start_time) * 1000),
             )
 
@@ -244,7 +293,8 @@ class ChatService:
                 data={
                     "trace_id": trace_id,
                     "answer_log_id": answer_log_id,
-                    "status": AnswerStatus.REFUSED.value,
+                    "status": status,
+                    "action_decision": action_decision_json,
                 },
             )
             return
@@ -275,6 +325,7 @@ class ChatService:
                 rewritten_question=workflow_response.rewritten_question,
                 context=context,
                 citations=citations,
+                sub_queries=sub_queries,
             ):
                 full_answer_parts.append(delta)
 
@@ -308,6 +359,7 @@ class ChatService:
                     "answer_log_id": answer_log_id,
                     "status": AnswerStatus.SUCCESS.value,
                     "citation_validation": citation_validation,
+                    "action_decision": action_decision_json,
                 },
             )
 
@@ -331,14 +383,51 @@ class ChatService:
                 },
             )
 
-    def _should_refuse_due_to_empty_context(self, context: str) -> bool:
-        return self.settings.answer_fail_when_context_empty and not context.strip()
+    async def _decide_action(
+        self,
+        *,
+        request: ChatRequestV2,
+        workflow_response,
+        context: str,
+        citations: list[dict],
+    ):
+        query_analysis = {
+            **(workflow_response.query_analysis or {}),
+            "need_clarification": (
+                workflow_response.need_clarification
+            ),
+            "clarification_question": (
+                workflow_response.clarification_question
+            ),
+        }
+        return await self.action_decision_service.decide(
+            question=request.question,
+            query_analysis=query_analysis,
+            retrieval_quality=workflow_response.retrieval_quality,
+            context=context,
+            citations=citations,
+        )
 
-    def _save_refused_answer(
+    @staticmethod
+    def _direct_response(action_decision) -> tuple[str, str]:
+        if action_decision.action == AnswerAction.CLARIFY:
+            return (
+                AnswerStatus.CLARIFIED.value,
+                action_decision.clarification_question
+                or "请补充问题所需的关键信息。",
+            )
+        return (
+            AnswerStatus.REFUSED.value,
+            "当前知识库中没有足够信息回答该问题，"
+            "建议补充相关 FAQ、SOP、业务规则或操作手册后再查询。",
+        )
+
+    def _save_direct_answer(
         self,
         request: ChatRequestV2,
         workflow_response,
         answer: str,
+        status: str,
         latency_ms: int,
     ) -> int:
         answer_log_id = self.answer_repository.create_answer_log(
@@ -351,14 +440,14 @@ class ChatService:
             max_tokens=self.settings.answer_max_tokens,
             context_log_id=workflow_response.context_build_info.get("context_log_id"),
             context_tokens=workflow_response.context_build_info.get("estimated_tokens"),
-            citation_count=len(workflow_response.citations or []),
-            status=AnswerStatus.REFUSED.value,
+            citation_count=0,
+            status=status,
         )
 
         self.answer_repository.update_answer_log(
             answer_log_id=answer_log_id,
             answer=answer,
-            status=AnswerStatus.REFUSED.value,
+            status=status,
             latency_ms=latency_ms,
             error_message=None,
         )

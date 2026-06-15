@@ -27,6 +27,7 @@ class ChatResponseV2(BaseModel):
     answer: str
 
     status: str
+    action_decision: dict[str, Any] = Field(default_factory=dict)
 
     citations: list[dict[str, Any]] = Field(default_factory=list)
     citation_validation: dict[str, Any] = Field(default_factory=dict)

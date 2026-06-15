@@ -40,11 +40,24 @@ class WorkflowDocumentResponse(BaseModel):
 class RagRetrievalWorkflowResponse(BaseModel):
     trace_id: str
     question: str
+    query_analysis: dict[str, Any] = Field(default_factory=dict)
     rewritten_question: str | None = None
     retrieval_mode: str | None = None
     target_doc_types: list[str] = Field(default_factory=list)
+    decomposition: dict[str, Any] = Field(default_factory=dict)
+    sub_query_coverage: dict[str, Any] = Field(
+        default_factory=dict
+    )
+    dependent_hop: dict[str, Any] = Field(default_factory=dict)
+    need_clarification: bool = False
+    clarification_question: str | None = None
     status: str
     retrieval_quality: dict[str, Any] = Field(default_factory=dict)
+    retrieval_round: int = 1
+    max_retrieval_rounds: int = 1
+    retrieval_attempts: list[dict[str, Any]] = Field(
+        default_factory=list
+    )
 
     # 召回阶段文档
     documents: list[WorkflowDocumentResponse] = Field(default_factory=list)

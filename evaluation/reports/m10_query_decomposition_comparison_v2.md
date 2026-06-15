@@ -1,0 +1,91 @@
+# M10 查询分解成对评测报告
+
+## 实验范围
+
+- 数据集：`rag_eval_ecommerce:v2`
+- 数据划分：`DEVELOPMENT`
+- Case 数：45
+- 两组均开启 M9 自适应检索并固定规则 Query Analysis
+- 控制组关闭查询分解，实验组开启查询分解
+
+## 核心结果
+
+| 指标 | M9 控制组 | M10 分解组 | 差值 |
+|---|---:|---:|---:|
+| Recall@1 | 0.5222 | 0.5222 | +0.0000 |
+| Recall@3 | 0.7000 | 0.7111 | +0.0111 |
+| Recall@5 | 0.7778 | 0.8000 | +0.0222 |
+| Recall@10 | 0.8111 | 0.8333 | +0.0222 |
+| MRR | 0.8204 | 0.8315 | +0.0111 |
+| nDCG@5 | 0.7443 | 0.7563 | +0.0121 |
+| nDCG@10 | 0.7582 | 0.7703 | +0.0121 |
+| 事实覆盖率 | 0.8111 | 0.8333 | +0.0222 |
+
+## 分解触发与成本
+
+- 分解触发率：53.33% （24/45）
+- 上游 Query 计划一致率：100.00%
+- 平均子问题数：2.00
+- 平均子问题覆盖率：100.00%
+- 子问题完全覆盖 Case：24/24
+- 平均延迟：3295.5 ms → 4758.6 ms （+1463.1 ms）
+- P95 延迟：8872.8 ms → 8358.8 ms （-514.0 ms）
+
+## 分类型结果
+
+| 类型 | Case 数 | 触发数 | Fact Coverage 控制组 | 分解组 | 差值 |
+|---|---:|---:|---:|---:|---:|
+| MULTI_CONDITION | 27 | 18 | 0.8333 | 0.8704 | +0.0370 |
+| MULTI_HOP | 18 | 6 | 0.7778 | 0.7778 | +0.0000 |
+
+## Case 变化
+
+- 事实覆盖率：改善 1，退化 0，不变 44。
+
+| Case | 类型 | 是否分解 | 子问题覆盖率 | Fact Coverage 差值 | 延迟差值(ms) |
+|---|---|---|---:|---:|---:|
+| CASE_MULTI_CONDITION_019 | MULTI_CONDITION | 是 | 100.00% | +1.0000 | +385 |
+| CASE_MULTI_CONDITION_001 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | +52 |
+| CASE_MULTI_CONDITION_002 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +3172 |
+| CASE_MULTI_CONDITION_003 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | -475 |
+| CASE_MULTI_CONDITION_004 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | -459 |
+| CASE_MULTI_CONDITION_005 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +3609 |
+| CASE_MULTI_CONDITION_006 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | -148 |
+| CASE_MULTI_CONDITION_007 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +4111 |
+| CASE_MULTI_CONDITION_008 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | +332 |
+| CASE_MULTI_CONDITION_009 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +4589 |
+| CASE_MULTI_CONDITION_010 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +1579 |
+| CASE_MULTI_CONDITION_011 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +6021 |
+| CASE_MULTI_CONDITION_012 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +2678 |
+| CASE_MULTI_CONDITION_013 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | -1285 |
+| CASE_MULTI_CONDITION_014 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | +2938 |
+| CASE_MULTI_CONDITION_015 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | -2923 |
+| CASE_MULTI_CONDITION_016 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +5765 |
+| CASE_MULTI_CONDITION_017 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +5185 |
+| CASE_MULTI_CONDITION_018 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +14399 |
+| CASE_MULTI_CONDITION_020 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | -1602 |
+| CASE_MULTI_CONDITION_021 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | -774 |
+| CASE_MULTI_CONDITION_022 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | +2119 |
+| CASE_MULTI_CONDITION_023 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | +1433 |
+| CASE_MULTI_CONDITION_024 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | -581 |
+| CASE_MULTI_CONDITION_025 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | -2464 |
+| CASE_MULTI_CONDITION_026 | MULTI_CONDITION | 是 | 100.00% | +0.0000 | -282 |
+| CASE_MULTI_CONDITION_027 | MULTI_CONDITION | 否 | 100.00% | +0.0000 | -1372 |
+| CASE_MULTI_HOP_001 | MULTI_HOP | 是 | 100.00% | +0.0000 | +4158 |
+| CASE_MULTI_HOP_002 | MULTI_HOP | 是 | 100.00% | +0.0000 | +445 |
+| CASE_MULTI_HOP_003 | MULTI_HOP | 否 | 100.00% | +0.0000 | +1128 |
+| CASE_MULTI_HOP_004 | MULTI_HOP | 是 | 100.00% | +0.0000 | +752 |
+| CASE_MULTI_HOP_005 | MULTI_HOP | 是 | 100.00% | +0.0000 | +3954 |
+| CASE_MULTI_HOP_006 | MULTI_HOP | 否 | 100.00% | +0.0000 | +2151 |
+| CASE_MULTI_HOP_007 | MULTI_HOP | 否 | 100.00% | +0.0000 | -1448 |
+| CASE_MULTI_HOP_008 | MULTI_HOP | 否 | 100.00% | +0.0000 | +1627 |
+| CASE_MULTI_HOP_009 | MULTI_HOP | 否 | 100.00% | +0.0000 | +1353 |
+| CASE_MULTI_HOP_010 | MULTI_HOP | 否 | 100.00% | +0.0000 | -7 |
+| CASE_MULTI_HOP_011 | MULTI_HOP | 是 | 100.00% | +0.0000 | +4977 |
+| CASE_MULTI_HOP_012 | MULTI_HOP | 否 | 100.00% | +0.0000 | -76 |
+| CASE_MULTI_HOP_013 | MULTI_HOP | 否 | 100.00% | +0.0000 | +39 |
+| CASE_MULTI_HOP_014 | MULTI_HOP | 否 | 100.00% | +0.0000 | -1289 |
+| CASE_MULTI_HOP_015 | MULTI_HOP | 否 | 100.00% | +0.0000 | -1417 |
+| CASE_MULTI_HOP_016 | MULTI_HOP | 否 | 100.00% | +0.0000 | -748 |
+| CASE_MULTI_HOP_017 | MULTI_HOP | 否 | 100.00% | +0.0000 | +206 |
+| CASE_MULTI_HOP_018 | MULTI_HOP | 是 | 100.00% | +0.0000 | +4033 |

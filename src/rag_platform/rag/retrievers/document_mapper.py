@@ -27,6 +27,7 @@ class RetrievalDocumentMapper:
         page_content = metadata.get("content") or ""
 
         doc_metadata = {
+            **metadata,
             "chunk_id": hit.chunk_id,
             "score": hit.score,
             "source": hit.source,
@@ -44,6 +45,7 @@ class RetrievalDocumentMapper:
             "vector_score": metadata.get("vector_score"),
             "bm25_score": metadata.get("bm25_score"),
         }
+        doc_metadata.pop("content", None)
 
         return Document(
             page_content=page_content,

@@ -156,6 +156,53 @@ async def test_refusal_case_uses_refusal_boolean() -> None:
     assert len(client.calls) == 1
 
 
+async def test_clarification_case_sends_gold_contract_to_judge() -> None:
+    client = SequencedJudgeClient(
+        [
+            {
+                "faithfulness_score": None,
+                "answer_relevance_score": None,
+                "completeness_score": None,
+                "citation_entailment_score": None,
+                "conflict_handling_score": None,
+                "refusal_correct": None,
+                "clarification_correct": True,
+                "passed": False,
+                "reasons": {},
+            }
+        ]
+    )
+    case = _case(expected_action=ExpectedAction.CLARIFY).model_copy(
+        update={
+            "generation_metadata": {
+                "clarification_contract": {
+                    "missing_condition_key": "order_status",
+                    "clarification_question": "订单目前是什么状态？",
+                }
+            }
+        }
+    )
+
+    score = await AnswerJudgeService(
+        client=client,
+        prompt_template="{judge_input_json}",
+    ).judge(
+        case=case,
+        system_answer="请问订单目前是什么状态？",
+        actual_action="CLARIFY",
+        context_blocks=[],
+        citations=[],
+    )
+
+    assert score.passed is True
+    assert '"missing_condition_key": "order_status"' in (
+        client.calls[0]["user_prompt"]
+    )
+    assert '"clarification_question": "订单目前是什么状态？"' in (
+        client.calls[0]["user_prompt"]
+    )
+
+
 async def test_judge_retries_invalid_payload_once() -> None:
     client = SequencedJudgeClient(
         [{"unexpected": "payload"}, _answer_payload(0.9)]

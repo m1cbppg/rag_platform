@@ -1,0 +1,16 @@
+from enum import StrEnum
+
+
+class AnswerAction(StrEnum):
+    ANSWER = "ANSWER"
+    REFUSE = "REFUSE"
+    CLARIFY = "CLARIFY"
+
+
+class AnswerDecisionSource(StrEnum):
+    QUERY_ANALYSIS = "QUERY_ANALYSIS"
+    POLICY_ENGINE = "POLICY_ENGINE"
+    CONSTRAINT_GUARD = "CONSTRAINT_GUARD"
+    EMPTY_CONTEXT = "EMPTY_CONTEXT"
+    LLM_EVIDENCE = "LLM_EVIDENCE"
+    FALLBACK = "FALLBACK"

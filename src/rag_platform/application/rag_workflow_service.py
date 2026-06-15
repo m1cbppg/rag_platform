@@ -59,11 +59,35 @@ class RagWorkflowService:
         return RagRetrievalWorkflowResponse(
             trace_id=final_state.get("trace_id") or initial_state["trace_id"],
             question=request.question,
+            query_analysis=final_state.get("query_analysis", {}),
             rewritten_question=final_state.get("rewritten_question"),
             retrieval_mode=final_state.get("retrieval_mode"),
             target_doc_types=final_state.get("target_doc_types", []),
+            decomposition=final_state.get("decomposition", {}),
+            sub_query_coverage=final_state.get(
+                "sub_query_coverage",
+                {},
+            ),
+            dependent_hop=final_state.get("dependent_hop", {}),
+            need_clarification=final_state.get(
+                "need_clarification",
+                False,
+            ),
+            clarification_question=final_state.get(
+                "clarification_question"
+            ),
             status=final_state.get("status", "UNKNOWN"),
             retrieval_quality=final_state.get("retrieval_quality", {}),
+            retrieval_round=int(
+                final_state.get("retrieval_round") or 1
+            ),
+            max_retrieval_rounds=int(
+                final_state.get("max_retrieval_rounds") or 1
+            ),
+            retrieval_attempts=final_state.get(
+                "retrieval_attempts",
+                [],
+            ),
             documents=merged_documents,
             rerank_info=final_state.get("rerank_info", {}),
             reranked_documents=reranked_documents,

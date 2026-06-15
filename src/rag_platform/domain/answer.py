@@ -9,6 +9,7 @@ class AnswerStatus(StrEnum):
     SUCCESS = "SUCCESS"
     FAILED = "FAILED"
     REFUSED = "REFUSED"
+    CLARIFIED = "CLARIFIED"
     STREAMING = "STREAMING"
 
 

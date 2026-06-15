@@ -13,6 +13,8 @@ from src.rag_platform.evaluation.models import (
     ReviewedEvalCase,
 )
 
+ANSWER_JUDGE_PROMPT_VERSION = "v2-action-contract"
+
 
 class JsonJudgeClient(Protocol):
     async def chat_json(
@@ -48,7 +50,7 @@ class AnswerJudgeService:
         prompt_template: str,
         provider: str = "dashscope",
         model: str = "qwen-plus",
-        prompt_version: str = "v1",
+        prompt_version: str = ANSWER_JUDGE_PROMPT_VERSION,
         pass_threshold: float = 0.8,
         borderline_margin: float = 0.05,
         max_attempts: int = 2,
@@ -125,6 +127,7 @@ class AnswerJudgeService:
             "expected_action": case.expected_action.value,
             "actual_action": actual_action.value,
             "reference_answer": case.reference_answer,
+            "generation_metadata": case.generation_metadata,
             "system_answer": system_answer,
             "context_blocks": context_blocks,
             "citations": citations,

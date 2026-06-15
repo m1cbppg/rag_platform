@@ -1,0 +1,183 @@
+{
+  "version": "v5",
+  "policies": [
+    {
+      "code": "modify_address",
+      "trigger_groups": [
+        ["修改", "更改", "改"],
+        ["地址"]
+      ],
+      "required_any_terms": ["我", "我的", "我想", "能改", "怎么改", "怎么操作"],
+      "excluded_terms": ["规则", "条件", "流程", "哪些", "后台", "风险"],
+      "required_slots": [
+        {
+          "code": "order_fulfillment_status",
+          "label": "订单出库或发货状态",
+          "values": [
+            "未出库",
+            "已出库",
+            "未发货",
+            "已发货",
+            "还没发货",
+            "没发货",
+            "还没出货",
+            "没出货",
+            "运输中",
+            "派送中"
+          ]
+        }
+      ],
+      "clarification_question": "请问订单目前是未出库还是已经发货？"
+    },
+    {
+      "code": "cancel_order",
+      "trigger_groups": [
+        ["取消"],
+        ["订单"]
+      ],
+      "required_any_terms": ["我", "我的", "我想", "我下", "能取消", "可以取消", "怎么取消", "怎么办"],
+      "excluded_terms": ["规则", "版本", "新旧", "条件", "流程", "判断", "第一步", "审核", "进度", "后台", "哪些", "特别规定", "窗口", "取消了", "已取消", "取消后", "退款多久", "多久到账"],
+      "required_slots": [
+        {
+          "code": "order_status",
+          "label": "订单状态",
+          "values": [
+            "待支付",
+            "未支付",
+            "已支付",
+            "待出库",
+            "未出库",
+            "已出库",
+            "未发货",
+            "已发货",
+            "已经发货",
+            "还没付款",
+            "没付款",
+            "还没发货",
+            "没发货",
+            "还没出货",
+            "已签收",
+            "已完成"
+          ]
+        }
+      ],
+      "clarification_question": "请问订单当前状态是待支付、已支付未出库，还是已经发货？"
+    },
+    {
+      "code": "coupon_refund",
+      "trigger_groups": [
+        ["优惠券"],
+        ["退款", "退回", "返还"]
+      ],
+      "required_any_terms": [],
+      "excluded_terms": ["规则", "版本", "新旧", "分别", "哪些", "条件"],
+      "required_slots": [
+        {
+          "code": "refund_scope",
+          "label": "整单退款或部分退款",
+          "values": [
+            "整单",
+            "全额",
+            "全部商品",
+            "部分退款",
+            "部分商品"
+          ]
+        },
+        {
+          "code": "coupon_validity_status",
+          "label": "优惠券是否已经过期",
+          "values": [
+            "未过期",
+            "已过期",
+            "有效期内",
+            "过期"
+          ]
+        }
+      ],
+      "clarification_question": "请问这是整单退款还是部分退款，优惠券目前是否已经过期？"
+    },
+    {
+      "code": "refund_only",
+      "trigger_groups": [
+        ["仅退款"]
+      ],
+      "required_any_terms": ["我", "我的", "我想", "怎么办", "怎么处理", "怎么申请"],
+      "excluded_terms": ["第一步", "审核", "预检查", "哪些内容", "哪些信息", "如何分支", "流程", "条件"],
+      "required_slots": [
+        {
+          "code": "refund_order_status",
+          "label": "订单物流状态",
+          "values": [
+            "未发货",
+            "待发货",
+            "已发货",
+            "未签收",
+            "派件中",
+            "已签收"
+          ]
+        },
+        {
+          "code": "refund_reason",
+          "label": "申请仅退款的原因",
+          "values": [
+            "质量问题",
+            "商品破损",
+            "未收到货",
+            "物流丢失",
+            "重复付款",
+            "不想要了"
+          ]
+        }
+      ],
+      "clarification_question": "请问订单是未发货、已发货未签收还是已签收，申请仅退款的原因是什么？"
+    },
+    {
+      "code": "package_damage",
+      "trigger_groups": [
+        ["包裹", "商品"],
+        ["破损", "损坏", "坏了"]
+      ],
+      "required_any_terms": ["我", "我的", "现在", "怎么办", "怎么处理", "该怎么"],
+      "excluded_terms": ["规则", "流程有哪些", "需要哪些凭证"],
+      "required_slots": [
+        {
+          "code": "damage_discovery_stage",
+          "label": "破损发现时点",
+          "values": [
+            "签收前",
+            "签收时",
+            "拒收",
+            "签收后",
+            "已经签收",
+            "未签收"
+          ]
+        }
+      ],
+      "clarification_question": "请问是在签收前发现破损，还是签收后才发现？"
+    },
+    {
+      "code": "aftersale_next_step",
+      "trigger_groups": [
+        ["售后单"],
+        ["下一步", "怎么做", "怎么办", "操作"]
+      ],
+      "required_any_terms": ["我", "我的", "下一步", "怎么办", "怎么做"],
+      "excluded_terms": ["规则", "流程", "有哪些状态"],
+      "required_slots": [
+        {
+          "code": "aftersale_status",
+          "label": "售后单当前状态",
+          "values": [
+            "待审核",
+            "待寄回",
+            "待收货",
+            "退款中",
+            "已关闭",
+            "已拒绝"
+          ]
+        }
+      ],
+      "clarification_question": "请问售后单当前显示待审核、待寄回、待收货还是退款中？"
+    }
+  ]
+}

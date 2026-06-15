@@ -145,6 +145,7 @@ class FakeRagAdapter:
                     "rank_no": 1,
                 }
             ],
+            retrieval_rounds=2,
             latency_ms=100,
         )
 
@@ -196,6 +197,7 @@ async def test_runner_executes_case_without_leaking_reference_answer() -> None:
     ]
     assert "reference_answer" not in adapter.calls[0]
     assert repository.results[1001]["metrics"].recall_at_1 == 1.0
+    assert repository.results[1001]["metrics"].retrieval_rounds == 2
     assert repository.hits[0][1][0]["is_gold"] is True
     assert judge.calls[0]["case"].reference_answer is not None
     assert summary["counts"]["completed"] == 1

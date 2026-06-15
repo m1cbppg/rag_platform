@@ -33,6 +33,7 @@ class ContextBuilder:
     def build(
         self,
         documents: list[dict],
+        sub_queries: list[dict] | None = None,
     ) -> ContextBuildResult:
         """
         构建上下文。
@@ -64,9 +65,17 @@ class ContextBuilder:
 
         citations = self.citation_builder.build_citations(selected_chunks)
 
-        context = self._render_context(
-            chunks=selected_chunks,
-            citations=citations,
+        context = (
+            self._render_structured_context(
+                chunks=selected_chunks,
+                citations=citations,
+                sub_queries=sub_queries,
+            )
+            if sub_queries
+            else self._render_context(
+                chunks=selected_chunks,
+                citations=citations,
+            )
         )
 
         status = (
@@ -197,19 +206,111 @@ class ContextBuilder:
         blocks: list[str] = []
 
         for chunk, citation in zip(chunks, citations):
-            header = f"[{citation.citation_id}]"
-
-            if self.settings.context_include_metadata_header:
-                title_path = chunk.title_path or chunk.title or "未知标题"
-                section = chunk.source_section or "未知章节"
-                chunk_type = chunk.chunk_type or "UNKNOWN"
-
-                header += f" 文档类型：{chunk_type}；标题路径：{title_path}；来源：{section}"
-
-            block = f"{header}\n{chunk.content}".strip()
-            blocks.append(block)
+            blocks.append(
+                self._render_chunk_block(
+                    chunk=chunk,
+                    citation=citation,
+                )
+            )
 
         return "\n\n---\n\n".join(blocks)
+
+    def _render_structured_context(
+        self,
+        *,
+        chunks: list[ContextChunk],
+        citations,
+        sub_queries: list[dict],
+    ) -> str:
+        """
+        按子问题组织证据，但 Citation 仍按唯一 Chunk 生成。
+        """
+
+        citation_by_chunk_id = {
+            citation.chunk_id: citation for citation in citations
+        }
+        groups: list[str] = []
+        assigned_chunk_ids: set[int] = set()
+
+        for sub_query in sub_queries:
+            sub_query_id = str(
+                sub_query.get("sub_query_id") or ""
+            ).strip()
+            question = str(
+                sub_query.get("question") or ""
+            ).strip()
+            if not sub_query_id:
+                continue
+            matching_chunks = [
+                chunk
+                for chunk in chunks
+                if sub_query_id
+                in list(
+                    (chunk.metadata or {}).get(
+                        "sub_query_ids",
+                        [],
+                    )
+                )
+            ]
+            assigned_chunk_ids.update(
+                chunk.chunk_id for chunk in matching_chunks
+            )
+            evidence_blocks = [
+                self._render_chunk_block(
+                    chunk=chunk,
+                    citation=citation_by_chunk_id[chunk.chunk_id],
+                )
+                for chunk in matching_chunks
+                if chunk.chunk_id in citation_by_chunk_id
+            ]
+            if not evidence_blocks:
+                evidence_blocks = ["当前未检索到该子问题的可用证据。"]
+            groups.append(
+                (
+                    f"## 子问题 {sub_query_id}：{question}\n\n"
+                    + "\n\n---\n\n".join(evidence_blocks)
+                ).strip()
+            )
+
+        unassigned_chunks = [
+            chunk
+            for chunk in chunks
+            if chunk.chunk_id not in assigned_chunk_ids
+        ]
+        if unassigned_chunks:
+            evidence_blocks = [
+                self._render_chunk_block(
+                    chunk=chunk,
+                    citation=citation_by_chunk_id[chunk.chunk_id],
+                )
+                for chunk in unassigned_chunks
+                if chunk.chunk_id in citation_by_chunk_id
+            ]
+            groups.append(
+                (
+                    "## 其他相关证据\n\n"
+                    + "\n\n---\n\n".join(evidence_blocks)
+                ).strip()
+            )
+
+        return "\n\n===\n\n".join(groups)
+
+    def _render_chunk_block(
+        self,
+        *,
+        chunk: ContextChunk,
+        citation,
+    ) -> str:
+        header = f"[{citation.citation_id}]"
+        if self.settings.context_include_metadata_header:
+            title_path = chunk.title_path or chunk.title or "未知标题"
+            section = chunk.source_section or "未知章节"
+            chunk_type = chunk.chunk_type or "UNKNOWN"
+            header += (
+                f" 文档类型：{chunk_type}；"
+                f"标题路径：{title_path}；来源：{section}"
+            )
+        return f"{header}\n{chunk.content}".strip()
 
     def _render_single_chunk_preview(
         self,

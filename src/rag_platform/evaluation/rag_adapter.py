@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Protocol
 
 from src.rag_platform.domain.answer import AnswerStatus
@@ -25,7 +25,13 @@ class RagEvaluationObservation:
     context: str
     context_blocks: list[str]
     retrieval_hits: list[dict[str, Any]]
+    retrieval_rounds: int
     latency_ms: int
+    decomposition: dict[str, Any] = field(default_factory=dict)
+    sub_query_coverage: dict[str, Any] = field(
+        default_factory=dict
+    )
+    dependent_hop: dict[str, Any] = field(default_factory=dict)
 
 
 class ChatServiceEvaluationAdapter:
@@ -80,7 +86,11 @@ class ChatServiceEvaluationAdapter:
                 question=question,
                 execution=execution,
             ),
+            retrieval_rounds=workflow.retrieval_round,
             latency_ms=execution.latency_ms,
+            decomposition=workflow.decomposition,
+            sub_query_coverage=workflow.sub_query_coverage,
+            dependent_hop=workflow.dependent_hop,
         )
 
 
@@ -97,6 +107,8 @@ def _actual_action(status: str) -> ActualAction:
         return ActualAction.ANSWER
     if status == AnswerStatus.REFUSED.value:
         return ActualAction.REFUSE
+    if status == AnswerStatus.CLARIFIED.value:
+        return ActualAction.CLARIFY
     return ActualAction.ERROR
 
 
@@ -108,6 +120,26 @@ def _retrieval_hits(
     workflow = execution.workflow
     query_text = workflow.rewritten_question or question
     hits: list[dict[str, Any]] = []
+    if workflow.retrieval_attempts:
+        for attempt in workflow.retrieval_attempts:
+            hits.extend(
+                _attempt_hits(
+                    attempt=attempt,
+                    fallback_query=query_text,
+                )
+            )
+        hits.extend(
+            _final_hits(
+                workflow=workflow,
+                retrieval_round=workflow.retrieval_round,
+                query_text=_last_attempt_query(
+                    workflow.retrieval_attempts,
+                    query_text,
+                ),
+            )
+        )
+        return hits
+
     merged_channel = (workflow.retrieval_mode or "HYBRID").upper()
     for rank, document in enumerate(workflow.documents, start=1):
         is_hybrid = merged_channel == "HYBRID"
@@ -162,3 +194,123 @@ def _retrieval_hits(
             }
         )
     return hits
+
+
+def _attempt_hits(
+    *,
+    attempt: dict[str, Any],
+    fallback_query: str,
+) -> list[dict[str, Any]]:
+    round_no = int(attempt.get("round_no") or 1)
+    query_variant = str(
+        attempt.get("query_variant") or "ORIGINAL"
+    )
+    queries = list(attempt.get("queries") or [])
+    query_text = str(
+        queries[0] if queries else fallback_query
+    )
+    result: list[dict[str, Any]] = []
+    default_channel = str(
+        attempt.get("retrieval_mode") or "hybrid"
+    ).upper()
+    for rank, document in enumerate(
+        attempt.get("documents") or [],
+        start=1,
+    ):
+        channel = str(
+            document.get("source") or default_channel
+        ).upper()
+        score = document.get("score")
+        is_fused = channel in {"HYBRID", "ADAPTIVE"}
+        result.append(
+            {
+                "retrieval_round": round_no,
+                "query_variant": query_variant,
+                "query_text": query_text,
+                "channel": channel,
+                "chunk_id": int(document["chunk_id"]),
+                "rank_no": rank,
+                "raw_score": None if is_fused else score,
+                "fused_score": score if is_fused else None,
+                "metadata": {
+                    **(document.get("metadata") or {}),
+                    "strategy": attempt.get("strategy"),
+                    "queries": queries,
+                    "removed_filters": attempt.get(
+                        "removed_filters",
+                        [],
+                    ),
+                },
+            }
+        )
+    for rank, document in enumerate(
+        attempt.get("reranked_documents") or [],
+        start=1,
+    ):
+        result.append(
+            {
+                "retrieval_round": round_no,
+                "query_variant": query_variant,
+                "query_text": query_text,
+                "channel": "RERANK",
+                "chunk_id": int(document["chunk_id"]),
+                "rank_no": rank,
+                "raw_score": document.get("score"),
+                "rerank_score": (
+                    document.get("rerank_score")
+                    or (document.get("metadata") or {}).get(
+                        "rerank_score"
+                    )
+                ),
+                "metadata": {
+                    **(document.get("metadata") or {}),
+                    "strategy": attempt.get("strategy"),
+                },
+            }
+        )
+    return result
+
+
+def _final_hits(
+    *,
+    workflow,
+    retrieval_round: int,
+    query_text: str,
+) -> list[dict[str, Any]]:
+    result = []
+    metadata_by_chunk_id = {
+        int(document.chunk_id): document.metadata
+        for document in workflow.reranked_documents
+    }
+    for rank, citation in enumerate(workflow.citations, start=1):
+        if citation.get("chunk_id") is None:
+            continue
+        result.append(
+            {
+                "retrieval_round": retrieval_round,
+                "query_variant": "FINAL",
+                "query_text": query_text,
+                "channel": "FINAL",
+                "chunk_id": int(citation["chunk_id"]),
+                "rank_no": rank,
+                "metadata": {
+                    **metadata_by_chunk_id.get(
+                        int(citation["chunk_id"]),
+                        {},
+                    ),
+                    "citation_id": citation.get("citation_id"),
+                    "expansion_type": citation.get(
+                        "expansion_type"
+                    ),
+                },
+            }
+        )
+    return result
+
+
+def _last_attempt_query(
+    attempts: list[dict[str, Any]],
+    fallback_query: str,
+) -> str:
+    queries = list(attempts[-1].get("queries") or [])
+    return str(queries[0] if queries else fallback_query)

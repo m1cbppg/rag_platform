@@ -1,0 +1,199 @@
+{
+  "case_count": 300,
+  "corrected_case_count": 15,
+  "corrections": [
+    {
+      "added_chunk_id": 64,
+      "added_source_doc_code": "FAQ_PAYMENT_001",
+      "candidate_chunk_ids": [
+        64
+      ],
+      "case_code": "CASE_EXACT_002",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "E-PAY-2001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 187,
+      "added_source_doc_code": "RULE_ORDER_001_V1",
+      "candidate_chunk_ids": [
+        187
+      ],
+      "case_code": "CASE_EXACT_003",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "R-ORDER-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 57,
+      "added_source_doc_code": "FAQ_ORDER_STATUS_001",
+      "candidate_chunk_ids": [
+        57
+      ],
+      "case_code": "CASE_EXACT_004",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "F-ORDER-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 143,
+      "added_source_doc_code": "FAQ_AFTERSALE_PROGRESS_001",
+      "candidate_chunk_ids": [
+        143
+      ],
+      "case_code": "CASE_EXACT_005",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "AFTERSALE_STATUS",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 199,
+      "added_source_doc_code": "RULE_REFUND_001_V1",
+      "candidate_chunk_ids": [
+        199
+      ],
+      "case_code": "CASE_EXACT_008",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "R-REFUND-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 57,
+      "added_source_doc_code": "FAQ_ORDER_STATUS_001",
+      "candidate_chunk_ids": [
+        57
+      ],
+      "case_code": "CASE_EXACT_012",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "F-ORDER-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 221,
+      "added_source_doc_code": "RULE_REFUND_002",
+      "candidate_chunk_ids": [
+        221
+      ],
+      "case_code": "CASE_EXACT_014",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "R-REFUND-002",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 64,
+      "added_source_doc_code": "FAQ_PAYMENT_001",
+      "candidate_chunk_ids": [
+        64
+      ],
+      "case_code": "CASE_EXACT_016",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "DEVELOPMENT",
+      "identifier": "E-PAY-2001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 115,
+      "added_source_doc_code": "FAQ_LOGISTICS_DELAY_001",
+      "candidate_chunk_ids": [
+        115
+      ],
+      "case_code": "CASE_EXACT_019",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "TEST",
+      "identifier": "F-LOGISTICS-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 126,
+      "added_source_doc_code": "FAQ_PACKAGE_EXCEPTION_001",
+      "candidate_chunk_ids": [
+        126
+      ],
+      "case_code": "CASE_EXACT_020",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "TEST",
+      "identifier": "PACKAGE_EXCEPTION",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 83,
+      "added_source_doc_code": "FAQ_RETURN_FREIGHT_001",
+      "candidate_chunk_ids": [
+        83
+      ],
+      "case_code": "CASE_EXACT_022",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "TEST",
+      "identifier": "F-RETURN-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 211,
+      "added_source_doc_code": "RULE_LOGISTICS_001_V1",
+      "candidate_chunk_ids": [
+        211,
+        214
+      ],
+      "case_code": "CASE_EXACT_023",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "TEST",
+      "identifier": "R-LOGISTICS-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 44,
+      "added_source_doc_code": "RULE_COUPON_001_V1",
+      "candidate_chunk_ids": [
+        44,
+        47
+      ],
+      "case_code": "CASE_EXACT_025",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "VALIDATION",
+      "identifier": "R-COUPON-001",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 206,
+      "added_source_doc_code": "RULE_COUPON_001_V2",
+      "candidate_chunk_ids": [
+        206
+      ],
+      "case_code": "CASE_EXACT_026",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "VALIDATION",
+      "identifier": "COUPON-V2",
+      "original_required_fact_count": 1
+    },
+    {
+      "added_chunk_id": 113,
+      "added_source_doc_code": "FAQ_INVOICE_001",
+      "candidate_chunk_ids": [
+        113
+      ],
+      "case_code": "CASE_EXACT_028",
+      "corrected_required_fact_count": 2,
+      "dataset_split": "VALIDATION",
+      "identifier": "F-INVOICE-001",
+      "original_required_fact_count": 1
+    }
+  ],
+  "document_count": 40,
+  "exact_identifier_case_count": 30,
+  "source_content_sha256": "e90b6449b07e44af3c4b1fdc16fddfdb6bcb8ed71e140e79dee424d5eec427fe",
+  "source_dataset": "rag_eval_ecommerce:v1",
+  "source_dataset_id": 7,
+  "target_content_sha256": "24db2f0bd9b3b5667c9b4d2362ca22fa33c4b391cebf1d0b40988b8e9bb932e9",
+  "target_dataset": "rag_eval_ecommerce:v2",
+  "target_dataset_id": 30,
+  "unchanged_exact_identifier_case_count": 15,
+  "unresolved": [],
+  "version": "exact-identifier-v1"
+}

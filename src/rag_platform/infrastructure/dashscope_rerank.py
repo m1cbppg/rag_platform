@@ -85,6 +85,9 @@ class DashScopeRerankClient:
 
         raise ExternalServiceError(f"qwen3-rerank 调用失败: {last_error}")
 
+    async def aclose(self) -> None:
+        await self.client.aclose()
+
     async def _do_rerank(
         self,
         query: str,

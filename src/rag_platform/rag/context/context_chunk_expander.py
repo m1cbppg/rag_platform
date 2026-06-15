@@ -134,6 +134,7 @@ class ContextChunkExpander:
             original_rank=base_chunk.original_rank,
             sort_score=sort_score,
             metadata={
+                **(base_chunk.metadata or {}),
                 "expanded_from_chunk_id": base_chunk.chunk_id,
                 "relation_type": relation_type,
             },

@@ -1,0 +1,4134 @@
+{
+  "cases": [
+    {
+      "case_code": "DEP_HOP_001",
+      "chain_type": "退款失败分类到改道规则",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.95,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先查明NOT_SUPPORTED的含义，再根据该含义查询对应的处理流程，两个步骤依赖且属于不同文档类型。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          165,
+          166,
+          221,
+          225,
+          222
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 6630,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8772153153380492,
+          "ndcg_at_5": 0.8772153153380492,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 48,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 19,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [
+              "NOT_SUPPORTED"
+            ],
+            "rerank_margin": 0.035036,
+            "rerank_top1": 0.912081,
+            "rerank_top3_mean": 0.857211,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.956602
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          165,
+          166,
+          221,
+          222,
+          225,
+          224,
+          223
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "退款渠道返回码是 NOT_SUPPORTED。请先查明它表示哪一类退款失败，然后根据该失败类型说明原路退款应如何改道处理？",
+            "退款规则",
+            "已发货订单退款条件",
+            "订单退款例外情况"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "退款渠道返回码是 NOT_SUPPORTED。请先查明它表示哪一类退款失败，然后根据该失败类型说明原路退款应如何改道处理？",
+          "target_doc_types": [
+            "RULE",
+            "FAQ"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.95,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先查明NOT_SUPPORTED的含义，再根据该含义查询处理流程，两个步骤依赖且属于不同文档类型。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "退款渠道返回码 NOT_SUPPORTED 表示哪一类退款失败？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "原路退回限制 原路退款应如何改道处理？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "FAQ"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "根据渠道返回码判断是原路退回限制（S-REFUND-002）还是账户异常",
+          "fallback_used": false,
+          "first_hop_question": "退款渠道返回码 NOT_SUPPORTED 表示哪一类退款失败？",
+          "intermediate_fact": "原路退回限制",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}} 原路退款应如何改道处理？",
+          "reason": "第一跳问题询问NOT_SUPPORTED表示的失败类型，候选证据明确将NOT_SUPPORTED归类为原路退回限制，该事实可直接用于第二跳查询原路退款改道处理。",
+          "second_hop_query": "原路退回限制 原路退款应如何改道处理？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 165
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          165,
+          166,
+          221,
+          225,
+          222,
+          224,
+          223
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 9111,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8772153153380492,
+          "ndcg_at_5": 0.8772153153380492,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 50,
+            "channel_overlap_at_10": 0.7,
+            "comparison_intent": false,
+            "distinct_document_count": 21,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [
+              "NOT_SUPPORTED"
+            ],
+            "rerank_margin": 0.035036,
+            "rerank_top1": 0.912081,
+            "rerank_top3_mean": 0.857211,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.926602
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          165,
+          166,
+          221,
+          222,
+          225,
+          224,
+          223
+        ],
+        "second_hop_attempt_chunk_ids": [
+          165,
+          166,
+          221,
+          225,
+          222,
+          224,
+          223
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "退款渠道返回码是 NOT_SUPPORTED。请先查明它表示哪一类退款失败，然后根据该失败类型说明原路退款应如何改道处理？",
+            "退款规则",
+            "已发货订单退款条件",
+            "订单退款例外情况"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "退款渠道返回码是 NOT_SUPPORTED。请先查明它表示哪一类退款失败，然后根据该失败类型说明原路退款应如何改道处理？",
+          "target_doc_types": [
+            "RULE",
+            "FAQ"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "原路退回限制",
+        "原渠道不可用",
+        "原路退款渠道不支持"
+      ],
+      "first_hop_gold_chunk_ids": [
+        165
+      ],
+      "latency_delta_ms": 2481,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "退款渠道返回码是 NOT_SUPPORTED。请先查明它表示哪一类退款失败，然后根据该失败类型说明原路退款应如何改道处理？",
+      "second_hop_gold_chunk_ids": [
+        222
+      ],
+      "source_case_codes": [
+        "CASE_MULTI_CONDITION_016",
+        "CASE_DIRECT_002"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_002",
+      "chain_type": "退款重试上限到人工处理",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个独立信息需求：先判断自动重试上限规则，再根据结果查询转人工流程。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          222,
+          165,
+          166,
+          221,
+          49
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 4007,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8315546295836226,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 50,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 20,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.000422,
+            "rerank_top1": 0.819916,
+            "rerank_top3_mean": 0.810114,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.926496
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          222,
+          165,
+          221,
+          223,
+          166,
+          49
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "一笔原路退款已经由系统自动重试两次。请先判断它当前是否达到自动处理上限，然后根据该判断说明后台下一步如何转人工处理？",
+            "退款规则",
+            "已发货订单退款条件",
+            "订单退款例外情况"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "一笔原路退款已经由系统自动重试两次。请先判断它当前是否达到自动处理上限，然后根据该判断说明后台下一步如何转人工处理？",
+          "target_doc_types": [
+            "RULE",
+            "SOP",
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个独立信息需求：首先需要查询自动重试上限规则，然后根据结果查询对应的人工处理流程。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "原路退款自动重试两次后，是否达到自动处理上限？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "原路退款最多自动重试两次，后台下一步如何转人工处理？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "SOP",
+                "MANUAL"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 1.0,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "原路退款最多自动重试两次",
+          "fallback_used": false,
+          "first_hop_question": "原路退款自动重试两次后，是否达到自动处理上限？",
+          "intermediate_fact": "原路退款最多自动重试两次",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}，后台下一步如何转人工处理？",
+          "reason": "第一跳问题询问是否达到自动处理上限，证据明确说明最多自动重试两次，因此两次后即达到上限，该事实可直接用于第二跳查询后台如何转人工处理。",
+          "second_hop_query": "原路退款最多自动重试两次，后台下一步如何转人工处理？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 222
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          222,
+          165,
+          166,
+          221,
+          49,
+          225,
+          180
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 7863,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8315546295836226,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 50,
+            "channel_overlap_at_10": 0.6,
+            "comparison_intent": false,
+            "distinct_document_count": 21,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.000422,
+            "rerank_top1": 0.819916,
+            "rerank_top3_mean": 0.810114,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.886496
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          222,
+          165,
+          221,
+          223,
+          166,
+          49,
+          225,
+          180
+        ],
+        "second_hop_attempt_chunk_ids": [
+          222,
+          165,
+          166,
+          221,
+          49,
+          225,
+          180
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "一笔原路退款已经由系统自动重试两次。请先判断它当前是否达到自动处理上限，然后根据该判断说明后台下一步如何转人工处理？",
+            "退款规则",
+            "已发货订单退款条件",
+            "订单退款例外情况"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "一笔原路退款已经由系统自动重试两次。请先判断它当前是否达到自动处理上限，然后根据该判断说明后台下一步如何转人工处理？",
+          "target_doc_types": [
+            "RULE",
+            "SOP",
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "达到自动重试上限",
+        "最多自动重试两次",
+        "已达到两次重试上限"
+      ],
+      "first_hop_gold_chunk_ids": [
+        222
+      ],
+      "latency_delta_ms": 3856,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "一笔原路退款已经由系统自动重试两次。请先判断它当前是否达到自动处理上限，然后根据该判断说明后台下一步如何转人工处理？",
+      "second_hop_gold_chunk_ids": [
+        49
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_002",
+        "CASE_DIRECT_054"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_003",
+      "chain_type": "物流丢失判定到承运商工单",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先判断核查状态，再根据状态说明工单提交方式。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          212,
+          211,
+          214,
+          215,
+          213
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 2523,
+        "metrics": {
+          "fact_coverage": 0.5,
+          "ndcg_at_10": 0.6131471927654584,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 0.5,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 20,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 9,
+            "distinct_version_count": 1,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.09332,
+            "rerank_top1": 0.884379,
+            "rerank_top3_mean": 0.813216,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.943077
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          212,
+          211,
+          213,
+          214,
+          215
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "按物流 V1 规则，包裹已经连续七日没有任何轨迹。请先判断它进入什么核查状态，然后根据该状态说明客服如何向承运商提交工单？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "按物流 V1 规则，包裹已经连续七日没有任何轨迹。请先判断它进入什么核查状态，然后根据该状态说明客服如何向承运商提交工单？",
+          "target_doc_types": [
+            "RULE"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先判断核查状态，再根据状态说明工单提交方式。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "按物流V1规则，包裹连续七日无轨迹，进入什么核查状态？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "根据疑似丢失核查状态，客服如何向承运商提交工单？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "SOP"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 1.0,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "若连续七日无轨迹，进入疑似丢失核查",
+          "fallback_used": false,
+          "first_hop_question": "按物流V1规则，包裹连续七日无轨迹，进入什么核查状态？",
+          "intermediate_fact": "疑似丢失核查",
+          "max_hops": 2,
+          "next_query_template": "根据{{intermediate_fact}}状态，客服如何向承运商提交工单？",
+          "reason": "第一跳问题询问连续七日无轨迹进入的核查状态，候选证据明确给出'疑似丢失核查'，该状态是第二跳查询中客服提交工单的前提。",
+          "second_hop_query": "根据疑似丢失核查状态，客服如何向承运商提交工单？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 212
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          212,
+          211,
+          214,
+          215,
+          154,
+          243,
+          155
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 7514,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8315546295836226,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 40,
+            "channel_overlap_at_10": 0.8,
+            "comparison_intent": false,
+            "distinct_document_count": 17,
+            "distinct_version_count": 1,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.09332,
+            "rerank_top1": 0.884379,
+            "rerank_top3_mean": 0.813216,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.923077
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          212,
+          211,
+          213,
+          214,
+          215,
+          154,
+          243,
+          155
+        ],
+        "second_hop_attempt_chunk_ids": [
+          212,
+          211,
+          214,
+          215,
+          154,
+          243,
+          155
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "按物流 V1 规则，包裹已经连续七日没有任何轨迹。请先判断它进入什么核查状态，然后根据该状态说明客服如何向承运商提交工单？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "按物流 V1 规则，包裹已经连续七日没有任何轨迹。请先判断它进入什么核查状态，然后根据该状态说明客服如何向承运商提交工单？",
+          "target_doc_types": [
+            "RULE"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "疑似丢失核查",
+        "进入丢失核查",
+        "包裹疑似丢失"
+      ],
+      "first_hop_gold_chunk_ids": [
+        212
+      ],
+      "latency_delta_ms": 4991,
+      "metric_deltas": {
+        "fact_coverage": 0.5,
+        "ndcg_at_10": 0.218407,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.5,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "按物流 V1 规则，包裹已经连续七日没有任何轨迹。请先判断它进入什么核查状态，然后根据该状态说明客服如何向承运商提交工单？",
+      "second_hop_gold_chunk_ids": [
+        154
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_059",
+        "CASE_DIRECT_071"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_004",
+      "chain_type": "V2丢失条件到承运商工单",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先根据规则判定流程，再根据流程说明创建工单。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          217,
+          216,
+          243,
+          115,
+          154
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 3024,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8315546295836226,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 20,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 11,
+            "distinct_version_count": 1,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.083104,
+            "rerank_top1": 0.890503,
+            "rerank_top3_mean": 0.830061,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.947135
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          217,
+          216,
+          218,
+          243,
+          115,
+          154,
+          155
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "按物流 V2 规则，某节点已经超出观察期且承运商二十四小时内没有有效反馈。请先判定该包裹应进入什么流程，然后根据该流程说明如何创建承运商核查工单？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "按物流 V2 规则，某节点已经超出观察期且承运商二十四小时内没有有效反馈。请先判定该包裹应进入什么流程，然后根据该流程说明如何创建承运商核查工单？",
+          "target_doc_types": [
+            "RULE",
+            "SOP"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个独立信息需求：先判定流程，再根据流程创建工单，且第二跳依赖第一跳的流程判定结果。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "按物流V2规则，某节点已经超出观察期且承运商二十四小时内没有有效反馈，该包裹应进入什么流程？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "根据丢失核查流程流程，如何创建承运商核查工单？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "SOP"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "若承运商在24小时内无有效反馈，则进入丢失核查流程。",
+          "fallback_used": false,
+          "first_hop_question": "按物流V2规则，某节点已经超出观察期且承运商二十四小时内没有有效反馈，该包裹应进入什么流程？",
+          "intermediate_fact": "丢失核查流程",
+          "max_hops": 2,
+          "next_query_template": "根据{{intermediate_fact}}流程，如何创建承运商核查工单？",
+          "reason": "第一跳问题判断包裹应进入的流程，候选证据明确说明节点超时且承运商无反馈则进入丢失核查流程，该流程正是第二跳查询创建承运商核查工单所需的上下文。",
+          "second_hop_query": "根据丢失核查流程流程，如何创建承运商核查工单？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 217
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          217,
+          216,
+          243,
+          115,
+          219,
+          154,
+          155
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 6696,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8175295903539446,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 32,
+            "channel_overlap_at_10": 0.9,
+            "comparison_intent": false,
+            "distinct_document_count": 13,
+            "distinct_version_count": 1,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.083104,
+            "rerank_top1": 0.890503,
+            "rerank_top3_mean": 0.830061,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.937135
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          217,
+          216,
+          218,
+          243,
+          115,
+          219,
+          154,
+          220
+        ],
+        "second_hop_attempt_chunk_ids": [
+          217,
+          216,
+          243,
+          115,
+          219,
+          154,
+          155
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "按物流 V2 规则，某节点已经超出观察期且承运商二十四小时内没有有效反馈。请先判定该包裹应进入什么流程，然后根据该流程说明如何创建承运商核查工单？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "按物流 V2 规则，某节点已经超出观察期且承运商二十四小时内没有有效反馈。请先判定该包裹应进入什么流程，然后根据该流程说明如何创建承运商核查工单？",
+          "target_doc_types": [
+            "RULE",
+            "SOP"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "进入丢失核查流程",
+        "丢失核查",
+        "节点超时且承运商无反馈"
+      ],
+      "first_hop_gold_chunk_ids": [
+        217
+      ],
+      "latency_delta_ms": 3672,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": -0.014025,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "按物流 V2 规则，某节点已经超出观察期且承运商二十四小时内没有有效反馈。请先判定该包裹应进入什么流程，然后根据该流程说明如何创建承运商核查工单？",
+      "second_hop_gold_chunk_ids": [
+        154
+      ],
+      "source_case_codes": [
+        "CASE_CONFLICT_014",
+        "CASE_DIRECT_071"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_005",
+      "chain_type": "物流节点超时到后台核查单",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个步骤：先判断异常状态，再根据状态执行核查操作。第二跳依赖第一跳的结果。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          217,
+          216,
+          243,
+          115,
+          114
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 2549,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9674679834891693,
+          "ndcg_at_5": 0.9674679834891693,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 20,
+            "channel_overlap_at_10": 0.7,
+            "comparison_intent": false,
+            "distinct_document_count": 11,
+            "distinct_version_count": 1,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [
+              "LOGISTICS-V2"
+            ],
+            "rerank_margin": 0.04659,
+            "rerank_top1": 0.795228,
+            "rerank_top3_mean": 0.736355,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.87926
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          217,
+          216,
+          218,
+          243,
+          115,
+          114
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "按 LOGISTICS-V2，包裹在转运节点停留五十小时没有更新。请先判断该节点属于什么异常状态，然后根据这个状态说明在物流后台应执行什么核查操作？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "按 LOGISTICS-V2，包裹在转运节点停留五十小时没有更新。请先判断该节点属于什么异常状态，然后根据这个状态说明在物流后台应执行什么核查操作？",
+          "target_doc_types": [
+            "MANUAL",
+            "FAQ"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先判断异常状态，再根据状态执行核查操作。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "按 LOGISTICS-V2，包裹在转运节点停留五十小时没有更新，属于什么异常状态？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "MANUAL"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "在物流后台，对于 节点超时 应执行什么核查操作？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "FAQ"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "若节点在观察期内未更新状态，系统自动标记为“节点超时”。",
+          "fallback_used": false,
+          "first_hop_question": "按 LOGISTICS-V2，包裹在转运节点停留五十小时没有更新，属于什么异常状态？",
+          "intermediate_fact": "节点超时",
+          "max_hops": 2,
+          "next_query_template": "在物流后台，对于 {{intermediate_fact}} 应执行什么核查操作？",
+          "reason": "第一跳问题询问包裹在转运节点停留五十小时（超过转运观察期48小时）属于什么异常状态，候选证据明确说明超过观察期未更新标记为“节点超时”，该事实可直接用于第二跳查询“在物流后台，对于节点超时应执行什么核查操作？”",
+          "second_hop_query": "在物流后台，对于 节点超时 应执行什么核查操作？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 217
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          217,
+          216,
+          243,
+          115,
+          114,
+          154,
+          155
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 7523,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9674679834891693,
+          "ndcg_at_5": 0.9674679834891693,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 32,
+            "channel_overlap_at_10": 0.5,
+            "comparison_intent": false,
+            "distinct_document_count": 16,
+            "distinct_version_count": 1,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [
+              "LOGISTICS-V2"
+            ],
+            "rerank_margin": 0.04659,
+            "rerank_top1": 0.795228,
+            "rerank_top3_mean": 0.736355,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.85926
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          217,
+          216,
+          218,
+          243,
+          115,
+          114,
+          154,
+          155
+        ],
+        "second_hop_attempt_chunk_ids": [
+          217,
+          216,
+          243,
+          115,
+          114,
+          154,
+          155
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "按 LOGISTICS-V2，包裹在转运节点停留五十小时没有更新。请先判断该节点属于什么异常状态，然后根据这个状态说明在物流后台应执行什么核查操作？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "按 LOGISTICS-V2，包裹在转运节点停留五十小时没有更新。请先判断该节点属于什么异常状态，然后根据这个状态说明在物流后台应执行什么核查操作？",
+          "target_doc_types": [
+            "MANUAL",
+            "FAQ"
+          ]
+        }
+      },
+      "execution_order": [
+        "dependent",
+        "control"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "转运节点超时",
+        "超过转运节点四十八小时观察期",
+        "节点超时"
+      ],
+      "first_hop_gold_chunk_ids": [
+        216,
+        217
+      ],
+      "latency_delta_ms": 4974,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "按 LOGISTICS-V2，包裹在转运节点停留五十小时没有更新。请先判断该节点属于什么异常状态，然后根据这个状态说明在物流后台应执行什么核查操作？",
+      "second_hop_gold_chunk_ids": [
+        243
+      ],
+      "source_case_codes": [
+        "CASE_CONFLICT_013",
+        "CASE_MULTI_CONDITION_033"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_006",
+      "chain_type": "揽收延迟分类到核查责任方",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题需要先查询观察期规则判断延迟类型，再根据延迟类型查询核查发起方，两跳依赖。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          115,
+          114,
+          217,
+          211,
+          216
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 5217,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_5": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 20,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 8,
+            "distinct_version_count": 2,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.117748,
+            "rerank_top1": 0.959837,
+            "rerank_top3_mean": 0.84058,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.966046
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          115,
+          114,
+          217,
+          216,
+          218,
+          211,
+          212
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "物流轨迹显示揽收扫描后三十小时仍没有下一条记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "物流轨迹显示揽收扫描后三十小时仍没有下一条记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题需要先查询观察期规则判断延迟类型，再根据延迟类型查询核查发起方，两个步骤依赖且需要中间事实。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "物流轨迹显示揽收扫描后三十小时仍没有下一条记录，依据观察期规则，这属于哪类延迟？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "揽收延迟延迟应由谁发起核查？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "SOP"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "揽收延迟：揽收扫描后24小时内无下一轨迹更新属于正常。",
+          "fallback_used": false,
+          "first_hop_question": "物流轨迹显示揽收扫描后三十小时仍没有下一条记录，依据观察期规则，这属于哪类延迟？",
+          "intermediate_fact": "揽收延迟",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}延迟应由谁发起核查？",
+          "reason": "第一跳问题询问依据观察期规则，揽收扫描后30小时无更新属于哪类延迟。候选证据chunk_id=114明确说明揽收延迟观察期为24小时，超过24小时即属于揽收延迟。该事实直接回答第一跳问题，且是第二跳查询所需的关键事实。",
+          "second_hop_query": "揽收延迟延迟应由谁发起核查？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 114
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          115,
+          114,
+          217,
+          211,
+          220,
+          216,
+          214
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 8514,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_5": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 25,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 10,
+            "distinct_version_count": 2,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.117748,
+            "rerank_top1": 0.959837,
+            "rerank_top3_mean": 0.84058,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.966046
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          115,
+          114,
+          217,
+          216,
+          218,
+          211,
+          220,
+          212
+        ],
+        "second_hop_attempt_chunk_ids": [
+          115,
+          114,
+          217,
+          211,
+          220,
+          216,
+          214
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "物流轨迹显示揽收扫描后三十小时仍没有下一条记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "物流轨迹显示揽收扫描后三十小时仍没有下一条记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "dependent",
+        "control"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "揽收延迟",
+        "超过揽收观察期",
+        "揽收节点延迟"
+      ],
+      "first_hop_gold_chunk_ids": [
+        114
+      ],
+      "latency_delta_ms": 3297,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "物流轨迹显示揽收扫描后三十小时仍没有下一条记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+      "second_hop_gold_chunk_ids": [
+        115
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_064",
+        "CASE_MULTI_CONDITION_029"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_007",
+      "chain_type": "运输延迟分类到核查责任方",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先查询延迟分类规则，再根据分类查询对应的核查发起方，属于两跳依赖。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          115,
+          114,
+          211,
+          216,
+          212
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 2819,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_5": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 20,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 8,
+            "distinct_version_count": 2,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.098859,
+            "rerank_top1": 0.954538,
+            "rerank_top3_mean": 0.837951,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.964327
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          115,
+          114,
+          211,
+          216,
+          212,
+          217,
+          213
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "物流轨迹显示包裹揽收后六十小时仍没有中途更新。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "物流轨迹显示包裹揽收后六十小时仍没有中途更新。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题需要先判断延迟类型，再根据类型确定核查发起方，属于两跳依赖查询。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "物流轨迹显示包裹揽收后六十小时仍没有中途更新，依据观察期判断这属于哪类延迟？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "运输延迟延迟应由谁发起核查？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "SOP"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "运输延迟：揽收后48小时内无中途轨迹更新属于正常。",
+          "fallback_used": false,
+          "first_hop_question": "物流轨迹显示包裹揽收后六十小时仍没有中途更新，依据观察期判断这属于哪类延迟？",
+          "intermediate_fact": "运输延迟",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}延迟应由谁发起核查？",
+          "reason": "第一跳问题询问包裹揽收后60小时无中途更新属于哪类延迟，根据观察期规则，揽收后48小时内无中途更新属于运输延迟的正常范围，超过48小时则属于运输延迟。因此中间事实为'运输延迟'，用于第二跳查询由谁发起核查。",
+          "second_hop_query": "运输延迟延迟应由谁发起核查？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 114
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          115,
+          114,
+          211,
+          216,
+          212,
+          214,
+          217
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 14753,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_5": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 29,
+            "channel_overlap_at_10": 0.8,
+            "comparison_intent": false,
+            "distinct_document_count": 10,
+            "distinct_version_count": 2,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.098859,
+            "rerank_top1": 0.954538,
+            "rerank_top3_mean": 0.837951,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.944327
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          115,
+          114,
+          211,
+          216,
+          220,
+          212,
+          217,
+          219
+        ],
+        "second_hop_attempt_chunk_ids": [
+          115,
+          114,
+          211,
+          216,
+          220,
+          212,
+          214
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "物流轨迹显示包裹揽收后六十小时仍没有中途更新。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "物流轨迹显示包裹揽收后六十小时仍没有中途更新。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "运输延迟",
+        "超过运输观察期",
+        "运输节点延迟"
+      ],
+      "first_hop_gold_chunk_ids": [
+        114
+      ],
+      "latency_delta_ms": 11934,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "物流轨迹显示包裹揽收后六十小时仍没有中途更新。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+      "second_hop_gold_chunk_ids": [
+        115
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_065",
+        "CASE_MULTI_CONDITION_029"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_008",
+      "chain_type": "派送延迟分类到核查责任方",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先查询延迟分类规则，再根据分类查询核查发起方，两步依赖。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          115,
+          114,
+          216,
+          211,
+          217
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 4857,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_5": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 20,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 8,
+            "distinct_version_count": 2,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.119142,
+            "rerank_top1": 0.922386,
+            "rerank_top3_mean": 0.811739,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.952357
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          115,
+          114,
+          216,
+          217,
+          211,
+          212,
+          218
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "物流轨迹显示包裹到达派送站点后三十小时仍没有派送记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "物流轨迹显示包裹到达派送站点后三十小时仍没有派送记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先查询延迟分类规则，再根据分类查询核查发起方，两个步骤依赖不同文档且顺序依赖。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "包裹到达派送站点后三十小时仍没有派送记录，依据观察期规则属于哪类延迟？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "派送延迟延迟应由谁发起核查？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "SOP"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 1.0,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "派送延迟：到达派送站点后24小时内无派送轨迹更新属于正常。",
+          "fallback_used": false,
+          "first_hop_question": "包裹到达派送站点后三十小时仍没有派送记录，依据观察期规则属于哪类延迟？",
+          "intermediate_fact": "派送延迟",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}延迟应由谁发起核查？",
+          "reason": "第一跳问题询问包裹到达派送站点后三十小时无派送记录属于哪类延迟，候选证据中明确说明派送延迟的观察期为24小时，超过24小时即属于派送延迟。该中间事实可直接用于第二跳查询模板，查询派送延迟应由谁发起核查。",
+          "second_hop_query": "派送延迟延迟应由谁发起核查？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 114
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          115,
+          114,
+          216,
+          211,
+          217,
+          214,
+          243
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 7971,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_5": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 27,
+            "channel_overlap_at_10": 0.9,
+            "comparison_intent": false,
+            "distinct_document_count": 9,
+            "distinct_version_count": 2,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.119142,
+            "rerank_top1": 0.922386,
+            "rerank_top3_mean": 0.811739,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.942357
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          115,
+          114,
+          216,
+          217,
+          211,
+          220,
+          212,
+          214
+        ],
+        "second_hop_attempt_chunk_ids": [
+          115,
+          114,
+          216,
+          211,
+          217,
+          220,
+          214
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "物流轨迹显示包裹到达派送站点后三十小时仍没有派送记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "物流轨迹显示包裹到达派送站点后三十小时仍没有派送记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "派送延迟",
+        "超过派送观察期",
+        "派送节点延迟"
+      ],
+      "first_hop_gold_chunk_ids": [
+        114
+      ],
+      "latency_delta_ms": 3114,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "物流轨迹显示包裹到达派送站点后三十小时仍没有派送记录。请先依据观察期判断这属于哪类延迟，然后根据该延迟类型说明由谁发起核查？",
+      "second_hop_gold_chunk_ids": [
+        115
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_064",
+        "CASE_MULTI_CONDITION_030"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_009",
+      "chain_type": "破损责任判定到解决方案",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先根据凭证判定责任类型，再根据责任类型查询处理方案，两个步骤依赖且属于不同知识领域。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          158,
+          157,
+          159,
+          126,
+          122
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 3224,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9674679834891693,
+          "ndcg_at_5": 0.9674679834891693,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 20,
+            "channel_overlap_at_10": 0.8,
+            "comparison_intent": false,
+            "distinct_document_count": 7,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.016801,
+            "rerank_top1": 0.973673,
+            "rerank_top3_mean": 0.940672,
+            "target_type_coverage": 0.5
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.914519
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          158,
+          157,
+          159,
+          126,
+          122
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "客户凭证显示外包装和商品是在运输途中受损。请先依据凭证判定责任类型，然后根据该责任类型说明用户可获得什么处理方案？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "客户凭证显示外包装和商品是在运输途中受损。请先依据凭证判定责任类型，然后根据该责任类型说明用户可获得什么处理方案？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先根据凭证判定责任类型，再根据责任类型查询处理方案，两个步骤依赖且属于不同知识点。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "客户凭证显示外包装和商品是在运输途中受损，依据凭证判定责任类型是什么？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "运输破损责任类型下，用户可获得什么处理方案？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "SOP",
+                "FAQ"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "若责任为运输破损，联系物流公司索赔，并为客户提供退款或补发方案。",
+          "fallback_used": false,
+          "first_hop_question": "客户凭证显示外包装和商品是在运输途中受损，依据凭证判定责任类型是什么？",
+          "intermediate_fact": "运输破损",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}责任类型下，用户可获得什么处理方案？",
+          "reason": "第一跳问题要求依据凭证判定责任类型，候选证据中明确提到运输破损，且该事实可直接用于第二跳查询模板。",
+          "second_hop_query": "运输破损责任类型下，用户可获得什么处理方案？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 158
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          158,
+          157,
+          159,
+          126,
+          122,
+          125,
+          238
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 6125,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9674679834891693,
+          "ndcg_at_5": 0.9674679834891693,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 31,
+            "channel_overlap_at_10": 0.6,
+            "comparison_intent": false,
+            "distinct_document_count": 14,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.016801,
+            "rerank_top1": 0.973673,
+            "rerank_top3_mean": 0.940672,
+            "target_type_coverage": 0.75
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.919519
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          158,
+          157,
+          159,
+          126,
+          122,
+          125,
+          238,
+          237
+        ],
+        "second_hop_attempt_chunk_ids": [
+          158,
+          157,
+          159,
+          126,
+          122,
+          125,
+          238
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "客户凭证显示外包装和商品是在运输途中受损。请先依据凭证判定责任类型，然后根据该责任类型说明用户可获得什么处理方案？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "客户凭证显示外包装和商品是在运输途中受损。请先依据凭证判定责任类型，然后根据该责任类型说明用户可获得什么处理方案？",
+          "target_doc_types": [
+            "FAQ",
+            "SOP",
+            "RULE",
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "运输破损",
+        "物流运输责任",
+        "责任方为物流运输"
+      ],
+      "first_hop_gold_chunk_ids": [
+        157,
+        158
+      ],
+      "latency_delta_ms": 2901,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "客户凭证显示外包装和商品是在运输途中受损。请先依据凭证判定责任类型，然后根据该责任类型说明用户可获得什么处理方案？",
+      "second_hop_gold_chunk_ids": [
+        126
+      ],
+      "source_case_codes": [
+        "CASE_MULTI_CONDITION_034",
+        "CASE_MULTI_CONDITION_031"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_010",
+      "chain_type": "发票状态到重新开票操作",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先判断发票状态对应的修改分支，再根据分支说明后台重新开票流程。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          244,
+          49,
+          242,
+          245,
+          243
+        ],
+        "first_hop_gold_hit": false,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 2908,
+        "metrics": {
+          "fact_coverage": 0.5,
+          "ndcg_at_10": 0.4692787260227565,
+          "ndcg_at_5": 0.4692787260227565,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 0.3333333333333333,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.3333333333333333,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 6,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 6,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.367985,
+            "rerank_top1": 0.696128,
+            "rerank_top3_mean": 0.448752,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.841345
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          244,
+          49,
+          242,
+          245,
+          243
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "核对后发现发票状态为已开票且用户需要修改抬头。请先判断该状态应走什么修改分支，然后根据该分支说明后台如何完成重新开票？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "核对后发现发票状态为已开票且用户需要修改抬头。请先判断该状态应走什么修改分支，然后根据该分支说明后台如何完成重新开票？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先判断发票状态对应的修改分支，再根据分支说明后台重新开票流程。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "发票状态为已开票且用户需要修改抬头时，应走什么修改分支？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "已开票后重开分支下，后台如何完成重新开票？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "MANUAL"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "若为开票后重开：先申请红字发票冲销（invoice_red_issue），待红字发票生成后，再重新开具正",
+          "fallback_used": false,
+          "first_hop_question": "发票状态为已开票且用户需要修改抬头时，应走什么修改分支？",
+          "intermediate_fact": "已开票后重开",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}分支下，后台如何完成重新开票？",
+          "reason": "第一跳问题询问已开票且修改抬头应走的分支，候选证据明确区分开票前修改和开票后重开，并指出已开票需先红冲后重开，因此中间事实为'已开票后重开'，用于第二跳查询该分支下的重新开票步骤。",
+          "second_hop_query": "已开票后重开分支下，后台如何完成重新开票？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 174
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          173,
+          174,
+          244,
+          106,
+          234,
+          231,
+          176
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 9397,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 1.0,
+          "ndcg_at_5": 1.0,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 34,
+            "channel_overlap_at_10": 0.9,
+            "comparison_intent": false,
+            "distinct_document_count": 16,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.09971,
+            "rerank_top1": 0.916851,
+            "rerank_top3_mean": 0.81004,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.940719
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          173,
+          174,
+          244,
+          106,
+          234,
+          233,
+          235,
+          231
+        ],
+        "second_hop_attempt_chunk_ids": [
+          173,
+          174,
+          244,
+          106,
+          234,
+          231,
+          164
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "核对后发现发票状态为已开票且用户需要修改抬头。请先判断该状态应走什么修改分支，然后根据该分支说明后台如何完成重新开票？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "核对后发现发票状态为已开票且用户需要修改抬头。请先判断该状态应走什么修改分支，然后根据该分支说明后台如何完成重新开票？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "dependent",
+        "control"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "已开票需先红冲后重开",
+        "已开票后重开",
+        "开票后重开",
+        "先红冲后重开",
+        "红冲后重新开票"
+      ],
+      "first_hop_gold_chunk_ids": [
+        173,
+        174
+      ],
+      "latency_delta_ms": 6489,
+      "metric_deltas": {
+        "fact_coverage": 0.5,
+        "ndcg_at_10": 0.530721,
+        "ndcg_at_5": 0.530721,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.666667,
+        "recall_at_3": 0.666667,
+        "recall_at_5": 0.666667,
+        "reciprocal_rank": 0.0
+      },
+      "question": "核对后发现发票状态为已开票且用户需要修改抬头。请先判断该状态应走什么修改分支，然后根据该分支说明后台如何完成重新开票？",
+      "second_hop_gold_chunk_ids": [
+        244
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_090",
+        "CASE_DIRECT_086"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_011",
+      "chain_type": "专票红冲条件到后台操作",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先确定已认证抵扣的增值税专用发票红冲所需补充材料，再根据材料要求说明后台提交红冲申请的流程。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          244,
+          49,
+          245,
+          243,
+          242
+        ],
+        "first_hop_gold_hit": false,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 4361,
+        "metrics": {
+          "fact_coverage": 0.5,
+          "ndcg_at_10": 0.6131471927654584,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 0.5,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 6,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 6,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.422904,
+            "rerank_top1": 0.830002,
+            "rerank_top3_mean": 0.545674,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.889352
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          244,
+          49,
+          245,
+          243,
+          242
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "购买方已经认证抵扣一张增值税专用发票，现在需要红冲。请先确定该情况必须补充什么材料，然后根据该材料要求说明后台如何提交红冲申请？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "购买方已经认证抵扣一张增值税专用发票，现在需要红冲。请先确定该情况必须补充什么材料，然后根据该材料要求说明后台如何提交红冲申请？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先确定已认证抵扣的增值税专用发票红冲所需补充材料，再根据材料要求说明后台提交红冲申请的流程。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "购买方已经认证抵扣一张增值税专用发票，现在需要红冲，必须补充什么材料？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "根据《开具红字增值税专用发票信息表》材料要求，后台如何提交红冲申请？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "MANUAL"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "需提供《开具红字增值税专用发票信息表》",
+          "fallback_used": false,
+          "first_hop_question": "购买方已经认证抵扣一张增值税专用发票，现在需要红冲，必须补充什么材料？",
+          "intermediate_fact": "《开具红字增值税专用发票信息表》",
+          "max_hops": 2,
+          "next_query_template": "根据{{intermediate_fact}}材料要求，后台如何提交红冲申请？",
+          "reason": "第一跳问题询问购买方已认证抵扣后红冲必须补充的材料，证据chunk_id=233明确说明需提供《开具红字增值税专用发票信息表》，该材料是第二跳查询中提交红冲申请的依据。",
+          "second_hop_query": "根据《开具红字增值税专用发票信息表》材料要求，后台如何提交红冲申请？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 233
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          233,
+          244,
+          234,
+          232,
+          175,
+          235,
+          231
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 9151,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8772153153380492,
+          "ndcg_at_5": 0.8772153153380492,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 30,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 15,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.040456,
+            "rerank_top1": 0.870458,
+            "rerank_top3_mean": 0.798665,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.937414
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          233,
+          234,
+          232,
+          244,
+          235,
+          175,
+          231,
+          174
+        ],
+        "second_hop_attempt_chunk_ids": [
+          233,
+          244,
+          234,
+          232,
+          175,
+          235,
+          231
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "购买方已经认证抵扣一张增值税专用发票，现在需要红冲。请先确定该情况必须补充什么材料，然后根据该材料要求说明后台如何提交红冲申请？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "购买方已经认证抵扣一张增值税专用发票，现在需要红冲。请先确定该情况必须补充什么材料，然后根据该材料要求说明后台如何提交红冲申请？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "开具红字增值税专用发票信息表",
+        "红字增值税专用发票信息表",
+        "额外审核材料"
+      ],
+      "first_hop_gold_chunk_ids": [
+        233
+      ],
+      "latency_delta_ms": 4790,
+      "metric_deltas": {
+        "fact_coverage": 0.5,
+        "ndcg_at_10": 0.264068,
+        "ndcg_at_5": 0.264068,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.5,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.5,
+        "reciprocal_rank": 0.0
+      },
+      "question": "购买方已经认证抵扣一张增值税专用发票，现在需要红冲。请先确定该情况必须补充什么材料，然后根据该材料要求说明后台如何提交红冲申请？",
+      "second_hop_gold_chunk_ids": [
+        244
+      ],
+      "source_case_codes": [
+        "CASE_MULTI_HOP_027",
+        "CASE_EXACT_027"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_012",
+      "chain_type": "优惠券故障补偿到后台补发",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先判断补偿方式，再根据补偿方式执行后台操作。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          242,
+          49,
+          245,
+          243,
+          244
+        ],
+        "first_hop_gold_hit": false,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 5454,
+        "metrics": {
+          "fact_coverage": 0.5,
+          "ndcg_at_10": 0.3903800499921017,
+          "ndcg_at_5": 0.3903800499921017,
+          "recall_at_1": 0.25,
+          "recall_at_10": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 6,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 6,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.298791,
+            "rerank_top1": 0.654825,
+            "rerank_top3_mean": 0.455437,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.832022
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          242,
+          49,
+          245,
+          243,
+          244
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "确认用户无法使用优惠券是系统故障导致的。请先判断适用什么补偿方式，然后根据该补偿方式说明客服如何在优惠券后台执行？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "确认用户无法使用优惠券是系统故障导致的。请先判断适用什么补偿方式，然后根据该补偿方式说明客服如何在优惠券后台执行？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先判断补偿方式，再根据补偿方式执行后台操作。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "用户无法使用优惠券是系统故障导致的，适用什么补偿方式？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "MANUAL"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "根据人工补发等值优惠券补偿方式，客服如何在优惠券后台执行？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "MANUAL"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "因系统故障导致用户无法使用优惠券时，可人工补发等值优惠券。",
+          "fallback_used": false,
+          "first_hop_question": "用户无法使用优惠券是系统故障导致的，适用什么补偿方式？",
+          "intermediate_fact": "人工补发等值优惠券",
+          "max_hops": 2,
+          "next_query_template": "根据{{intermediate_fact}}补偿方式，客服如何在优惠券后台执行？",
+          "reason": "第一跳问题询问系统故障下的补偿方式，证据明确给出'人工补发等值优惠券'，该事实可直接用于第二跳查询'根据人工补发等值优惠券补偿方式，客服如何在优惠券后台执行？'",
+          "second_hop_query": "根据人工补发等值优惠券补偿方式，客服如何在优惠券后台执行？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 227
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          170,
+          227,
+          168,
+          226,
+          242,
+          169,
+          91
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 6822,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9349366583346499,
+          "ndcg_at_5": 0.8048099750039491,
+          "recall_at_1": 0.25,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 32,
+            "channel_overlap_at_10": 0.4,
+            "comparison_intent": false,
+            "distinct_document_count": 15,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.054551,
+            "rerank_top1": 0.879657,
+            "rerank_top3_mean": 0.831101,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.884579
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          170,
+          168,
+          169,
+          227,
+          226,
+          228,
+          242,
+          91
+        ],
+        "second_hop_attempt_chunk_ids": [
+          170,
+          227,
+          168,
+          226,
+          242,
+          169,
+          91
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "确认用户无法使用优惠券是系统故障导致的。请先判断适用什么补偿方式，然后根据该补偿方式说明客服如何在优惠券后台执行？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "确认用户无法使用优惠券是系统故障导致的。请先判断适用什么补偿方式，然后根据该补偿方式说明客服如何在优惠券后台执行？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "人工补发等值优惠券",
+        "补发等值优惠券",
+        "人工补发优惠券",
+        "补发优惠券"
+      ],
+      "first_hop_gold_chunk_ids": [
+        168,
+        170,
+        227
+      ],
+      "latency_delta_ms": 1368,
+      "metric_deltas": {
+        "fact_coverage": 0.5,
+        "ndcg_at_10": 0.544557,
+        "ndcg_at_5": 0.41443,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.75,
+        "recall_at_3": 0.25,
+        "recall_at_5": 0.5,
+        "reciprocal_rank": 0.0
+      },
+      "question": "确认用户无法使用优惠券是系统故障导致的。请先判断适用什么补偿方式，然后根据该补偿方式说明客服如何在优惠券后台执行？",
+      "second_hop_gold_chunk_ids": [
+        242
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_089",
+        "CASE_DIRECT_083"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_013",
+      "chain_type": "风险时限到后台升级",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先根据处理时限判断风险等级，再根据等级说明升级操作。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          245,
+          49,
+          241,
+          243,
+          244
+        ],
+        "first_hop_gold_hit": false,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 2862,
+        "metrics": {
+          "fact_coverage": 0.5,
+          "ndcg_at_10": 0.6131471927654584,
+          "ndcg_at_5": 0.6131471927654584,
+          "recall_at_1": 0.5,
+          "recall_at_10": 0.5,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 6,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 6,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.52467,
+            "rerank_top1": 0.922437,
+            "rerank_top3_mean": 0.552198,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.913439
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          245,
+          49,
+          241,
+          243,
+          244
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "某风险案件要求在二十四小时内处理，当前已经超时。请先根据处理时限判断它属于哪个风险等级，然后根据该等级说明客服在风控后台如何升级？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "某风险案件要求在二十四小时内处理，当前已经超时。请先根据处理时限判断它属于哪个风险等级，然后根据该等级说明客服在风控后台如何升级？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个依赖步骤：先根据处理时限判断风险等级，再根据等级说明升级操作。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "某风险案件要求在二十四小时内处理，当前已经超时，根据处理时限判断它属于哪个风险等级？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "高风险风险等级下，客服在风控后台如何升级？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "MANUAL"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "高风险（S-RISK-001=H）对应24小时内未处理则自动升级至主管",
+          "fallback_used": false,
+          "first_hop_question": "某风险案件要求在二十四小时内处理，当前已经超时，根据处理时限判断它属于哪个风险等级？",
+          "intermediate_fact": "高风险",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}风险等级下，客服在风控后台如何升级？",
+          "reason": "第一跳问题要求根据24小时处理时限判断风险等级，候选证据中明确说明高风险对应24小时内未处理，因此中间事实为'高风险'，可用于第二跳查询该等级下的升级操作。",
+          "second_hop_query": "高风险风险等级下，客服在风控后台如何升级？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 183
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          183,
+          245,
+          184,
+          185,
+          145,
+          68,
+          72
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 9338,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9197207891481876,
+          "ndcg_at_5": 0.9197207891481876,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 36,
+            "channel_overlap_at_10": 0.7,
+            "comparison_intent": false,
+            "distinct_document_count": 24,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.031795,
+            "rerank_top1": 0.954232,
+            "rerank_top3_mean": 0.861194,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.937737
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          183,
+          184,
+          245,
+          185,
+          145,
+          182,
+          181,
+          177
+        ],
+        "second_hop_attempt_chunk_ids": [
+          183,
+          245,
+          184,
+          185,
+          145,
+          182,
+          68
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "某风险案件要求在二十四小时内处理，当前已经超时。请先根据处理时限判断它属于哪个风险等级，然后根据该等级说明客服在风控后台如何升级？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "某风险案件要求在二十四小时内处理，当前已经超时。请先根据处理时限判断它属于哪个风险等级，然后根据该等级说明客服在风控后台如何升级？",
+          "target_doc_types": [
+            "MANUAL"
+          ]
+        }
+      },
+      "execution_order": [
+        "dependent",
+        "control"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "高风险",
+        "高风险案件",
+        "风险等级为高"
+      ],
+      "first_hop_gold_chunk_ids": [
+        183
+      ],
+      "latency_delta_ms": 6476,
+      "metric_deltas": {
+        "fact_coverage": 0.5,
+        "ndcg_at_10": 0.306574,
+        "ndcg_at_5": 0.306574,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.5,
+        "recall_at_3": 0.5,
+        "recall_at_5": 0.5,
+        "reciprocal_rank": 0.0
+      },
+      "question": "某风险案件要求在二十四小时内处理，当前已经超时。请先根据处理时限判断它属于哪个风险等级，然后根据该等级说明客服在风控后台如何升级？",
+      "second_hop_gold_chunk_ids": [
+        245
+      ],
+      "source_case_codes": [
+        "CASE_MULTI_HOP_003",
+        "CASE_MULTI_CONDITION_002"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_014",
+      "chain_type": "退款账户异常到更换退款方式",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先查明ACCOUNT_CLOSED对应的失败类别，再根据类别查询更换退款方式的步骤，属于两跳依赖查询。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "NOT_REQUIRED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          165,
+          166,
+          181,
+          73,
+          225
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 3989,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9197207891481876,
+          "ndcg_at_5": 0.9197207891481876,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 50,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 21,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [
+              "ACCOUNT_CLOSED"
+            ],
+            "rerank_margin": 0.048738,
+            "rerank_top1": 0.884644,
+            "rerank_top3_mean": 0.815082,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.943423
+        },
+        "retrieval_rounds": 1,
+        "retrieved_chunk_ids": [
+          165,
+          166,
+          181,
+          180,
+          177,
+          73,
+          225,
+          224
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "退款渠道返回码是 ACCOUNT_CLOSED。请先查明它对应什么失败类别，然后根据该类别说明下一步如何更换退款方式？",
+            "退款规则",
+            "已发货订单退款条件",
+            "订单退款例外情况"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "退款渠道返回码是 ACCOUNT_CLOSED。请先查明它对应什么失败类别，然后根据该类别说明下一步如何更换退款方式？",
+          "target_doc_types": [
+            "RULE",
+            "FAQ"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "需要先查明ACCOUNT_CLOSED对应的失败类别，再根据类别查询更换退款方式的步骤，两个信息来自不同文档且存在依赖关系。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "退款渠道返回码ACCOUNT_CLOSED对应什么失败类别？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "账户异常失败类别下，如何更换退款方式？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "FAQ"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "若为原路退回限制，则重试退款任务（参考标识S-REFUND-002）；若为账户异常，则直接转人工打款（参考标识E-RF-1002）。",
+          "fallback_used": false,
+          "first_hop_question": "退款渠道返回码ACCOUNT_CLOSED对应什么失败类别？",
+          "intermediate_fact": "账户异常",
+          "max_hops": 2,
+          "next_query_template": "{{intermediate_fact}}失败类别下，如何更换退款方式？",
+          "reason": "第一跳问题询问ACCOUNT_CLOSED对应的失败类别，证据中明确将ACCOUNT_CLOSED归类为账户异常，该事实可直接用于第二跳查询'账户异常失败类别下，如何更换退款方式？'",
+          "second_hop_query": "账户异常失败类别下，如何更换退款方式？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 165
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          165,
+          166,
+          181,
+          73,
+          225,
+          221,
+          167
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 11670,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9197207891481876,
+          "ndcg_at_5": 0.9197207891481876,
+          "recall_at_1": 0.5,
+          "recall_at_10": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 50,
+            "channel_overlap_at_10": 0.8,
+            "comparison_intent": false,
+            "distinct_document_count": 19,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [
+              "ACCOUNT_CLOSED"
+            ],
+            "rerank_margin": 0.048738,
+            "rerank_top1": 0.884644,
+            "rerank_top3_mean": 0.815082,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.923423
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          165,
+          166,
+          181,
+          180,
+          177,
+          73,
+          225,
+          221
+        ],
+        "second_hop_attempt_chunk_ids": [
+          165,
+          166,
+          181,
+          73,
+          225,
+          221,
+          167
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "退款渠道返回码是 ACCOUNT_CLOSED。请先查明它对应什么失败类别，然后根据该类别说明下一步如何更换退款方式？",
+            "退款规则",
+            "已发货订单退款条件",
+            "订单退款例外情况"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "退款渠道返回码是 ACCOUNT_CLOSED。请先查明它对应什么失败类别，然后根据该类别说明下一步如何更换退款方式？",
+          "target_doc_types": [
+            "RULE",
+            "FAQ"
+          ]
+        }
+      },
+      "execution_order": [
+        "dependent",
+        "control"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "账户异常",
+        "支付账户已关闭",
+        "退款账户异常"
+      ],
+      "first_hop_gold_chunk_ids": [
+        165
+      ],
+      "latency_delta_ms": 7681,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.0,
+        "ndcg_at_5": 0.0,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "退款渠道返回码是 ACCOUNT_CLOSED。请先查明它对应什么失败类别，然后根据该类别说明下一步如何更换退款方式？",
+      "second_hop_gold_chunk_ids": [
+        181
+      ],
+      "source_case_codes": [
+        "CASE_MULTI_CONDITION_018"
+      ],
+      "upstream_query_plan_match": true
+    },
+    {
+      "case_code": "DEP_HOP_015",
+      "chain_type": "重复支付核实到原路退款",
+      "control": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个独立信息需求：判定重复支付的关键条件，以及多付款项的退回流程。后者依赖前者核实结果，因此需要DEPENDENT拆分。",
+          "requires_decomposition": false,
+          "sub_queries": []
+        },
+        "dependent_hop": {
+          "confidence": 0.0,
+          "current_hop": 0,
+          "enabled": false,
+          "evidence_quote": "",
+          "fallback_used": false,
+          "intermediate_fact": "",
+          "max_hops": 2,
+          "second_hop_query": "",
+          "status": "COMPLETED",
+          "supporting_chunk_id": null
+        },
+        "dependent_triggered": false,
+        "end_to_end_chain_success": false,
+        "extraction_success": false,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          229,
+          226,
+          224,
+          193,
+          199
+        ],
+        "first_hop_gold_hit": false,
+        "intermediate_fact_accurate": false,
+        "latency_ms": 13802,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.8854598815714875,
+          "ndcg_at_5": 0.8854598815714875,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 50,
+            "channel_overlap_at_10": 0.8,
+            "comparison_intent": false,
+            "distinct_document_count": 21,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.031238,
+            "rerank_top1": 0.934845,
+            "rerank_top3_mean": 0.8846,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.946401
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          177,
+          178,
+          179,
+          180,
+          65
+        ],
+        "second_hop_attempt_chunk_ids": [],
+        "second_hop_gold_hit": false,
+        "second_query_contains_fact": false,
+        "supporting_chunk_accurate": false,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "系统怀疑同一订单存在重复支付。请先说明判定重复支付需要核实哪些关键条件，然后根据核实结果说明多付的款项如何退回？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "系统怀疑同一订单存在重复支付。请先说明判定重复支付需要核实哪些关键条件，然后根据核实结果说明多付的款项如何退回？",
+          "target_doc_types": [
+            "RULE"
+          ]
+        }
+      },
+      "dependent": {
+        "decomposition": {
+          "benefit_score": 0.85,
+          "decomposition_type": "DEPENDENT",
+          "fallback_used": false,
+          "reason": "问题包含两个独立信息需求：判定重复支付的关键条件，以及多付款项的退回流程。后者依赖前者核实结果，因此需要DEPENDENT拆分。",
+          "requires_decomposition": true,
+          "sub_queries": [
+            {
+              "question": "判定同一订单存在重复支付需要核实哪些关键条件？",
+              "sub_query_id": "SQ1",
+              "target_doc_types": [
+                "RULE"
+              ]
+            },
+            {
+              "depends_on_sub_query_id": "SQ1",
+              "is_template": false,
+              "question": "根据重复支付事实已确认，多付的款项如何退回？",
+              "resolved_from_intermediate_fact": true,
+              "sub_query_id": "SQ2",
+              "target_doc_types": [
+                "RULE"
+              ]
+            }
+          ]
+        },
+        "dependent_hop": {
+          "confidence": 0.95,
+          "current_hop": 2,
+          "enabled": true,
+          "evidence_quote": "关键事实：核对订单号、支付流水和扣款次数，确认重复支付事实。",
+          "fallback_used": false,
+          "first_hop_question": "判定同一订单存在重复支付需要核实哪些关键条件？",
+          "intermediate_fact": "重复支付事实已确认",
+          "max_hops": 2,
+          "next_query_template": "根据{{intermediate_fact}}，多付的款项如何退回？",
+          "reason": "第一跳问题要求判定重复支付需要核实的关键条件，该证据中的关键事实直接给出了确认重复支付事实的步骤，可作为第二跳查询退款流程的前提。",
+          "second_hop_query": "根据重复支付事实已确认，多付的款项如何退回？",
+          "status": "COMPLETED",
+          "supporting_chunk_id": 177
+        },
+        "dependent_triggered": true,
+        "end_to_end_chain_success": true,
+        "extraction_success": true,
+        "fallback_used": false,
+        "first_hop_attempt_chunk_ids": [
+          177,
+          65,
+          179,
+          66,
+          64,
+          178,
+          180
+        ],
+        "first_hop_gold_hit": true,
+        "intermediate_fact_accurate": true,
+        "latency_ms": 9093,
+        "metrics": {
+          "fact_coverage": 1.0,
+          "ndcg_at_10": 0.9060254355346823,
+          "ndcg_at_5": 0.9060254355346823,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 1.0
+        },
+        "retrieval_quality": {
+          "features": {
+            "candidate_count": 44,
+            "channel_overlap_at_10": 1.0,
+            "comparison_intent": false,
+            "distinct_document_count": 18,
+            "distinct_version_count": 0,
+            "exact_term_coverage": 1.0,
+            "exact_terms": [],
+            "rerank_margin": 0.038244,
+            "rerank_top1": 0.885638,
+            "rerank_top3_mean": 0.854035,
+            "target_type_coverage": 1.0
+          },
+          "need_rewrite": false,
+          "quality": "GOOD",
+          "reason": "检索质量满足进入Context构建阶段的条件",
+          "reasons": [
+            "检索质量满足进入Context构建阶段的条件"
+          ],
+          "retry_strategy": "NONE",
+          "score": 0.949515
+        },
+        "retrieval_rounds": 2,
+        "retrieved_chunk_ids": [
+          177,
+          178,
+          65,
+          179,
+          66,
+          64,
+          180
+        ],
+        "second_hop_attempt_chunk_ids": [
+          177,
+          65,
+          179,
+          66,
+          64,
+          178,
+          180
+        ],
+        "second_hop_gold_hit": true,
+        "second_query_contains_fact": true,
+        "supporting_chunk_accurate": true,
+        "upstream_query_plan": {
+          "business_domain": "ecommerce_after_sales",
+          "expanded_queries": [
+            "系统怀疑同一订单存在重复支付。请先说明判定重复支付需要核实哪些关键条件，然后根据核实结果说明多付的款项如何退回？"
+          ],
+          "retrieval_mode": "hybrid",
+          "rewritten_query": "系统怀疑同一订单存在重复支付。请先说明判定重复支付需要核实哪些关键条件，然后根据核实结果说明多付的款项如何退回？",
+          "target_doc_types": [
+            "RULE"
+          ]
+        }
+      },
+      "execution_order": [
+        "control",
+        "dependent"
+      ],
+      "expected_intermediate_fact_aliases": [
+        "存在两笔或以上金额相同时间相近的成功流水",
+        "多余流水未绑定其他订单且退款账户与支付账户一致",
+        "确认多余流水未绑定其他订单",
+        "退款账户与支付账户一致",
+        "核对订单号支付流水和扣款次数确认重复支付事实"
+      ],
+      "first_hop_gold_chunk_ids": [
+        177,
+        179
+      ],
+      "latency_delta_ms": -4709,
+      "metric_deltas": {
+        "fact_coverage": 0.0,
+        "ndcg_at_10": 0.020566,
+        "ndcg_at_5": 0.020566,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.0,
+        "recall_at_3": 0.0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      "question": "系统怀疑同一订单存在重复支付。请先说明判定重复支付需要核实哪些关键条件，然后根据核实结果说明多付的款项如何退回？",
+      "second_hop_gold_chunk_ids": [
+        65
+      ],
+      "source_case_codes": [
+        "CASE_DIRECT_049",
+        "CASE_DIRECT_041"
+      ],
+      "upstream_query_plan_match": true
+    }
+  ],
+  "metadata": {
+    "adaptive_retrieval_enabled": true,
+    "concurrency": 1,
+    "control_dependent_enabled": false,
+    "dataset_path": "evaluation/datasets/rag_dependent_multi_hop_v1.jsonl",
+    "dataset_sha256": "7a88270e0ef0bd581826f0a1fe89effbf1bf105f4707509ea0bf8d84b9cb8bef",
+    "dependent_fact_min_confidence": 0.75,
+    "dependent_fact_model": "deepseek-chat",
+    "experiment_dependent_enabled": true,
+    "generated_at": "2026-06-12T16:15:36.393085+00:00",
+    "git_commit_sha": "d53986a6f3369978d70aeea034c400cc4f48f963",
+    "git_dirty": true,
+    "intermediate_fact_prompt_version": "v2-first-hop-answer-bound",
+    "query_analysis_mode": "rule",
+    "query_decomposition_model": "deepseek-chat",
+    "query_decomposition_prompt_version": "v3-dependent-two-hop",
+    "top_k": 20
+  },
+  "summary": {
+    "by_chain_type": {
+      "V2丢失条件到承运商工单": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "专票红冲条件到后台操作": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 0.5,
+          "delta": 0.5,
+          "dependent": 1.0
+        }
+      },
+      "优惠券故障补偿到后台补发": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 0.5,
+          "delta": 0.5,
+          "dependent": 1.0
+        }
+      },
+      "发票状态到重新开票操作": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 0.5,
+          "delta": 0.5,
+          "dependent": 1.0
+        }
+      },
+      "揽收延迟分类到核查责任方": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "派送延迟分类到核查责任方": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "物流丢失判定到承运商工单": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 0.5,
+          "delta": 0.5,
+          "dependent": 1.0
+        }
+      },
+      "物流节点超时到后台核查单": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "破损责任判定到解决方案": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "运输延迟分类到核查责任方": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "退款失败分类到改道规则": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "退款账户异常到更换退款方式": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "退款重试上限到人工处理": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "重复支付核实到原路退款": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 1.0,
+          "delta": 0.0,
+          "dependent": 1.0
+        }
+      },
+      "风险时限到后台升级": {
+        "case_count": 1,
+        "chain_success_rate": 1.0,
+        "fact_coverage": {
+          "control": 0.5,
+          "delta": 0.5,
+          "dependent": 1.0
+        }
+      }
+    },
+    "case_count": 15,
+    "dependent_trigger_count": 15,
+    "dependent_trigger_rate": 1.0,
+    "end_to_end_chain_success_rate": 1.0,
+    "extraction_success_rate": 1.0,
+    "fact_coverage_outcomes": {
+      "improved": 5,
+      "regressed": 0,
+      "unchanged": 10
+    },
+    "fallback_rate": 0.0,
+    "first_hop_gold_hit_rate": 1.0,
+    "intermediate_fact_accuracy_rate": 1.0,
+    "latency_ms": {
+      "control_mean": 4548.4,
+      "control_p95": 8781.6,
+      "dependent_mean": 8769.4,
+      "dependent_p95": 12594.9,
+      "mean_delta": 4221.0,
+      "p95_delta": 3813.3
+    },
+    "metrics": {
+      "fact_coverage": {
+        "control": 0.833333,
+        "delta": 0.166667,
+        "dependent": 1.0
+      },
+      "ndcg_at_10": {
+        "control": 0.798636,
+        "delta": 0.124725,
+        "dependent": 0.923361
+      },
+      "ndcg_at_5": {
+        "control": 0.769515,
+        "delta": 0.102424,
+        "dependent": 0.871939
+      },
+      "recall_at_1": {
+        "control": 0.438889,
+        "delta": 0.0,
+        "dependent": 0.438889
+      },
+      "recall_at_10": {
+        "control": 0.805556,
+        "delta": 0.194444,
+        "dependent": 1.0
+      },
+      "recall_at_3": {
+        "control": 0.638889,
+        "delta": 0.094444,
+        "dependent": 0.733333
+      },
+      "recall_at_5": {
+        "control": 0.738889,
+        "delta": 0.144444,
+        "dependent": 0.883333
+      },
+      "reciprocal_rank": {
+        "control": 1.0,
+        "delta": 0.0,
+        "dependent": 1.0
+      }
+    },
+    "recall_at_5_outcomes": {
+      "improved": 4,
+      "regressed": 0,
+      "unchanged": 11
+    },
+    "second_hop_gold_hit_rate": 1.0,
+    "second_query_fact_injection_rate": 1.0,
+    "supporting_chunk_accuracy_rate": 1.0,
+    "upstream_query_plan_match_rate": 1.0
+  }
+}

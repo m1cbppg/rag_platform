@@ -91,6 +91,54 @@ class Settings(BaseSettings):
     default_query_top_k: int = 10
 
     # --------------------
+    # 自适应检索配置
+    # --------------------
+    adaptive_retrieval_enabled: bool = True
+    adaptive_max_rounds: int = 2
+    adaptive_quality_good_threshold: float = 0.68
+    adaptive_quality_poor_threshold: float = 0.25
+    adaptive_rerank_top1_threshold: float = 0.60
+    adaptive_rerank_top3_threshold: float = 0.55
+    adaptive_min_candidate_count: int = 3
+    adaptive_min_distinct_documents: int = 2
+    adaptive_min_version_count: int = 2
+    adaptive_rewrite_model: str = "deepseek-chat"
+    adaptive_rewrite_max_attempts: int = 2
+
+    # --------------------
+    # 复杂查询分解配置
+    # --------------------
+    query_decomposition_enabled: bool = True
+    query_decomposition_model: str = "deepseek-chat"
+    query_decomposition_max_sub_queries: int = 3
+    query_decomposition_max_attempts: int = 2
+    query_decomposition_min_query_length: int = 18
+    query_decomposition_min_benefit_score: float = 0.80
+    query_decomposition_allow_dependent: bool = True
+    query_decomposition_rerank_extra_limit: int = 3
+    sub_query_min_candidates: int = 1
+    sub_query_rerank_quota: int = 1
+
+    # --------------------
+    # 顺序依赖多跳配置
+    # --------------------
+    dependent_multi_hop_enabled: bool = True
+    dependent_multi_hop_max_hops: int = 2
+    dependent_fact_model: str = "deepseek-chat"
+    dependent_fact_min_confidence: float = 0.75
+    dependent_fact_max_candidates: int = 5
+    dependent_fact_max_attempts: int = 2
+
+    # --------------------
+    # 回答动作决策配置
+    # --------------------
+    action_decision_enabled: bool = True
+    action_decision_model: str = "deepseek-chat"
+    action_decision_clarify_threshold: float = 0.75
+    action_decision_refuse_threshold: float = 0.80
+    action_decision_max_attempts: int = 2
+
+    # --------------------
     # Hybrid Fusion 配置
     # --------------------
     hybrid_fusion_method: str = "rrf"

@@ -32,12 +32,14 @@ class DeepSeekAnswerGenerator:
         rewritten_question: str | None,
         context: str,
         citations: list[dict],
+        sub_queries: list[dict] | None = None,
     ) -> str:
         system_prompt, user_prompt = self.prompt_builder.build(
             question=question,
             rewritten_question=rewritten_question,
             context=context,
             citations=citations,
+            sub_queries=sub_queries,
         )
 
         return await self.client.chat_text(
@@ -54,12 +56,14 @@ class DeepSeekAnswerGenerator:
         rewritten_question: str | None,
         context: str,
         citations: list[dict],
+        sub_queries: list[dict] | None = None,
     ) -> AsyncGenerator[str, None]:
         system_prompt, user_prompt = self.prompt_builder.build(
             question=question,
             rewritten_question=rewritten_question,
             context=context,
             citations=citations,
+            sub_queries=sub_queries,
         )
 
         async for delta in self.client.stream_chat_text(

@@ -172,6 +172,7 @@ class ExperimentRunner:
                     cited_chunk_ids=observation.cited_chunk_ids,
                     expected_action=case.expected_action,
                     actual_action=observation.actual_action,
+                    retrieval_rounds=observation.retrieval_rounds,
                 )
                 judge_score = await self.judge_service.judge(
                     case=case,
@@ -215,6 +216,11 @@ class ExperimentRunner:
                     ),
                     expected_action=case.expected_action,
                     actual_action=actual_action,
+                    retrieval_rounds=(
+                        observation.retrieval_rounds
+                        if observation is not None
+                        else 1
+                    ),
                 )
                 self.repository.finish_case_result(
                     case_result_id=case_result_id,

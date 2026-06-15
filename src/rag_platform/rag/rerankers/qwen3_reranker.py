@@ -24,6 +24,7 @@ class Qwen3Reranker:
         self,
         query: str,
         documents: list[dict],
+        top_n: int | None = None,
     ) -> list[RerankResultItem]:
         """
         对候选文档做 rerank。
@@ -32,55 +33,73 @@ class Qwen3Reranker:
             来自 LangGraph State 的 merged_documents。
         """
 
-        candidate_limit = self.settings.rerank_candidate_limit
-        top_n = self.settings.rerank_top_n
-
-        limited_documents = documents[:candidate_limit]
-
-        candidates = self._build_candidates(limited_documents)
-
-        if not candidates:
-            return []
-
-        rerank_results = await self.client.rerank(
-            query=query,
-            documents=[candidate.text for candidate in candidates],
-            top_n=min(top_n, len(candidates)),
-            instruct=self.settings.rerank_instruct,
-        )
-
-        candidate_map = {
-            candidate.document_index: candidate
-            for candidate in candidates
-        }
-
-        result_items: list[RerankResultItem] = []
-
-        for after_rank, item in enumerate(rerank_results, start=1):
-            original_index = item["index"]
-            candidate = candidate_map.get(original_index)
-
-            if candidate is None:
-                continue
-
-            result_items.append(
-                RerankResultItem(
-                    chunk_id=candidate.chunk_id,
-                    document_index=original_index,
-                    relevance_score=item["relevance_score"],
-                    after_rank=after_rank,
-                    text=candidate.text,
-                    metadata={
-                        **candidate.metadata,
-                        "rerank_score": item["relevance_score"],
-                        "before_rank": candidate.before_rank,
-                        "after_rank": after_rank,
-                        "before_score": candidate.before_score,
-                    },
-                )
+        try:
+            candidate_limit = self.settings.rerank_candidate_limit
+            effective_top_n = max(
+                1,
+                int(top_n or self.settings.rerank_top_n),
             )
 
-        return result_items
+            limited_documents = documents[:candidate_limit]
+
+            candidates = self._build_candidates(limited_documents)
+
+            if not candidates:
+                return []
+
+            rerank_results = await self.client.rerank(
+                query=query,
+                documents=[
+                    candidate.text
+                    for candidate in candidates
+                ],
+                top_n=min(effective_top_n, len(candidates)),
+                instruct=self.settings.rerank_instruct,
+            )
+
+            candidate_map = {
+                candidate.document_index: candidate
+                for candidate in candidates
+            }
+
+            result_items: list[RerankResultItem] = []
+
+            for after_rank, item in enumerate(
+                rerank_results,
+                start=1,
+            ):
+                original_index = item["index"]
+                candidate = candidate_map.get(original_index)
+
+                if candidate is None:
+                    continue
+
+                result_items.append(
+                    RerankResultItem(
+                        chunk_id=candidate.chunk_id,
+                        document_index=original_index,
+                        relevance_score=item["relevance_score"],
+                        after_rank=after_rank,
+                        text=candidate.text,
+                        metadata={
+                            **candidate.metadata,
+                            "rerank_score": item[
+                                "relevance_score"
+                            ],
+                            "before_rank": candidate.before_rank,
+                            "after_rank": after_rank,
+                            "before_score": (
+                                candidate.before_score
+                            ),
+                        },
+                    )
+                )
+
+            return result_items
+        finally:
+            close = getattr(self.client, "aclose", None)
+            if close is not None:
+                await close()
 
     def _build_candidates(
         self,

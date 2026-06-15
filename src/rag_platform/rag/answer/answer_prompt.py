@@ -23,6 +23,8 @@ ANSWER_USER_PROMPT_TEMPLATE = """
 可用引用：
 {citation_summary}
 
+{sub_query_plan}
+
 已提供的上下文：
 {context}
 
@@ -34,4 +36,5 @@ ANSWER_USER_PROMPT_TEMPLATE = """
 3. 每个关键结论后面必须带引用，例如 [C1]；
 4. 如果无法回答，不要猜测，直接说明知识库信息不足；
 5. 不要输出和问题无关的内容。
+{sub_query_requirements}
 """

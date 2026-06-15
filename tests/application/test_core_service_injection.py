@@ -56,7 +56,16 @@ async def test_query_understanding_service_uses_injected_dependencies() -> None:
 
 
 class FakeReranker:
-    async def rerank(self, query, documents):
+    calls: list[dict] = []
+
+    async def rerank(self, query, documents, top_n=None):
+        self.calls.append(
+            {
+                "query": query,
+                "documents": documents,
+                "top_n": top_n,
+            }
+        )
         return [
             RerankResultItem(
                 chunk_id=1,
@@ -83,6 +92,7 @@ class FakeRerankRepository:
 
 
 async def test_rerank_service_uses_injected_reranker_and_repository() -> None:
+    FakeReranker.calls = []
     repository = FakeRerankRepository()
     service = RerankService(
         settings=SimpleNamespace(
@@ -101,12 +111,15 @@ async def test_rerank_service_uses_injected_reranker_and_repository() -> None:
         trace_id="trace-1",
         query="退款",
         documents=[{"chunk_id": 1, "page_content": "退款规则"}],
+        top_n=7,
     )
 
     assert documents[0]["chunk_id"] == 1
     assert info["status"] == "SUCCESS"
     assert repository.created[0]["provider"] == "fake"
+    assert repository.created[0]["top_n"] == 7
     assert repository.saved[0]["args"][0] == 7
+    assert FakeReranker.calls[0]["top_n"] == 7
 
 
 class FakeContextBuilder:

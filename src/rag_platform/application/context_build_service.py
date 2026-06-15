@@ -30,6 +30,7 @@ class ContextBuildService:
         trace_id: str,
         query_text: str,
         documents: list[dict],
+        sub_queries: list[dict] | None = None,
     ) -> tuple[ContextBuildResult, dict]:
         """
         构建上下文，并落日志。
@@ -40,7 +41,14 @@ class ContextBuildService:
         """
 
         try:
-            result = self.builder.build(documents)
+            result = (
+                self.builder.build(
+                    documents,
+                    sub_queries=sub_queries,
+                )
+                if sub_queries
+                else self.builder.build(documents)
+            )
 
             context_log_id = self.repository.create_context_log(
                 trace_id=trace_id,

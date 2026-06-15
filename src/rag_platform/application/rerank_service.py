@@ -37,6 +37,7 @@ class RerankService:
         trace_id: str,
         query: str,
         documents: list[dict],
+        top_n: int | None = None,
     ) -> tuple[list[dict], dict]:
         """
         对 merged_documents 进行 rerank。
@@ -45,10 +46,15 @@ class RerankService:
             reranked_documents, rerank_info
         """
 
+        effective_top_n = max(
+            1,
+            int(top_n or self.settings.rerank_top_n),
+        )
+
         if not self.settings.rerank_enabled:
             items = self.fallback_reranker.rerank(
                 documents=documents,
-                top_n=self.settings.rerank_top_n,
+                top_n=effective_top_n,
             )
 
             log_id = self.repository.create_rerank_log(
@@ -57,7 +63,7 @@ class RerankService:
                 provider=self.settings.rerank_provider,
                 model=self.settings.rerank_model,
                 candidate_count=len(documents),
-                top_n=self.settings.rerank_top_n,
+                top_n=effective_top_n,
                 success_count=len(items),
                 status=RerankStatus.SKIPPED.value,
                 fail_open=True,
@@ -80,6 +86,7 @@ class RerankService:
             items = await reranker.rerank(
                 query=query,
                 documents=documents,
+                top_n=effective_top_n,
             )
 
             items = self._filter_by_min_score(items)
@@ -92,7 +99,7 @@ class RerankService:
                 provider=self.settings.rerank_provider,
                 model=self.settings.rerank_model,
                 candidate_count=len(documents),
-                top_n=self.settings.rerank_top_n,
+                top_n=effective_top_n,
                 success_count=len(items),
                 status=RerankStatus.SUCCESS.value,
                 fail_open=False,
@@ -107,6 +114,7 @@ class RerankService:
                 "latency_ms": latency_ms,
                 "candidate_count": len(documents),
                 "success_count": len(items),
+                "top_n": effective_top_n,
             }
 
         except Exception as exc:
@@ -119,7 +127,7 @@ class RerankService:
                     provider=self.settings.rerank_provider,
                     model=self.settings.rerank_model,
                     candidate_count=len(documents),
-                    top_n=self.settings.rerank_top_n,
+                    top_n=effective_top_n,
                     success_count=0,
                     status=RerankStatus.FAILED.value,
                     fail_open=False,
@@ -131,7 +139,7 @@ class RerankService:
 
             items = self.fallback_reranker.rerank(
                 documents=documents,
-                top_n=self.settings.rerank_top_n,
+                top_n=effective_top_n,
             )
 
             log_id = self.repository.create_rerank_log(
@@ -140,7 +148,7 @@ class RerankService:
                 provider=self.settings.rerank_provider,
                 model=self.settings.rerank_model,
                 candidate_count=len(documents),
-                top_n=self.settings.rerank_top_n,
+                top_n=effective_top_n,
                 success_count=len(items),
                 status=RerankStatus.FALLBACK.value,
                 fail_open=True,
@@ -154,6 +162,7 @@ class RerankService:
                 "rerank_log_id": log_id,
                 "latency_ms": latency_ms,
                 "error_message": str(exc),
+                "top_n": effective_top_n,
             }
 
     def _filter_by_min_score(
